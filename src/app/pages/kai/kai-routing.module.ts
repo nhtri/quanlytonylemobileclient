@@ -1,15 +1,15 @@
 import { RouterModule, Routes } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { KaiComponent } from './kai.component';
-import { SmartTableCustomerComponent } from './smart-table-customer/smart-table-customer.component';
 import { CustomerComponent } from './customer/customer.component';
-import { SmartTableDeviceComponent } from './smart-table-device/smart-table-device.component';
-import { SmartTableInvoiceComponent } from './smart-table-invoice/smart-table-invoice.component';
 import { InvoiceComponent } from './invoice/invoice.component';
-import { SmartTableMobileComponent } from './smart-table-mobile/smart-table-mobile.component';
-import { SmartTableOrdersComponent } from './smart-table-orders/smart-table-orders.component';
-import { SmartTableCompleteOrdersComponent } from './smart-table-complete-orders/smart-table-complete-orders.component';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { CustomersComponent } from './customers/customers.component';
+import { PurchasingInvoicesComponent } from './purchasing-invoices/purchasing-invoices.component';
+import { ProductsComponent } from './products/products.component';
+import { PendingInvoicesComponent } from './pending-invoices/pending-invoices.component';
+import { CompletedInvoicesComponent } from './completed-invoices/completed-invoices.component';
+import { DevicesComponent } from './devices/devices.component';
 
 const KAI_ROUTES: Routes = [{
     path: '',
@@ -17,31 +17,31 @@ const KAI_ROUTES: Routes = [{
     children: [
         {
             path: 'customers',
-            component: SmartTableCustomerComponent,
+            component: CustomersComponent,
         },
         {
             path: 'customer',
             component: CustomerComponent,
         },
         {
-            path: 'invoices',
-            component: SmartTableInvoiceComponent,
+            path: 'purchasing-invoices',
+            component: PurchasingInvoicesComponent,
         },
         {
             path: 'invoice',
             component: InvoiceComponent,
         },
         {
-            path: 'mobiles',
-            component: SmartTableMobileComponent,
+            path: 'products',
+            component: ProductsComponent,
         },
         {
-            path: 'orders',
-            component: SmartTableOrdersComponent,
+            path: 'pending-orders',
+            component: PendingInvoicesComponent,
         },
         {
-            path: 'complete-orders',
-            component: SmartTableCompleteOrdersComponent,
+            path: 'completed-orders',
+            component: CompletedInvoicesComponent,
         },
         {
             path: 'statistics',
@@ -49,7 +49,7 @@ const KAI_ROUTES: Routes = [{
         },
         {
             path: 'devices',
-            component: SmartTableDeviceComponent,
+            component: DevicesComponent,
         },
     ],
 }];
@@ -62,13 +62,13 @@ export class KaiRoutingModule {
 }
 
 export const KAI_COMPONENTS = [
-    SmartTableCustomerComponent,
     CustomerComponent,
-    SmartTableDeviceComponent,
-    SmartTableInvoiceComponent,
     InvoiceComponent,
-    SmartTableMobileComponent,
-    SmartTableOrdersComponent,
-    SmartTableCompleteOrdersComponent,
     StatisticsComponent,
+    CustomersComponent,
+    PurchasingInvoicesComponent,
+    ProductsComponent,
+    PendingInvoicesComponent,
+    CompletedInvoicesComponent,
+    DevicesComponent,
 ];

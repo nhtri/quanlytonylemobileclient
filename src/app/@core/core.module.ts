@@ -53,7 +53,6 @@ import { VisitorsAnalyticsService } from './mock/visitors-analytics.service';
 import { SecurityCamerasService } from './mock/security-cameras.service';
 import { MockDataModule } from './mock/mock-data.module';
 import { JobTitlePipe } from './shared/pipes/job-title.pipe';
-import { DeviceStatusPipe } from './shared/pipes/device-status.pipe';
 
 const socialLinks = [
   {
@@ -158,7 +157,6 @@ export const NB_CORE_PROVIDERS = [
   providers: [
       DatePipe,
       JobTitlePipe,
-      DeviceStatusPipe,
   ],
 })
 export class CoreModule {

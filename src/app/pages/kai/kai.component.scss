@@ -1,0 +1,124 @@
+
+::ng-deep {
+
+  .nb-theme-default {
+    .kai-page {
+      nb-card-body {
+        overflow: inherit;
+      }
+    }
+  }
+
+  .kai-styled-table {
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    font-family: sans-serif;
+    min-width: 400px;
+    width: 100%;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+    .p-datatable-thead {
+      & > tr > th, td {
+        background-color: #809ffc;
+        color: #ffffff;
+        text-align: left;
+        padding: 12px 15px;
+      }
+    }
+
+    .p-datatable-tbody {
+      & > tr > td {
+        padding: 0.5rem 0.5rem;
+      }
+    }
+
+    thead tr {
+      background-color: #809ffc;
+      color: #ffffff;
+      text-align: left;
+    }
+
+    thead {
+      tr {
+        td {
+          background-color: #809ffc;
+        }
+      }
+    }
+
+    th, td {
+      padding: 12px 15px;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid #dddddd;
+    }
+
+    tbody tr:nth-of-type(even) {
+      background-color: #f3f3f3;
+    }
+
+    tbody tr:last-of-type {
+      border-bottom: 2px solid #809ffc;
+    }
+
+    tbody tr.active-row {
+      font-weight: bold;
+      color: #809ffc;
+    }
+
+  }
+
+  .birthday-calendar {
+    .ui-datepicker {
+      &:not(.ui-datepicker-inline) {
+        top: auto !important;
+      }
+    }
+  }
+
+  .filter-input-group {
+    margin-bottom: 1rem;
+  }
+
+  .form-inline {
+    .filter-text {
+      width: 150px;
+      margin-right: 2rem;
+
+      &.ui-dropdown,
+      .ui-dropdown-trigger {
+        border-radius: 0.4285rem;
+
+        &.form-control {
+          padding: 0.429em;
+        }
+      }
+    }
+  }
+
+  .my-calendar {
+    .ui-corner-all {
+      border-radius: 0.4285rem;
+    }
+
+    .ui-datepicker {
+      &:not(.ui-datepicker-inline) {
+        top: auto !important;
+      }
+    }
+
+    .form-control {
+      width: 150px;
+      margin-right: 2rem;
+    }
+  }
+
+  .my-scrollable-table {
+    .ui-table-wrapper {
+      max-height: 350px;
+      overflow: auto;
+    }
+  }
+}
