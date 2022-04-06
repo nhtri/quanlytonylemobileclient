@@ -1,0 +1,172 @@
+<!-- <nb-card>
+  <nb-card-header>
+    Mua Bán Sản Phẩm
+  </nb-card-header>
+
+  <nb-card-body>
+    <table class="styled-table">
+      <tbody>
+        <tr *ngFor="let data of datas">
+          <td>
+            <div class="marginclass">
+              <div>
+                <div style="display: flex;">
+                  <div><b>Nhóm sản phẩm:</b> {{data[0].nhomsanpham}}</div>
+                  <div style="margin-left: 25px;"><b>Tên sản phẩm:</b> {{data[0].tensanpham}}</div>
+                </div>
+                <div style="display: flex;">
+                  <div><b>Dung lượng:</b> {{data[0].dungluong}}</div>
+                  <div style="margin-left: 25px;"><b>Loại sản phẩm:</b> {{data[0].loaisanpham}}</div>
+                </div>
+                <div><b>Phiên bản:</b> {{data[0].phienban}}</div>
+                <div><b>IMEI:</b></div>
+                <div *ngFor="let data of data[0].imei.split(',')">
+                  <input type="checkbox" value="{{data}}" (change)="checkCheckBoxvalue($event)"
+                    style="margin-right: 10px;">{{data}}
+                </div>
+                <div><b>Hình thức thanh toán:</b></div>
+                <div>
+                  <select name="cars" id="cars" (change)="changehinhthucthanhtoan($event)"
+                    style="height: 24px; border-radius: 5px; width: 150px;">
+                    <option value="default">Hình thức thanh toán</option>
+                    <option value="tienmat">Tiền mặt</option>
+                    <option value="chuyenkhoan">Chuyển khoản, Daibiki</option>
+                  </select>
+                </div>
+                <br>
+                <div *ngIf="hinhthucthanhtoan=='tienmat'">
+                  <div>Số tiền khách đưa: <input style="width: 120px;height: 24px; border-radius: 5px;"></div>
+
+                  <div>Số tiền hóa đơn: <input style="width: 120px;height: 24px; border-radius: 5px; margin-top: 5px;"></div>
+
+                  <div>Số tiền thừa: <input style="width: 120px;height: 24px; border-radius: 5px;margin-top: 5px;"></div>
+                </div>
+              </div>
+            </div>
+          </td>
+          <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete()"></i></td>
+        </tr>
+      </tbody>
+    </table>
+    <br />
+    <br />
+    <button (click)="quayve()"
+      style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">
+      Quay Về</button>
+
+  </nb-card-body>
+
+</nb-card> -->
+
+
+<nb-card>
+  <nb-card-header>
+    Đơn Hàng Xử Lý
+  </nb-card-header>
+
+  <nb-card-body>
+
+
+
+    <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
+
+    <!-- <br /> -->
+    <table class="styled-table" id="excel-table">
+
+
+      <thead>
+        <tr>
+          <!-- <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;" routerLink="/pages/tables/bansanpham"
+        [queryParams]={id:[danhsachidsanpham]}></i>
+    </th> -->
+          <th>Id</th>
+          <th>Nhóm sản phẩm</th>
+          <th>Tên sản phẩm</th>
+          <th>Dung lượng</th>
+          <th>Loại sản phẩm</th>
+          <th>Phiên bản</th>
+          <th>Imei</th>
+          <th>Giá tiền</th>
+          <th></th>
+          <!-- <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let sanpham of datas">
+          <td>{{sanpham[0].id}}</td>
+          <td>{{sanpham[0].nhomsanpham}}</td>
+          <td>{{sanpham[0].tensanpham}}</td>
+          <td>{{sanpham[0].dungluong}}</td>
+          <td>{{sanpham[0].loaisanpham}}</td>
+          <td>{{sanpham[0].phienban}}</td>
+          <td>
+          
+            <!-- <div *ngFor="let data of sanpham[0].imei.split(',')">
+              <input *ngIf="data!=''" type="checkbox" value="{{data}}" (change)="checkCheckBoxvalue(
+                $event,sanpham[0].id,sanpham[0].nhomsanpham
+              ,sanpham[0].tensanpham,sanpham[0].dungluong,
+              sanpham[0].loaisanpham,sanpham[0].phienban)" style="margin-right: 10px;">{{data}}
+            </div> -->
+
+         
+              <input *ngIf="data!=''" type="checkbox" value="{{data}}" (change)="checkCheckBoxvalue(
+                $event,sanpham[0].id,sanpham[0].nhomsanpham
+              ,sanpham[0].tensanpham,sanpham[0].dungluong,
+              sanpham[0].loaisanpham,sanpham[0].phienban)" style="margin-right: 10px;">{{sanpham[0].imei}}
+      
+          </td>
+          <!-- <td>
+          
+            <mat-form-field appearance="fill" class="mySelectForm">
+              <mat-select [formControl]="toppings" multiple>
+                <mat-option *ngFor="let topping of sanpham[0].imei.split(',')" [value]="topping">{{topping}}</mat-option>
+              </mat-select>
+              </mat-form-field>
+          </td> -->
+          <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;"
+              (change)="changesotien($event,sanpham[0].id)"></td>
+          <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham[0].id)"></i></td>
+
+   
+        </tr>
+
+
+      </tbody>
+    </table>
+    <br>
+    <div>Hình thức thanh toán:
+      <select name="cars" id="cars" (change)="changehinhthucthanhtoan($event)"
+        style="height: 22px; border-radius: 5px; width: 180px; margin-left: 10px;">
+        <option value="default">Hình thức thanh toán</option>
+        <option value="tienmat">Tiền mặt</option>
+        <option value="chuyenkhoan">Chuyển khoản</option>
+        <option value="daibiki">Daibiki</option>
+      </select>
+    </div>
+    <br>
+
+    <div *ngIf="hinhthucthanhtoan=='tienmat' || hinhthucthanhtoan=='chuyenkhoan' || hinhthucthanhtoan=='daibiki'">Tiền Hóa Đơn: <input type="text"
+        style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="tienhoadon">
+    </div>
+    <br>
+    <div *ngIf="hinhthucthanhtoan=='tienmat'">Tiền Khách Đưa: <input type="text"
+        style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" (change)="changetienkhachdua($event)"
+        [(ngModel)]="tienkhachdua"></div>
+    <br>
+    <div *ngIf="hinhthucthanhtoan=='tienmat'">Tiền Thừa: <input type="text"
+        style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="tienthua"></div>
+
+    <br>
+    <br>
+    <div style="display: flex;">
+      <button (click)="hoantat()"
+        style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
+        Hoàn Tất</button>
+      <button (click)="quayve()"
+        style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #fab32e;color: white;background-color: #fcad80;font-weight: 300;">
+        Hủy</button>
+
+    </div>
+  </nb-card-body>
+</nb-card>

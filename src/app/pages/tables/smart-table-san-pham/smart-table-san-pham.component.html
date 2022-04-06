@@ -1,0 +1,126 @@
+<!-- <nb-card>  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings"   [source]="source"   >
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card> -->
+
+  <a *ngIf="role=='dailycap1'||role=='dailycap2'||role=='khachle'" style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a>
+
+  <br/>
+<table class="styled-table" id="excel-table" >
+
+
+  <thead>
+    <tr>
+      <th *ngIf="role=='dailycap1'||role=='dailycap2'||role=='khachle'"></th>
+      <th>Mã Sản Phẩm</th>
+      <th>Loại Máy</th>
+      <th>Đời Máy</th>
+      <th>Màn Hình</th>
+      <th>Chip</th>
+      <th>Tần Số</th>
+      <th>Ram</th>
+      <th>Ổ Cứng</th>
+      <th>Nhóm</th>
+      <th *ngIf="role!='admin'">Giá Tiền</th>
+      <th>Màu Sắc</th>
+      <th>Chi Tiết</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <td *ngIf="role=='dailycap1'||role=='dailycap2'||role=='khachle'"><i class="fa fa-shopping-cart"
+        style="font-size:18px;color:cornflowerblue;" (click)="muahang()"></i></td>
+  
+      <td><input (change)="selectMaSanPham($event)" name="cars" id="cars"
+        style="height: 28px;width: 80px;border-radius: 5px;border-color: #809ffc;"></td>
+
+    <td><select (change)="selectLoaiMay($event)" name="cars" id="cars"
+        style="height: 28px;width: 80px;border-radius: 5px;border-color: #809ffc;">
+        <option value="default">Loại Máy</option>
+        <option *ngFor="let data of loaimays" [value]="data">
+          {{data}}
+        </option>
+
+      </select></td>
+    <td><select (change)="selectDoiMay($event)" name="cars" id="cars"
+      style="height: 28px;width: 80px;border-radius: 5px;border-color: #809ffc;">
+      <option value="default">Đời Máy</option>
+      <option *ngFor="let data of doimays" [value]="data">
+        {{data}}
+      </option>
+
+    </select></td>
+    <td><select (change)="selectManHinh($event)" name="cars" id="cars"
+      style="height: 28px;width: 80px;border-radius: 5px;border-color: #809ffc;">
+      <option value="default">Màn Hình</option>
+      <option *ngFor="let data of manhinhs" [value]="data">
+        {{data}}
+      </option>
+
+    </select></td>
+    <td><select (change)="selectChip($event)" name="cars" id="cars"
+      style="height: 28px;width: 60px;border-radius: 5px;border-color: #809ffc;">
+      <option value="default">Chip</option>
+      <option *ngFor="let data of chips" [value]="data">
+        {{data}}
+      </option>
+
+    </select></td>
+    <td><select (change)="selectTanso($event)" name="cars" id="cars"
+      style="height: 28px;width: 80px;border-radius: 5px;border-color: #809ffc;">
+      <option value="default">Tần số</option>
+      <option *ngFor="let data of tansos" [value]="data">
+        {{data}}
+      </option>
+
+    </select></td>
+    <td><select (change)="selectRam($event)" name="cars" id="cars"
+      style="height: 28px;width: 60px;border-radius: 5px;border-color: #809ffc;">
+      <option value="default">Ram</option>
+      <option *ngFor="let data of rams" [value]="data">
+        {{data}}
+      </option>
+
+    </select></td>
+    <td><select (change)="selectOcung($event)" name="cars" id="cars"
+      style="height: 28px;width: 80px;border-radius: 5px;border-color: #809ffc;">
+      <option value="default">Ổ cứng</option>
+      <option *ngFor="let data of ocungs" [value]="data">
+        {{data}}
+      </option>
+
+    </select></td>
+    <td><select (change)="selectNhom($event)" name="cars" id="cars"
+      style="height: 28px;width: 60px;border-radius: 5px;border-color: #809ffc;">
+      <option value="default">Nhóm</option>
+      <option *ngFor="let data of nhoms" [value]="data">
+        {{data}}
+      </option>
+
+    </select></td>
+  
+    <tr *ngFor="let sanpham of sanphams">
+      <td *ngIf="role=='dailycap1'||role=='dailycap2'||role=='khachle'"><input type="checkbox"
+          (click)="onClick(sanpham)"></td>
+      <td>{{sanpham.masanpham}}</td>
+      <td>{{sanpham.loaimay}}</td>
+      <td>{{sanpham.doimay}}</td>
+      <td>{{sanpham.manhinh}}</td>
+      <td>{{sanpham.chip}}</td>
+      <td>{{sanpham.tanso}}</td>
+      <td>{{sanpham.ram}}</td>
+      <td>{{sanpham.ocung}}</td>
+      <td>{{sanpham.nhom}}</td>
+      <td *ngIf="sanpham.gia1">¥ {{sanpham.gia1}}</td>
+      <td *ngIf="sanpham.gia2">¥ {{sanpham.gia2}}</td>
+      <td *ngIf="sanpham.gia3">¥ {{sanpham.gia3}}</td>
+      <td>{{sanpham.mausac}}</td>
+      <td>{{sanpham.chitiet}}</td>
+
+    </tr>
+
+
+  </tbody>
+</table>

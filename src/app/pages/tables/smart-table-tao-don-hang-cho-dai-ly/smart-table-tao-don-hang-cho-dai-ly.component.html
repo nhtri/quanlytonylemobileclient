@@ -1,0 +1,62 @@
+<div style="display: flex;">
+        <select (change)="selectOption($event)" name="cars" id="cars" style="height: 36px;width: 200px;border-radius: 5px;border-color: #809ffc;">
+        <option value="default">Tên Đại Lý</option>
+        <option *ngFor="let user of users" [value]="user.dienthoai">
+            {{user.hoten}}
+        </option>
+
+    </select>
+    <input [(ngModel)]="masanphammoi" placeholder="Mã Sản Phẩm" style="margin-left: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #809ffc;">
+    <button (click)="taodonhang()" style="margin-left: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">Thêm Sản Phẩm</button>
+
+</div>
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Mã Sản Phẩm</th>
+            <th>Loại Máy</th>
+            <th>Đời Máy</th>
+            <th>Màn Hình</th>
+            <th>Chip</th>
+            <th>Tần Số</th>
+            <th>Ram</th>
+            <th>Ổ Cứng</th>
+            <th>Nhóm</th>
+            <th>imei</th>
+            <th>Giá</th>
+            <th>Màu Sắc</th>
+            <th>Chi Tiết</th>
+            <th>Chi Tiết Đặc Biệt</th>
+            <th>Ngày Tháng</th>
+            <th>Người Mua</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let sanpham of sanphams">
+            <td>{{sanpham.masanpham}}</td>
+            <td>{{sanpham.loaimay}}</td>
+            <td>{{sanpham.doimay}}</td>
+            <td>{{sanpham.manhinh}}</td>
+            <td>{{sanpham.chip}}</td>
+            <td>{{sanpham.tanso}}</td>
+            <td>{{sanpham.ram}}</td>
+            <td>{{sanpham.ocung}}</td>
+            <td>{{sanpham.nhom}}</td>
+            <td>{{sanpham.imei}}</td>
+            <td>{{sanpham.gia}}</td>
+            <td>{{sanpham.mausac}}</td>
+            <td>{{sanpham.chitiet}}</td>
+            <td>{{sanpham.chitietdacbiet}}</td>
+            <td>{{sanpham.ngaythang.substring(0,10)}}</td>
+            <td>{{sanpham.tenkhachhang}}</td>
+            <td><i class="fa fa-remove" style="font-size:18px;color:tomato;" (click)="click(sanpham)"></i></td>
+
+        </tr>
+
+    </tbody>
+</table>
+<br/>
+<!-- <button (click)="huydonhang()" style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: tomato;color: white;background-color:orangered;font-weight: 300;"> Hủy</button> -->
+<button (click)="dongydonhang()" style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;"> Đồng Ý</button>

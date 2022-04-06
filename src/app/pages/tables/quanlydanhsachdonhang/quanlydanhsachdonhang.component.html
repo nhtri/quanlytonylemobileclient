@@ -1,0 +1,50 @@
+<nb-card>
+    <nb-card-header>
+      Danh Sách Đơn Hàng <a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()"> Tải Danh Sách Đơn Hàng</a>
+
+    </nb-card-header>
+  
+    <nb-card-body>
+  
+
+
+<!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
+
+<!-- <br /> -->
+<table class="styled-table" id="excel-table">
+
+
+  <thead>
+    <tr>
+      <th>Đơn hàng</th>
+      <th>Giá tiền</th>
+      <th>Ngày bán</th>
+      <th>Imei</th>
+      <th>Số lượng máy</th>
+      <!-- <th></th>
+      <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
+    </tr>
+  </thead>
+  <tbody>
+    
+
+  
+    <tr *ngFor="let sanpham of data">
+      <td ><a routerLink="/pages/tables/chitietdonhang"
+        [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td>
+      <td>{{sanpham.giatien}}</td>
+      <td>{{sanpham.ngayban}}</td>
+      <td>{{sanpham.danhsachimei}}</td>
+      <td>{{sanpham.soluongmay}}</td>
+      <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
+          [queryParams]={id:[sanpham.id]}></i></td>
+      <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
+
+    </tr>
+
+
+  </tbody>
+</table>
+
+</nb-card-body>
+</nb-card> 

@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-header>
+      Quản Lý Máy Đã Bán:   <b style="color:#2e61fa">{{soluongmay}} máy</b> 
+      <a  style="margin-left: 60px; color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Hàng Đã Bán</a>
+
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table id="excel-table"  [settings]="settings" [source]="source" (createConfirm)="onCreateConfirm($event)"  (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>

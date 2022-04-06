@@ -1,0 +1,60 @@
+<nb-card>
+
+
+    <nb-card-body>
+        <div *ngFor="let sanpham of sanphams">
+            <div
+                style="display: flex;; margin-top: 15px; color: #809ffc;  ">
+                <a routerLink="/pages/tables/smart-table-don-hang-dang-xu-ly-nguoi-mua" style="text-decoration: none !important;"> <b style="margin-right: 10px;">-</b> Mã Đơn Hàng: <b
+                    style="margin-right: 15px;">{{sanpham.madonhang}}</b> 
+                    -Tổng Giá Tiền: <b style="margin-right: 15px;">{{sanpham.tongtien}} </b> -Tổng Sản Phẩm: <b style="margin-right: 15px;">{{sanpham.tongsanpham}} </b>
+                    - Ngày Tháng: <b
+                    style="margin-right: 15px;">{{sanpham.ngaythang.substring(0,10)}} </b></a>
+                    
+            </div>
+
+
+            <br />
+
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Mã Sản Phẩm</th>
+                        <th>Loại Máy</th>
+                        <th>Đời Máy</th>
+                        <th>Màn Hình</th>
+                        <th>Chip</th>
+                        <th>Tần Số</th>
+                        <th>Ram</th>
+                        <th>Ổ Cứng</th>
+                        <th>Nhóm</th>
+                        <th *ngIf="sanpham.trangthaidonhang=='thanhcong'">imei</th>
+                        <th>Giá Tiền</th> 
+                        <th>Màu Sắc</th>                
+                        <th>Chi Tiết</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr *ngFor="let sanpham of data" >
+                        <td>{{sanpham.masanpham}}</td>
+                        <td>{{sanpham.loaimay}}</td>
+                        <td>{{sanpham.doimay}}</td>
+                        <td>{{sanpham.manhinh}}</td>
+                        <td>{{sanpham.chip}}</td>
+                        <td>{{sanpham.tanso}}</td>
+                        <td>{{sanpham.ram}}</td>
+                        <td>{{sanpham.ocung}}</td>
+                        <td>{{sanpham.nhom}}</td>
+                        <td *ngIf="sanpham.trangthaidonhang=='thanhcong'">{{sanpham.imei}}</td>
+                        <td>{{sanpham.gia}}</td>
+                        <td>{{sanpham.mausac}}</td>
+                        <td>{{sanpham.chitiet}}</td>
+                    </tr>
+                  
+                    <!-- and so on... -->
+                </tbody>
+            </table>
+           
+        </div>
+    </nb-card-body>
+</nb-card>

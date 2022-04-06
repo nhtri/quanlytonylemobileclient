@@ -1,0 +1,43 @@
+<table class="styled-table">
+    <thead>
+        <tr>
+            <th>Mã Sản Phẩm</th>
+            <th>Loại Máy</th>
+            <th>Đời Máy</th>
+            <th>Màn Hình</th>
+            <th>Chip</th>
+            <th>Tần Số</th>
+            <th>Ram</th>
+            <th>Ổ Cứng</th>
+            <th>Nhóm</th>
+            <th>Giá</th>
+            <th>Chi Tiết</th>
+            <th>Ngày Tháng</th>
+            <th>Họ Tên Người Mua</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let sanpham of sanphams">
+            <td>{{sanpham.masanpham}}</td>
+            <td>{{sanpham.loaimay}}</td>
+            <td>{{sanpham.doimay}}</td>
+            <td>{{sanpham.manhinh}}</td>
+            <td>{{sanpham.chip}}</td>
+            <td>{{sanpham.tanso}}</td>
+            <td>{{sanpham.ram}}</td>
+            <td>{{sanpham.ocung}}</td>
+            <td>{{sanpham.nhom}}</td>
+            <td>{{sanpham.gia}}</td>
+            <td>{{sanpham.chitiet}}</td>
+            <td>{{sanpham.ngaythang.substring(0,10)}}</td>
+            <td>{{sanpham.hoten}}</td>
+            <td><i class="fa fa-remove" style="font-size:18px;color:tomato;" (click)="click(sanpham)"></i></td>
+            <td><i class="fa fa-check" style="font-size:18px;color:lightgreen;" (click)="clickmuahang(sanpham)"></i></td>
+        </tr>
+
+        <!-- and so on... -->
+    </tbody>
+</table>

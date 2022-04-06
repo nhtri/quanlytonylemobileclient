@@ -1,0 +1,29 @@
+@import '../@theme/styles/themes';
+
+@include nb-install-component() {
+  ::ng-deep router-outlet + * {
+    display: block;
+    animation: fade 1s;
+
+    @keyframes fade {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+  }
+
+  ::ng-deep .main-menu {
+    .menu-group {
+      font-size: 1rem;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+    .menu-group:not(:first-child) {
+      margin-top: 25px;
+    }
+  }
+}

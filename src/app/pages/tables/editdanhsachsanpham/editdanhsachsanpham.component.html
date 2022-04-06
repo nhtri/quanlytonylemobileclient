@@ -1,0 +1,12 @@
+<nb-card>
+    <nb-card-header>
+      Chỉnh Sửa Sản Phẩm
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source"  (editConfirm)="onSaveConfirm($event)">
+      </ng2-smart-table>
+      <br/>
+      <button (click)="quayve()" style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;"> Quay Về</button>
+    </nb-card-body>
+  </nb-card>

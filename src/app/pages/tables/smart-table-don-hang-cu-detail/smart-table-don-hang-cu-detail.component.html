@@ -1,0 +1,28 @@
+<nb-card>
+
+
+    <nb-card-body>
+        <div *ngFor="let sanpham of sanphams">
+            <div
+                style="display: flex; background-color: #809ffc; margin-top: 15px; color: white;   padding: 12px 15px; border-radius: 10px;">
+                <a routerLink="/pages/tables/smart-table-don-hang-da-xu-ly-thanh-cong" style="text-decoration: none !important;color:white"><b style="margin-right: 10px;">-</b> Mã Đơn Hàng: <b
+                    style="margin-right: 15px;">{{sanpham.madonhang}}</b> - Khách Hàng: <b
+                    style="margin-right: 15px;">{{sanpham.tenkhachhang}}</b> 
+                    -Tổng Giá Tiền: <b style="margin-right: 15px;">{{sanpham.tongtien}} </b> -Tổng Sản Phẩm: <b style="margin-right: 15px;">{{sanpham.tongsanpham}} </b>
+                  
+                    - Ngày Tháng: <b
+                    style="margin-right: 15px;">{{sanpham.ngaythang.substring(0,10)}} </b></a>
+            </div>
+
+
+            <br />
+            <div>
+                <ng2-smart-table id="excel-table"  [settings]="settings" [source]="source" >
+                </ng2-smart-table>
+            </div>
+          
+        </div>
+        <br/>
+        <button (click)="xuatdonhang()" style="height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">Xuất Đơn Hàng</button>
+    </nb-card-body>
+</nb-card>

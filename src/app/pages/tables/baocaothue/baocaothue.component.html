@@ -1,0 +1,63 @@
+<nb-card>
+  <nb-card-header>
+    Báo Cáo Thuế <a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()">
+      Tải Danh Sách Báo Cáo Thuế</a>
+
+  </nb-card-header>
+
+  <nb-card-body>
+
+    <input type="date" style="margin-right: 5px;" [(ngModel)]="date1" (change)="change1()">-<input type="date"
+      style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()">
+    <br />
+
+    <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
+
+    <!-- <br /> -->
+    <table class="styled-table" id="excel-table">
+
+
+      <thead>
+        <tr>
+          <th>Ngày bán</th>
+          <!-- <th>Đơn hàng</th> -->
+
+          <th>Tổng Giá tiền</th>
+          <th>Tên sản phẩm</th>
+          <th>Imei</th>
+
+          <!-- <th></th>
+        <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr *ngFor="let datacon of dataconvert">
+          <td>{{datacon.ngayban| date: 'dd/MM/yyyy'}}</td>
+
+
+          <td>{{datacon.tongsotien}}</td>
+          <td>
+            <!-- {{datacon.tensanpham}} -->
+            <div *ngFor="let data of datacon.tensanpham.split(',')">
+              {{data}}
+            </div>
+          </td>
+          <td>
+            <!-- {{datacon.imei}} -->
+            <div *ngFor="let data of datacon.imei.split(',')">
+              {{data}}
+            </div>
+          </td>
+
+
+
+
+        </tr>
+
+
+      </tbody>
+    </table>
+
+  </nb-card-body>
+</nb-card>

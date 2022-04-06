@@ -1,0 +1,23 @@
+<nb-card>
+  <nb-card-header>
+    Quản Lý Máy: <b style="color:#2e61fa">{{soluongmay}} máy</b> 
+    <a  style="margin-left: 60px; color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Hàng Tồn</a>
+  </nb-card-header>
+
+  <nb-card-body>
+    <br/>
+  
+    <br/>
+    <br />
+    <div style="display: flex;">
+      <a href="../../../../assets/data/SanPham.xlsx" style="margin-right: 40px;"><b>Tải danh sách sản phẩm mẫu xuống</b></a>
+      <input type="file" id="file" (change)="uploadExcel($event)">
+      <button (click)="taosanpham()" style="margin-left: 10px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">Thêm Sản Phẩm</button>
+
+    </div>
+    <br />
+    <ng2-smart-table id="excel-table"  *ngIf="role == 'admin'" [settings]="settings" [source]="source" (createConfirm)="onCreateConfirm($event)"
+      (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)">
+    </ng2-smart-table>
+  </nb-card-body>
+</nb-card>

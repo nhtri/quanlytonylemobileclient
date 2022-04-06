@@ -1,0 +1,82 @@
+// :host {
+   
+//     ::ng-deep .dungluong .ng2-smart-title {
+//         width: 110px;
+//       }
+//     ::ng-deep .loaisanpham .ng2-smart-title {
+//         width: 110px;
+//       }
+//     ::ng-deep .phienban .ng2-smart-title {
+//         width: 110px;
+//       }
+//     ::ng-deep .nhomsanpham .ng2-smart-title {
+//         width: 120px;
+//       }
+//     ::ng-deep .mau .ng2-smart-title {
+//         width: 80px;
+//       }
+//       ::ng-deep .tensanpham .ng2-smart-title {
+//         width: 110px;
+//       }
+//       ::ng-deep .soluong .ng2-smart-title {
+//         width: 70px;
+//       }
+//       ::ng-deep .imei .ng2-smart-title {
+//         width: 110px;
+//       }
+
+
+
+      
+//   }
+
+
+//   ::ng-deep ng2-st-tbody-edit-delete {display: flex !important;
+//     height: 0 !important;
+//   }
+  
+//   ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom {
+//     display: inline-block;
+//     width: 50px;
+//     text-align: center;
+//     font-size: 1.1em;
+//   }
+  
+//   ::ng-deep ng2-st-tbody-custom a.ng2-smart-action.ng2-smart-action-custom-custom:hover {
+//     color: #5dcfe3;
+//   }
+
+.styled-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  font-size: 0.9em;
+  font-family: sans-serif;
+  min-width: 400px;
+  width: 100%;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+.styled-table thead tr {
+  background-color: #809ffc;
+  color: #ffffff;
+  text-align: left;
+}
+.styled-table th,
+.styled-table td {
+  padding: 12px 15px;
+
+}
+.styled-table tbody tr {
+  border-bottom: 1px solid #dddddd;
+}
+
+.styled-table tbody tr:nth-of-type(even) {
+  background-color: #f3f3f3;
+}
+
+.styled-table tbody tr:last-of-type {
+  border-bottom: 2px solid #809ffc;
+}
+.styled-table tbody tr.active-row {
+  font-weight: bold;
+  color: #809ffc;
+}

@@ -1,0 +1,23 @@
+<nb-card>
+    <nb-card-header>
+      Quản Lý Danh Sách Khách Hàng
+    </nb-card-header>
+  
+    <nb-card-body>
+      <div style="display: flex;">
+        <select (change)="selectOption($event)" name="cars" id="cars" style="height: 36px;width: 200px;border-radius: 5px;border-color: #809ffc;">
+        <option value="default">Tên Đại Lý</option>
+        <option *ngFor="let user of users" [value]="user.dienthoai">
+            {{user.hoten}}
+        </option>
+
+    </select>
+    
+    <button (click)="resetpass()" style="margin-left: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">Tạo Lại Mật Khẩu</button>
+
+</div>
+      <br/>
+      <ng2-smart-table [settings]="settings" [source]="source" (createConfirm)="onCreateConfirm($event)"  (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>

@@ -1,0 +1,56 @@
+
+    <!-- <table class="styled-table">
+        <thead>
+            <tr *ngFor="let sanpham of sanphams">
+                <th style="display: flex;"><b style="margin-right: 10px;">+</b>  Mã Đơn Hàng: {{sanpham.madonhang}}    -    Ngày Tháng: {{sanpham.ngaythang.substring(0,10)}} </th>   
+                   
+            </tr>
+        </thead> -->
+
+        
+
+            <div *ngFor="let sanpham of sanphams">
+                <!-- <div *ngIf="sanpham.trangthaidonhang=='thanhcong'"style="display: flex; background-color: #809ffc; margin-top: 15px; color: white;   padding: 12px 15px; border-radius: 10px;"><a routerLink="/pages/tables/smart-table-detail-nguoi-dung" [queryParams]={id:[sanpham.madonhang]} style="text-decoration: none !important; color:white"><b style="margin-right: 10px;">+</b>  Mã Đơn Hàng:<b style="margin-right: 15px;"> {{sanpham.madonhang}}  </b>  -Tổng Giá Tiền: <b style="margin-right: 15px;">{{sanpham.tongtien}} </b> -Tổng Sản Phẩm: <b style="margin-right: 15px;">{{sanpham.tongsanpham}} </b>  -Ngày Tháng: <b style="margin-right: 15px;">{{sanpham.ngaythang.substring(0,10)}}</b>- Trạng Thái: <b style="margin-right: 15px;">Hoàn thành</b></a></div>   -->
+                <div *ngIf="sanpham.trangthaidonhang=='dangxuly'" style="display: flex; background-color: #809ffc; margin-top: 15px; color: white;   padding: 12px 15px; border-radius: 10px;"><a routerLink="/pages/tables/smart-table-detail-nguoi-dung" [queryParams]={id:[sanpham.madonhang]} style="text-decoration: none !important; color:white"><b style="margin-right: 10px;">+</b>  Mã Đơn Hàng:<b style="margin-right: 15px;"> {{sanpham.madonhang}}  </b>   -Tổng Giá Tiền: <b style="margin-right: 15px;">{{sanpham.tongtien}} </b> -Tổng Sản Phẩm: <b style="margin-right: 15px;">{{sanpham.tongsanpham}} </b>  -    Ngày Tháng: <b style="margin-right: 15px;">{{sanpham.ngaythang.substring(0,10)}}</b> - Trạng Thái: <b style="margin-right: 15px;">Đang xử lý</b></a></div>  
+            </div>
+    
+<!-- <table class="styled-table">
+    <thead>
+        <tr>
+            <th>Mã Sản Phẩm</th>
+            <th>Loại Máy</th>
+            <th>Đời Máy</th>
+            <th>Màn Hình</th>
+            <th>Chip</th>
+            <th>Tần Số</th>
+            <th>Ram</th>
+            <th>Ổ Cứng</th>
+            <th>Nhóm</th>
+            <th>Giá</th>
+            <th>Chi Tiết</th>
+            <th>Ngày Tháng</th>
+            <th>Trạng Thái</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        <tr *ngFor="let sanpham of sanphams">
+            <td>{{sanpham.masanpham}}</td>
+            <td>{{sanpham.loaimay}}</td>
+            <td>{{sanpham.doimay}}</td>
+            <td>{{sanpham.manhinh}}</td>
+            <td>{{sanpham.chip}}</td>
+            <td>{{sanpham.tanso}}</td>
+            <td>{{sanpham.ram}}</td>
+            <td>{{sanpham.ocung}}</td>
+            <td>{{sanpham.nhom}}</td>
+            <td>{{sanpham.gia}}</td>
+            <td>{{sanpham.chitiet}}</td>
+            <td>{{sanpham.ngaythang.substring(0,10)}}</td>
+            <td *ngIf="sanpham.trangthaidonhang=='dangxuly'">Đang Xử Lý</td>
+            <td *ngIf="sanpham.trangthaidonhang=='thanhcong'">Thành Công</td>
+ </tr>
+
+ 
+    </tbody>
+</table> -->
