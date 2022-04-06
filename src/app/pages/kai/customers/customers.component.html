@@ -1,0 +1,74 @@
+<nb-card>
+    <nb-card-header>
+        QUẢN LÝ NGƯỜI BÁN
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="row filter-input-group customer-search">
+            <div class="col-9 col-md-9 form-inline">
+                <input type="text" placeholder="Tên Tiếng Việt"
+                       [(ngModel)]="customerSearch.name" required id="searchName" (keydown.enter)="onSearchCustomer($event)" (ngModelChange)="onSearchCustomer($event)"
+                       name="searchName" class="filter-text form-control" />
+                <input type="text" placeholder="Số Điện Thoại"
+                       [(ngModel)]="customerSearch.phone" required id="searchPhone" (keydown.enter)="onSearchCustomer($event)" (ngModelChange)="onSearchCustomer($event)"
+                       name="searchPhone" class="filter-text form-control" />
+                <p-calendar
+                        [inputStyleClass]="'form-control'"
+                        [styleClass]="'my-calendar birthday-calendar'"
+                        placeholder="Ngày Sinh"
+                        [(ngModel)]="customerSearch.birthday"
+                        dateFormat="dd-mm-yy"
+                        (ngModelChange)="onSearchCustomer($event)"
+                        [ngModelOptions]="{standalone: true}"
+                        [monthNavigator]="true"
+                        [yearNavigator]="true"
+                        [yearRange]="birthdayYearRange"
+                        [showButtonBar]="true"
+                        #birthdayValidate="ngModel"
+                >
+                </p-calendar>
+            </div>
+            <div class="col-3 col-md-3">
+                <button type="button" pButton icon="pi pi-plus" iconPos="left" label="THÊM" (click)="navigateToAddCustomer()" class="ui-button-info float-right"></button>
+            </div>
+        </div>
+
+        <p-table dataKey="id" editMode="row" #tt [columns]="cols" [value]="data" [paginator]="true"
+                 [rows]="20" [tableStyleClass]="'kai-styled-table'" [tableStyle]="{'table-layout':'auto'}">
+
+            <ng-template pTemplate="header" let-columns class=" text-primary">
+                <tr>
+                    <th></th>
+                    <th>Tên Tiếng Việt</th>
+                    <th>Tên Tiếng Nhật</th>
+                    <th>Ngày Sinh</th>
+                    <th>Tuổi</th>
+                    <th>Địa Chỉ</th>
+                    <th>Số Điện Thoại</th>
+                    <th>Nghề Nghiệp</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template let-i="rowIndex" pTemplate="body" let-rowData let-columns="columns"
+                         let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="rowData">
+                    <td>{{i + 1}}</td>
+                    <td>{{rowData.name_vietnamese}}</td>
+                    <td>{{rowData.name_japanese}}</td>
+                    <td>{{rowData.birthday}}</td>
+                    <td>{{rowData.age}}</td>
+                    <td>{{rowData.address}}</td>
+                    <td>{{rowData.phone}}</td>
+                    <td>{{rowData.job | jobTitle}}</td>
+                    <td style="text-align:center">
+                        <button nbButton status="primary" (click)="onRowEditInit(rowData)" ><nb-icon icon="edit-outline"></nb-icon></button>
+                    </td>
+                    <td style="text-align:center">
+                        <button nbButton status="danger" (click)="onRowDelete(rowData,ri)" ><nb-icon icon="trash-2-outline"></nb-icon></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+    </nb-card-body>
+</nb-card>
