@@ -22,6 +22,8 @@ export class PagesComponent {
         this.menuItems = [
             ...this.menuService.kaiMenuItems(),
             ...this.menuService.mainMenuItems(),
+            ...this.menuService.mainMenuItemsvn(),
+            ...this.menuService.mainMenuItemskho(),
             ...this.menuService.adminMenuItems(),
             ...this.menuService.generalMenuItems(),
         ];
