@@ -7,8 +7,32 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
         group: true,
     },
     {
-        title: 'Customers',
+        title: 'Quản Lý Người Bán',
         link: '/pages/kai/customers',
+    },
+    {
+        title: 'Quản Lý Đơn Thu Mua',
+        link: '/pages/kai/purchasing-invoices',
+    },
+    {
+        title: 'DS Máy Trong Kho',
+        link: '/pages/kai/products',
+    },
+    {
+        title: 'DS ĐH Đang Xữ Lý',
+        link: '/pages/kai/pending-orders',
+    },
+    {
+        title: 'DS ĐH Hoàn Thành',
+        link: '/pages/kai/completed-orders',
+    },
+    {
+        title: 'Quản Lý Thu Chi',
+        link: '/pages/kai/statistics',
+    },
+    {
+        title: 'Quản Lý Máy',
+        link: '/pages/kai/devices',
     },
 ];
 
