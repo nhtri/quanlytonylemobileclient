@@ -3,15 +3,14 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 
 @Component({
-  selector: 'ngx-quanlydanhsachsanpham',
-  templateUrl: './quanlydanhsachsanpham.component.html',
-  styleUrls: ['./quanlydanhsachsanpham.component.scss']
+  selector: 'ngx-quanlydanhsachsanphamvn',
+  templateUrl: './quanlydanhsachsanphamvn.component.html',
+  styleUrls: ['./quanlydanhsachsanphamvn.component.scss']
 })
-export class QuanlydanhsachsanphamComponent implements OnInit {
-
+export class QuanlydanhsachsanphamvnComponent implements OnInit {
   constructor(private service: NetworkserviceService) {
 
-    this.service.getsanphamtonkhokhohang().subscribe(val => {
+    this.service.getsanphamtonkhovn().subscribe(val => {
 
       val.forEach(element => {
         this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
@@ -249,7 +248,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         
           console.log("POST Request is successful ", data);
 
-          this.service.getsanphamtonkhokhohang().subscribe(val => {
+          this.service.getsanphamtonkhovn().subscribe(val => {
 this.dataedit=[]
             val.forEach(element => {
               this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
@@ -302,14 +301,14 @@ this.dataedit=[]
 
   onCreateConfirm(event): void {
     console.log("Create Event In Console")
-    // if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
-    // el.tensanpham === (event['newData']['tensanpham']) &&
-    // el.dungluong === (event['newData']['dungluong']) &&
-    // el.mau === (event['newData']['mau']) &&
-    // el.loaisanpham === (event['newData']['loaisanpham']) &&
-    // el.phienban === (event['newData']['phienban'])
-    // )) {
-      this.service.sanphamtonkhokhohang(
+    if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
+    el.tensanpham === (event['newData']['tensanpham']) &&
+    el.dungluong === (event['newData']['dungluong']) &&
+    el.mau === (event['newData']['mau']) &&
+    el.loaisanpham === (event['newData']['loaisanpham']) &&
+    el.phienban === (event['newData']['phienban'])
+    )) {
+      this.service.sanphamtonkhovn(
         [
           event['newData']['imei'],
           event['newData']['color'],
@@ -317,8 +316,8 @@ this.dataedit=[]
           event['newData']['quantity'],
           event['newData']['price'],
           event['newData']['price'],
-          'WAREHOUSE',
-          'WAREHOUSE'
+          'SHOP_VN',
+          'SHOP_VN'
         ]
       )
         .subscribe(data => {
@@ -330,11 +329,11 @@ this.dataedit=[]
 
           })
       event.confirm.resolve();
-    // }
-    // else {
-    //   alert("Dữ liệu đã tồn tại")
-    //   event.confirm.reject();
-    // }
+    }
+    else {
+      alert("Dữ liệu đã tồn tại")
+      event.confirm.reject();
+    }
 
   }
 }

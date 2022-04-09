@@ -3,15 +3,15 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 
 @Component({
-  selector: 'ngx-quanlydanhsachsanpham',
-  templateUrl: './quanlydanhsachsanpham.component.html',
-  styleUrls: ['./quanlydanhsachsanpham.component.scss']
+  selector: 'ngx-quanlydanhsachsanphamnhat',
+  templateUrl: './quanlydanhsachsanphamnhat.component.html',
+  styleUrls: ['./quanlydanhsachsanphamnhat.component.scss']
 })
-export class QuanlydanhsachsanphamComponent implements OnInit {
+export class QuanlydanhsachsanphamnhatComponent implements OnInit {
 
   constructor(private service: NetworkserviceService) {
 
-    this.service.getsanphamtonkhokhohang().subscribe(val => {
+    this.service.getsanphamtonkhojp().subscribe(val => {
 
       val.forEach(element => {
         this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
@@ -44,7 +44,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       data.forEach(data => {
         this.datatensanpham.push({ "value": data, "title": data })
       });
-      this.settings.columns.name.editor.config.list = this.datatensanpham
+      // this.settings.columns.name.editor.config.list = this.datatensanpham
       this.settings = Object.assign({}, this.settings);
 
     })
@@ -64,7 +64,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       data.forEach(data => {
         this.datamau.push({ "value": data, "title": data })
       });
-      this.settings.columns.color.editor.config.list = this.datamau
+      // this.settings.columns.color.editor.config.list = this.datamau
       this.settings = Object.assign({}, this.settings);
 
     })
@@ -141,12 +141,13 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       name: {
         title: 'Tên Sản Phẩm',
         editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-            ]
-          }
+          // type: 'list',
+          // config: {
+          //   selectText: 'Select',
+          //   list: [
+          //   ]
+          // }
+          type:'string'
         },
         // filter: false,
       },
@@ -170,24 +171,26 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       color: {
         title: 'Màu',
         editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-            ]
-          }
+          // type: 'list',
+          // config: {
+          //   selectText: 'Select',
+          //   list: [
+          //   ]
+          // }
+          type:'string'
         },
         // filter: false,
       },
       status: {
         title: 'Tình Trạng',
         editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-            ]
-          }
+          // type: 'list',
+          // config: {
+          //   selectText: 'Select',
+          //   list: [
+          //   ]
+          // }
+          type:'string'
         },
         // filter: false,
       },
@@ -207,15 +210,15 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       quantity: {
         title: 'Số Lượng',
         type: 'string',
-        editable: false,
-        addable: false,
+        editable: true,
+        addable: true,
         // filter: false,
       },
       price: {
         title: 'Giá Tiền',
         type: 'string',
-        editable: false,
-        addable: false,
+        editable: true,
+        addable: true,
         // filter: false,
       },
     },
@@ -249,7 +252,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         
           console.log("POST Request is successful ", data);
 
-          this.service.getsanphamtonkhokhohang().subscribe(val => {
+          this.service.getsanphamtonkhojp().subscribe(val => {
 this.dataedit=[]
             val.forEach(element => {
               this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
@@ -302,24 +305,24 @@ this.dataedit=[]
 
   onCreateConfirm(event): void {
     console.log("Create Event In Console")
-    // if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
-    // el.tensanpham === (event['newData']['tensanpham']) &&
-    // el.dungluong === (event['newData']['dungluong']) &&
-    // el.mau === (event['newData']['mau']) &&
-    // el.loaisanpham === (event['newData']['loaisanpham']) &&
-    // el.phienban === (event['newData']['phienban'])
-    // )) {
-      this.service.sanphamtonkhokhohang(
-        [
-          event['newData']['imei'],
-          event['newData']['color'],
-          event['newData']['status'],
-          event['newData']['quantity'],
-          event['newData']['price'],
-          event['newData']['price'],
-          'WAREHOUSE',
-          'WAREHOUSE'
-        ]
+    if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
+    el.tensanpham === (event['newData']['tensanpham']) &&
+    el.dungluong === (event['newData']['dungluong']) &&
+    el.mau === (event['newData']['mau']) &&
+    el.loaisanpham === (event['newData']['loaisanpham']) &&
+    el.phienban === (event['newData']['phienban'])
+    )) {
+      this.service.sanphamtonkhojp(
+        {
+          'imei':event['newData']['imei'],
+          'name':event['newData']['name'],
+          'color':event['newData']['color'],
+          'status':'test',
+          'quantity' :event['newData']['quantity'],
+         'price': event['newData']['price'],
+         'position' :'SHOP_JP',
+          'source':'SHOP_JP'
+        }
       )
         .subscribe(data => {
 
@@ -330,11 +333,11 @@ this.dataedit=[]
 
           })
       event.confirm.resolve();
-    // }
-    // else {
-    //   alert("Dữ liệu đã tồn tại")
-    //   event.confirm.reject();
-    // }
+    }
+    else {
+      alert("Dữ liệu đã tồn tại")
+      event.confirm.reject();
+    }
 
   }
 }

@@ -414,13 +414,41 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(ocungAPI, data, this.httpOptions);
     }
 
-    getsanphamtonkho() {
-        const get = 'https://quanlytonylemobile.herokuapp.com/getsanphamtonkho';
+    // getsanphamtonkho() {
+    //     const get = 'https://quanlytonylemobile.herokuapp.com/getsanphamtonkho';
+    //     return this.httpClient.get<any>(get);
+    // }
+
+    getsanphamtonkhovn() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/products/shop-vn';
+        return this.httpClient.get<any>(get);
+    }
+    getsanphamtonkhojp() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/products/shop-jp';
+        return this.httpClient.get<any>(get);
+    }
+    getsanphamtonkhokhohang() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/products/warehouse';
         return this.httpClient.get<any>(get);
     }
 
     sanphamtonkho(data): Observable<any> {
         const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/sanphamtonkho`;
+        return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
+    sanphamtonkhokhohang(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/products`;
+        return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
+    sanphamtonkhovn(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/products`;
+        return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
+    sanphamtonkhojp(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/products`;
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
     }
 
