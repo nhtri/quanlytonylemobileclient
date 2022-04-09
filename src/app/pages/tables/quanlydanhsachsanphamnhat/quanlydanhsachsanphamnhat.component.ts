@@ -284,10 +284,10 @@ this.dataedit=[]
   onDeleteConfirm(event): void {
     console.log(event)
     if (window.confirm('Bạn có chắc muốn xóa không ????')) {
-      this.service.deletesanphamtonkho(
-        [
+      this.service.deletesanphamtonkhojp(
+        
           event['data']['id']
-        ]
+      
       )
         .subscribe(data => {
 
@@ -305,19 +305,19 @@ this.dataedit=[]
 
   onCreateConfirm(event): void {
     console.log("Create Event In Console")
-    if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
-    el.tensanpham === (event['newData']['tensanpham']) &&
-    el.dungluong === (event['newData']['dungluong']) &&
-    el.mau === (event['newData']['mau']) &&
-    el.loaisanpham === (event['newData']['loaisanpham']) &&
-    el.phienban === (event['newData']['phienban'])
-    )) {
+    // if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
+    // el.tensanpham === (event['newData']['tensanpham']) &&
+    // el.dungluong === (event['newData']['dungluong']) &&
+    // el.mau === (event['newData']['mau']) &&
+    // el.loaisanpham === (event['newData']['loaisanpham']) &&
+    // el.phienban === (event['newData']['phienban'])
+    // )) {
       this.service.sanphamtonkhojp(
         {
           'imei':event['newData']['imei'],
           'name':event['newData']['name'],
           'color':event['newData']['color'],
-          'status':'test',
+          'status':event['newData']['status'],
           'quantity' :event['newData']['quantity'],
          'price': event['newData']['price'],
          'position' :'SHOP_JP',
@@ -333,11 +333,11 @@ this.dataedit=[]
 
           })
       event.confirm.resolve();
-    }
-    else {
-      alert("Dữ liệu đã tồn tại")
-      event.confirm.reject();
-    }
+    // }
+    // else {
+    //   alert("Dữ liệu đã tồn tại")
+    //   event.confirm.reject();
+    // }
 
   }
 }

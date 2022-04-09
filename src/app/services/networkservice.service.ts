@@ -456,6 +456,14 @@ export class NetworkserviceService {
         const sanphamtonkho = `https://quanlytonylemobile.herokuapp.com/deletesanphamtonkho`;
         return this.httpClient.post<any>(sanphamtonkho, data, this.httpOptions);
     }
+    deletesanphamtonkhojp(data): Observable<any> {
+       
+        return this.httpClient.delete(`https://quanlytonylemobile.herokuapp.com/products/`+data)
+    }
+    deletesanphamtonkhovn(data): Observable<any> {
+        
+        return this.httpClient.delete(`https://quanlytonylemobile.herokuapp.com/products/`+data)
+    }
 
     updatesanpham(data): Observable<any> {
         const sanphamtonkho = `https://quanlytonylemobile.herokuapp.com/updatesanpham`;

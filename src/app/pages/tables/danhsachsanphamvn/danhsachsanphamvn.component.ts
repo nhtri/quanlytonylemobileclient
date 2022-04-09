@@ -49,9 +49,9 @@ export class DanhsachsanphamvnComponent implements OnInit {
           // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
         }
 
-        if (element.tensanpham != '' && element.tensanpham != null && !this.datatensanpham.some(val => val.value == element.tensanpham)) {
-          this.datatensanpham.push({ "value": element.tensanpham, "title": element.tensanpham })
-          // this.datatensanpham = [...new Set(this.datatensanpham)];
+        if (element.name != '' && element.name != null && !this.datatensanpham.some(val => val.value == element.name)) {
+          this.datatensanpham.push({ "value": element.name, "title": element.name })
+           this.datatensanpham = [...new Set(this.datatensanpham)];
         }
 
         if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
@@ -181,7 +181,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
       this.data = this.data.filter(val => val.nhomsanpham == this.dataselectnhomsanpham)
     }
     if (this.dataselecttensanpham != '' && this.dataselecttensanpham != 'default') {
-      this.data = this.data.filter(val => val.tensanpham == this.dataselecttensanpham)
+      this.data = this.data.filter(val => val.name == this.dataselecttensanpham)
     }
     if (this.dataselectdungluong != '' && this.dataselectdungluong != 'default') {
       this.data = this.data.filter(val => val.dungluong == this.dataselectdungluong)
