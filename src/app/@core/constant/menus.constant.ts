@@ -1,5 +1,6 @@
 import { MobileMenuItem } from '../../model/mobile-menu-item';
 import { USER_ROLE } from './common';
+import { KAI_PAGES } from './pages.constant';
 
 export const KAI_MENU_ITEMS: MobileMenuItem[] = [
     {
@@ -8,31 +9,31 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
     },
     {
         title: 'Quản Lý Người Bán',
-        link: '/pages/kai/customers',
+        link: KAI_PAGES.DATA_CUSTOMERS,
     },
     {
         title: 'Quản Lý Đơn Thu Mua',
-        link: '/pages/kai/purchasing-invoices',
+        link: KAI_PAGES.DATA_PURCHASING_INVOICES,
     },
     {
         title: 'DS Máy Trong Kho',
-        link: '/pages/kai/products',
+        link: KAI_PAGES.DATA_PRODUCTS,
     },
     {
         title: 'DS ĐH Đang Xữ Lý',
-        link: '/pages/kai/pending-orders',
+        link: KAI_PAGES.DATA_PENDING_ORDERS,
     },
     {
         title: 'DS ĐH Hoàn Thành',
-        link: '/pages/kai/completed-orders',
+        link: KAI_PAGES.DATA_COMPLETED_ORDERS,
     },
     {
         title: 'Quản Lý Thu Chi',
-        link: '/pages/kai/statistics',
+        link: KAI_PAGES.STATISTICS,
     },
     {
         title: 'Quản Lý Máy',
-        link: '/pages/kai/devices',
+        link: KAI_PAGES.DATA_DEVICES,
     },
 ];
 

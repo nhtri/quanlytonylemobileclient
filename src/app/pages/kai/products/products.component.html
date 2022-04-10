@@ -26,8 +26,16 @@
             <ng-template pTemplate="header" let-columns class=" text-primary">
                 <tr>
                     <th class="text-center">
-                        <button (click)="onShowDetail()" pButton iconPos="left" type="button" icon="pi pi-shopping-cart"
-                                class="ui-button-info"></button>
+                        <button (click)="onShowDetail()" pButton type="button"
+                                class="btn p-button-sm p-button-info p-1"
+                        >
+                            <nb-icon icon="shopping-cart-outline"></nb-icon>
+                        </button>
+                        <button (click)="onShowDetail()" pButton type="button"
+                                class="btn p-button-sm p-button-success p-1 ml-2"
+                        >
+                            <nb-icon icon="flip-2-outline"></nb-icon>
+                        </button>
                     </th>
                     <th>Tên máy</th>
                     <th>Số IMEI</th>

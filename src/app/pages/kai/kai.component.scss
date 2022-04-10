@@ -1,6 +1,38 @@
 
 ::ng-deep {
 
+  .kai-page {
+
+    .col-kai-half-1 {
+      max-width: (100% / 12) * (1/2);
+    }
+
+    .col-kai-half-3 {
+      max-width: (100% / 12) * (3/2);
+    }
+
+    .col-kai-half-5 {
+      max-width: (100% / 12) * (5/2);
+    }
+
+    .col-kai-half-7 {
+      max-width: (100% / 12) * (7/2);
+    }
+
+    .col-kai-half-9 {
+      max-width: (100% / 12) * (9/2);
+    }
+
+
+    .form-control {
+      &.p-dropdown {
+        padding: 0;
+      }
+    }
+
+
+  }
+
   .nb-theme-default {
     .kai-page {
       nb-card-body {
