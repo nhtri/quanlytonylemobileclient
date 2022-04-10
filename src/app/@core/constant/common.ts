@@ -34,6 +34,8 @@ export const NA = 'N/A';
 
 export const CURRENT_YEAR = new Date().getFullYear();
 
+export const TODAY = new Date();
+
 export const DEFAULT_BIRTHDAY_YEAR_RANGE = `1800:${CURRENT_YEAR}`;
 
 export const enum JOB_TYPE {
@@ -58,6 +60,28 @@ export const PEOPLE_JOBS = [
 export const PRODUCT_STATUSES = [
     {label: '新品', value: PRODUCT_STATUS.NEW},
     {label: '中古', value: PRODUCT_STATUS.USED},
+];
+
+export const enum PRODUCT_COLOR {
+    BLACK = 'BLACK',
+    GRAY = 'GRAY',
+    WHITE = 'WHITE',
+    RED = 'RED',
+    GREEN = 'GREEN',
+    BLUE = 'BLUE',
+    PINK = 'PINK',
+    SILVER_BLACK = 'SILVER_BLACK',
+}
+
+export const PRODUCT_COLORS = [
+    {label: 'Black', code: '#000000', value: PRODUCT_COLOR.BLACK},
+    {label: 'Gray', code: '#808080', value: PRODUCT_COLOR.GRAY},
+    {label: 'White', code: '#FFFFFF', value: PRODUCT_COLOR.WHITE},
+    {label: 'Red', code: '#FF0000' , value: PRODUCT_COLOR.RED},
+    {label: 'Green', code: '#00FF00', value: PRODUCT_COLOR.GREEN},
+    {label: 'Blue', code: '#0000FF', value: PRODUCT_COLOR.BLUE},
+    {label: 'Pink', code: '#FFC0CB', value: PRODUCT_COLOR.PINK},
+    {label: 'Silver Black', code: '#C0C0C0,#000000', value: PRODUCT_COLOR.SILVER_BLACK},
 ];
 
 export const enum PRODUCT_SOURCE {
@@ -93,3 +117,7 @@ export const USERS: User[] = [
         role: USER_ROLE.EMPLOYEE,
     },
 ];
+
+export const EXCEL_TYPE = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+
+export const EXCEL_EXTENSION = '.xlsx';

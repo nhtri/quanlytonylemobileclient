@@ -6,7 +6,7 @@ import { NbButtonModule, NbCardModule, NbIconModule } from '@nebular/theme';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { CalendarModule } from 'primeng/calendar';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ProductStatusPipe } from '../../@core/shared/pipes/product-status.pipe';
 import { DropdownModule } from 'primeng/dropdown';
@@ -21,6 +21,7 @@ import { DropdownModule } from 'primeng/dropdown';
         TableModule,
         CalendarModule,
         FormsModule,
+        ReactiveFormsModule,
         CommonModule,
         KaiRoutingModule,
     ],

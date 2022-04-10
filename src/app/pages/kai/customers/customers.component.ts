@@ -4,6 +4,7 @@ import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { notEmpty } from '../../../@core/utils/data.utils';
+import { KAI_PAGES } from '../../../@core/constant/pages.constant';
 
 @Component({
     selector: 'ngx-customers',
@@ -61,13 +62,12 @@ export class CustomersComponent implements OnInit {
     }
 
     onRowEditInit(rowData) {
-        this.router.navigate(['/customer'], {state: rowData});
+        this.router.navigate([KAI_PAGES.CUSTOMER], {state: rowData}).then(r => r);
     }
 
     onRowDelete(val, index) {
-        const isDel = confirm('Bạn có muốn xóa thông tin người bán \'' + val.name_vietnamese + '\' không?');
+        const isDel = confirm(`Bạn có muốn xóa thông tin người bán ${val.name_vietnamese} không?`);
         if (isDel === true) {
-
             this.kaiService.deleteCustomer(val.id).subscribe(
                 data => {
                     alert('Xóa Thành Công');
@@ -103,7 +103,7 @@ export class CustomersComponent implements OnInit {
     }
 
     navigateToAddCustomer() {
-        this.router.navigateByUrl('pages/kai/customer').then(r => r);
+        this.router.navigateByUrl(KAI_PAGES.CUSTOMER).then(r => r);
     }
 
 }

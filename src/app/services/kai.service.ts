@@ -11,6 +11,9 @@ import { InvoiceDetail } from '../model/invoice-detail';
 import RestService from '../@core/services/rest.service';
 import { KaiRevenueStatistic } from '../model/kai-revenue-statistic';
 import { StatisticFilterDto } from '../model/dto/statistic-filter.dto';
+import { CustomerSearchDto } from '../model/dto/customer-search.dto';
+import { PurchasingInvoiceDto } from '../model/dto/purchasing-invoice.dto';
+import { PurchasingInvoiceSearchDto } from '../model/dto/purchasing-invoice-search.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -32,11 +35,15 @@ export class KaiService extends RestService {
     }
 
     updateCustomer(customer: Customer): Observable<Customer> {
-        return this.update(customer.id, customer);
+        return this.update(`${SERVICE_RESOURCES.CUSTOMERS}`, customer);
     }
 
     deleteCustomer(customerId) {
-        return this.remove(customerId);
+        return this.remove(`${SERVICE_RESOURCES.CUSTOMERS}/${customerId}`);
+    }
+
+    searchCustomer(customerSearchParams: CustomerSearchDto): Observable<Customer[]> {
+        return this.post<Customer[]>(`${SERVICE_RESOURCES.CUSTOMERS}/search`, customerSearchParams);
     }
 
     /**
@@ -48,8 +55,8 @@ export class KaiService extends RestService {
     /**
      * Get all purchasing invoices
      */
-    getPurchasingInvoices(): Observable<Invoice[]> {
-        return this.getAll<Invoice[]>(SERVICE_RESOURCES.PURCHASING_INVOICES);
+    getPurchasingInvoices(): Observable<PurchasingInvoice[]> {
+        return this.getAll<PurchasingInvoice[]>(SERVICE_RESOURCES.PURCHASING_INVOICES);
     }
 
     getPurchasingInvoiceDetail(invoiceId: number): Observable<PurchasingInvoice> {
@@ -58,6 +65,31 @@ export class KaiService extends RestService {
 
     deletePurchasingInvoice(invoiceId: number): Observable<any> {
         return this.remove(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/${invoiceId}`);
+    }
+
+    downloadPurchasingInvoice(invoiceId: number) {
+        return this.http.get(this.requestUrl(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/report/${invoiceId}`), {
+            responseType: 'arraybuffer',
+        });
+
+    }
+
+    saveAndDownloadPurchasingInvoice(purchasingInvoiceDto: PurchasingInvoiceDto) {
+        return this.http.post(
+            this.requestUrl(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/save-and-report`),
+            purchasingInvoiceDto,
+            {
+                responseType: 'arraybuffer',
+            },
+        );
+    }
+
+    purchasingInvoice(purchasingInvoiceDto: PurchasingInvoiceDto): Observable<PurchasingInvoice> {
+        return this.post(`${SERVICE_RESOURCES.PURCHASING_INVOICES}`, purchasingInvoiceDto);
+    }
+
+    searchPurchasingInvoices(purchasingInvoiceSearchParams: PurchasingInvoiceSearchDto): Observable<Invoice[]> {
+        return this.post<Invoice[]>(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/search`, purchasingInvoiceSearchParams);
     }
 
     // Create For Sale Invoice

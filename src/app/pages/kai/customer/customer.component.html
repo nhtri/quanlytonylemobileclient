@@ -1,1 +1,120 @@
-<p>customer works!</p>
+<nb-card>
+    <nb-card-header>
+        NGƯỜI BÁN
+    </nb-card-header>
+    <nb-card-body>
+        <form #createAppForm="ngForm" (ngSubmit)="onSubmit()" autocomplete="false"
+              novalidate>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Tên Tiếng Việt </label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Tên Tiếng Việt" type="text"
+                               [(ngModel)]="customer.name_vietnamese" required id="name_vietnamese"
+                               name="name_vietnamese" #nameVietnameseValidate="ngModel" />
+
+                        <div *ngIf="nameVietnameseValidate.invalid && (nameVietnameseValidate.dirty || nameVietnameseValidate.touched)">
+                            <label style="color: #ec250d;"> Tên Tiếng Việt is required.</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Tên Tiếng Nhật </label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Tên Tiếng Nhật" type="text"
+                               [(ngModel)]="customer.name_japanese" required id="name_japanese"
+                               name="name_japanese" #nameJapaneseValidate="ngModel" />
+                        <div *ngIf="nameJapaneseValidate.invalid && (nameJapaneseValidate.dirty || nameJapaneseValidate.touched)">
+                            <label style="color: #ec250d;"> Tên Tiếng Nhật is required.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Ngày Sinh</label> <label style="color: #ec250d;"> * &nbsp;</label>
+                        <p-calendar
+                                [styleClass]="'birthday-calendar'"
+                                placeholder="Ngày Sinh"
+                                [(ngModel)]="birthday"
+                                dateFormat="dd-mm-yy"
+                                (ngModelChange)="birthdayChange()"
+                                [ngModelOptions]="{standalone: true}"
+                                [monthNavigator]="true"
+                                [yearNavigator]="true"
+                                [yearRange]="birthdayYearRange"
+                                #birthdayValidate="ngModel"
+                                [maxDate]="TODAY"
+                        >
+                        </p-calendar>
+                        <div *ngIf="birthdayValidate.invalid && (birthdayValidate.dirty || birthdayValidate.touched)">
+                            <label style="color: #ec250d;"> Ngày Sinh is required.</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Tuổi</label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Tuổi" type="text" [(ngModel)]="customer.age"
+                               disabled id="age" name="age" />
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Địa Chỉ</label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Địa Chỉ" type="text"
+                               [(ngModel)]="customer.address" required id="address" name="address"
+                               #addressValidate="ngModel" />
+                        <div *ngIf="addressValidate.invalid && (addressValidate.dirty || addressValidate.touched)">
+                            <label style="color: #ec250d;"> Địa Chỉ is required.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Số Điện Thoại</label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Số Điện Thoại" type="text" [(ngModel)]="customer.phone"
+                               required id="phone" name="phone" #phoneValidate="ngModel" (keypress)="keyPressNumbers($event)"/>
+                        <div *ngIf="phoneValidate.invalid && (phoneValidate.dirty || phoneValidate.touched)">
+                            <label style="color: #ec250d;"> Số Điện Thoại is required.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Nghề Nghiệp</label> <label style="color: #ec250d;"> * &nbsp;</label>
+                        <p-dropdown [options]="jobs" (onChange)="onChangeJob($event)"
+                                    [(ngModel)]="selectedJob" optionLabel="label" optionValue="value" required
+                                    [ngModelOptions]="{standalone: true}">
+                        </p-dropdown>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class=" card-footer">
+                <button class=" btn btn-fill btn-danger" type="submit"
+                        [disabled]="!createAppForm.valid || !selectedJob || selectedJob == null || !birthday">
+                    Lưu
+                </button>
+
+                <button class=" btn " type="button" style="background:rgba(224, 46, 22, 0.6)" (click)="onCancel()"
+                        [disabled]="!createAppForm.valid || !selectedJob || selectedJob == null || !birthday"
+                >Hủy
+                </button>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
