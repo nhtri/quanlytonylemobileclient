@@ -44,6 +44,10 @@ import { QuanlychiComponent } from './quanlychi/quanlychi.component';
 import { QuanlythuComponent } from './quanlythu/quanlythu.component';
 import { QuanlythuchiComponent } from './quanlythuchi/quanlythuchi.component';
 import { BaocaothueComponent } from './baocaothue/baocaothue.component';
+import { DanhsachsanphamnhatComponent } from './danhsachsanphamnhat/danhsachsanphamnhat.component';
+import { DanhsachsanphamvnComponent } from './danhsachsanphamvn/danhsachsanphamvn.component';
+import { QuanlydanhsachsanphamnhatComponent } from './quanlydanhsachsanphamnhat/quanlydanhsachsanphamnhat.component';
+import { QuanlydanhsachsanphamvnComponent } from './quanlydanhsachsanphamvn/quanlydanhsachsanphamvn.component';
 
 const routes: Routes = [{
   path: '',
@@ -94,6 +98,14 @@ const routes: Routes = [{
       component: QuanlydanhsachsanphamComponent,
     },
     {
+      path: 'quanlydanhsachsanphamjp',
+      component: QuanlydanhsachsanphamnhatComponent,
+    },
+    {
+      path: 'quanlydanhsachsanphamvn',
+      component: QuanlydanhsachsanphamvnComponent,
+    },
+    {
       path: 'quanlydanhsachsanphamdaban',
       component: QuanlydanhsachsanphamdabanComponent,
     },
@@ -141,6 +153,14 @@ const routes: Routes = [{
     {
       path: 'danhsachsanpham',
       component: DanhsachsanphamComponent,
+    },
+    {
+      path: 'danhsachsanphamjp',
+      component: DanhsachsanphamnhatComponent,
+    },
+    {
+      path: 'danhsachsanphamvn',
+      component: DanhsachsanphamvnComponent,
     },
     {
       path: 'smart-table-o-cung',

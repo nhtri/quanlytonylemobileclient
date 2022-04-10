@@ -51,6 +51,10 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import {MatSelectModule} from '@angular/material/select';
 import { D3AdvancedPieComponent } from '../charts/d3/d3-advanced-pie.component';
 import { BaocaothueComponent } from './baocaothue/baocaothue.component';
+import { DanhsachsanphamnhatComponent } from './danhsachsanphamnhat/danhsachsanphamnhat.component';
+import { DanhsachsanphamvnComponent } from './danhsachsanphamvn/danhsachsanphamvn.component';
+import { QuanlydanhsachsanphamnhatComponent } from './quanlydanhsachsanphamnhat/quanlydanhsachsanphamnhat.component';
+import { QuanlydanhsachsanphamvnComponent } from './quanlydanhsachsanphamvn/quanlydanhsachsanphamvn.component';
 @NgModule({
   imports: [
     NbCardModule,
@@ -109,6 +113,10 @@ import { BaocaothueComponent } from './baocaothue/baocaothue.component';
        QuanlythuComponent,
        QuanlychiComponent,
        BaocaothueComponent,
+       DanhsachsanphamnhatComponent,
+       DanhsachsanphamvnComponent,
+       QuanlydanhsachsanphamnhatComponent,
+       QuanlydanhsachsanphamvnComponent,
   ],
 })
 export class TablesModule { }

@@ -45,12 +45,12 @@ export const MENU_ITEMS: MobileMenuItem[] = [
     {
         title: 'Quản Lý Mua Hàng',
         icon: 'shopping-cart-outline',
-        link: '/pages/tables/danhsachsanpham',
+        link: '/pages/tables/danhsachsanphamjp',
         home: true,
         children: [
             {
                 title: 'Sản Phẩm',
-                link: '/pages/tables/danhsachsanpham',
+                link: '/pages/tables/danhsachsanphamjp',
             },
             {
                 title: 'Sản Phẩm Đã Bán',
@@ -111,33 +111,33 @@ export const MENU_ITEMS: MobileMenuItem[] = [
         roles: [USER_ROLE.ADMIN],
         // hidden: localStorage.getItem('role') != 'admin',
         children: [
-            {
-                title: 'Quản Lý Nhóm Sản Phẩm',
-                link: '/pages/tables/nhomsanpham',
-            },
+            // {
+            //     title: 'Quản Lý Nhóm Sản Phẩm',
+            //     link: '/pages/tables/nhomsanpham',
+            // },
             {
                 title: 'Quản Lý Tên Sản Phẩm',
                 link: '/pages/tables/tensanpham',
             },
-            {
-                title: 'Quản Lý Dung Lượng',
-                link: '/pages/tables/dungluong',
-            },
-            {
-                title: 'Quản Lý Loại Sản Phẩm',
-                link: '/pages/tables/loaisanpham',
-            },
+            // {
+            //     title: 'Quản Lý Dung Lượng',
+            //     link: '/pages/tables/dungluong',
+            // },
+            // {
+            //     title: 'Quản Lý Loại Sản Phẩm',
+            //     link: '/pages/tables/loaisanpham',
+            // },
             {
                 title: 'Quản Lý Màu Sắc',
                 link: '/pages/tables/mau',
             },
-            {
-                title: 'Quản Lý Phiên Bản',
-                link: '/pages/tables/phienban',
-            },
+            // {
+            //     title: 'Quản Lý Phiên Bản',
+            //     link: '/pages/tables/phienban',
+            // },
             {
                 title: 'Quản Lý Danh Sách Sản Phẩm',
-                link: '/pages/tables/quanlydanhsachsanpham',
+                link: '/pages/tables/quanlydanhsachsanphamjp',
             },
         ],
     },
@@ -151,12 +151,12 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
     {
         title: 'Quản Lý Mua Hàng',
         icon: 'shopping-cart-outline',
-        link: '/pages/tables/danhsachsanpham',
+        link: '/pages/tables/danhsachsanphamvn',
         home: true,
         children: [
             {
                 title: 'Sản Phẩm',
-                link: '/pages/tables/danhsachsanpham',
+                link: '/pages/tables/danhsachsanphamvn',
             },
             {
                 title: 'Sản Phẩm Đã Bán',
@@ -217,33 +217,33 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
         roles: [USER_ROLE.ADMIN],
         // hidden: localStorage.getItem('role') != 'admin',
         children: [
-            {
-                title: 'Quản Lý Nhóm Sản Phẩm',
-                link: '/pages/tables/nhomsanpham',
-            },
+            // {
+            //     title: 'Quản Lý Nhóm Sản Phẩm',
+            //     link: '/pages/tables/nhomsanpham',
+            // },
             {
                 title: 'Quản Lý Tên Sản Phẩm',
                 link: '/pages/tables/tensanpham',
             },
-            {
-                title: 'Quản Lý Dung Lượng',
-                link: '/pages/tables/dungluong',
-            },
-            {
-                title: 'Quản Lý Loại Sản Phẩm',
-                link: '/pages/tables/loaisanpham',
-            },
+            // {
+            //     title: 'Quản Lý Dung Lượng',
+            //     link: '/pages/tables/dungluong',
+            // },
+            // {
+            //     title: 'Quản Lý Loại Sản Phẩm',
+            //     link: '/pages/tables/loaisanpham',
+            // },
             {
                 title: 'Quản Lý Màu Sắc',
                 link: '/pages/tables/mau',
             },
-            {
-                title: 'Quản Lý Phiên Bản',
-                link: '/pages/tables/phienban',
-            },
+            // {
+            //     title: 'Quản Lý Phiên Bản',
+            //     link: '/pages/tables/phienban',
+            // },
             {
                 title: 'Quản Lý Danh Sách Sản Phẩm',
-                link: '/pages/tables/quanlydanhsachsanpham',
+                link: '/pages/tables/quanlydanhsachsanphamvn',
             },
         ],
     },
@@ -323,30 +323,30 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
         roles: [USER_ROLE.ADMIN],
         // hidden: localStorage.getItem('role') != 'admin',
         children: [
-            {
-                title: 'Quản Lý Nhóm Sản Phẩm',
-                link: '/pages/tables/nhomsanpham',
-            },
+            // {
+            //     title: 'Quản Lý Nhóm Sản Phẩm',
+            //     link: '/pages/tables/nhomsanpham',
+            // },
             {
                 title: 'Quản Lý Tên Sản Phẩm',
                 link: '/pages/tables/tensanpham',
             },
-            {
-                title: 'Quản Lý Dung Lượng',
-                link: '/pages/tables/dungluong',
-            },
-            {
-                title: 'Quản Lý Loại Sản Phẩm',
-                link: '/pages/tables/loaisanpham',
-            },
+            // {
+            //     title: 'Quản Lý Dung Lượng',
+            //     link: '/pages/tables/dungluong',
+            // },
+            // {
+            //     title: 'Quản Lý Loại Sản Phẩm',
+            //     link: '/pages/tables/loaisanpham',
+            // },
             {
                 title: 'Quản Lý Màu Sắc',
                 link: '/pages/tables/mau',
             },
-            {
-                title: 'Quản Lý Phiên Bản',
-                link: '/pages/tables/phienban',
-            },
+            // {
+            //     title: 'Quản Lý Phiên Bản',
+            //     link: '/pages/tables/phienban',
+            // },
             {
                 title: 'Quản Lý Danh Sách Sản Phẩm',
                 link: '/pages/tables/quanlydanhsachsanpham',

@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
-import { ActivatedRoute, Router } from '@angular/router';
-
 @Component({
-  selector: 'ngx-danhsachsanpham',
-  templateUrl: './danhsachsanpham.component.html',
-  styleUrls: ['./danhsachsanpham.component.scss']
+  selector: 'ngx-danhsachsanphamvn',
+  templateUrl: './danhsachsanphamvn.component.html',
+  styleUrls: ['./danhsachsanphamvn.component.scss']
 })
-export class DanhsachsanphamComponent implements OnInit {
+export class DanhsachsanphamvnComponent implements OnInit {
+
   fileName = 'DanhSachSanPham.xlsx';
   source: LocalDataSource = new LocalDataSource();
   data = []
@@ -23,12 +23,7 @@ export class DanhsachsanphamComponent implements OnInit {
   taomoisanpham = false
   role
 
-  // datanhomsanphamtaomoi = ""
-  // datatensanphamtaomoi = ""
-  // datadungluongtaomoi = ""
-  // dataloaisanphamtaomoi = ""
-  // dataphienbantaomoi = ""
-  // dataimeitaomoi = ""
+
 
   dataselectnhomsanpham = ""
   dataselecttensanpham = ""
@@ -40,55 +35,23 @@ export class DanhsachsanphamComponent implements OnInit {
 
   constructor(private service: NetworkserviceService, private router: Router) {
 
-    // this.service.getsanphamtonkho().subscribe(val => {
-    //   // this.source.load(val);
-    //   val.forEach(element => {
-    //     element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
-    //     this.data.push(element)
-    //     if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
-    //       this.datanhomsanpham.push({ "value": element.nhomsanpham, "title": element.nhomsanpham })
-    //       // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
-    //     }
-
-    //     if (element.tensanpham != '' && element.tensanpham != null && !this.datatensanpham.some(val => val.value == element.tensanpham)) {
-    //       this.datatensanpham.push({ "value": element.tensanpham, "title": element.tensanpham })
-    //       // this.datatensanpham = [...new Set(this.datatensanpham)];
-    //     }
-
-    //     if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
-    //       this.datadungluong.push({ "value": element.dungluong, "title": element.dungluong })
-    //       // this.datadungluong = [...new Set(this.datadungluong)];
-    //     }
-
-    //     if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
-    //       this.dataloaisanpham.push({ "value": element.loaisanpham, "title": element.loaisanpham })
-    //       // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
-    //     }
-
-    //     if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
-    //       this.dataphienban.push({ "value": element.phienban, "title": element.phienban })
-    //       // this.dataphienban = [...new Set(this.dataphienban)];
-    //     }
-
-    //   });
-    //   this.datafilter = this.data
-    // });
+   
 
 
-    this.service.getsanphamtonkhokhohang().subscribe(val => {
+    this.service.getsanphamtonkhovn().subscribe(val => {
       this.source.load(val);
       this.data =val
       val.forEach(element => {
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)
-        // if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
-        //   this.datanhomsanpham.push({ "value": element.nhomsanpham, "title": element.nhomsanpham })
-        //   // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
-        // }
+        if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
+          this.datanhomsanpham.push({ "value": element.nhomsanpham, "title": element.nhomsanpham })
+          // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
+        }
 
         if (element.name != '' && element.name != null && !this.datatensanpham.some(val => val.value == element.name)) {
           this.datatensanpham.push({ "value": element.name, "title": element.name })
-          // this.datatensanpham = [...new Set(this.datatensanpham)];
+           this.datatensanpham = [...new Set(this.datatensanpham)];
         }
 
         if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
@@ -110,72 +73,7 @@ export class DanhsachsanphamComponent implements OnInit {
       this.datafilter = this.data
     });
 
-    // this.service.getsanphamtonkho().subscribe(val => {
-    //   let data = val.map(val => val.nhomsanpham)
-    //   data.forEach(data => {
-    //     if (data != '' || data != null)
-    //       this.datanhomsanpham.push({ "value": data, "title": data })
-    //   });
-    //   console.log(this.datanhomsanpham)
-    //   // this.settings.columns.nhomsanpham.editor.config.list = this.datanhomsanpham
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getsanphamtonkho().subscribe(val => {
-    //   let data = val.map(val => val.tensanpham)
-    //   data.forEach(data => {
-    //     if (data != '' || data != null)
-    //       this.datatensanpham.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.tensanpham.editor.config.list = this.datatensanpham
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getsanphamtonkho().subscribe(val => {
-    //   let data = val.map(val => val.dungluong)
-    //   data.forEach(data => {
-    //     if (data != '' || data != null)
-    //       this.datadungluong.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.dungluong.editor.config.list = this.datadungluong
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getsanphamtonkho().subscribe(val => {
-    //   let data = val.map(val => val.mau)
-    //   data.forEach(data => {
-    //     if (data != '' || data != null)
-    //       this.datamau.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.mau.editor.config.list = this.datamau
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getsanphamtonkho().subscribe(val => {
-    //   let data = val.map(val => val.loaisanpham)
-    //   data.forEach(data => {
-    //     if (data != '' || data != null)
-    //       this.dataloaisanpham.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.loaisanpham.editor.config.list = this.dataloaisanpham
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getsanphamtonkho().subscribe(val => {
-    //   let data = val.map(val => val.phienban)
-    //   data.forEach(data => {
-    //     if (data != '' || data != null)
-    //       this.dataphienban.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.phienban.editor.config.list = this.dataphienban
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
+  
 
   }
 
@@ -216,7 +114,7 @@ export class DanhsachsanphamComponent implements OnInit {
       )
         .subscribe(data => {
 
-          this.service.getsanphamtonkhokhohang().subscribe(val => {
+          this.service.getsanphamtonkhovn().subscribe(val => {
             // this.source.load(val);
             this.data = val
           });
@@ -256,43 +154,7 @@ export class DanhsachsanphamComponent implements OnInit {
     this.taomoisanpham = false
   }
 
-  // selecttaomoinhomsanpham(value) {
-  //   this.datanhomsanphamtaomoi = value
-  //   console.log('selecttaomoinhomsanpham', value)
-  // }
-  // selecttaomoitensanpham(value) {
-  //   this.datatensanphamtaomoi = value
-  // }
-  // selecttaomoidungluong(value) {
-  //   this.datadungluongtaomoi = value
-  // }
-  // selecttaomoiloaisanpham(value) {
-  //   this.dataloaisanphamtaomoi = value
-  // }
-  // selecttaomoiphienban(value) {
-  //   this.dataphienbantaomoi = value
-  // }
-  // taosanphammoi() {
-  //   this.service.sanphamtonkho([
-  //     this.datanhomsanphamtaomoi,
-  //     this.datatensanphamtaomoi,
-  //     this.datadungluongtaomoi,
-  //     this.dataloaisanphamtaomoi,
-  //     this.dataphienbantaomoi,
-  //     this.dataimeitaomoi
-  //   ]).subscribe(data => {
-  //     this.taomoisanpham = false
-  //     this.service.getsanphamtonkho().subscribe(val => {
-  //       // this.source.load(val);
-  //       this.data = val
-  //     });
-  //     console.log("POST Request is successful ", data);
-  //   },
-  //     error => {
-  //       console.log("Error", error);
-
-  //     })
-  // }
+  
   selectnhomsanpham(event) {
     this.dataselectnhomsanpham = event.target.value
     this.data = this.datafilter
@@ -319,7 +181,7 @@ export class DanhsachsanphamComponent implements OnInit {
       this.data = this.data.filter(val => val.nhomsanpham == this.dataselectnhomsanpham)
     }
     if (this.dataselecttensanpham != '' && this.dataselecttensanpham != 'default') {
-      this.data = this.data.filter(val => val.tensanpham == this.dataselecttensanpham)
+      this.data = this.data.filter(val => val.name == this.dataselecttensanpham)
     }
     if (this.dataselectdungluong != '' && this.dataselectdungluong != 'default') {
       this.data = this.data.filter(val => val.dungluong == this.dataselectdungluong)

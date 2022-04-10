@@ -177,7 +177,7 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
       )
         .subscribe(data => {
 
-          this.service.getsanphamtonkho().subscribe(val => {
+          this.service.getsanphamtonkhokhohang().subscribe(val => {
             // this.source.load(val);
             this.data = val
           });
