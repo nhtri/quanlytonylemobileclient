@@ -47,9 +47,11 @@ export class SmartTableNguoidungComponent implements OnInit {
           config: {
             selectText: 'Select',
             list: [
-              { value: 'dailycap1', title: 'Đại Lý Cấp 1' },
-              { value: 'dailycap2', title: 'Đại Lý Cấp 2' },
-              { value: 'khachle', title: 'Khách Lẻ' },
+              { value: 'kai', title: 'KAI' },
+              { value: 'cuahangnhat', title: 'Cửa Hàng Nhật' },
+              { value: 'cuahangvietnam', title: 'Cửa Hàng Việt Nam' },
+              { value: 'kho', title: 'Kho Hàng' },
+              { value: 'admin', title: 'Admin' },
             ]
           }
         },

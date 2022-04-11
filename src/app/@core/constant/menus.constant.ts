@@ -6,7 +6,7 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
     {
         title: 'Kai',
         group: true,
-    },
+         },
     {
         title: 'Quản Lý Người Bán',
         link: KAI_PAGES.DATA_CUSTOMERS,
@@ -41,7 +41,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
     {
         title: 'Cửa hàng Nhật',
         group: true,
-    },
+     },
     {
         title: 'Quản Lý Mua Hàng',
         icon: 'shopping-cart-outline',

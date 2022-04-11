@@ -35,21 +35,22 @@ export class MenuService {
 
     mainMenuItems(): MobileMenuItem[] {
         return this.mainMenus.map((menuItem) => {
-            menuItem.hidden = !this.authService.canAccess(menuItem.roles);
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'cuahangnhat'
+
             return menuItem;
         });
     }
 
     mainMenuItemsvn(): MobileMenuItem[] {
         return this.mainMenusvn.map((menuItem) => {
-            menuItem.hidden = !this.authService.canAccess(menuItem.roles);
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'cuahangvietnam'
             return menuItem;
         });
     }
 
     mainMenuItemskho(): MobileMenuItem[] {
         return this.mainMenuskho.map((menuItem) => {
-            menuItem.hidden = !this.authService.canAccess(menuItem.roles);
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'kho'
             return menuItem;
         });
     }
