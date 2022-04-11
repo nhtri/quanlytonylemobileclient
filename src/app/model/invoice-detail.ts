@@ -5,5 +5,6 @@ export interface InvoiceDetail {
     quantity: number;
     total_money: number;
     sale_date: Date | string;
+    type?: string;
     products?: Product[];
 }

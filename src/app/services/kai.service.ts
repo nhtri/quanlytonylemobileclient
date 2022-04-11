@@ -107,8 +107,8 @@ export class KaiService extends RestService {
     }
 
     // Get for sale invoice detail
-    getForSaleInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
-        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/detail/${invoiceId}`);
+    getKaiForSaleInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/kai/detail/${invoiceId}`);
     }
 
     // Cancel for sale invoice
@@ -119,6 +119,20 @@ export class KaiService extends RestService {
     // Approve for sale invoice
     approveForSaleInvoice(forSaleInvoiceDto: ForSaleInvoiceDto, invoiceId: number): Observable<any> {
         return this.post<any>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/approve/${invoiceId}`, forSaleInvoiceDto);
+    }
+
+    // Get for sale invoice detail
+    getKaiTransferringInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/kai/detail/${invoiceId}`);
+    }
+
+    // General Invoice
+    getKaiPendingInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/pending/kai`);
+    }
+
+    getKaiCompletedInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/completed/kai`);
     }
 
     /**

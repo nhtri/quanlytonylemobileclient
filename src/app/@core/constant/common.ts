@@ -10,6 +10,7 @@ export const enum SERVICE_RESOURCES {
     INVOICES = 'invoices',
     PURCHASING_INVOICES = 'invoices/purchasing',
     FOR_SALE_INVOICES = 'invoices/for-sale',
+    TRANSFERRING_INVOICES = 'invoices/transferring',
     STATISTICS = 'statistics',
 }
 
@@ -48,6 +49,12 @@ export const enum JOB_TYPE {
 export const enum PRODUCT_STATUS {
     NEW = 'NEW',
     USED = 'USED',
+}
+
+export const enum INVOICE_TYPE {
+    PURCHASING = 'PURCHASING',
+    FOR_SALE = 'FOR_SALE',
+    TRANSFERRING = 'TRANSFERRING',
 }
 
 export const PEOPLE_JOBS = [
