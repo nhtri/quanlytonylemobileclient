@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { notEmpty } from '../../../@core/utils/data.utils';
-import { DATE_CONSTANT, DEFAULT_BIRTHDAY_YEAR_RANGE } from '../../../@core/constant/common';
+import { DATE_CONSTANT, DEFAULT_BIRTHDAY_YEAR_RANGE, INVOICE_TYPE } from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { Product } from '../../../model/product';
@@ -19,6 +19,7 @@ export class PendingInvoicesComponent implements OnInit {
     searchText = '';
     dateFormat = DATE_CONSTANT.ORIGINAL_DATE_FORMAT;
     displayDetailModal: boolean = false;
+    displayTransferringDetailModal: boolean = false;
     listProducts: Product[] = [];
     selectedProduct: any;
     order: any;
@@ -33,6 +34,9 @@ export class PendingInvoicesComponent implements OnInit {
         to_date: null,
     };
 
+    FOR_SALE = INVOICE_TYPE.FOR_SALE;
+    TRANSFERRING = INVOICE_TYPE.TRANSFERRING;
+
     constructor(
         private kaiService: KaiService,
         public datePipe: DatePipe,
@@ -44,7 +48,7 @@ export class PendingInvoicesComponent implements OnInit {
     }
 
     getOrdersPending() {
-        this.kaiService.getPendingForSaleInvoices().subscribe(pendingForSaleInvoices => {
+        this.kaiService.getKaiPendingInvoices().subscribe(pendingForSaleInvoices => {
                 this.originalData = pendingForSaleInvoices;
                 this.data = pendingForSaleInvoices;
             },
@@ -54,12 +58,27 @@ export class PendingInvoicesComponent implements OnInit {
     onShowDetail(event, rowData) {
         if (notEmpty(rowData)) {
             this.order = rowData;
-            this.kaiService.getForSaleInvoiceDetail(rowData.invoice_id).subscribe((orderDetail) => {
-                this.displayDetailModal = true;
-                if (notEmpty(orderDetail)) {
-                    this.listProducts = orderDetail.products;
-                }
-            });
+            switch (rowData.type) {
+                case INVOICE_TYPE.TRANSFERRING:
+                    this.kaiService.getKaiTransferringInvoiceDetail(rowData.invoice_id).subscribe((orderDetail) => {
+                        this.displayTransferringDetailModal = true;
+                        this.displayDetailModal = false;
+                        if (notEmpty(orderDetail)) {
+                            this.listProducts = orderDetail.products;
+                        }
+                    });
+                    break;
+                case INVOICE_TYPE.FOR_SALE:
+                default:
+                    this.kaiService.getKaiForSaleInvoiceDetail(rowData.invoice_id).subscribe((orderDetail) => {
+                        this.displayDetailModal = true;
+                        this.displayTransferringDetailModal = false;
+                        if (notEmpty(orderDetail)) {
+                            this.listProducts = orderDetail.products;
+                        }
+                    });
+                    break;
+            }
         }
     }
 

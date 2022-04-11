@@ -58,7 +58,7 @@ export class CompletedInvoicesComponent implements OnInit {
         this.listProducts = [];
         if (notEmpty(rowData)) {
             this.order = rowData;
-            this.kaiService.getForSaleInvoiceDetail(rowData.invoice_id).subscribe((orderDetail) => {
+            this.kaiService.getKaiForSaleInvoiceDetail(rowData.invoice_id).subscribe((orderDetail) => {
                 this.displayDetailModal = true;
                 if (notEmpty(orderDetail)) {
                     this.listProducts = orderDetail.products;
