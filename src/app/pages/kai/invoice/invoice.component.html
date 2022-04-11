@@ -1,1 +1,306 @@
-<p>invoice works!</p>
+<nb-card>
+    <nb-card-header>ĐƠN THU MUA</nb-card-header>
+    <nb-card-body>
+        <form #createAppForm="ngForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSubmit()"
+              autocomplete="true" novalidate>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Tên Tiếng Việt </label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Tên Tiếng Việt" type="text"
+                               [(ngModel)]="customer.name_vietnamese" required id="name_vietnamese"
+                               name="name_vietnamese" #nameVietnameseValidate="ngModel" />
+
+                        <div
+                                *ngIf="nameVietnameseValidate.invalid && (nameVietnameseValidate.dirty || nameVietnameseValidate.touched)">
+                            <label style="color: #ec250d;"> Tên Tiếng Việt is required.</label>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Tên Tiếng Nhật </label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Tên Tiếng Nhật" type="text"
+                               [(ngModel)]="customer.name_japanese" required id="name_japanese"
+                               name="name_japanese" #nameJapaneseValidate="ngModel" />
+                        <div
+                                *ngIf="nameJapaneseValidate.invalid && (nameJapaneseValidate.dirty || nameJapaneseValidate.touched)">
+                            <label style="color: #ec250d;"> Tên Tiếng Nhật is required.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class="form-group">
+                        <label> Ngày Sinh</label> <label style="color: #ec250d;"> * &nbsp;</label>
+                        <p-calendar
+                                [styleClass]="'birthday-calendar'"
+                                placeholder="Ngày Sinh"
+                                [(ngModel)]="birthday"
+                                (ngModelChange)="onChangeBirthday()"
+                                [ngModelOptions]="{standalone: true}"
+                                [monthNavigator]="true"
+                                [yearNavigator]="true"
+                                [maxDate]="CURRENT_DATE"
+                                dateFormat="dd-mm-yy"
+                                #birthdayValidate="ngModel"
+                        >
+                        </p-calendar>
+                        <i *ngIf="displaySpinner" class="pi pi-spin pi-spinner"
+                           style="font-size: 2rem; color: blue;"></i>
+                        <div *ngIf="birthdayValidate.invalid && (birthdayValidate.dirty || birthdayValidate.touched)">
+                            <label style="color: #ec250d;"> Ngày Sinh is required.</label>
+                        </div>
+                        <p-dialog
+                                header="Gợi Ý Khách Hàng"
+                                [(visible)]="displaySuggestModal"
+                                [modal]="true"
+                                [style]="{width: '50vw'}"
+                                [baseZIndex]="10000"
+                                [draggable]="false"
+                                [resizable]="false">
+                            <p-table
+                                    [value]="suggestCustomers"
+                                    [(selection)]="selectedCustomer"
+                                    selectionMode="single"
+                                    dataKey="vin"
+                                    (onRowSelect)="onSelectCustomer($event)"
+                                    (onRowUnselect)="onUnSelectCustomer($event)"
+                            >
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>Tên Tiếng Việt</th>
+                                        <th>Tên Tiếng Nhật</th>
+                                        <th>Địa Chỉ</th>
+                                        <th>SĐT</th>
+                                        <th>Nghề Nghiệp</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-customer>
+                                    <tr [pSelectableRow]="customer">
+                                        <td>{{customer.name_vietnamese}}</td>
+                                        <td>{{customer.name_japanese}}</td>
+                                        <td>{{customer.address}}</td>
+                                        <td>{{customer.phone}}</td>
+                                        <td>{{customer.job | jobTitle}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </p-dialog>
+                    </div>
+
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Tuổi</label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Tuổi" type="text" [(ngModel)]="customer.age"
+                               disabled id="age" name="age" #age="ngModel" />
+
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Địa Chỉ</label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Địa Chỉ" type="text"
+                               [(ngModel)]="customer.address" required id="address" name="address"
+                               #addressValidate="ngModel" />
+                        <div
+                                *ngIf="addressValidate.invalid && (addressValidate.dirty || addressValidate.touched)">
+                            <label style="color: #ec250d;"> Địa Chỉ is required.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Số Điện Thoại</label> <label style="color: #ec250d;"> *</label>
+                        <input class=" form-control" placeholder="Số Điện Thoại" type="text"
+                               [(ngModel)]="customer.phone" required id="phone" name="phone" #phoneValidate="ngModel"
+                               (keypress)="keyPressNumbers($event)" />
+                        <div
+                                *ngIf="phoneValidate.invalid && (phoneValidate.dirty || phoneValidate.touched)">
+                            <label style="color: #ec250d;"> Số Điện Thoại is required.</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Nghề Nghiệp</label> <label style="color: #ec250d;"> *&nbsp;&nbsp;</label>
+                        <p-dropdown [options]="jobs" (onChange)="onChangeJob($event.value)"
+                                    [(ngModel)]="selectedJobs" optionLabel="label" optionValue="value" required
+                                    [ngModelOptions]="{standalone: true}" #jobValidate="ngModel">
+                        </p-dropdown>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div class=" row">
+                <div class=" col-md-6 pr-md-1">
+                    <div class=" form-group">
+                        <label> Ngày Bán</label> <label style="color: #ec250d;"> *&nbsp;&nbsp;</label>
+                        <p-calendar
+                                [styleClass]="'birthday-calendar'"
+                                placeholder="Ngày Bán"
+                                [(ngModel)]="sale_date"
+                                [ngModelOptions]="{standalone: true}"
+                                [monthNavigator]="true"
+                                [yearNavigator]="true"
+                                dateFormat="dd-mm-yy"
+                                #birthdayValidate="ngModel"
+                                [maxDate]="CURRENT_DATE"
+                        >
+                        </p-calendar>
+                        <br />
+                    </div>
+                </div>
+            </div>
+            <div>
+                <div *ngFor="let product of products; let i = index">
+                    <div *ngIf="product.id != -1">
+                        <div class=" row">
+                            <div class=" col-md-6 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Thông tin máy {{i + 1}}</label> <label style="color: #ec250d;">
+                                    *&nbsp;</label>
+                                    <button pButton
+                                            class="btn p-button-sm p-button-danger mr-2"
+                                            type="button" (click)="removeProduct(i)">
+                                        <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon> Xóa
+                                    </button>
+                                    <button pButton
+                                            class="btn p-button-sm p-button-success" W
+                                            type="button" (click)="cloneProduct(i)">
+                                        <nb-icon class="mr-1" icon="copy-outline"></nb-icon> Clone
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class=" row">
+                            <div class=" col-md-3 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Tên máy </label>
+                                    <input class=" form-control" placeholder="Tên máy" [(ngModel)]="product.name"
+                                           type="text" id="NameMobile{{i}}" name="NameMobile{{i}}"
+                                           #NameMobile{{i}}="ngModel" />
+                                </div>
+                            </div>
+                            <div class="col-kai-half-5 col-md-2 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Số imei </label>
+                                    <input class=" form-control" placeholder="Số imei" [(ngModel)]="product.imei"
+                                           type="text" id="imei{{i}}" name="imei{{i}}" #imei{{i}}="ngModel" />
+                                </div>
+                            </div>
+                            <div class="col-kai-half-3 col-md-2 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Trạng thái &nbsp;</label>
+                                    <p-dropdown [styleClass]="'form-control'" [options]="status"
+                                                (onChange)="onChangeStatus($event.value, i)"
+                                                [(ngModel)]="product.status" optionLabel="label" optionValue="value"
+                                                id="status{{i}}" name="status{{i}}" #status{{i}}="ngModel"
+                                                required [ngModelOptions]="{standalone: true}">
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-kai-half-3 col-md-1 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Màu </label>
+                                    <p-dropdown [styleClass]="'form-control'" [options]="productColors"
+                                                (onChange)="onChangeColor($event.value, i)"
+                                                [(ngModel)]="product.color" optionLabel="label" optionValue="value"
+                                                id="color{{i}}" name="color{{i}}" #color{{i}}="ngModel"
+                                                required [ngModelOptions]="{standalone: true}">
+                                        <ng-template let-color pTemplate="item">
+                                            <div class="country-item">
+                                                <div>
+                                                    <span class="color-box" *ngFor="let c of color.code.split(',')"
+                                                          style="background-color:{{c}}">&nbsp;</span>
+                                                    {{color.label}}
+                                                </div>
+                                            </div>
+                                        </ng-template>
+                                    </p-dropdown>
+                                </div>
+                            </div>
+                            <div class="col-kai-half-3 col-md-2 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Số Lượng </label>
+                                    <input class=" form-control" placeholder="Giá" [(ngModel)]="product.quantity"
+                                           type="number" id="quantity{{i}}" name="quantity{{i}}"
+                                           #quantity{{i}}="ngModel"
+                                           (keypress)="keyPressNumbers($event)" />
+                                </div>
+                            </div>
+                            <div class=" col-md-2 pr-md-1">
+                                <div class=" form-group">
+                                    <label> Giá </label>
+                                    <input class=" form-control" placeholder="Giá" [(ngModel)]="product.price"
+                                           type="text" id="price{{i}}" name="price{{i}}" #price{{i}}="ngModel"
+                                           (keypress)="keyPressNumbers($event)" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button pButton class="btn p-button-sm p-button-info" type="button" (click)="addProduct()">
+                        <nb-icon class="mr-1" icon="plus-square-outline"></nb-icon> Thêm
+                    </button>
+                </div>
+                <div class="col-md-12 mt-3">
+                    <h5> Tổng số máy : {{getQuantity}}</h5>
+                    <h5> Tổng số tiền : {{totalMoney}}</h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <button pButton class="btn p-button-sm p-button-info" type="submit"
+                            [disabled]="!createAppForm.valid || !selectedJobs || selectedJobs == null || !birthday">
+                        <nb-icon class="mr-1" icon="save-outline"></nb-icon> Lưu
+                    </button>
+                    <button pButton
+                            class="btn p-button-sm p-button-danger ml-1"
+                            type="button" (click)="cancel()">
+                        <nb-icon class="mr-1" icon="close-square-outline"></nb-icon> Hủy
+                    </button>
+                    <button *ngIf="editData.id"
+                            pButton
+                            class="btn p-button-sm p-button-danger ml-1"
+                            type="button"
+                            (click)="delete()">
+                        <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon> Xóa
+                    </button>
+                    <button *ngIf="editData.id"
+                            pButton
+                            class=" btn p-button-sm p-button-info ml-1"
+                            type="button"
+                            (click)="exportExcel()">
+                        <nb-icon class="mr-1" icon="download-outline"></nb-icon> Export
+                    </button>
+                    <button
+                            pButton
+                            class="btn p-button-sm p-button-success ml-1"
+                            type="button"
+                            (click)="saveAndExport()">
+                        <nb-icon class="mr-1" icon="cloud-download-outline"></nb-icon> Lưu và Export
+                    </button>
+                </div>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

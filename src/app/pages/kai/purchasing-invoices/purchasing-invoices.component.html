@@ -7,8 +7,9 @@
         <div class="row filter-input-group invoice-search">
             <div class="col-9 col-md-9 form-inline">
                 <input type="text"
-                       [(ngModel)]="invoiceSearch.name" required id="searchNameText" (keydown.enter)="onSearchInvoices($event)" (ngModelChange)="onSearchInvoices($event)"
-                       name="searchNameText" placeholder="Tên Tiếng Việt" class="filter-text form-control"/>
+                       [(ngModel)]="invoiceSearch.name" required id="searchNameText"
+                       (keydown.enter)="onSearchInvoices($event)" (ngModelChange)="onSearchInvoices($event)"
+                       name="searchNameText" placeholder="Tên Tiếng Việt" class="filter-text form-control" />
 
                 <p-calendar
                         [inputStyleClass]="'form-control'"
@@ -20,15 +21,19 @@
                         [ngModelOptions]="{standalone: true}"
                         [monthNavigator]="true"
                         [yearNavigator]="true"
-                        [yearRange]="yearRange"
                         [showButtonBar]="true"
                         #birthdayValidate="ngModel"
                 >
                 </p-calendar>
             </div>
             <div class="col-3 col-md-3">
-                <button type="button" pButton icon="pi pi-plus" iconPos="left" label="THÊM" (click)="navigateToAddInvoice()"
-                        style="margin-top: 20px;" class="ui-button-info float-right"></button>
+                <button type="button"
+                        pButton
+                        icon="pi pi-plus"
+                        iconPos="left"
+                        label="THÊM"
+                        (click)="navigateToAddInvoice()"
+                        class="btn p-button-sm ui-button-info float-right"></button>
             </div>
         </div>
 
@@ -39,7 +44,9 @@
                 <tr>
                     <th></th>
                     <th>Tên Khách Bán</th>
-                    <th pSortableColumn="sale_date" >Ngày Bán <p-sortIcon field="sale_date"></p-sortIcon> </th>
+                    <th pSortableColumn="sale_date">Ngày Bán
+                        <p-sortIcon field="sale_date"></p-sortIcon>
+                    </th>
                     <th>Số Máy Bán</th>
                     <th>Tổng Số Tiền</th>
                     <th></th>
@@ -51,15 +58,19 @@
                          let-editing="editing" let-ri="rowIndex">
                 <tr [pEditableRow]="rowData">
                     <td>{{i + 1}}</td>
-                    <td>{{rowData.name_vietnamese}}</td>
+                    <td>{{rowData.customer.name_vietnamese}}</td>
                     <td>{{rowData.sale_date | date: dateFormat }}</td>
                     <td>{{rowData.quantity}}</td>
                     <td>{{rowData.total_money}}</td>
                     <td style="text-align:center">
-                        <button nbButton status="primary" (click)="onRowEditInit(rowData)" ><nb-icon icon="edit-outline"></nb-icon></button>
+                        <button nbButton status="primary" (click)="onRowEditInit(rowData)">
+                            <nb-icon icon="edit-outline"></nb-icon>
+                        </button>
                     </td>
                     <td style="text-align:center">
-                        <button nbButton status="danger" (click)="onRowDelete(rowData,ri)" ><nb-icon icon="trash-2-outline"></nb-icon></button>
+                        <button nbButton status="danger" (click)="onRowDelete(rowData,ri)">
+                            <nb-icon icon="trash-2-outline"></nb-icon>
+                        </button>
                     </td>
                 </tr>
             </ng-template>
