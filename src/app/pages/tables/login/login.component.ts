@@ -56,9 +56,9 @@ export class LoginComponent implements OnInit {
 
 
                 } else {
-                    localStorage.setItem("role", 'admin')
-                    localStorage.setItem("sodienthoai", '0987654321')
-                    localStorage.setItem("hoten", 'Nguyen Van Admin')
+                    // localStorage.setItem("role", 'admin')
+                    // localStorage.setItem("sodienthoai", '0987654321')
+                    // localStorage.setItem("hoten", 'Nguyen Van Admin')
 
 
                     window.location.reload()

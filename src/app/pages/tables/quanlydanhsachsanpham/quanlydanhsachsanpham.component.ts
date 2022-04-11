@@ -44,7 +44,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       data.forEach(data => {
         this.datatensanpham.push({ "value": data, "title": data })
       });
-      this.settings.columns.name.editor.config.list = this.datatensanpham
+      // this.settings.columns.name.editor.config.list = this.datatensanpham
       this.settings = Object.assign({}, this.settings);
 
     })
@@ -64,7 +64,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       data.forEach(data => {
         this.datamau.push({ "value": data, "title": data })
       });
-      this.settings.columns.color.editor.config.list = this.datamau
+      // this.settings.columns.color.editor.config.list = this.datamau
       this.settings = Object.assign({}, this.settings);
 
     })
@@ -141,12 +141,13 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       name: {
         title: 'Tên Sản Phẩm',
         editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-            ]
-          }
+          // type: 'list',
+          // config: {
+          //   selectText: 'Select',
+          //   list: [
+          //   ]
+          // }
+          type:'string'
         },
         // filter: false,
       },
@@ -170,24 +171,26 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       color: {
         title: 'Màu',
         editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-            ]
-          }
+          // type: 'list',
+          // config: {
+          //   selectText: 'Select',
+          //   list: [
+          //   ]
+          // }
+          type:'string'
         },
         // filter: false,
       },
       status: {
         title: 'Tình Trạng',
         editor: {
-          type: 'list',
-          config: {
-            selectText: 'Select',
-            list: [
-            ]
-          }
+          // type: 'list',
+          // config: {
+          //   selectText: 'Select',
+          //   list: [
+          //   ]
+          // }
+          type:'string'
         },
         // filter: false,
       },
@@ -207,15 +210,15 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       quantity: {
         title: 'Số Lượng',
         type: 'string',
-        editable: false,
-        addable: false,
+        editable: true,
+        addable: true,
         // filter: false,
       },
       price: {
         title: 'Giá Tiền',
         type: 'string',
-        editable: false,
-        addable: false,
+        editable: true,
+        addable: true,
         // filter: false,
       },
     },
@@ -282,9 +285,9 @@ this.dataedit=[]
     console.log(event)
     if (window.confirm('Bạn có chắc muốn xóa không ????')) {
       this.service.deletesanphamtonkho(
-        [
+        
           event['data']['id']
-        ]
+      
       )
         .subscribe(data => {
 
@@ -309,17 +312,17 @@ this.dataedit=[]
     // el.loaisanpham === (event['newData']['loaisanpham']) &&
     // el.phienban === (event['newData']['phienban'])
     // )) {
-      this.service.sanphamtonkhokhohang(
-        [
-          event['newData']['imei'],
-          event['newData']['color'],
-          event['newData']['status'],
-          event['newData']['quantity'],
-          event['newData']['price'],
-          event['newData']['price'],
-          'WAREHOUSE',
-          'WAREHOUSE'
-        ]
+      this.service.sanphamtonkhovn(
+        {
+          'imei':event['newData']['imei'],
+          'name':event['newData']['name'],
+          'color':event['newData']['color'],
+          'status':event['newData']['status'],
+          'quantity' :event['newData']['quantity'],
+         'price': event['newData']['price'],
+         'position' :'WAREHOUSE',
+          'source':'WAREHOUSE'
+        }
       )
         .subscribe(data => {
 

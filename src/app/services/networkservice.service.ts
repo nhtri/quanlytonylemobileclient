@@ -157,16 +157,25 @@ export class NetworkserviceService {
         return this.httpClient.get<any>(get);
     }
 
+    // getalluser() {
+    //     const get = 'https://salemobileserver.herokuapp.com/getalluser';
+    //     return this.httpClient.get<any>(get);
+    // }
+
     getalluser() {
-        const get = 'https://salemobileserver.herokuapp.com/getalluser';
+        const get = 'https://quanlytonylemobile.herokuapp.com/getalluser';
         return this.httpClient.get<any>(get);
     }
 
+    // quyennhanvien(data): Observable<any> {
+    //     const quyennhanvienAPI = `https://salemobileserver.herokuapp.com/authen`;
+    //     return this.httpClient.post<any>(quyennhanvienAPI, data, this.httpOptions);
+    // }
     quyennhanvien(data): Observable<any> {
-        const quyennhanvienAPI = `https://salemobileserver.herokuapp.com/authen`;
+        const quyennhanvienAPI = `https://quanlytonylemobile.herokuapp.com/authen`;
         return this.httpClient.post<any>(quyennhanvienAPI, data, this.httpOptions);
     }
-
+    
     getdanhsachdonhangtheomadonhang(data): Observable<any> {
         const API = `https://salemobileserver.herokuapp.com/getdanhsachdonhangtheomadonhang`;
         return this.httpClient.post<any>(API, data, this.httpOptions);
@@ -217,8 +226,13 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
     }
 
+    // updatepass(data): Observable<any> {
+    //     const API = `https://salemobileserver.herokuapp.com/updatepassword`;
+    //     return this.httpClient.put<any>(API, data, this.httpOptions);
+    // }
+
     updatepass(data): Observable<any> {
-        const API = `https://salemobileserver.herokuapp.com/updatepassword`;
+        const API = `https://quanlytonylemobile.herokuapp.com/updatepassword`;
         return this.httpClient.put<any>(API, data, this.httpOptions);
     }
 
