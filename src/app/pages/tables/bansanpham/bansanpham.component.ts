@@ -16,7 +16,7 @@ export class BansanphamComponent implements OnInit {
   tienthua = '0'
   tienhoadon = '0'
   hinhthucthanhtoan = ""
-
+tongtien=0
   imeiduocchon = []
   giatiensanpham = []
 
@@ -41,7 +41,10 @@ export class BansanphamComponent implements OnInit {
         console.log('this.id', this.id)
         this.id.forEach(element => {
           this.service.getsanpham([element]).subscribe(value => {
+            console.log('value',value)
             this.datas.push(value)
+            this.tongtien += parseInt(value[0].price)
+            console.log('tongtien',this.tongtien, value[0].price)
           })
         });
         console.log('this.datas', this.datas)
@@ -99,8 +102,10 @@ export class BansanphamComponent implements OnInit {
     this.id.forEach(element => {
       this.service.getsanpham([element]).subscribe(value => {
         this.datas.push(value)
+        this.tongtien += parseInt(value.price)
       })
     });
+
   }
 
   changesotien(event, id,) {
@@ -126,25 +131,25 @@ export class BansanphamComponent implements OnInit {
 
 
   changehinhthucthanhtoan(event) {
-    this.tienhoadon = '0'
+    this.tienhoadon = this.tongtien.toString()
     this.hinhthucthanhtoan = event.target.value
     console.log(this.hinhthucthanhtoan)
 
-    this.giatiensanpham.forEach(element => {
-      console.log('element', element)
-      console.log('(parseFloat(this.tienhoadon)', (parseFloat(this.tienhoadon)))
-      console.log('parseFloat(element.giatien)', parseFloat(element.giatien))
-      console.log('(this.imeiduocchon.filter(val => val.id != element.id)).length)', this.imeiduocchon.filter(val => val.id == element.id).length)
+    // this.giatiensanpham.forEach(element => {
+    //   console.log('element', element)
+    //   console.log('(parseFloat(this.tienhoadon)', (parseFloat(this.tienhoadon)))
+    //   console.log('parseFloat(element.giatien)', parseFloat(element.giatien))
+    //   console.log('(this.imeiduocchon.filter(val => val.id != element.id)).length)', this.imeiduocchon.filter(val => val.id == element.id).length)
 
-      if (this.imeiduocchon.filter(val => val.id == element.id).length > 0) {
-        console.log('>0')
-        this.tienhoadon = (parseFloat(this.tienhoadon) + (parseFloat(element.giatien) * (this.imeiduocchon.filter(val => val.id == element.id)).length)).toString()
-      }
-      // else {
-      //   console.log('=0')
-      //   this.tienhoadon = (parseFloat(this.tienhoadon) + (parseFloat(element.giatien) * (this.imeiduocchon.length))).toString()
-      // }
-    });
+    //   if (this.imeiduocchon.filter(val => val.id == element.id).length > 0) {
+    //     console.log('>0')
+    //     this.tienhoadon = (parseFloat(this.tienhoadon) + (parseFloat(element.giatien) * (this.imeiduocchon.filter(val => val.id == element.id)).length)).toString()
+    //   }
+    //   // else {
+    //   //   console.log('=0')
+    //   //   this.tienhoadon = (parseFloat(this.tienhoadon) + (parseFloat(element.giatien) * (this.imeiduocchon.length))).toString()
+    //   // }
+    // });
   }
 
   hoantat() {

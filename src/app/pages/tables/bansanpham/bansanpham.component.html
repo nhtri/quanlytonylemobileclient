@@ -80,13 +80,13 @@
         [queryParams]={id:[danhsachidsanpham]}></i>
     </th> -->
           <th>Id</th>
-          <th>Nhóm sản phẩm</th>
           <th>Tên sản phẩm</th>
-          <th>Dung lượng</th>
-          <th>Loại sản phẩm</th>
-          <th>Phiên bản</th>
           <th>Imei</th>
-          <th>Giá tiền</th>
+          <th>Màu sắc</th>
+          <th>Tình trạng</th>
+          <th>Số lượng</th>
+          <th>Giá tiền thu</th>
+          <th>Giá tiền bán</th>
           <th></th>
           <!-- <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
         </tr>
@@ -95,12 +95,11 @@
 
         <tr *ngFor="let sanpham of datas">
           <td>{{sanpham[0].id}}</td>
-          <td>{{sanpham[0].nhomsanpham}}</td>
-          <td>{{sanpham[0].tensanpham}}</td>
-          <td>{{sanpham[0].dungluong}}</td>
-          <td>{{sanpham[0].loaisanpham}}</td>
-          <td>{{sanpham[0].phienban}}</td>
-          <td>
+          <td>{{sanpham[0].name}}</td>
+          <td>{{sanpham[0].imei}}</td>
+          <td>{{sanpham[0].color}}</td>
+          <td>{{sanpham[0].status}}</td>
+          <!-- <td> -->
           
             <!-- <div *ngFor="let data of sanpham[0].imei.split(',')">
               <input *ngIf="data!=''" type="checkbox" value="{{data}}" (change)="checkCheckBoxvalue(
@@ -110,12 +109,11 @@
             </div> -->
 
          
-              <input *ngIf="data!=''" type="checkbox" value="{{data}}" (change)="checkCheckBoxvalue(
-                $event,sanpham[0].id,sanpham[0].nhomsanpham
-              ,sanpham[0].tensanpham,sanpham[0].dungluong,
-              sanpham[0].loaisanpham,sanpham[0].phienban)" style="margin-right: 10px;">{{sanpham[0].imei}}
-      
-          </td>
+            <td><input type="text"
+              style="height: 22px; width: 60px; border-radius: 5px;"></td>
+            <td>{{sanpham[0].price}}</td>
+            <td><input type="text"
+              style="height: 22px; width: 80px; border-radius: 5px;"></td>
           <!-- <td>
           
             <mat-form-field appearance="fill" class="mySelectForm">
@@ -124,8 +122,7 @@
               </mat-select>
               </mat-form-field>
           </td> -->
-          <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;"
-              (change)="changesotien($event,sanpham[0].id)"></td>
+        
           <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham[0].id)"></i></td>
 
    
