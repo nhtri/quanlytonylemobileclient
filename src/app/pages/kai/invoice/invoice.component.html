@@ -237,10 +237,9 @@
                             <div class="col-kai-half-3 col-md-2 pr-md-1">
                                 <div class=" form-group">
                                     <label> Số Lượng </label>
-                                    <input class=" form-control" placeholder="Giá" [(ngModel)]="product.quantity"
+                                    <input class=" form-control" placeholder="Số Lượng" [(ngModel)]="product.quantity"
                                            type="number" id="quantity{{i}}" name="quantity{{i}}"
-                                           #quantity{{i}}="ngModel"
-                                           (keypress)="keyPressNumbers($event)" />
+                                           #quantity{{i}}="ngModel" (ngModelChange)="onChangeQuantity(product, i)"/>
                                 </div>
                             </div>
                             <div class=" col-md-2 pr-md-1">
@@ -248,7 +247,7 @@
                                     <label> Giá </label>
                                     <input class=" form-control" placeholder="Giá" [(ngModel)]="product.price"
                                            type="text" id="price{{i}}" name="price{{i}}" #price{{i}}="ngModel"
-                                           (keypress)="keyPressNumbers($event)" />
+                                           (keypress)="keyPressNumbers($event)" (ngModelChange)="onChangePrice(product, i)" />
                                 </div>
                             </div>
                         </div>
