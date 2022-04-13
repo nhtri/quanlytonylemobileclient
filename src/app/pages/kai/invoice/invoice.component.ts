@@ -100,6 +100,14 @@ export class InvoiceComponent implements OnInit {
         this.products[index].color = value.color;
     }
 
+    onChangeQuantity(product, index) {
+        this.products[index].quantity = +product.quantity;
+    }
+
+    onChangePrice(product, index) {
+        this.products[index].price = +product.price;
+    }
+
     onChangeBirthday() {
         this.customer.birthday = this.datePipe.transform(this.birthday, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
         this.customer.age = getAge(this.birthday);
@@ -169,7 +177,6 @@ export class InvoiceComponent implements OnInit {
     }
 
     get getQuantity() {
-        // return this.products.filter(x => x.id !== -1).length;
         let totalQuantity = 0;
         this.products.forEach((product) => totalQuantity += +product.quantity);
         return totalQuantity;
@@ -183,8 +190,8 @@ export class InvoiceComponent implements OnInit {
             sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
             total_money: this.totalMoney,
             quantity: this.getQuantity,
+            position: PRODUCT_SOURCE.KAI,
         };
-
         this.kaiService.purchasingInvoice(this.invoice).subscribe((purchasingInvoiceDetail) => {
             if (notEmpty(purchasingInvoiceDetail)) {
                 alert(`Lưu Thành Công`);
