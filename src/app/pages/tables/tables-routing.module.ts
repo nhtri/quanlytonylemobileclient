@@ -48,6 +48,8 @@ import { DanhsachsanphamnhatComponent } from './danhsachsanphamnhat/danhsachsanp
 import { DanhsachsanphamvnComponent } from './danhsachsanphamvn/danhsachsanphamvn.component';
 import { QuanlydanhsachsanphamnhatComponent } from './quanlydanhsachsanphamnhat/quanlydanhsachsanphamnhat.component';
 import { QuanlydanhsachsanphamvnComponent } from './quanlydanhsachsanphamvn/quanlydanhsachsanphamvn.component';
+import { QuanlydanhsachdonhangvnComponent } from './quanlydanhsachdonhangvn/quanlydanhsachdonhangvn.component';
+import { QuanlydanhsachdonhangnhatComponent } from './quanlydanhsachdonhangnhat/quanlydanhsachdonhangnhat.component';
 
 const routes: Routes = [{
   path: '',
@@ -112,6 +114,14 @@ const routes: Routes = [{
     {
       path: 'quanlydanhsachdonhang',
       component: QuanlydanhsachdonhangComponent,
+    },
+    {
+      path: 'quanlydanhsachdonhangvn',
+      component: QuanlydanhsachdonhangvnComponent,
+    },
+    {
+      path: 'quanlydanhsachdonhangjp',
+      component: QuanlydanhsachdonhangnhatComponent,
     },
     {
       path: 'dungluong',
