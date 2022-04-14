@@ -21,7 +21,7 @@ export class BansanphamComponent implements OnInit {
   giatiensanpham = []
   tongtienban = 0
 
-
+vitri=''
 
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
@@ -39,6 +39,7 @@ export class BansanphamComponent implements OnInit {
         this.id.forEach(element => {
           this.service.getsanpham([element]).subscribe(value => {
             console.log('value', value)
+           
             this.datas.push(value.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
 
           })
@@ -73,6 +74,7 @@ export class BansanphamComponent implements OnInit {
 
       })
     });
+    this.tongtienthu = 0
     this.tongtienban = 0
     this.tienhoadon = this.tongtienban.toString()
   }
@@ -85,9 +87,11 @@ export class BansanphamComponent implements OnInit {
 
 
   changehinhthucthanhtoan(event) {
+    this.tongtienthu = 0
     this.tongtienban = 0
     this.datas.forEach(e => {
       this.tongtienban += parseInt(e[0].quantity) * parseInt(e[0].sotienban)
+      this.tongtienthu += parseInt(e[0].quantity) * parseInt(e[0].price)
     });
     this.tienhoadon = this.tongtienban.toString()
     this.hinhthucthanhtoan = event.target.value
@@ -100,8 +104,11 @@ export class BansanphamComponent implements OnInit {
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
     let danhsachimei = ""
+    let soluongsanpham = 0
     this.datas.forEach(element => {
-    
+      danhsachimei += element[0].imei + ','
+      soluongsanpham += parseInt(element[0].quantity)
+      this.vitri = element[0].position
     });
     // for (let i = 0; i < this.imeiduocchon.length; i++) {
     //   for (let j = 0; j < this.giatiensanpham.length; j++) {
@@ -139,12 +146,12 @@ export class BansanphamComponent implements OnInit {
     // });
 
     // this.service.quanlythu([this.tienhoadon, date, transactionkey]).subscribe(val => { })
-
-    // this.service.taodanhsachdonhang([date, this.tienhoadon, transactionkey, this.imeiduocchon.length, danhsachimei.substring(0, danhsachimei.length - 1)]).subscribe(value => {
-    //   console.log(value)
-    //   alert("Mua Hàng Thành Công")
-    //   this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
-    // })
+console.log('data danhsachdonhang',date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1),this.vitri,this.hinhthucthanhtoan,this.tienhoadon)
+    this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1),this.vitri,this.hinhthucthanhtoan,this.tienhoadon]).subscribe(value => {
+      console.log(value)
+      alert("Mua Hàng Thành Công")
+      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+    })
 
 
 
@@ -174,8 +181,10 @@ export class BansanphamComponent implements OnInit {
     console.log('this.datas', this.datas)
 
     this.tongtienban = 0
+    this.tongtienthu
     this.datas.forEach(e => {
       this.tongtienban += parseInt(e[0].quantity) * parseInt(e[0].sotienban)
+      this.tongtienthu += parseInt(e[0].quantity) * parseInt(e[0].price)
     });
     this.tienhoadon = this.tongtienban.toString()
   }
@@ -193,8 +202,10 @@ export class BansanphamComponent implements OnInit {
     )
 
     this.tongtienban = 0
+    this.tongtienthu = 0
     this.datas.forEach(e => {
       this.tongtienban += (parseInt(e[0].quantity) * parseInt(e[0].sotienban))
+      this.tongtienthu += (parseInt(e[0].quantity) * parseInt(e[0].price))
     });
     console.log('this.datas', this.datas)
     this.tienhoadon = this.tongtienban.toString()

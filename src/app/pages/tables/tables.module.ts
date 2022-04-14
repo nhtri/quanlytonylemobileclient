@@ -55,6 +55,8 @@ import { DanhsachsanphamnhatComponent } from './danhsachsanphamnhat/danhsachsanp
 import { DanhsachsanphamvnComponent } from './danhsachsanphamvn/danhsachsanphamvn.component';
 import { QuanlydanhsachsanphamnhatComponent } from './quanlydanhsachsanphamnhat/quanlydanhsachsanphamnhat.component';
 import { QuanlydanhsachsanphamvnComponent } from './quanlydanhsachsanphamvn/quanlydanhsachsanphamvn.component';
+import { QuanlydanhsachdonhangnhatComponent } from './quanlydanhsachdonhangnhat/quanlydanhsachdonhangnhat.component';
+import { QuanlydanhsachdonhangvnComponent } from './quanlydanhsachdonhangvn/quanlydanhsachdonhangvn.component';
 @NgModule({
   imports: [
     NbCardModule,
@@ -117,6 +119,8 @@ import { QuanlydanhsachsanphamvnComponent } from './quanlydanhsachsanphamvn/quan
        DanhsachsanphamvnComponent,
        QuanlydanhsachsanphamnhatComponent,
        QuanlydanhsachsanphamvnComponent,
+       QuanlydanhsachdonhangnhatComponent,
+       QuanlydanhsachdonhangvnComponent,
   ],
 })
 export class TablesModule { }
