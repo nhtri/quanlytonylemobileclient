@@ -109,11 +109,11 @@
             </div> -->
 
          
-            <td><input type="text"
-              style="height: 22px; width: 60px; border-radius: 5px;"></td>
+            <td><input type="number" [min]="1" [max]="sanpham[0].quantitytemp"
+              style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham[0].id)" [value]="1"></td>
             <td>{{sanpham[0].price}}</td>
             <td><input type="text"
-              style="height: 22px; width: 80px; border-radius: 5px;"></td>
+              style="height: 22px; width: 80px; border-radius: 5px;"(change)="nhapsotienban($event,sanpham[0].id)"></td>
           <!-- <td>
           
             <mat-form-field appearance="fill" class="mySelectForm">
