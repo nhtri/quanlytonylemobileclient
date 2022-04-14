@@ -266,6 +266,14 @@ export class NetworkserviceService {
         const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachdonhangquanlymobile';
         return this.httpClient.get<any>(get);
     }
+    getdanhsachdonhangquanlymobilevn() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachdonhangquanlymobilevn';
+        return this.httpClient.get<any>(get);
+    }
+    getdanhsachdonhangquanlymobilejp() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachdonhangquanlymobilejp';
+        return this.httpClient.get<any>(get);
+    }
 
     getdanhsachsanphamdabanquanlymobiletransaction(data): Observable<any> {
         const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobiletransaction`;

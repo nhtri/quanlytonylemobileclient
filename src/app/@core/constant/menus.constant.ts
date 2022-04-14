@@ -58,7 +58,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
             },
             {
                 title: 'Danh Sách Đơn Hàng',
-                link: '/pages/tables/quanlydanhsachdonhang',
+                link: '/pages/tables/quanlydanhsachdonhangjp',
             },
 
         ],
@@ -164,7 +164,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
             },
             {
                 title: 'Danh Sách Đơn Hàng',
-                link: '/pages/tables/quanlydanhsachdonhang',
+                link: '/pages/tables/quanlydanhsachdonhangvn',
             },
 
         ],
