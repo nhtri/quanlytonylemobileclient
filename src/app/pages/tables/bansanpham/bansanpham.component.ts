@@ -21,7 +21,7 @@ export class BansanphamComponent implements OnInit {
   giatiensanpham = []
   tongtienban = 0
 
-vitri=''
+  vitri = ''
 
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
@@ -39,7 +39,7 @@ vitri=''
         this.id.forEach(element => {
           this.service.getsanpham([element]).subscribe(value => {
             console.log('value', value)
-           
+
             this.datas.push(value.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
 
           })
@@ -146,8 +146,8 @@ vitri=''
     // });
 
     // this.service.quanlythu([this.tienhoadon, date, transactionkey]).subscribe(val => { })
-console.log('data danhsachdonhang',date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1),this.vitri,this.hinhthucthanhtoan,this.tienhoadon)
-    this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1),this.vitri,this.hinhthucthanhtoan,this.tienhoadon]).subscribe(value => {
+    console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
+    this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon]).subscribe(value => {
       console.log(value)
       alert("Mua Hàng Thành Công")
       this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')

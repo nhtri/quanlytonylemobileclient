@@ -46,9 +46,14 @@ export class QuanlythuComponent implements OnInit {
   date = ""
   sotien = ""
   mucdich = ""
+  hinhthucthanhtoan = ""
+  
+
   ngOnInit(): void {
     
   }
+
+  selecthinhthucthanhtoan(event){}
   exportexcel() {
     let element = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
