@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import * as XLSX from 'xlsx';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+import * as XLSX from 'xlsx';
 @Component({
-  selector: 'ngx-quanlythu',
-  templateUrl: './quanlythu.component.html',
-  styleUrls: ['./quanlythu.component.scss']
+  selector: 'ngx-thongke',
+  templateUrl: './thongke.component.html',
+  styleUrls: ['./thongke.component.scss']
 })
-export class QuanlythuComponent implements OnInit {
+export class ThongkeComponent implements OnInit {
 
   data = []
   id = ""

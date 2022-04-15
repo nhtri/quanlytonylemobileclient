@@ -132,25 +132,40 @@ export class BansanphamComponent implements OnInit {
     //   })
 
 
+    this.datas.forEach(element => {
 
-    //   this.service.danhsachsanphamdaban([element.nhomsanpham, element.tensanpham,
-    //   element.dungluong,
-    //   element.loaisanpham,
-    //   element.phienban,
-    //   element.imei,
-    //     transactionkey,
-    //   element.giatien,
-    //     date, this.hinhthucthanhtoan]).subscribe(value => {
-    //       console.log(value)
-    //     })
-    // });
+      this.service.danhsachsanphamdaban(['', element[0].name,
+        '',
+        '',
+        '',
+        element[0].imei,
+        transactionkey,
+        parseInt(element[0].price) * parseInt(element[0].quantity),
+        date, this.hinhthucthanhtoan,
+        this.vitri, parseInt(element[0].sotienban) * parseInt(element[0].quantity)
+        , element[0].quantity
+      ]).subscribe(value => {
+        console.log(value)
+      })
+    });
 
-    // this.service.quanlythu([this.tienhoadon, date, transactionkey]).subscribe(val => { })
+
+
+
+    this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan]).subscribe(val => { })
     console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
     this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon]).subscribe(value => {
       console.log(value)
       alert("Mua Hàng Thành Công")
-      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+      if (this.vitri == "WAREHOUSE") {
+        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+      }
+      if (this.vitri == "SHOP_VN") {
+        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+      }
+      if (this.vitri == "SHOP_JP") {
+        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+      }
     })
 
 

@@ -14,13 +14,15 @@
   <thead>
     <tr>
       <th>Đơn hàng</th>
-      <th>Nhóm sản phẩm</th>
+      <!-- <th>Nhóm sản phẩm</th> -->
       <th>Tên sản phẩm</th>
-      <th>Dung lượng</th>
+      <th>Số lượng</th>
+      <!-- <th>Dung lượng</th>
       <th>Loại sản phẩm</th>
-      <th>Phiên bản</th>
+      <th>Phiên bản</th> -->
       <th>Imei</th>
-      <th>Giá tiền</th>
+      <th>Giá tiền thu</th>
+      <th>Giá tiền bán</th>
       <th>Ngày bán</th>
       </tr>
   </thead>
@@ -30,13 +32,15 @@
 
     <tr *ngFor="let sanpham of data">
       <td>{{madonhang}}</td>
-      <td>{{sanpham.nhomsanpham}}</td>
+      <!-- <td>{{sanpham.nhomsanpham}}</td> -->
       <td>{{sanpham.tensanpham}}</td>
-      <td>{{sanpham.dungluong}}</td>
-      <td>{{sanpham.loaisanpham}}</td>
-      <td>{{sanpham.phienban}}</td>
+      <!-- <td>{{sanpham.dungluong}}</td> -->
+      <!-- <td>{{sanpham.loaisanpham}}</td>
+      <td>{{sanpham.phienban}}</td> -->
+      <td>{{sanpham.soluong}}</td>
       <td>{{sanpham.imei}}</td>
       <td>{{sanpham.giatien}}</td>
+      <td>{{sanpham.giaban}}</td>
       <td>{{sanpham.ngayban}}</td>
       <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
           [queryParams]={id:[sanpham.id]}></i></td>
