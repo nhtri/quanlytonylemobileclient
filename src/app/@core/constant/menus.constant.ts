@@ -56,7 +56,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                 },
                 {
                     title: 'Sản Phẩm Đã Bán',
-                    link: '/pages/tables/quanlydanhsachsanphamdaban',
+                    link: '/pages/tables/quanlydanhsachsanphamdabanjp',
                 },
                 {
                     title: 'Danh Sách Đơn Hàng',
@@ -81,7 +81,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                 },
                 {
                     title: 'Quản Lý Tổng Thu Chi',
-                    link: '/pages/tables/quanlythuchi',
+                    link: '/pages/tables/quanlythuchijp',
                 },
             ],
         },
@@ -169,7 +169,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 },
                 {
                     title: 'Sản Phẩm Đã Bán',
-                    link: '/pages/tables/quanlydanhsachsanphamdaban',
+                    link: '/pages/tables/quanlydanhsachsanphamdabanvn',
                 },
                 {
                     title: 'Danh Sách Đơn Hàng',
@@ -194,7 +194,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 },
                 {
                     title: 'Quản Lý Tổng Thu Chi',
-                    link: '/pages/tables/quanlythuchi',
+                    link: '/pages/tables/quanlythuchivn',
                 },
             ],
         },
