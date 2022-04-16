@@ -83,28 +83,32 @@ export const MENU_ITEMS: MobileMenuItem[] = [
             },
         ],
     },
-    {
-        title: 'Thống Kê & Báo Cáo',
-        icon: 'pie-chart-outline',
-        children: [
-            // {
-            //     title: 'Echarts (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/echarts',
-            // },
-            // {
-            //     title: 'Charts.js (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/chartjs',
-            // },
-            {
-                title: 'Thống Kê',
-                link: '/pages/charts/d3',
-            },
-            {
-                title: 'Báo Cáo Thuế',
-                link: '/pages/tables/baocaothue',
-            },
-        ],
-    },
+    // {
+    //     title: 'Thống Kê & Báo Cáo',
+    //     icon: 'pie-chart-outline',
+    //     children: [
+    //         // {
+    //         //     title: 'Echarts (Tham khảo lựa mẫu)',
+    //         //     link: '/pages/charts/echarts',
+    //         // },
+    //         // {
+    //         //     title: 'Charts.js (Tham khảo lựa mẫu)',
+    //         //     link: '/pages/charts/chartjs',
+    //         // },
+    //         {
+    //             title: 'Thống Kê Bán Hàng',
+    //             link: '/pages/charts/d3',
+    //         },
+    //         {
+    //             title: 'Thống Kê Lợi Nhuận',
+    //             link: '/pages/tables/thongke',
+    //         },
+    //         {
+    //             title: 'Báo Cáo Thuế',
+    //             link: '/pages/tables/baocaothue',
+    //         },
+    //     ],
+    // },
     {
         title: 'Quản Lý Cấu Hình Máy',
         icon: 'grid-outline',
@@ -189,28 +193,32 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
             },
         ],
     },
-    {
-        title: 'Thống Kê & Báo Cáo',
-        icon: 'pie-chart-outline',
-        children: [
-            // {
-            //     title: 'Echarts (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/echarts',
-            // },
-            // {
-            //     title: 'Charts.js (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/chartjs',
-            // },
-            {
-                title: 'Thống Kê',
-                link: '/pages/charts/d3',
-            },
-            {
-                title: 'Báo Cáo Thuế',
-                link: '/pages/tables/baocaothue',
-            },
-        ],
-    },
+    // {
+    //     title: 'Thống Kê & Báo Cáo',
+    //     icon: 'pie-chart-outline',
+    //     children: [
+    //         // {
+    //         //     title: 'Echarts (Tham khảo lựa mẫu)',
+    //         //     link: '/pages/charts/echarts',
+    //         // },
+    //         // {
+    //         //     title: 'Charts.js (Tham khảo lựa mẫu)',
+    //         //     link: '/pages/charts/chartjs',
+    //         // },
+    //         {
+    //             title: 'Thống Kê Bán Hàng',
+    //             link: '/pages/charts/d3',
+    //         },
+    //         {
+    //             title: 'Thống Kê Lợi Nhuận',
+    //             link: '/pages/tables/thongke',
+    //         },
+    //         {
+    //             title: 'Báo Cáo Thuế',
+    //             link: '/pages/tables/baocaothue',
+    //         },
+    //     ],
+    // },
     {
         title: 'Quản Lý Cấu Hình Máy',
         icon: 'grid-outline',
@@ -295,10 +303,10 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
             },
         ],
     },
-    {
-        title: 'Thống Kê & Báo Cáo',
-        icon: 'pie-chart-outline',
-        children: [
+    // {
+        // title: 'Thống Kê & Báo Cáo',
+        // icon: 'pie-chart-outline',
+        // children: [
             // {
             //     title: 'Echarts (Tham khảo lựa mẫu)',
             //     link: '/pages/charts/echarts',
@@ -307,16 +315,20 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
             //     title: 'Charts.js (Tham khảo lựa mẫu)',
             //     link: '/pages/charts/chartjs',
             // },
-            {
-                title: 'Thống Kê',
-                link: '/pages/charts/d3',
-            },
-            {
-                title: 'Báo Cáo Thuế',
-                link: '/pages/tables/baocaothue',
-            },
-        ],
-    },
+            // {
+            //     title: 'Thống Kê Bán Hàng',
+            //     link: '/pages/charts/d3',
+            // },
+            // {
+            //     title: 'Thống Kê Lợi Nhuận',
+            //     link: '/pages/tables/thongke',
+            // },
+            // {
+            //     title: 'Báo Cáo Thuế',
+            //     link: '/pages/tables/baocaothue',
+            // },
+        // ],
+    // },
     {
         title: 'Quản Lý Cấu Hình Máy',
         icon: 'grid-outline',
@@ -367,6 +379,33 @@ export const ADMIN_MENU_ITEMS: MobileMenuItem[] = [
         link: '/pages/tables/smart-table-nguoidung',
         roles: [USER_ROLE.ADMIN],
         // hidden: localStorage.getItem('role') != null,
+        
+    },
+   {
+        title: 'Thống Kê & Báo Cáo',
+        icon: 'pie-chart-outline',
+        children: [
+            // {
+            //     title: 'Echarts (Tham khảo lựa mẫu)',
+            //     link: '/pages/charts/echarts',
+            // },
+            // {
+            //     title: 'Charts.js (Tham khảo lựa mẫu)',
+            //     link: '/pages/charts/chartjs',
+            // },
+            {
+                title: 'Thống Kê Bán Hàng',
+                link: '/pages/charts/d3',
+            },
+            {
+                title: 'Thống Kê Lợi Nhuận',
+                link: '/pages/tables/thongke',
+            },
+            {
+                title: 'Báo Cáo Thuế',
+                link: '/pages/tables/baocaothue',
+            },
+        ],
     },
 ];
 
