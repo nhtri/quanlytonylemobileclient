@@ -13,6 +13,16 @@
                 style="margin-left: 25px; height: 28px; width: 150px; border-radius: 5px;" placeholder="Số tiền">
             <input type="text" [(ngModel)]="mucdich"
                 style=" margin-left: 25px; height: 28px; width: 320px; border-radius: 5px;" placeholder="Mục đích">
+
+                <select (change)="selecthinhthucthanhtoan($event)"
+                style="margin-left: 25px; height: 28px;width: 140px;border-radius: 5px;border-color: #809ffc;">
+                <option value="default">Hình thức chi</option>
+                <option value="tienmat">Tiền mặt</option>
+                <option value="chuyenkhoan">Chuyển khoản</option>
+                <option value="daibiki">Daibiki</option>
+
+            </select>
+
             <button (click)="hoantat()"
                 style="margin-left: 25px; height: 28px;width: 120px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
                 Hoàn Tất</button>

@@ -147,4 +147,9 @@ export class QuanlychiComponent implements OnInit {
     });
     console.log(this.daterange)
   }
+
+
+  selecthinhthucthanhtoan(event){
+    
+  }
 }
