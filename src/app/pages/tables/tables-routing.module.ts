@@ -51,6 +51,10 @@ import { QuanlydanhsachsanphamvnComponent } from './quanlydanhsachsanphamvn/quan
 import { QuanlydanhsachdonhangvnComponent } from './quanlydanhsachdonhangvn/quanlydanhsachdonhangvn.component';
 import { QuanlydanhsachdonhangnhatComponent } from './quanlydanhsachdonhangnhat/quanlydanhsachdonhangnhat.component';
 import { ThongkeComponent } from './thongke/thongke.component';
+import { QuanlydanhsachsanphamdabannhatComponent } from './quanlydanhsachsanphamdabannhat/quanlydanhsachsanphamdabannhat.component';
+import { QuanlydanhsachsanphamdabanvnComponent } from './quanlydanhsachsanphamdabanvn/quanlydanhsachsanphamdabanvn.component';
+import { QuanlythuchinhatComponent } from './quanlythuchinhat/quanlythuchinhat.component';
+import { QuanlythuchivnComponent } from './quanlythuchivn/quanlythuchivn.component';
 
 const routes: Routes = [{
   path: '',
@@ -97,6 +101,14 @@ const routes: Routes = [{
       component: QuanlythuchiComponent,
     },
     {
+      path: 'quanlythuchijp',
+      component: QuanlythuchinhatComponent,
+    },
+    {
+      path: 'quanlythuchivn',
+      component: QuanlythuchivnComponent,
+    },
+    {
       path: 'quanlydanhsachsanpham',
       component: QuanlydanhsachsanphamComponent,
     },
@@ -111,6 +123,14 @@ const routes: Routes = [{
     {
       path: 'quanlydanhsachsanphamdaban',
       component: QuanlydanhsachsanphamdabanComponent,
+    },
+    {
+      path: 'quanlydanhsachsanphamdabanjp',
+      component: QuanlydanhsachsanphamdabannhatComponent,
+    },
+    {
+      path: 'quanlydanhsachsanphamdabanvn',
+      component: QuanlydanhsachsanphamdabanvnComponent,
     },
     {
       path: 'quanlydanhsachdonhang',
