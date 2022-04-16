@@ -145,6 +145,26 @@
       width: 150px;
       margin-right: 2rem;
     }
+
+    .p-datepicker {
+      table {
+        td {
+          & > span {
+            width: 1.5rem;
+            height: 1.5rem;
+          }
+        }
+      }
+
+      .p-datepicker-header {
+        padding: 0;
+      }
+
+      .p-datepicker-buttonbar {
+        padding: 0;
+      }
+
+    }
   }
 
   .my-scrollable-table {

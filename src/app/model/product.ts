@@ -7,6 +7,7 @@ export interface Product {
     color: string;
     status: PRODUCT_STATUS;
     quantity: number;
+    transfer_quantity?: number;
     price: number;
     position: PRODUCT_SOURCE;
     source: PRODUCT_SOURCE;
