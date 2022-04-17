@@ -73,7 +73,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
             children: [
                 {
                     title: 'Quản Lý Thu',
-                    link: '/pages/tables/quanlythu',
+                    link: '/pages/tables/quanlythujp',
                 },
                 {
                     title: 'Quản Lý Chi',
@@ -186,7 +186,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
             children: [
                 {
                     title: 'Quản Lý Thu',
-                    link: '/pages/tables/quanlythu',
+                    link: '/pages/tables/quanlythuvn',
                 },
                 {
                     title: 'Quản Lý Chi',
