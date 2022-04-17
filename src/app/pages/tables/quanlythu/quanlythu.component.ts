@@ -23,7 +23,7 @@ export class QuanlythuComponent implements OnInit {
     this.service.getquanlythu().subscribe(val => {
       console.log(val)
       val.forEach(element => {
-        this.totalmoney += parseInt(element.sotien)
+        // this.totalmoney += parseInt(element.sotien)
         if (element.mucdich.includes('dh')) {
           this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
             element.mucdich = 'Mã ĐH: ' + data[0].madonhang

@@ -57,6 +57,8 @@ import { QuanlythuchinhatComponent } from './quanlythuchinhat/quanlythuchinhat.c
 import { QuanlythuchivnComponent } from './quanlythuchivn/quanlythuchivn.component';
 import { QuanlychivnComponent } from './quanlychivn/quanlychivn.component';
 import { QuanlychinhatComponent } from './quanlychinhat/quanlychinhat.component';
+import { QuanlythunhatComponent } from './quanlythunhat/quanlythunhat.component';
+import { QuanlythuvnComponent } from './quanlythuvn/quanlythuvn.component';
 
 const routes: Routes = [{
   path: '',
@@ -105,6 +107,14 @@ const routes: Routes = [{
     {
       path: 'quanlythu',
       component: QuanlythuComponent,
+    },
+    {
+      path: 'quanlythujp',
+      component: QuanlythunhatComponent,
+    },
+    {
+      path: 'quanlythuvn',
+      component: QuanlythuvnComponent,
     },
     {
       path: 'quanlythuchi',
