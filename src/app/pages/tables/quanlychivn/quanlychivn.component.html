@@ -1,1 +1,76 @@
-<p>quanlychivn works!</p>
+<nb-card>
+    <nb-card-header>
+        Quản Lý Chi<a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()"> Tải Danh
+            Sách Quản Lý Chi</a>
+
+    </nb-card-header>
+
+    <nb-card-body>
+
+        <div style="display: flex;">
+            <input type="date" style="height: 28px; width: 150px; border-radius: 5px;" [(ngModel)]="date">
+            <input type="text" [(ngModel)]="sotien"
+                style="margin-left: 25px; height: 28px; width: 150px; border-radius: 5px;" placeholder="Số tiền">
+            <input type="text" [(ngModel)]="mucdich"
+                style=" margin-left: 25px; height: 28px; width: 320px; border-radius: 5px;" placeholder="Mục đích">
+
+                <select (change)="selecthinhthucthanhtoan($event)"
+                style="margin-left: 25px; height: 28px;width: 140px;border-radius: 5px;border-color: #809ffc;">
+                <option value="default">Hình thức chi</option>
+                <option value="tienmat">Tiền mặt</option>
+                <option value="chuyenkhoan">Chuyển khoản</option>
+                <option value="daibiki">Daibiki</option>
+
+            </select>
+
+            <button (click)="hoantat()"
+                style="margin-left: 25px; height: 28px;width: 120px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
+                Hoàn Tất</button>
+        </div>
+
+        <br><br>
+
+        <table class="styled-table" id="excel-table">
+
+
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Ngày tạo</th>
+                    <th>Số tiền</th>
+                    <th>Mục đích</th>
+                    <th>Hình thức thanh toán</th>
+                    <th style="width: 30px;"></th>
+                    <th style="width: 30px;"></th>
+                </tr>
+
+            </thead>
+            <tbody>
+                <tr >
+                    <td></td>
+                    <td style="width: 400px;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1" (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()"></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+
+                </tr>
+                <tr *ngFor="let sanpham of data">
+                    <td>{{sanpham.id}}</td>
+                    <td>{{sanpham.ngaytao| date: 'dd/MM/yyyy'}}</td>
+                    <td>{{sanpham.sotien}}</td>
+                    <td>{{sanpham.mucdich}}</td>
+                    <td>{{sanpham.hinhthucthanhtoan}}</td>
+                    <td><i class="fa fa-edit" style="font-size:18px;color:darkblue; width: 30px;"
+                            (click)="edit(sanpham.id,sanpham.ngaytao,sanpham.sotien,sanpham.mucdich)"></i></td>
+                    <td><i class="fa fa-trash" style="font-size:18px;color:tomato;width: 30px;" (click)="delete(sanpham.id)"></i>
+                    </td>
+                </tr>
+
+
+            </tbody>
+        </table>
+        <br />
+        <div>Tổng chi: {{totalmoney}}</div>
+    </nb-card-body>
+</nb-card>

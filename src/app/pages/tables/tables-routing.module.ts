@@ -55,6 +55,8 @@ import { QuanlydanhsachsanphamdabannhatComponent } from './quanlydanhsachsanpham
 import { QuanlydanhsachsanphamdabanvnComponent } from './quanlydanhsachsanphamdabanvn/quanlydanhsachsanphamdabanvn.component';
 import { QuanlythuchinhatComponent } from './quanlythuchinhat/quanlythuchinhat.component';
 import { QuanlythuchivnComponent } from './quanlythuchivn/quanlythuchivn.component';
+import { QuanlychivnComponent } from './quanlychivn/quanlychivn.component';
+import { QuanlychinhatComponent } from './quanlychinhat/quanlychinhat.component';
 
 const routes: Routes = [{
   path: '',
@@ -91,6 +93,14 @@ const routes: Routes = [{
     {
       path: 'quanlychi',
       component: QuanlychiComponent,
+    },
+    {
+      path: 'quanlychivn',
+      component: QuanlychivnComponent,
+    },
+    {
+      path: 'quanlychijp',
+      component: QuanlychinhatComponent,
     },
     {
       path: 'quanlythu',

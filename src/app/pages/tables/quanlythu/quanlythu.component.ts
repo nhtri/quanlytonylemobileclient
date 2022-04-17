@@ -46,7 +46,7 @@ export class QuanlythuComponent implements OnInit {
   date
   sotien = ""
   mucdich = ""
-  hinhthucthanhtoan = ""
+  hinhthucthanhtoan = "tienmat"
   
 
   ngOnInit(): void {
@@ -72,7 +72,7 @@ export class QuanlythuComponent implements OnInit {
   hoantat() {
     console.log(this.sotien, this.mucdich, this.date)
     if (this.id == "") {
-      this.service.quanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan]).subscribe(val => {
+      this.service.quanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan,'WAREHOUSE']).subscribe(val => {
         alert("Tạo mới thành công")
         console.log(val)
         this.service.getquanlythu().subscribe(val => {

@@ -38,6 +38,7 @@
                     <th>Id</th>
                     <th>Ngày tạo</th>
                     <th>Số tiền</th>
+                    <th>Hình thức thanh toán</th>
                     <th>Mục đích</th>
                     <th style="width: 30px;"></th>
                     <th style="width: 30px;"></th>
@@ -59,7 +60,7 @@
                     <td>{{sanpham.ngaytao| date: 'dd/MM/yyyy'}}</td>
                     <td>{{sanpham.sotien}}</td>
                     <td>{{sanpham.mucdich}}</td>
-
+                    <td>{{sanpham.hinhthucthanhtoan}}</td>
                     <td><i class="fa fa-edit" style="font-size:18px;color:darkblue; width: 30px;"
                             (click)="edit(sanpham.id,sanpham.ngaytao,sanpham.sotien,sanpham.mucdich)"></i></td>
                     <td><i class="fa fa-trash" style="font-size:18px;color:tomato;width: 30px;" (click)="delete(sanpham.id)"></i>
