@@ -38,8 +38,9 @@
                     <th>Id</th>
                     <th>Ngày tạo</th>
                     <th>Số tiền</th>
-                    <th>Hình thức thanh toán</th>
+                 
                     <th>Mục đích</th>
+                    <th>Hình thức thanh toán</th>
                     <th style="width: 30px;"></th>
                     <th style="width: 30px;"></th>
                 </tr>
@@ -71,6 +72,14 @@
             </tbody>
         </table>
         <br />
-        <div>Tổng chi: {{totalmoney}}</div>
+      
     </nb-card-body>
+    <nb-card-footer>
+        <div style="color:#2e61fa">* Tiền mặt: {{tienmat}}</div>
+        <div style="color:#2e61fa">* Daibiki: {{daibiki}}</div>
+        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan}}</div>
+    </nb-card-footer>
+    <nb-card-footer>
+        <div style="color:blue; font-weight: 600;">Tổng chi: {{totalmoney}}</div>
+    </nb-card-footer>
 </nb-card>

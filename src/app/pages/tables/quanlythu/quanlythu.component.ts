@@ -15,6 +15,9 @@ export class QuanlythuComponent implements OnInit {
   daterange = []
   datatemp = []
   totalmoney=0
+  tienmat = 0
+  daibiki = 0
+  chuyenkhoan = 0
   constructor(private service: NetworkserviceService) {
  
     this.service.getquanlythu().subscribe(val => {
@@ -35,6 +38,19 @@ export class QuanlythuComponent implements OnInit {
 
       });
 
+      val.forEach(element => {
+        this.totalmoney += parseInt(element.sotien)
+
+        if (element.hinhthucthanhtoan == 'tienmat') {
+          this.tienmat += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'daibiki') {
+          this.daibiki += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+          this.chuyenkhoan += parseInt(element.sotien)
+        }
+      });
 
 
     });
@@ -75,10 +91,11 @@ export class QuanlythuComponent implements OnInit {
       this.service.quanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan,'WAREHOUSE']).subscribe(val => {
         alert("Tạo mới thành công")
         console.log(val)
-        this.service.getquanlythu().subscribe(val => {
-          console.log(val)
-          this.data = val
-        });
+        // this.service.getquanlythu().subscribe(val => {
+        //   console.log(val)
+        //   this.data = val
+        // });
+        window.location.reload()
       });
     }
     if (this.id != "") {
@@ -143,6 +160,9 @@ export class QuanlythuComponent implements OnInit {
   }
 
   change1() {
+    this.tienmat = 0
+    this.daibiki = 0
+    this.chuyenkhoan = 0
     if (this.date2 == "") {
       this.data = []
       console.log(this.date1, this.date2)
@@ -174,8 +194,23 @@ export class QuanlythuComponent implements OnInit {
       });
       console.log(this.daterange)
     }
+
+    this.data.forEach(element => {
+      if (element.hinhthucthanhtoan == 'tienmat') {
+        this.tienmat += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'daibiki') {
+        this.daibiki += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+        this.chuyenkhoan += parseInt(element.sotien)
+      }
+    });
   }
   change2() {
+    this.tienmat = 0
+    this.daibiki = 0
+    this.chuyenkhoan = 0
     this.data = []
     this.daterange=[]
     console.log(this.date1, this.date2)
@@ -195,5 +230,17 @@ export class QuanlythuComponent implements OnInit {
 
     });
     console.log(this.daterange)
+
+    this.data.forEach(element => {
+      if (element.hinhthucthanhtoan == 'tienmat') {
+        this.tienmat += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'daibiki') {
+        this.daibiki += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+        this.chuyenkhoan += parseInt(element.sotien)
+      }
+    });
   }
 }

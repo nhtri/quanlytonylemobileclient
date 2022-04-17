@@ -14,7 +14,7 @@
             <input type="text" [(ngModel)]="mucdich"
                 style=" margin-left: 25px; height: 28px; width: 320px; border-radius: 5px;" placeholder="Mục đích">
 
-            <select (change)="selecthinhthucthanhtoan($event)"
+                <select (change)="selecthinhthucthanhtoan($event)"
                 style="margin-left: 25px; height: 28px;width: 140px;border-radius: 5px;border-color: #809ffc;">
                 <option value="default">Hình thức chi</option>
                 <option value="tienmat">Tiền mặt</option>
@@ -38,6 +38,7 @@
                     <th>Id</th>
                     <th>Ngày tạo</th>
                     <th>Số tiền</th>
+                 
                     <th>Mục đích</th>
                     <th>Hình thức thanh toán</th>
                     <th style="width: 30px;"></th>
@@ -46,11 +47,9 @@
 
             </thead>
             <tbody>
-                <tr>
+                <tr >
                     <td></td>
-                    <td style="width: 400px;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1"
-                            (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2"
-                            (change)="change2()"></td>
+                    <td style="width: 400px;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1" (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()"></td>
                     <td></td>
                     <td></td>
                     <td></td>
@@ -65,8 +64,7 @@
                     <td>{{sanpham.hinhthucthanhtoan}}</td>
                     <td><i class="fa fa-edit" style="font-size:18px;color:darkblue; width: 30px;"
                             (click)="edit(sanpham.id,sanpham.ngaytao,sanpham.sotien,sanpham.mucdich)"></i></td>
-                    <td><i class="fa fa-trash" style="font-size:18px;color:tomato;width: 30px;"
-                            (click)="delete(sanpham.id)"></i>
+                    <td><i class="fa fa-trash" style="font-size:18px;color:tomato;width: 30px;" (click)="delete(sanpham.id)"></i>
                     </td>
                 </tr>
 
@@ -74,6 +72,14 @@
             </tbody>
         </table>
         <br />
-        <div>Tổng chi: {{totalmoney}}</div>
+      
     </nb-card-body>
+    <nb-card-footer>
+        <div style="color:#2e61fa">* Tiền mặt: {{tienmat}}</div>
+        <div style="color:#2e61fa">* Daibiki: {{daibiki}}</div>
+        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan}}</div>
+    </nb-card-footer>
+    <nb-card-footer>
+        <div style="color:blue; font-weight: 600;">Tổng chi: {{totalmoney}}</div>
+    </nb-card-footer>
 </nb-card>
