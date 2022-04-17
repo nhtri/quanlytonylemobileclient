@@ -77,7 +77,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                 },
                 {
                     title: 'Quản Lý Chi',
-                    link: '/pages/tables/quanlychi',
+                    link: '/pages/tables/quanlychijp',
                 },
                 {
                     title: 'Quản Lý Tổng Thu Chi',
@@ -190,7 +190,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 },
                 {
                     title: 'Quản Lý Chi',
-                    link: '/pages/tables/quanlychi',
+                    link: '/pages/tables/quanlychivn',
                 },
                 {
                     title: 'Quản Lý Tổng Thu Chi',

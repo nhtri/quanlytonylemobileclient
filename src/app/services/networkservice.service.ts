@@ -396,6 +396,16 @@ export class NetworkserviceService {
         return this.httpClient.get<any>(get);
     }
 
+    getquanlychivn() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getquanlychivn';
+        return this.httpClient.get<any>(get);
+    }
+
+    getquanlychijp() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getquanlychijp';
+        return this.httpClient.get<any>(get);
+    }
+
     quanlychi(data): Observable<any> {
         const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/quanlychi`;
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
