@@ -80,7 +80,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                     link: '/pages/tables/quanlychijp',
                 },
                 {
-                    title: 'Quản Lý Tổng Thu Chi',
+                    title: 'Quản Lý Tiền Mặt',
                     link: '/pages/tables/quanlythuchijp',
                 },
             ],
@@ -193,7 +193,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                     link: '/pages/tables/quanlychivn',
                 },
                 {
-                    title: 'Quản Lý Tổng Thu Chi',
+                    title: 'Quản Lý Tiền Mặt',
                     link: '/pages/tables/quanlythuchivn',
                 },
             ],
@@ -306,7 +306,7 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                     link: '/pages/tables/quanlychi',
                 },
                 {
-                    title: 'Quản Lý Tổng Thu Chi',
+                    title: 'Quản Lý Tiền Mặt',
                     link: '/pages/tables/quanlythuchi',
                 },
             ],

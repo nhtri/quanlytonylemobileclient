@@ -20,7 +20,7 @@ export class QuanlythuvnComponent implements OnInit {
   chuyenkhoan = 0
   constructor(private service: NetworkserviceService) {
  
-    this.service.getquanlythu().subscribe(val => {
+    this.service.getquanlythuvn().subscribe(val => {
       console.log(val)
       val.forEach(element => {
         // this.totalmoney += parseInt(element.sotien)

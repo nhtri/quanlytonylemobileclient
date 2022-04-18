@@ -25,8 +25,8 @@ export class QuanlythuchiComponent implements OnInit {
   date2 = ""
   daterangefilter = []
   datatemp = []
-  totalthu=0
-  totalchi=0
+  totalthu = 0
+  totalchi = 0
   constructor(private service: NetworkserviceService) {
     // this.service.getquanlythu().subscribe(val => {
     //   console.log(val)
@@ -62,18 +62,19 @@ export class QuanlythuchiComponent implements OnInit {
       // this.sotien = "", this.date = "", this.mucdich = "", this.id = ""
       console.log(val)
       val.forEach(element => {
-        this.totalthu += parseInt(element.sotien)
-        if (element.mucdich.includes('dh')) {
-          this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
-            element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+        if (element.hinhthucthanhtoan == "tienmat") {
+          this.totalthu += parseInt(element.sotien)
+          if (element.mucdich.includes('dh')) {
+            this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
+              element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+              this.datathu.push(element)
+            })
+          }
+          else {
             this.datathu.push(element)
-          })
-        }
-        else {
-          this.datathu.push(element)
-        }
+          }
 
-
+        }
       });
 
       await new Promise(f => setTimeout(f, 3000));
@@ -117,10 +118,10 @@ export class QuanlythuchiComponent implements OnInit {
 
 
       this.service.getquanlychi().subscribe(val => {
-       
+
         console.log(val)
-        this.datachi = val
-        this.datatempchi = val
+        this.datachi = val.filter(val=>val.hinhthucthanhtoan=="tienmat")
+        this.datatempchi = val.filter(val=>val.hinhthucthanhtoan=="tienmat")
 
         const res = this.datachi.reduce((acc, curr) => {
           if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
@@ -130,21 +131,25 @@ export class QuanlythuchiComponent implements OnInit {
         console.log('res', res)
 
         this.datachi.forEach(element => {
+
           this.totalchi += parseInt(element.sotien)
           this.daterange.push(element.ngaytao)
           if (res[element.ngaytao].length > 1) {
             let tienchi = 0
             let mucdich = ''
+            let hinhthucthanhtoan = ''
             res[element.ngaytao].forEach(element => {
               tienchi = tienchi + parseFloat(element.sotien)
               mucdich = mucdich + ',' + element.mucdich
+              hinhthucthanhtoan = element.hinhthucthanhtoan
             });
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': tienchi, 'mucdich': mucdich })
+            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': tienchi, 'mucdich': mucdich, 'hinhthucthanhtoan':hinhthucthanhtoan })
 
           }
           else {
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': element.sotien, 'mucdich': element.mucdich })
+            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': element.sotien, 'mucdich': element.mucdich, 'hinhthucthanhtoan':element.hinhthucthanhtoan  })
           }
+
         });
         this.datachiedit = this.datachiedit.filter((value, index, self) =>
           index === self.findIndex((t) => (
@@ -166,8 +171,10 @@ export class QuanlythuchiComponent implements OnInit {
 
         //data tong
         this.datachiedit.forEach(element => {
-          if (this.daterange.includes(element.ngaytao)) {
-            this.datatong.push({ "ngaytao": element.ngaytao, "tienchi": element.tienchi, "mucdichchi": element.mucdich })
+          if (element.hinhthucthanhtoan == "tienmat") {
+            if (this.daterange.includes(element.ngaytao)) {
+              this.datatong.push({ "ngaytao": element.ngaytao, "tienchi": element.tienchi, "mucdichchi": element.mucdich })
+            }
           }
         });
         this.datathuedit.forEach(element => {
