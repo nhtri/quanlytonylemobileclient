@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
+import { LocalDataSource } from 'ng2-smart-table';
+import { Router } from '@angular/router';
 @Component({
   selector: 'ngx-thongke',
   templateUrl: './thongke.component.html',
@@ -8,233 +10,52 @@ import * as XLSX from 'xlsx';
 })
 export class ThongkeComponent implements OnInit {
 
-  datathu = []
-  datatempthu = []
-  datachi = []
-  datatempchi = []
-  datathuedit = []
-  datachiedit = []
-  datatong = []
-  datatongedit = []
-  datatongconvert = []
-  daterange = []
+  fileName = 'DanhSachSanPham.xlsx';
+  source: LocalDataSource = new LocalDataSource();
+  data=[]
+  datadungluong = []
+  datanhomsanpham = []
+  datatensanpham = []
+  datamau = []
+  dataloaisanpham = []
+  dataphienban = []
+  danhsachidsanpham = []
+  taomoisanpham = false
 
 
+  datanhomsanphamtaomoi = ""
+  datatensanphamtaomoi = ""
+  datadungluongtaomoi = ""
+  dataloaisanphamtaomoi = ""
+  dataphienbantaomoi = ""
+  dataimeitaomoi = ""
 
-  date1 = ""
-  date2 = ""
-  daterangefilter = []
-  datatemp = []
-  totalthu=0
-  totalchi=0
-  constructor(private service: NetworkserviceService) {
-    // this.service.getquanlythu().subscribe(val => {
-    //   console.log(val)
-    //   this.datathu = val
+  tongloinhuan = 0
 
-    // const res = this.datathu.reduce((acc, curr) => {
-    //   if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
-    //   acc[curr.ngaytao].push(curr);
-    //   return acc;
-    // }, {});
-    // console.log('resthu', res)
+  constructor(private service: NetworkserviceService, private router: Router) {
 
-
-    // this.datathu.forEach(element => {
-    //   this.daterange.push(element.ngaytao)
-    //   if (res[element.ngaytao].length > 1) {
-    //     let tienchi = 0
-    //     let mucdich = ''
-    //     res[element.ngaytao].forEach(element => {
-    //       tienchi = tienchi + parseFloat(element.sotien)
-    //       mucdich = mucdich + ',' + element.mucdich
-    //     });
-    //     this.datathuedit.push({ 'ngaytao': element.ngaytao, 'tienthu': tienchi, 'mucdich': mucdich })
-
-    //   }
-    //   else {
-    //     this.datathuedit.push({ 'ngaytao': element.ngaytao, 'tienthu': element.sotien, 'mucdich': element.mucdich })
-    //   }
-    // });
-
-    this.service.getquanlythu().subscribe(async val => {
-      this.datathu = []
-      // this.sotien = "", this.date = "", this.mucdich = "", this.id = ""
-      console.log(val)
-      val.forEach(element => {
-        this.totalthu += parseInt(element.sotien)
-        if (element.mucdich.includes('dh')) {
-          this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
-            element.mucdich = 'Mã ĐH: ' + data[0].madonhang
-            this.datathu.push(element)
-          })
-        }
-        else {
-          this.datathu.push(element)
-        }
-
-
-      });
-
-      await new Promise(f => setTimeout(f, 3000));
-      const res1 = this.datathu.reduce((acc, curr) => {
-        if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
-        acc[curr.ngaytao].push(curr);
-        return acc;
-      }, {});
-      console.log('resthu', res1)
-
-      this.datathu.forEach(element => {
-        this.daterange.push(element.ngaytao)
-        if (res1[element.ngaytao].length > 1) {
-          let tienthu = 0
-          let mucdich = ''
-          res1[element.ngaytao].forEach(element => {
-            tienthu = tienthu + parseFloat(element.sotien)
-            mucdich = mucdich + ',' + element.mucdich
-          });
-          this.datathuedit.push({ 'ngaytao': element.ngaytao, 'tienthu': tienthu, 'mucdich': mucdich })
-
-        }
-        else {
-          this.datathuedit.push({ 'ngaytao': element.ngaytao, 'tienthu': element.sotien, 'mucdich': element.mucdich })
-        }
-      });
-      this.datathuedit = this.datathuedit.filter((value, index, self) =>
-        index === self.findIndex((t) => (
-          t.ngaytao === value.ngaytao
-        ))
-      )
-      console.log('datathuedit', this.datathuedit,)
-
-
-      console.log('datathu', this.datathu,)
-
-
-
-
-
-
-
-      this.service.getquanlychi().subscribe(val => {
-       
-        console.log(val)
-        this.datachi = val
-        this.datatempchi = val
-
-        const res = this.datachi.reduce((acc, curr) => {
-          if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
-          acc[curr.ngaytao].push(curr);
-          return acc;
-        }, {});
-        console.log('res', res)
-
-        this.datachi.forEach(element => {
-          this.totalchi += parseInt(element.sotien)
-          this.daterange.push(element.ngaytao)
-          if (res[element.ngaytao].length > 1) {
-            let tienchi = 0
-            let mucdich = ''
-            res[element.ngaytao].forEach(element => {
-              tienchi = tienchi + parseFloat(element.sotien)
-              mucdich = mucdich + ',' + element.mucdich
-            });
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': tienchi, 'mucdich': mucdich })
-
-          }
-          else {
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': element.sotien, 'mucdich': element.mucdich })
-          }
-        });
-        this.datachiedit = this.datachiedit.filter((value, index, self) =>
-          index === self.findIndex((t) => (
-            t.ngaytao === value.ngaytao
-          ))
-        )
-        console.log('datachiedit', this.datachiedit,)
-
-
-        this.daterange = this.daterange.filter((value, index, self) =>
-          index === self.findIndex((t) => (
-            t === value
-          ))
-        )
-        console.log('this.daterange', this.daterange)
-
-
-
-
-        //data tong
-        this.datachiedit.forEach(element => {
-          if (this.daterange.includes(element.ngaytao)) {
-            this.datatong.push({ "ngaytao": element.ngaytao, "tienchi": element.tienchi, "mucdichchi": element.mucdich })
-          }
-        });
-        this.datathuedit.forEach(element => {
-          if (this.daterange.includes(element.ngaytao)) {
-            this.datatong.push({ "ngaytao": element.ngaytao, "tienthu": element.tienthu, "mucdichthu": element.mucdich })
-          }
-        });
-
-
-        let resdatatong
-        resdatatong = this.datatong.reduce((acc, curr) => {
-          if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
-          acc[curr.ngaytao].push(curr);
-          return acc;
-        }, {});
-
-        console.log('this.datatong', this.datatong)
-        console.log('resdatatong', resdatatong)
-        this.datatong.forEach(element => {
-          if (resdatatong[element.ngaytao].length > 1) {
-            console.log("resdatatong[element.ngaytao]", resdatatong[element.ngaytao])
-            this.datatongedit.push({
-              "ngaytao": element.ngaytao, "tienthu": resdatatong[element.ngaytao][1].tienthu,
-              "mucdichthu": resdatatong[element.ngaytao][1].mucdichthu, "tienchi": resdatatong[element.ngaytao][0].tienchi, "mucdichchi": resdatatong[element.ngaytao][0].mucdichchi
-            })
-          }
-          {
-            if (element.mucdichthu != null && element.mucdichthu != "") {
-              this.datatongedit.push({
-                "ngaytao": element.ngaytao, "tienthu": element.tienthu,
-                "mucdichthu": element.mucdichthu, "tienchi": "", "mucdichchi": ""
-              })
-            }
-            else {
-              this.datatongedit.push({
-                "ngaytao": element.ngaytao, "tienthu": "",
-                "mucdichthu": "", "tienchi": element.tienchi, "mucdichchi": element.mucdichchi
-              })
-            }
-          }
-        });
-        this.datatongedit = this.datatongedit.filter((value, index, self) =>
-          index === self.findIndex((t) => (
-            t.ngaytao === value.ngaytao
-          ))
-        )
-        // this.datatongedit.forEach(element => {
-        //   this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdichthu]).subscribe(data => {
-        //     element.mucdichthu = 'Mã ĐH: ' + data[0].madonhang
-
-        //   })
-        // });
-        this.datatemp = this.datatongedit
-        console.log('datatongedit', this.datatongedit)
-      });
-
-
+    this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
+this.data =value
+this.data.forEach(element => {
+  console.log("element.giatien",element.giatien)
+  console.log("element.giatienban",element.giatienban)
+  this.tongloinhuan += (parseInt(element.giatienban)-parseInt(element.giatien))
+  console.log("this.tongloinhuan",this.tongloinhuan)
+});
     });
 
 
 
-
   }
-  fileName = "DanhSachThuChi"
+
+
+
   ngOnInit(): void {
-
   }
+
+
+
+
   exportexcel() {
     let element = document.getElementById('excel-table');
     const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
@@ -247,60 +68,94 @@ export class ThongkeComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
   }
 
+  selectLoaiMay(value) { }
 
+  delete(value) {
+    console.log(value)
+    if (window.confirm('Bạn có chắc muốn xóa không ????')) {
+      this.service.deletesanphamtonkho(
+        [
+          value
+        ]
+      )
+        .subscribe(data => {
 
-  change1() {
-    if (this.date2 == "") {
-      this.datatongedit = []
-      console.log(this.date1, this.date2)
-      this.datatemp.forEach(element => {
-        console.log('element.ngaytao', element.ngaytao)
-        if (this.date1 == element.ngaytao) {
-          this.datatongedit.push(element)
-        }
-      });
+          this.service.getsanphamtonkhokhohang().subscribe(val => {
+            // this.source.load(val);
+            this.data = val
+          });
+          console.log("POST Request is successful ", data);
+        },
+          error => {
+            console.log("Error", error);
+
+          })
     }
-    if (this.date2 != "") {
-      this.datatongedit = []
-      this.daterangefilter = []
-      console.log(this.date1, this.date2)
-      var currentDate = new Date(this.date1);
-      while (currentDate <= new Date(this.date2)) {
-        this.daterangefilter.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
-        currentDate.setDate(currentDate.getDate() + 1)
+  }
+
+  edit(value) {
+    this.router.navigate(["/pages/tables/sanpham", value]);
+  }
+
+  select(value) {
+    if (this.danhsachidsanpham.length == 0) {
+      this.danhsachidsanpham.push(value)
+    }
+    else {
+      if (this.danhsachidsanpham.includes(value)) {
+        this.danhsachidsanpham = this.danhsachidsanpham.filter(item => item !== value);
       }
-
-      this.datatemp.forEach(element1 => {
-        console.log('element.ngaytao', element1.ngaytao)
-        this.daterange.forEach(element2 => {
-          if (element2 == element1.ngaytao) {
-            this.datatongedit.push(element1)
-          }
-        });
-
-      });
-      console.log(this.daterangefilter)
+      else {
+        this.danhsachidsanpham.push(value)
+      }
     }
+    console.log(this.danhsachidsanpham)
   }
-  change2() {
-    this.datatongedit = []
-    this.daterangefilter = []
-    console.log(this.date1, this.date2)
-    var currentDate = new Date(this.date1);
-    while (currentDate <= new Date(this.date2)) {
-      this.daterangefilter.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
-      currentDate.setDate(currentDate.getDate() + 1)
-    }
 
-    this.datatemp.forEach(element1 => {
-      console.log('element.ngaytao', element1.ngaytao)
-      this.daterangefilter.forEach(element2 => {
-        if (element2 == element1.ngaytao) {
-          this.datatongedit.push(element1)
-        }
+
+  taomoi() {
+    this.taomoisanpham = true
+  }
+  canceltaomoi() {
+    this.taomoisanpham = false
+  }
+
+  selecttaomoinhomsanpham(value) {
+    this.datanhomsanphamtaomoi = value
+    console.log('selecttaomoinhomsanpham', value)
+  }
+  selecttaomoitensanpham(value) {
+    this.datatensanphamtaomoi = value
+  }
+  selecttaomoidungluong(value) {
+    this.datadungluongtaomoi = value
+  }
+  selecttaomoiloaisanpham(value) {
+    this.dataloaisanphamtaomoi = value
+  }
+  selecttaomoiphienban(value) {
+    this.dataphienbantaomoi = value
+  }
+  taosanphammoi() {
+    this.service.sanphamtonkho([
+      this.datanhomsanphamtaomoi,
+      this.datatensanphamtaomoi,
+      this.datadungluongtaomoi,
+      this.dataloaisanphamtaomoi,
+      this.dataphienbantaomoi,
+      this.dataimeitaomoi
+    ]).subscribe(data => {
+      this.taomoisanpham = false
+      this.service.getsanphamtonkhokhohang().subscribe(val => {
+        // this.source.load(val);
+        this.data = val
       });
+      console.log("POST Request is successful ", data);
+    },
+      error => {
+        console.log("Error", error);
 
-    });
-    console.log(this.daterangefilter)
+      })
   }
+
 }

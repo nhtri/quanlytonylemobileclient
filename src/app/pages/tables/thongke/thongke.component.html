@@ -1,45 +1,58 @@
 <nb-card>
-    <nb-card-header>
-      Thống Kê Lợi Nhuận<a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()"> Tải Danh
-        Sách Thống Kê Lợi Nhuận</a>
+  <nb-card-header>
+    Thống kê lợi nhuận bán hàng <a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()"> Tải Danh Sách Thống Kê</a>
+
+  </nb-card-header>
+
+  <nb-card-body>
+
+
+
+<!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
+
+<!-- <br /> -->
+<table class="styled-table" id="excel-table">
+
+
+<thead>
+  <tr>
+    <th>Đơn hàng</th>
+    <th>Giá tiền thu</th>
+    <th>Giá tiền bán</th>
+    <th>Imei</th>
+    <th>Số lượng máy</th>
+    <th>Ngày bán</th>
+    <th>Hình thức thanh toán</th>
+    <!-- <th></th>
+    <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
+  </tr>
+</thead>
+<tbody>
   
-    </nb-card-header>
-  
-    <nb-card-body>
-  
-      <div style="display: flex;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1"
-        (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()">
-    </div>
-    <br>
-  
-      <table class="styled-table" id="excel-table">
-  
+
+
+  <tr *ngFor="let sanpham of data">
+    <td ><a routerLink="/pages/tables/chitietdonhang"
+      [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td>
+    <td>{{sanpham.giatien}}</td>
+    <td>{{sanpham.giatienban}}</td>
    
-        <thead>
-          <tr>
-            <th>Ngày tạo</th>
-            <th>Hiệu số </th>
-            <th>Số tiền thu</th>
-            <th>Mục đích thu</th>
-            <th>Số tiền chi</th>
-            <th>Mục đích chi</th>
-          </tr>
-        </thead>
-        <tbody>
-  
-          <tr *ngFor="let sanpham of datatongedit">
-            <td>{{sanpham.ngaytao}}</td>
-            <td>{{sanpham.tienthu - sanpham.tienchi}}</td>
-            <td>{{sanpham.tienthu}}</td>
-            <td>{{sanpham.mucdichthu}}</td>
-            <td>{{sanpham.tienchi}}</td>
-            <td>{{sanpham.mucdichchi}}</td>
-  
-          </tr>
-  
-        </tbody>
-      </table>
-  <br/>
-  <div>Tổng thu chi: {{totalthu - totalchi}}</div>
-    </nb-card-body>
-  </nb-card>
+    <td>{{sanpham.danhsachimei}}</td>
+    <td>{{sanpham.soluongmay}}</td>
+    <td>{{sanpham.ngayban}}</td>
+    <td *ngIf="sanpham.hinhthucthanhtoan == 'tienmat'">Tiền Mặt</td>
+    <td *ngIf="sanpham.hinhthucthanhtoan == 'daibiki'">Daibiki</td>
+    <td *ngIf="sanpham.hinhthucthanhtoan == 'chuyenkhoan'">Chuyển Khoản</td>
+    <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
+        [queryParams]={id:[sanpham.id]}></i></td>
+    <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
+
+  </tr>
+
+
+</tbody>
+</table>
+
+</nb-card-body>
+<nb-card-footer>Tổng lợi nhuận: {{tongloinhuan}}</nb-card-footer>
+</nb-card> 

@@ -152,7 +152,7 @@ export class BansanphamComponent implements OnInit {
 
 
 
-    this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan]).subscribe(val => { })
+    this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan,this.vitri]).subscribe(val => { })
     console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
     this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon]).subscribe(value => {
       console.log(value)
