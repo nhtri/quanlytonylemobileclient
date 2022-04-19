@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+
 @Component({
-  selector: 'ngx-quanlythu',
-  templateUrl: './quanlythu.component.html',
-  styleUrls: ['./quanlythu.component.scss']
+  selector: 'ngx-quanlythunhat',
+  templateUrl: './quanlythunhat.component.html',
+  styleUrls: ['./quanlythunhat.component.scss']
 })
-export class QuanlythuComponent implements OnInit {
+export class QuanlythunhatComponent implements OnInit {
 
   data = []
   id = ""
@@ -20,7 +21,7 @@ export class QuanlythuComponent implements OnInit {
   chuyenkhoan = 0
   constructor(private service: NetworkserviceService) {
  
-    this.service.getquanlythu().subscribe(val => {
+    this.service.getquanlythujp().subscribe(val => {
       console.log(val)
       val.forEach(element => {
         // this.totalmoney += parseInt(element.sotien)

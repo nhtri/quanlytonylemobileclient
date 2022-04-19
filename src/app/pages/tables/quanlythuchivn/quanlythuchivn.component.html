@@ -1,0 +1,45 @@
+<nb-card>
+    <nb-card-header>
+      Quản Lý Tiền Mặt<a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()"> Tải Danh
+        Sách Quản Lý Tiền Mặt</a>
+  
+    </nb-card-header>
+  
+    <nb-card-body>
+  
+      <div style="display: flex;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1"
+        (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()">
+    </div>
+    <br>
+  
+      <table class="styled-table" id="excel-table">
+  
+   
+        <thead>
+          <tr>
+            <th>Ngày tạo</th>
+            <th>Hiệu số </th>
+            <th>Số tiền thu</th>
+            <th>Mục đích thu</th>
+            <th>Số tiền chi</th>
+            <th>Mục đích chi</th>
+          </tr>
+        </thead>
+        <tbody>
+  
+          <tr *ngFor="let sanpham of datatongedit">
+            <td>{{sanpham.ngaytao}}</td>
+            <td>{{sanpham.tienthu - sanpham.tienchi}}</td>
+            <td>{{sanpham.tienthu}}</td>
+            <td>{{sanpham.mucdichthu}}</td>
+            <td>{{sanpham.tienchi}}</td>
+            <td>{{sanpham.mucdichchi}}</td>
+  
+          </tr>
+  
+        </tbody>
+      </table>
+  <br/>
+  <div>Tổng thu chi: {{totalthu - totalchi}}</div>
+    </nb-card-body>
+  </nb-card>

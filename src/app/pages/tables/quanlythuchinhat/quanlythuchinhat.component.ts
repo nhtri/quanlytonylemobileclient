@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import * as XLSX from 'xlsx';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 @Component({
-  selector: 'ngx-quanlythuchi',
-  templateUrl: './quanlythuchi.component.html',
-  styleUrls: ['./quanlythuchi.component.scss']
+  selector: 'ngx-quanlythuchinhat',
+  templateUrl: './quanlythuchinhat.component.html',
+  styleUrls: ['./quanlythuchinhat.component.scss']
 })
-export class QuanlythuchiComponent implements OnInit {
+export class QuanlythuchinhatComponent implements OnInit {
+
 
   datathu = []
   datatempthu = []
@@ -57,7 +58,7 @@ export class QuanlythuchiComponent implements OnInit {
     //   }
     // });
 
-    this.service.getquanlythu().subscribe(async val => {
+    this.service.getquanlythujp().subscribe(async val => {
       this.datathu = []
       // this.sotien = "", this.date = "", this.mucdich = "", this.id = ""
       console.log(val)
@@ -117,7 +118,7 @@ export class QuanlythuchiComponent implements OnInit {
 
 
 
-      this.service.getquanlychi().subscribe(val => {
+      this.service.getquanlychijp().subscribe(val => {
 
         console.log(val)
         this.datachi = val.filter(val=>val.hinhthucthanhtoan=="tienmat")

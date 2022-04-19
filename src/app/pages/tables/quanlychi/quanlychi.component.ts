@@ -9,15 +9,29 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
 })
 export class QuanlychiComponent implements OnInit {
   data = []
-  totalmoney=0
+  totalmoney = 0
+  tienmat = 0
+  daibiki = 0
+  chuyenkhoan = 0
+
   constructor(private service: NetworkserviceService) {
 
     this.service.getquanlychi().subscribe(val => {
       console.log(val)
       this.data = val
-      this.datatemp=val
+      this.datatemp = val
       val.forEach(element => {
-        this.totalmoney +=parseInt(element.sotien)
+        this.totalmoney += parseInt(element.sotien)
+
+        if (element.hinhthucthanhtoan == 'tienmat') {
+          this.tienmat += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'daibiki') {
+          this.daibiki += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+          this.chuyenkhoan += parseInt(element.sotien)
+        }
       });
     });
 
@@ -35,7 +49,11 @@ export class QuanlychiComponent implements OnInit {
   date2 = ""
   daterange = []
   datatemp = []
+  hinhthucthanhtoan = "tienmat"
+
   ngOnInit(): void {
+    this.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '-' + new Date().getDate().toString().padStart(2, '0')
+
   }
   exportexcel() {
     let element = document.getElementById('excel-table');
@@ -51,14 +69,10 @@ export class QuanlychiComponent implements OnInit {
   hoantat() {
     console.log(this.sotien, this.mucdich, this.date)
     if (this.id == "") {
-      this.service.quanlychi([this.sotien, this.date, this.mucdich]).subscribe(val => {
+      this.service.quanlychi([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, 'WAREHOUSE']).subscribe(val => {
         console.log(val)
         alert("Tạo mới thành công")
-        this.service.getquanlychi().subscribe(val => {
-          console.log(val)
-          this.data = val
-     
-        });
+        window.location.reload()
       });
     }
     if (this.id != "") {
@@ -68,7 +82,7 @@ export class QuanlychiComponent implements OnInit {
         this.service.getquanlychi().subscribe(val => {
           console.log(val)
           this.data = val
-       
+
         });
       });
     }
@@ -79,7 +93,7 @@ export class QuanlychiComponent implements OnInit {
     this.mucdich = mucdich
     this.id = id
   }
-  delete(value) { 
+  delete(value) {
     this.service.deletequanlychi([value]).subscribe(val => {
       console.log(val)
       alert("Xoá thành công")
@@ -93,12 +107,15 @@ export class QuanlychiComponent implements OnInit {
 
 
   change1() {
+    this.tienmat = 0
+    this.daibiki = 0
+    this.chuyenkhoan = 0
     if (this.date2 == "") {
       this.data = []
       console.log(this.date1, this.date2)
       this.datatemp.forEach(element => {
         console.log('element.ngaytao', element.ngaytao)
-        console.log('this.date1', this.date1 )
+        console.log('this.date1', this.date1)
         if (this.date1 == element.ngaytao) {
           this.data.push(element)
         }
@@ -106,7 +123,7 @@ export class QuanlychiComponent implements OnInit {
     }
     if (this.date2 != "") {
       this.data = []
-      this.daterange=[]
+      this.daterange = []
       console.log(this.date1, this.date2)
       var currentDate = new Date(this.date1);
       while (currentDate <= new Date(this.date2)) {
@@ -125,10 +142,24 @@ export class QuanlychiComponent implements OnInit {
       });
       console.log(this.daterange)
     }
+    this.data.forEach(element => {
+      if (element.hinhthucthanhtoan == 'tienmat') {
+        this.tienmat += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'daibiki') {
+        this.daibiki += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+        this.chuyenkhoan += parseInt(element.sotien)
+      }
+    });
   }
   change2() {
+    this.tienmat = 0
+    this.daibiki = 0
+    this.chuyenkhoan = 0
     this.data = []
-    this.daterange=[]
+    this.daterange = []
     console.log(this.date1, this.date2)
     var currentDate = new Date(this.date1);
     while (currentDate <= new Date(this.date2)) {
@@ -145,6 +176,23 @@ export class QuanlychiComponent implements OnInit {
       });
 
     });
+
+    this.data.forEach(element => {
+      if (element.hinhthucthanhtoan == 'tienmat') {
+        this.tienmat += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'daibiki') {
+        this.daibiki += parseInt(element.sotien)
+      }
+      if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+        this.chuyenkhoan += parseInt(element.sotien)
+      }
+    });
     console.log(this.daterange)
+  }
+
+
+  selecthinhthucthanhtoan(event) {
+    this.hinhthucthanhtoan = event.target.value
   }
 }
