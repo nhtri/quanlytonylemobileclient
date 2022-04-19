@@ -38,7 +38,7 @@
                     <div class=" form-group">
                         <label> Ngày Sinh</label> <label style="color: #ec250d;"> * &nbsp;</label>
                         <p-calendar
-                                [styleClass]="'birthday-calendar'"
+                                [styleClass]="'my-calendar birthday-calendar'"
                                 placeholder="Ngày Sinh"
                                 [(ngModel)]="birthday"
                                 dateFormat="dd-mm-yy"
@@ -99,20 +99,20 @@
                         <p-dropdown [options]="jobs" (onChange)="onChangeJob($event)"
                                     [(ngModel)]="selectedJob" optionLabel="label" optionValue="value" required
                                     [ngModelOptions]="{standalone: true}">
-                        </p-dropdown>
+                        </p-dropdown>Tạo mới KH, chỗ chọn ngày sinh bị che phần trên nên ko chọn tháng / năm được 
                         <br />
                     </div>
                 </div>
             </div>
-            <div class=" card-footer">
-                <button class=" btn btn-fill btn-danger" type="submit"
+            <div class="card-footer">
+                <button pButton class="btn p-button-sm p-button-info" type="submit"
                         [disabled]="!createAppForm.valid || !selectedJob || selectedJob == null || !birthday">
-                    Lưu
+                    <nb-icon class="mr-1" icon="save-outline"></nb-icon> Lưu
                 </button>
-
-                <button class=" btn " type="button" style="background:rgba(224, 46, 22, 0.6)" (click)="onCancel()"
-                        [disabled]="!createAppForm.valid || !selectedJob || selectedJob == null || !birthday"
-                >Hủy
+                <button pButton
+                        class="btn p-button-sm p-button-danger ml-1"
+                        type="button" (click)="onCancel()">
+                    <nb-icon class="mr-1" icon="close-square-outline"></nb-icon> Hủy
                 </button>
             </div>
         </form>

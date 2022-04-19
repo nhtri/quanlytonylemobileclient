@@ -14,6 +14,7 @@ import { StatisticFilterDto } from '../model/dto/statistic-filter.dto';
 import { CustomerSearchDto } from '../model/dto/customer-search.dto';
 import { PurchasingInvoiceDto } from '../model/dto/purchasing-invoice.dto';
 import { PurchasingInvoiceSearchDto } from '../model/dto/purchasing-invoice-search.dto';
+import { TransferInvoiceDto } from '../model/dto/transfer-invoice.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -133,6 +134,11 @@ export class KaiService extends RestService {
 
     getKaiCompletedInvoices(): Observable<InvoiceDetail[]> {
         return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/completed/kai`);
+    }
+
+    // Transfer Invoice
+    createTransferInvoice(transferInvoiceDto: TransferInvoiceDto): Observable<any> {
+        return this.create(`${SERVICE_RESOURCES.TRANSFERRING_INVOICES}`, transferInvoiceDto);
     }
 
     /**
