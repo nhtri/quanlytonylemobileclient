@@ -100,6 +100,8 @@ export class BansanphamComponent implements OnInit {
   }
 
   hoantat() {
+
+    console.log('this.datas',this.datas)
     let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
@@ -130,10 +132,10 @@ export class BansanphamComponent implements OnInit {
     //     let newimei = value[0].imei.replace(element.imei, "")
     //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
     //   })
-
+    let datasale=[]
 
     this.datas.forEach(element => {
-
+datasale.push({"id":element[0].id,"quantity":element[0].quantity,"price":parseInt(element[0].sotienban),"position":this.vitri})
       this.service.danhsachsanphamdaban(['', element[0].name,
         '',
         '',
@@ -150,9 +152,17 @@ export class BansanphamComponent implements OnInit {
     });
 
 
+    this.service.forsale(
+      {
+        "quantity":soluongsanpham,
+        "total_money":parseInt(this.tienhoadon),
+        "sale_date":date,
+        "products":datasale
+      }
+    ).subscribe(val => { })
 
 
-    this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan,this.vitri]).subscribe(val => { })
+    this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
     console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
     this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon]).subscribe(value => {
       console.log(value)

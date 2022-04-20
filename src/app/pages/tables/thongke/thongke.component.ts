@@ -12,10 +12,10 @@ export class ThongkeComponent implements OnInit {
 
   date1 = ""
   date2 = ""
-
+  daterange
   fileName = 'DanhSachSanPham.xlsx';
   source: LocalDataSource = new LocalDataSource();
-  data=[]
+  data = []
   datadungluong = []
   datanhomsanpham = []
   datatensanpham = []
@@ -32,21 +32,23 @@ export class ThongkeComponent implements OnInit {
   dataloaisanphamtaomoi = ""
   dataphienbantaomoi = ""
   dataimeitaomoi = ""
-
+  datatemp=[]
   tongloinhuan = 0
 
   constructor(private service: NetworkserviceService, private router: Router) {
 
-    this.service.getdanhsachdonhangquanlymobileall().subscribe(value => {
-this.data =value
-this.data.forEach(element => {
-  console.log("element.giatien",element.giatien)
-  console.log("element.giatienban",element.giatienban)
-  this.tongloinhuan += (parseInt(element.giatienban)-parseInt(element.giatien))
-  console.log("this.tongloinhuan",this.tongloinhuan)
-});
-    });
 
+    this.tongloinhuan = 0
+    this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
+      this.data = value
+      this.datatemp = value
+      this.data.forEach(element => {
+        console.log("element.giatien", element.giatien)
+        console.log("element.giatienban", element.giatienban)
+        this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
+        console.log("this.tongloinhuan", this.tongloinhuan)
+      });
+    });
 
 
   }
@@ -162,11 +164,113 @@ this.data.forEach(element => {
   }
 
   change1() {
-   
-  
+
+    if (this.date2 == "") {
+      this.data = []
+      console.log(this.date1, this.date2)
+      console.log('this.datatemp',this.datatemp)
+      this.datatemp.forEach(element => {
+        console.log('element.ngaytao', element.ngayban)
+        if (this.date1 == element.ngayban) {
+          this.data.push(element)
+          console.log('this.data',this.data)
+        }
+      });
+    }
+    if (this.date2 != "") {
+      this.data = []
+      this.daterange = []
+      console.log(this.date1, this.date2)
+      var currentDate = new Date(this.date1);
+      while (currentDate <= new Date(this.date2)) {
+        this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+        currentDate.setDate(currentDate.getDate() + 1)
+      }
+
+      this.datatemp.forEach(element1 => {
+        console.log('element.ngaytao', element1.ngayban)
+        this.daterange.forEach(element2 => {
+          if (element2 == element1.ngayban) {
+            this.data.push(element1)
+          }
+        });
+
+      });
+      console.log(this.daterange)
+    }
+
   }
   change2() {
-   
+    this.data = []
+    this.daterange = []
+    console.log(this.date1, this.date2)
+    var currentDate = new Date(this.date1);
+    while (currentDate <= new Date(this.date2)) {
+      this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+      currentDate.setDate(currentDate.getDate() + 1)
+    }
+
+    this.datatemp.forEach(element1 => {
+      console.log('element.ngaytao', element1.ngayban)
+      this.daterange.forEach(element2 => {
+        if (element2 == element1.ngayban) {
+          this.data.push(element1)
+        }
+      });
+
+    });
+    console.log(this.daterange)
   }
+
+
+  selecvitri(event) {
+    if (event.target.value == "kho") {
+      this.tongloinhuan = 0
+      this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
+        this.data = value
+        this.datatemp=value
+        this.data.forEach(element => {
+          console.log("element.giatien", element.giatien)
+          console.log("element.giatienban", element.giatienban)
+          this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
+          console.log("this.tongloinhuan", this.tongloinhuan)
+        });
+      });
+
+    }
+
+
+    if (event.target.value == "cuahangvietnam") {
+      this.tongloinhuan = 0
+      
+      this.service.getdanhsachdonhangquanlymobilevn().subscribe(value => {
+        this.data = value
+        this.datatemp=value
+        this.data.forEach(element => {
+          console.log("element.giatien", element.giatien)
+          console.log("element.giatienban", element.giatienban)
+          this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
+          console.log("this.tongloinhuan", this.tongloinhuan)
+        });
+      });
+
+    }
+    if (event.target.value == "cuahangnhat") {
+      this.tongloinhuan = 0
+      this.service.getdanhsachdonhangquanlymobilejp().subscribe(value => {
+        this.data = value
+        this.datatemp=value
+        this.data.forEach(element => {
+          console.log("element.giatien", element.giatien)
+          console.log("element.giatienban", element.giatienban)
+          this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
+          console.log("this.tongloinhuan", this.tongloinhuan)
+        });
+      });
+
+    }
+  }
+
+
 
 }
