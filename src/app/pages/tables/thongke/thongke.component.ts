@@ -10,6 +10,9 @@ import { Router } from '@angular/router';
 })
 export class ThongkeComponent implements OnInit {
 
+  date1 = ""
+  date2 = ""
+
   fileName = 'DanhSachSanPham.xlsx';
   source: LocalDataSource = new LocalDataSource();
   data=[]
@@ -34,7 +37,7 @@ export class ThongkeComponent implements OnInit {
 
   constructor(private service: NetworkserviceService, private router: Router) {
 
-    this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
+    this.service.getdanhsachdonhangquanlymobileall().subscribe(value => {
 this.data =value
 this.data.forEach(element => {
   console.log("element.giatien",element.giatien)
@@ -156,6 +159,14 @@ this.data.forEach(element => {
         console.log("Error", error);
 
       })
+  }
+
+  change1() {
+   
+  
+  }
+  change2() {
+   
   }
 
 }

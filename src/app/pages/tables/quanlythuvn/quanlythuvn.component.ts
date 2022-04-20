@@ -14,12 +14,12 @@ export class QuanlythuvnComponent implements OnInit {
   date2 = ""
   daterange = []
   datatemp = []
-  totalmoney=0
+  totalmoney = 0
   tienmat = 0
   daibiki = 0
   chuyenkhoan = 0
   constructor(private service: NetworkserviceService) {
- 
+
     this.service.getquanlythuvn().subscribe(val => {
       console.log(val)
       val.forEach(element => {
@@ -63,15 +63,16 @@ export class QuanlythuvnComponent implements OnInit {
   sotien = ""
   mucdich = ""
   hinhthucthanhtoan = "tienmat"
-  
+  hinhthucthanhtoanfilter = ""
 
   ngOnInit(): void {
     this.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '-' + new Date().getDate().toString().padStart(2, '0')
   }
 
-  selecthinhthucthanhtoan(event){
+  selecthinhthucthanhtoan(event) {
     console.log(event.target.value)
     this.hinhthucthanhtoan = event.target.value
+
   }
   exportexcel() {
     let element = document.getElementById('excel-table');
@@ -88,7 +89,7 @@ export class QuanlythuvnComponent implements OnInit {
   hoantat() {
     console.log(this.sotien, this.mucdich, this.date)
     if (this.id == "") {
-      this.service.quanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan,'WAREHOUSE']).subscribe(val => {
+      this.service.quanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, 'WAREHOUSE']).subscribe(val => {
         alert("Tạo mới thành công")
         console.log(val)
         // this.service.getquanlythu().subscribe(val => {
@@ -102,7 +103,7 @@ export class QuanlythuvnComponent implements OnInit {
       this.service.editquanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, this.id]).subscribe(val => {
         console.log(val)
         alert("Chỉnh sửa thành công")
-        this.service.getquanlythu().subscribe(val => {
+        this.service.getquanlythuvn().subscribe(val => {
           this.data = []
           this.sotien = "", this.date = "", this.mucdich = "", this.id = ""
           console.log(val)
@@ -137,8 +138,8 @@ export class QuanlythuvnComponent implements OnInit {
     this.service.deletequanlythu([value]).subscribe(val => {
       console.log(val)
       alert("Xoá thành công")
-      this.service.getquanlythu().subscribe(val => {
-        this.data=[]
+      this.service.getquanlythuvn().subscribe(val => {
+        this.data = []
         console.log(val)
         val.forEach(element => {
           if (element.mucdich.includes('dh')) {
@@ -175,7 +176,7 @@ export class QuanlythuvnComponent implements OnInit {
     }
     if (this.date2 != "") {
       this.data = []
-      this.daterange=[]
+      this.daterange = []
       console.log(this.date1, this.date2)
       var currentDate = new Date(this.date1);
       while (currentDate <= new Date(this.date2)) {
@@ -212,7 +213,7 @@ export class QuanlythuvnComponent implements OnInit {
     this.daibiki = 0
     this.chuyenkhoan = 0
     this.data = []
-    this.daterange=[]
+    this.daterange = []
     console.log(this.date1, this.date2)
     var currentDate = new Date(this.date1);
     while (currentDate <= new Date(this.date2)) {
@@ -242,5 +243,182 @@ export class QuanlythuvnComponent implements OnInit {
         this.chuyenkhoan += parseInt(element.sotien)
       }
     });
+  }
+
+
+  selecthinhthucthanhtoanfilter(event) {
+    // let datatemp
+    // datatemp = this.data
+
+    // this.data=[]
+    // console.log(event.target.value)
+    // this.hinhthucthanhtoanfilter = event.target.value
+    // this.datatemp.forEach(element => {
+    //   if(element.hinhthucthanhtoan == this.hinhthucthanhtoanfilter){
+    //     this.data.push(element)
+    //   }
+
+    // });
+    if (this.date1 == "") {
+      this.data = []
+      console.log(event.target.value)
+      this.hinhthucthanhtoanfilter = event.target.value
+      this.datatemp.forEach(element => {
+        if (element.hinhthucthanhtoan == this.hinhthucthanhtoanfilter) {
+          this.data.push(element)
+        }
+
+      });
+    }
+    if (this.date1 != "" && this.date2 == "") {
+
+
+      this.tienmat = 0
+      this.daibiki = 0
+      this.chuyenkhoan = 0
+      if (this.date2 == "") {
+        this.data = []
+        console.log(this.date1, this.date2)
+        this.datatemp.forEach(element => {
+          console.log('element.ngaytao', element.ngaytao)
+          if (this.date1 == element.ngaytao) {
+            this.data.push(element)
+          }
+        });
+      }
+      if (this.date2 != "") {
+        this.data = []
+        this.daterange = []
+        console.log(this.date1, this.date2)
+        var currentDate = new Date(this.date1);
+        while (currentDate <= new Date(this.date2)) {
+          this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+          currentDate.setDate(currentDate.getDate() + 1)
+        }
+
+        this.datatemp.forEach(element1 => {
+          console.log('element.ngaytao', element1.ngaytao)
+          this.daterange.forEach(element2 => {
+            if (element2 == element1.ngaytao) {
+              this.data.push(element1)
+            }
+          });
+
+        });
+        console.log(this.daterange)
+      }
+
+      this.data.forEach(element => {
+        if (element.hinhthucthanhtoan == 'tienmat') {
+          this.tienmat += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'daibiki') {
+          this.daibiki += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+          this.chuyenkhoan += parseInt(element.sotien)
+        }
+      });
+
+
+      let datatemp
+      datatemp = this.data
+
+      this.data = []
+      console.log(event.target.value)
+      this.hinhthucthanhtoanfilter = event.target.value
+      datatemp.forEach(element => {
+        if (element.hinhthucthanhtoan == this.hinhthucthanhtoanfilter) {
+          this.data.push(element)
+        }
+
+      });
+
+      if (this.hinhthucthanhtoanfilter == "default") {
+        window.location.reload()
+      }
+
+      if (this.hinhthucthanhtoanfilter == "daibiki") {
+        this.tienmat = 0
+        this.chuyenkhoan = 0
+      }
+      if (this.hinhthucthanhtoanfilter == "tienmat") {
+        this.daibiki = 0
+        this.chuyenkhoan = 0
+      }
+      if (this.hinhthucthanhtoanfilter == "chuyenkhoan") {
+        this.tienmat = 0
+        this.daibiki = 0
+      }
+    }
+
+    if (this.date2 != "") {
+      this.tienmat = 0
+      this.daibiki = 0
+      this.chuyenkhoan = 0
+      this.data = []
+      this.daterange = []
+      console.log(this.date1, this.date2)
+      var currentDate = new Date(this.date1);
+      while (currentDate <= new Date(this.date2)) {
+        this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+        currentDate.setDate(currentDate.getDate() + 1)
+      }
+
+      this.datatemp.forEach(element1 => {
+        console.log('element.ngaytao', element1.ngaytao)
+        this.daterange.forEach(element2 => {
+          if (element2 == element1.ngaytao) {
+            this.data.push(element1)
+          }
+        });
+
+      });
+      console.log(this.daterange)
+
+      this.data.forEach(element => {
+        if (element.hinhthucthanhtoan == 'tienmat') {
+          this.tienmat += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'daibiki') {
+          this.daibiki += parseInt(element.sotien)
+        }
+        if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+          this.chuyenkhoan += parseInt(element.sotien)
+        }
+      });
+
+
+      let datatemp
+      datatemp = this.data
+
+      this.data = []
+      console.log(event.target.value)
+      this.hinhthucthanhtoanfilter = event.target.value
+      datatemp.forEach(element => {
+        if (element.hinhthucthanhtoan == this.hinhthucthanhtoanfilter) {
+          this.data.push(element)
+        }
+
+      });
+
+      if (this.hinhthucthanhtoanfilter == "default") {
+        window.location.reload()
+      }
+
+      if (this.hinhthucthanhtoanfilter == "daibiki") {
+        this.tienmat = 0
+        this.chuyenkhoan = 0
+      }
+      if (this.hinhthucthanhtoanfilter == "tienmat") {
+        this.daibiki = 0
+        this.chuyenkhoan = 0
+      }
+      if (this.hinhthucthanhtoanfilter == "chuyenkhoan") {
+        this.tienmat = 0
+        this.daibiki = 0
+      }
+    }
+
   }
 }

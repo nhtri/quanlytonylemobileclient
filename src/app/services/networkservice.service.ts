@@ -83,12 +83,12 @@ export class NetworkserviceService {
     }
 
     user(data): Observable<any> {
-        const userAPI = `https://salemobileserver.herokuapp.com/user`;
+        const userAPI = `https://quanlytonylemobile.herokuapp.com/user`;
         return this.httpClient.post<any>(userAPI, data, this.httpOptions);
     }
 
     deleteuser(data): Observable<any> {
-        const userAPI = `https://salemobileserver.herokuapp.com/deleteuser`;
+        const userAPI = `https://quanlytonylemobile.herokuapp.com/deleteuser`;
         return this.httpClient.post<any>(userAPI, data, this.httpOptions);
     }
 
@@ -237,7 +237,7 @@ export class NetworkserviceService {
     }
 
     resetpassword(data): Observable<any> {
-        const API = `https://salemobileserver.herokuapp.com/resetpassword`;
+        const API = `https://quanlytonylemobile.herokuapp.com/resetpassword`;
         return this.httpClient.put<any>(API, data, this.httpOptions);
     }
 
@@ -272,6 +272,10 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
     }
 
+    getdanhsachdonhangquanlymobileall() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachdonhangquanlymobileall';
+        return this.httpClient.get<any>(get);
+    }
     getdanhsachdonhangquanlymobile() {
         const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachdonhangquanlymobile';
         return this.httpClient.get<any>(get);

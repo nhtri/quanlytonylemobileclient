@@ -48,7 +48,7 @@
                             (change)="change2()"></td>
                     <td></td>
                     <td></td>
-                    <td> <select (change)="selecthinhthucthanhtoan($event)"
+                    <td> <select (change)="selecthinhthucthanhtoanfilter($event)"
                             style="height: 28px;width: 140px;border-radius: 5px;border-color: #809ffc;">
                             <option value="default">Hình thức thu</option>
                             <option value="tienmat">Tiền mặt</option>
@@ -83,11 +83,11 @@
     </nb-card-body>
 
     <nb-card-footer>
-        <div style="color:#2e61fa">* Tiền mặt: {{tienmat}}</div>
-        <div style="color:#2e61fa">* Daibiki: {{daibiki}}</div>
-        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan}}</div>
+        <div style="color:#2e61fa">* Tiền mặt: {{tienmat| number}}</div>
+        <div style="color:#2e61fa">* Daibiki: {{daibiki| number}}</div>
+        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan| number}}</div>
     </nb-card-footer>
     <nb-card-footer>
-        <div style="color:blue; font-weight: 600;">Tổng thu: {{totalmoney}}</div>
+        <div style="color:blue; font-weight: 600;">Tổng thu: {{totalmoney| number}}</div>
     </nb-card-footer>
 </nb-card>

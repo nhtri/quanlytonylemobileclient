@@ -393,6 +393,7 @@ export const ADMIN_MENU_ITEMS: MobileMenuItem[] = [
     {
         title: 'Thống Kê & Báo Cáo',
         icon: 'pie-chart-outline',
+        roles: [USER_ROLE.ADMIN],
         children: [
             // {
             //     title: 'Echarts (Tham khảo lựa mẫu)',
