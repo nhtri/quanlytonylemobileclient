@@ -1,44 +1,45 @@
 <nb-card>
-    <nb-card-header>
-      Danh Sách Sản Phẩm <a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a>
+  <nb-card-header>
+    Danh Sách Sản Phẩm <a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()"> Tải Danh
+      Sách Sản Phẩm</a>
 
-    </nb-card-header>
-  
-    <nb-card-body>
-  
+  </nb-card-header>
 
-
-<!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
-
-<!-- <br /> -->
-<table class="styled-table" id="excel-table">
+  <nb-card-body>
 
 
-  <thead>
-    <tr>
-      <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;" routerLink="/pages/tables/bansanpham"
-          [queryParams]={id:[danhsachidsanpham]}></i>
-      </th>
-      <th>Id</th>
-      <!-- <th>Nhóm sản phẩm</th> -->
-      <th>Tên sản phẩm</th>
-      <th>Imei</th>
-      <!-- <th>Dung lượng</th>
+
+    <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
+
+    <!-- <br /> -->
+    <table class="styled-table" id="excel-table">
+
+
+      <thead>
+        <tr>
+          <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;"
+              routerLink="/pages/tables/bansanpham" [queryParams]={id:[danhsachidsanpham]}></i>
+          </th>
+          <th>Id</th>
+          <!-- <th>Nhóm sản phẩm</th> -->
+          <th>Tên sản phẩm</th>
+          <th>Imei</th>
+          <!-- <th>Dung lượng</th>
       <th>Loại sản phẩm</th>
       <th>Phiên bản</th> -->
-      <th>Màu sắc</th>
-      <th>Tình trạng</th>
-      <th>Số lượng</th>
-      <th>Giá tiền</th>
-     
-      <!-- <th></th>
+          <th>Màu sắc</th>
+          <th>Tình trạng</th>
+          <th>Số lượng</th>
+          <th>Giá tiền</th>
+
+          <!-- <th></th>
       <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
-    </tr>
-  </thead>
-  <tbody>
-    <td></td>
-    <td></td>
-    <!-- <td></td>
+        </tr>
+      </thead>
+      <tbody>
+        <td></td>
+        <td></td>
+        <!-- <td></td>
     <td><select (change)="selectnhomsanpham($event)"
         style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
         <option value="default">Nhóm sản phẩm</option>
@@ -48,16 +49,19 @@
 
       </select></td> -->
 
-    <td><select (change)="selecttensanpham($event)"
-        style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-        <option value="default">Tên sản phẩm</option>
-        <option *ngFor="let data of datatensanpham" [value]="data.value">
-          {{data.title}}
-        </option>
-
-      </select></td>
-
-    <!-- <td><select (change)="selectdungluong($event)"
+        <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+          (change)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+        </td>
+        <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+          (change)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+        </td>
+        <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+          (change)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
+        </td>
+        <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+          (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
+        </td>
+        <!-- <td><select (change)="selectdungluong($event)"
         style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
         <option value="default">Dung lượng</option>
         <option *ngFor="let data of datadungluong" [value]="data.value">
@@ -66,7 +70,7 @@
 
       </select></td> -->
 
-    <!-- <td><select (change)="selectloaisanpham($event)"
+        <!-- <td><select (change)="selectloaisanpham($event)"
         style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
         <option value="default">Loại sản phẩm</option>
         <option *ngFor="let data of dataloaisanpham" [value]="data.value">
@@ -75,7 +79,7 @@
 
       </select></td> -->
 
-    <!-- <td><select (change)="selectphienban($event)"
+        <!-- <td><select (change)="selectphienban($event)"
         style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
         <option value="default">Phiên bản</option>
         <option *ngFor="let data of dataphienban" [value]="data.value">
@@ -84,7 +88,7 @@
 
       </select></td> -->
 
-    <!-- <tr *ngIf="taomoisanpham==true">
+        <!-- <tr *ngIf="taomoisanpham==true">
       <td></td>
       <td></td>
       <td><select (change)="selecttaomoinhomsanpham($event.target.value)"
@@ -134,26 +138,26 @@
       <td><i class="fa fa-times" style="font-size:18px;color:tomato;" (click)="canceltaomoi()"></i></td>
 
     </tr> -->
-    <tr *ngFor="let sanpham of data">
-      <td><input type="checkbox" (click)="select(sanpham.id)"></td>
-      <td>{{sanpham.id}}</td>
-      <!-- <td>{{sanpham.nhomsanpham}}</td> -->
-      <td>{{sanpham.name}}</td>
-      <td>{{sanpham.imei}}</td>
-      <td>{{sanpham.color}}</td>
-      <td>{{sanpham.status}}</td>
-      <td>{{sanpham.quantity}}</td>
-      <td>{{sanpham.price}}</td>
-     
-      <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
+        <tr *ngFor="let sanpham of data">
+          <td><input type="checkbox" (click)="select(sanpham.id)"></td>
+          <td>{{sanpham.id}}</td>
+          <!-- <td>{{sanpham.nhomsanpham}}</td> -->
+          <td>{{sanpham.name}}</td>
+          <td>{{sanpham.imei}}</td>
+          <td>{{sanpham.color}}</td>
+          <td>{{sanpham.status}}</td>
+          <td>{{sanpham.quantity}}</td>
+          <td>{{sanpham.price}}</td>
+
+          <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
           [queryParams]={id:[sanpham.id]}></i></td>
       <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
 
-    </tr>
+        </tr>
 
 
-  </tbody>
-</table>
+      </tbody>
+    </table>
 
-</nb-card-body>
-</nb-card> 
+  </nb-card-body>
+</nb-card>

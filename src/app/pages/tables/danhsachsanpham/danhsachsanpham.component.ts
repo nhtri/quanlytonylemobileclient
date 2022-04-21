@@ -38,6 +38,10 @@ export class DanhsachsanphamComponent implements OnInit {
 
   datafilter = []
 
+  tensp = ""
+  imeisp = ""
+  mausacsp = ""
+  tinhtrangsp = ""
   constructor(private service: NetworkserviceService, private router: Router) {
 
     // this.service.getsanphamtonkho().subscribe(val => {
@@ -77,7 +81,7 @@ export class DanhsachsanphamComponent implements OnInit {
 
     this.service.getsanphamtonkhokhohang().subscribe(val => {
       this.source.load(val);
-      this.data =val
+      this.data = val
       val.forEach(element => {
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)
@@ -386,6 +390,27 @@ export class DanhsachsanphamComponent implements OnInit {
     }
     if (this.dataselectphienban != '' && this.dataselectphienban != 'default') {
       this.data = this.data.filter(val => val.phienban == this.dataselectphienban)
+    }
+  }
+
+
+  filterdanhsachsanpham() {
+    console.log(this.data)
+    this.data = []
+    if (this.tensp != "") {
+      this.data = this.datafilter.filter(data => data.name.includes(this.tensp))
+    }
+    if (this.imeisp != "") {
+      this.data = this.datafilter.filter(data => data.imei.includes(this.imeisp))
+    }
+    if (this.mausacsp != "") {
+      this.data = this.datafilter.filter(data => data.color.includes(this.mausacsp))
+    }
+    if (this.tinhtrangsp != "") {
+      this.data = this.datafilter.filter(data => data.status.includes(this.tinhtrangsp))
+    }
+    if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""){
+      this.data = this.datafilter
     }
   }
 }

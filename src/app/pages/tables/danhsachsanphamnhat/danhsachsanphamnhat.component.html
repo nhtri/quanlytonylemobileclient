@@ -48,14 +48,18 @@
 
     </select></td> -->
 
-  <td><select (change)="selecttensanpham($event)"
-      style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-      <option value="default">Tên sản phẩm</option>
-      <option *ngFor="let data of datatensanpham" [value]="data.value">
-        {{data.title}}
-      </option>
-
-    </select></td>
+    <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+      (change)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+    </td>
+    <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+      (change)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+    </td>
+    <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+      (change)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
+    </td>
+    <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+      (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
+    </td>
 
   <!-- <td><select (change)="selectdungluong($event)"
       style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
