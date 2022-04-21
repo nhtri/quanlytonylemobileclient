@@ -32,8 +32,9 @@ export class ThongkeComponent implements OnInit {
   dataloaisanphamtaomoi = ""
   dataphienbantaomoi = ""
   dataimeitaomoi = ""
-  datatemp=[]
+  datatemp = []
   tongloinhuan = 0
+  tongloinhuantheothang = 0
 
   constructor(private service: NetworkserviceService, private router: Router) {
 
@@ -46,6 +47,7 @@ export class ThongkeComponent implements OnInit {
         console.log("element.giatien", element.giatien)
         console.log("element.giatienban", element.giatienban)
         this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
+        this.tongloinhuantheothang += (parseInt(element.giatienban) - parseInt(element.giatien))
         console.log("this.tongloinhuan", this.tongloinhuan)
       });
     });
@@ -168,12 +170,12 @@ export class ThongkeComponent implements OnInit {
     if (this.date2 == "") {
       this.data = []
       console.log(this.date1, this.date2)
-      console.log('this.datatemp',this.datatemp)
+      console.log('this.datatemp', this.datatemp)
       this.datatemp.forEach(element => {
         console.log('element.ngaytao', element.ngayban)
         if (this.date1 == element.ngayban) {
           this.data.push(element)
-          console.log('this.data',this.data)
+          console.log('this.data', this.data)
         }
       });
     }
@@ -195,10 +197,14 @@ export class ThongkeComponent implements OnInit {
           }
         });
 
-      });
+      });}
       console.log(this.daterange)
-    }
-
+      this.tongloinhuantheothang = 0
+      this.data.forEach(element => {
+        this.tongloinhuantheothang += (parseInt(element.giatienban) - parseInt(element.giatien))
+        console.log("this.tongloinhuan", this.tongloinhuan)
+      });
+    
   }
   change2() {
     this.data = []
@@ -220,6 +226,12 @@ export class ThongkeComponent implements OnInit {
 
     });
     console.log(this.daterange)
+
+    this.tongloinhuantheothang = 0
+    this.data.forEach(element => {
+      this.tongloinhuantheothang += (parseInt(element.giatienban) - parseInt(element.giatien))
+      console.log("this.tongloinhuan", this.tongloinhuan)
+    });
   }
 
 
@@ -228,7 +240,7 @@ export class ThongkeComponent implements OnInit {
       this.tongloinhuan = 0
       this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
         this.data = value
-        this.datatemp=value
+        this.datatemp = value
         this.data.forEach(element => {
           console.log("element.giatien", element.giatien)
           console.log("element.giatienban", element.giatienban)
@@ -242,10 +254,10 @@ export class ThongkeComponent implements OnInit {
 
     if (event.target.value == "cuahangvietnam") {
       this.tongloinhuan = 0
-      
+
       this.service.getdanhsachdonhangquanlymobilevn().subscribe(value => {
         this.data = value
-        this.datatemp=value
+        this.datatemp = value
         this.data.forEach(element => {
           console.log("element.giatien", element.giatien)
           console.log("element.giatienban", element.giatienban)
@@ -259,7 +271,7 @@ export class ThongkeComponent implements OnInit {
       this.tongloinhuan = 0
       this.service.getdanhsachdonhangquanlymobilejp().subscribe(value => {
         this.data = value
-        this.datatemp=value
+        this.datatemp = value
         this.data.forEach(element => {
           console.log("element.giatien", element.giatien)
           console.log("element.giatienban", element.giatienban)
