@@ -47,8 +47,8 @@ export const MENU_ITEMS: MobileMenuItem[] = [
         children: [{
             title: 'Quản Lý Mua Hàng',
             icon: 'shopping-cart-outline',
-            link: '/pages/tables/danhsachsanphamjp',
-            home: true,
+            // link: '/pages/tables/danhsachsanphamjp',
+            // home: true,
             children: [
                 {
                     title: 'Sản Phẩm',
@@ -160,8 +160,8 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
         children: [{
             title: 'Quản Lý Mua Hàng',
             icon: 'shopping-cart-outline',
-            link: '/pages/tables/danhsachsanphamvn',
-            home: true,
+            // link: '/pages/tables/danhsachsanphamvn',
+            // home: true,
             children: [
                 {
                     title: 'Sản Phẩm',
@@ -273,8 +273,8 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
         children: [{
             title: 'Quản Lý Mua Hàng',
             icon: 'shopping-cart-outline',
-            link: '/pages/tables/danhsachsanpham',
-            home: true,
+            // link: '/pages/tables/danhsachsanpham',
+            // home: true,
             children: [
                 {
                     title: 'Sản Phẩm',

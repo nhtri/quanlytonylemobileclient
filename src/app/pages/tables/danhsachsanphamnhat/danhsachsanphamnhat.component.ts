@@ -85,7 +85,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role')
-    if (this.role != 'admin') {
+    if (this.role != 'cuahangnhat') {
       this.router.navigateByUrl('/pages/tables/login')
     }
 

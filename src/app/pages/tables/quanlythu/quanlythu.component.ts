@@ -89,6 +89,9 @@ export class QuanlythuComponent implements OnInit {
   hoantat() {
     console.log(this.sotien, this.mucdich, this.date)
     if (this.id == "") {
+      if (this.hinhthucthanhtoan == 'default') {
+        this.hinhthucthanhtoan = "tienmat"
+      }
       this.service.quanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, 'WAREHOUSE']).subscribe(val => {
         alert("Tạo mới thành công")
         console.log(val)
