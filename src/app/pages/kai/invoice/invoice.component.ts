@@ -67,26 +67,19 @@ export class InvoiceComponent implements OnInit {
     ngOnInit() {
         this.editData = window.history.state;
         this.sale_date = new Date();
-        if (this.editData.id) {
-            this.kaiService.getPurchasingInvoiceDetail(this.editData.id).subscribe((invoiceDetail) => {
+        if (this.editData.invoice_id) {
+            this.kaiService.getPurchasingInvoiceDetail(this.editData.invoice_id).subscribe((invoiceDetail) => {
                 if (notEmpty(invoiceDetail)) {
                     this.products = invoiceDetail.products;
                     this.customer_id = invoiceDetail.customer.id;
                     this.invoice_id = invoiceDetail.invoice_id;
                     this.customer = invoiceDetail.customer;
                     this.birthday = new Date(this.customer.birthday);
-                    const customerJob = this.jobs.find(x => x.value === this.customer.job);
                     this.sale_date = new Date(invoiceDetail.sale_date);
                     if (isEmpty(this.selectedJobs)) {
                         this.selectedJobs = PEOPLE_JOBS[0].value;
                         this.customer.job = this.selectedJobs;
                     }
-                    // this.products.forEach(x => {
-                    //     let status = this.status.find(y => x.status === y.value);
-                    //     if (status) {
-                    //         x.selectedStatus = status;
-                    //     }
-                    // });
                 }
             });
         }
@@ -254,7 +247,10 @@ export class InvoiceComponent implements OnInit {
     }
 
     cancel() {
-        this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
+        const isCancel = confirm(`Bạn có chắc chắn muốn hủy thay đổi không?`);
+        if (isCancel) {
+            this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
+        }
     }
 
     exportExcel() {

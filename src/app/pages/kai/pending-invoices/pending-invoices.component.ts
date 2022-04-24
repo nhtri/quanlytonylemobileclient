@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { notEmpty } from '../../../@core/utils/data.utils';
-import { DATE_CONSTANT, DEFAULT_BIRTHDAY_YEAR_RANGE, INVOICE_TYPE } from '../../../@core/constant/common';
+import {
+    DATE_CONSTANT,
+    DEFAULT_BIRTHDAY_YEAR_RANGE,
+    INVOICE_TYPE,
+    TRANSFER_STATUS,
+} from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { Product } from '../../../model/product';
@@ -64,7 +69,9 @@ export class PendingInvoicesComponent implements OnInit {
                         this.displayTransferringDetailModal = true;
                         this.displayDetailModal = false;
                         if (notEmpty(orderDetail)) {
-                            this.listProducts = orderDetail.products;
+                            this.listProducts = orderDetail.products.filter(p =>
+                                p.transfer_status === TRANSFER_STATUS.PROCESSING,
+                            );
                         }
                     });
                     break;
@@ -112,6 +119,58 @@ export class PendingInvoicesComponent implements OnInit {
             this.getOrdersPending();
             this.displayDetailModal = false;
         });
+    }
+
+    approveTransferItem(event, product) {
+        event.preventDefault();
+        if (notEmpty(this.order) && notEmpty(product)) {
+            this.kaiService.approveTransferringInvoiceProduct(this.order.invoice_id, product.id)
+                .subscribe((result) => {
+                    this.listProducts = this.listProducts.filter(p => p.id !== product.id);
+                    if (this.listProducts.length === 0) {
+                        this.displayTransferringDetailModal = false;
+                        this.displayDetailModal = false;
+                        this.getOrdersPending();
+                    }
+                });
+        }
+    }
+
+    cancelTransferItem(event, product) {
+        event.preventDefault();
+        if (notEmpty(this.order) && notEmpty(product)) {
+            this.kaiService.cancelTransferringInvoiceProduct(this.order.invoice_id, product.id)
+                .subscribe((result) => {
+                    this.listProducts = this.listProducts.filter(p => p.id !== product.id);
+                    if (this.listProducts.length === 0) {
+                        this.displayTransferringDetailModal = false;
+                        this.displayDetailModal = false;
+                        this.getOrdersPending();
+                    }
+                });
+        }
+    }
+
+    approveTransferInvoice() {
+        if (notEmpty(this.order)) {
+            this.kaiService.approveTransferringInvoice(this.order.invoice_id)
+                .subscribe((result) => {
+                    this.displayTransferringDetailModal = false;
+                    this.displayDetailModal = false;
+                    this.getOrdersPending();
+                });
+        }
+    }
+
+    cancelTransferInvoice() {
+        if (notEmpty(this.order)) {
+            this.kaiService.cancelTransferringInvoice(this.order.invoice_id)
+                .subscribe((result) => {
+                    this.displayTransferringDetailModal = false;
+                    this.displayDetailModal = false;
+                    this.getOrdersPending();
+                });
+        }
     }
 
     onRemoveProduct = (product, event) => {

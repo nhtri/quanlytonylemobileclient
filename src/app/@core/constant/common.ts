@@ -51,6 +51,13 @@ export const enum PRODUCT_STATUS {
     USED = 'USED',
 }
 
+export const enum TRANSFER_STATUS {
+    NEW = 'NEW',
+    PROCESSING = 'PROCESSING',
+    TRANSFERRED = 'TRANSFERRED',
+    CANCELED = 'CANCELED',
+}
+
 export const enum INVOICE_TYPE {
     PURCHASING = 'PURCHASING',
     FOR_SALE = 'FOR_SALE',
@@ -97,6 +104,13 @@ export const enum PRODUCT_SOURCE {
     SHOP_JP = 'SHOP_JP',
     WAREHOUSE = 'WAREHOUSE',
 }
+
+export const PRODUCT_STORAGES = [
+    {label: 'KAI', value: PRODUCT_SOURCE.KAI},
+    {label: 'Kho Việt Nam', value: PRODUCT_SOURCE.SHOP_VN},
+    {label: 'Kho Nhật', value: PRODUCT_SOURCE.SHOP_JP},
+    {label: 'Kho Tổng', value: PRODUCT_SOURCE.WAREHOUSE},
+];
 
 export const enum REPORT_TYPE {
     MONTH = 'MONTH',
