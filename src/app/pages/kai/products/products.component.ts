@@ -6,7 +6,7 @@ import { notEmpty } from '../../../@core/utils/data.utils';
 import { ForSaleInvoiceDto } from '../../../model/dto/for-sale-invoice.dto';
 import { ProductDto } from '../../../model/dto/product.dto';
 import { TransferInvoiceDto } from '../../../model/dto/transfer-invoice.dto';
-import { PRODUCT_SOURCE } from '../../../@core/constant/common';
+import { PRODUCT_SOURCE, PRODUCT_STORAGES } from '../../../@core/constant/common';
 import { calculateProductSummary } from '../../../@core/utils/kai.utils';
 
 @Component({
@@ -32,12 +32,20 @@ export class ProductsComponent implements OnInit {
     };
     selectedMobiles = [];
     transferInvoice: TransferInvoiceDto;
+    productStorages = PRODUCT_STORAGES;
+    transferSource: PRODUCT_SOURCE = PRODUCT_SOURCE.KAI;
+    transferDestination: PRODUCT_SOURCE = PRODUCT_SOURCE.SHOP_JP;
+    rate_exchange: number = 1;
+    sub_fee: number = 0;
+
+    SHOP_VN_SOURCE = PRODUCT_SOURCE.SHOP_VN;
 
     constructor(private kaiService: KaiService, public datePipe: DatePipe) {
     }
 
     ngOnInit() {
         this.getMobiles();
+        this.productStorages = PRODUCT_STORAGES.filter(ps => ps.value !== PRODUCT_SOURCE.KAI);
     }
 
     getMobiles() {
@@ -114,34 +122,40 @@ export class ProductsComponent implements OnInit {
     }
 
     createTransferInvoice() {
-        const sale_date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
-        const from_position: PRODUCT_SOURCE = PRODUCT_SOURCE.KAI;
-        const to_position: PRODUCT_SOURCE = PRODUCT_SOURCE.SHOP_JP;
-        const products = this.listProducts.map((product: Product) => {
-            return {
-                id: product.id,
-                price: product.price,
-                quantity: notEmpty(product.transfer_quantity) ? product.transfer_quantity : 1,
+        if (this.transferSource !== this.transferDestination) {
+            const sale_date = this.datePipe.transform(new Date(), 'yyyy-MM-dd');
+            const from_position: PRODUCT_SOURCE = this.transferSource;
+            const to_position: PRODUCT_SOURCE = this.transferDestination;
+            const products = this.listProducts.map((product: Product) => {
+                return {
+                    id: product.id,
+                    price: product.price,
+                    quantity: notEmpty(product.transfer_quantity) ? product.transfer_quantity : 1,
+                };
+            });
+            let exchange_rate = this.rate_exchange;
+            let sub_fee = this.sub_fee;
+            if (this.transferDestination !== PRODUCT_SOURCE.SHOP_VN) {
+                exchange_rate = 1;
+                sub_fee = 0;
+            }
+            const productSummary = calculateProductSummary(this.listProducts, exchange_rate, sub_fee);
+            this.transferInvoice = {
+                sale_date,
+                total_money: productSummary.total_money,
+                total_quantity: productSummary.total_quantity,
+                from_position,
+                to_position,
+                exchange_rate,
+                sub_fee,
+                products,
             };
-        });
-        const exchange_rate = 1;
-        const sub_fee = 0;
-        const productSummary = calculateProductSummary(this.listProducts, exchange_rate, sub_fee);
-        this.transferInvoice = {
-            sale_date,
-            total_money: productSummary.total_money,
-            total_quantity: productSummary.total_quantity,
-            from_position,
-            to_position,
-            exchange_rate,
-            sub_fee,
-            products,
-        };
-        this.kaiService.createTransferInvoice(this.transferInvoice).subscribe(val => {
-            alert('Lưu Thành Công');
-            this.getMobiles();
-            this.displayTransferModal = false;
-        });
+            this.kaiService.createTransferInvoice(this.transferInvoice).subscribe(val => {
+                alert('Lưu Thành Công');
+                this.getMobiles();
+                this.displayTransferModal = false;
+            });
+        }
     }
 
     createForSaleInvoice() {
@@ -166,6 +180,18 @@ export class ProductsComponent implements OnInit {
             this.displayForSaleModal = false;
         });
 
+    }
+
+    onChangeTransferSource(source: PRODUCT_SOURCE) {
+        this.transferSource = source;
+    }
+
+    onChangeTransferDestination(source: PRODUCT_SOURCE) {
+        this.transferDestination = source;
+        if (this.transferSource !== this.transferDestination && this.transferDestination !== PRODUCT_SOURCE.SHOP_VN) {
+            this.rate_exchange = 1.0;
+            this.sub_fee = 0;
+        }
     }
 
 }

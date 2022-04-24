@@ -47,7 +47,7 @@ export class CompletedInvoicesComponent implements OnInit {
     }
 
     getOrdersCompleted() {
-        this.kaiService.getCompletedForSaleInvoices().subscribe(completedForSaleInvoices => {
+        this.kaiService.getKaiCompletedInvoices().subscribe(completedForSaleInvoices => {
                 this.originalData = completedForSaleInvoices;
                 this.data = completedForSaleInvoices;
             },

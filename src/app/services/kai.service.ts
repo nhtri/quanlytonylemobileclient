@@ -127,6 +127,30 @@ export class KaiService extends RestService {
         return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/kai/detail/${invoiceId}`);
     }
 
+    cancelTransferringInvoiceProduct(invoiceId: number, productId: number): Observable<any> {
+        return this.getAll<InvoiceDetail>(
+            `${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/cancel/${invoiceId}/${productId}`,
+        );
+    }
+
+    approveTransferringInvoiceProduct(invoiceId: number, productId: number): Observable<any> {
+        return this.getAll<InvoiceDetail>(
+            `${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/approve/${invoiceId}/${productId}`,
+        );
+    }
+
+    approveTransferringInvoice(invoiceId: number): Observable<any> {
+        return this.getAll<InvoiceDetail>(
+            `${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/approve/${invoiceId}`,
+        );
+    }
+
+    cancelTransferringInvoice(invoiceId: number): Observable<any> {
+        return this.getAll<InvoiceDetail>(
+            `${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/cancel/${invoiceId}`,
+        );
+    }
+
     // General Invoice
     getKaiPendingInvoices(): Observable<InvoiceDetail[]> {
         return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/pending/kai`);
