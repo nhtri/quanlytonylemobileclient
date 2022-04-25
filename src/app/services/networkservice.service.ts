@@ -512,8 +512,7 @@ export class NetworkserviceService {
     }
 
     deletesanphamtonkho(data): Observable<any> {
-        const sanphamtonkho = `https://quanlytonylemobile.herokuapp.com/deletesanphamtonkho`;
-        return this.httpClient.post<any>(sanphamtonkho, data, this.httpOptions);
+        return this.httpClient.delete(`https://quanlytonylemobile.herokuapp.com/products/`+data)
     }
     deletesanphamtonkhojp(data): Observable<any> {
        

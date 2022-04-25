@@ -79,11 +79,7 @@ export class QuanlychiComponent implements OnInit {
       this.service.editquanlychi([this.sotien, this.date, this.mucdich, this.id]).subscribe(val => {
         console.log(val)
         alert("Chỉnh sửa thành công")
-        this.service.getquanlychi().subscribe(val => {
-          console.log(val)
-          this.data = val
-
-        });
+        window.location.reload()
       });
     }
   }

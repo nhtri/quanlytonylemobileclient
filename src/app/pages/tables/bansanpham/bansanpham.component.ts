@@ -100,7 +100,9 @@ export class BansanphamComponent implements OnInit {
   }
 
   hoantat() {
-
+if(this.hinhthucthanhtoan=='default'){
+  this.hinhthucthanhtoan = "tienmat"
+}
     console.log('this.datas',this.datas)
     let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
     let today = new Date();

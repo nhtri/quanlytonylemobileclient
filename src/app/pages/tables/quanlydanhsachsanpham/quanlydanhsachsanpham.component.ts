@@ -120,14 +120,14 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
     pager: false,
     columns: {
-      id: {
-        title: 'ID',
-        type: 'string',
-        // filter: false,
-        editable: false,
-        addable: false,
-        hidden:true,
-      },
+      // id: {
+      //   title: 'ID',
+      //   type: 'string',
+      //   // filter: false,
+      //   editable: false,
+      //   addable: false,
+      //   hidden:true,
+      // },
       // nhomsanpham: {
       //   title: 'Nhóm Sản Phẩm',
       //   editor: {

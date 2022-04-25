@@ -1,26 +1,34 @@
 :host {
-    ::ng-deep .nhomsanpham .ng2-smart-title {
-      width: 120px;
-    }
-    ::ng-deep .tensanpham .ng2-smart-title {
-        width: 120px;
-      }
-    ::ng-deep .dungluong .ng2-smart-title {
-        width: 100px;
-      }
-      ::ng-deep .mau .ng2-smart-title {
-        width: 40px;
-      }
-      ::ng-deep .loaisanpham .ng2-smart-title {
-        width: 120px;
-      }
-      ::ng-deep .phienban .ng2-smart-title {
-        width: 80px;
-      }
-      ::ng-deep .imei .ng2-smart-title {
-        width: 140px;
-      }
-      ::ng-deep .soluong .ng2-smart-title {
-        width: 80px;
-      }
-    }
+
+  ::ng-deep .nhomsanpham .ng2-smart-title {
+    width: 120px;
+  }
+
+  ::ng-deep .tensanpham .ng2-smart-title {
+    width: 160px;
+  }
+
+  // ::ng-deep .dungluong .ng2-smart-title {
+  //   width: 100px;
+  // }
+
+  ::ng-deep .mau .ng2-smart-title {
+    width: 40px;
+  }
+
+  // ::ng-deep .loaisanpham .ng2-smart-title {
+  //   width: 120px;
+  // }
+
+  // ::ng-deep .phienban .ng2-smart-title {
+  //   width: 80px;
+  // }
+
+  ::ng-deep .imei .ng2-smart-title {
+    width: 140px;
+  }
+
+  ::ng-deep .soluong .ng2-smart-title {
+    width: 60px;
+  }
+}

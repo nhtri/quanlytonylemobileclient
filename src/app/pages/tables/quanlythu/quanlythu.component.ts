@@ -106,26 +106,27 @@ export class QuanlythuComponent implements OnInit {
       this.service.editquanlythu([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, this.id]).subscribe(val => {
         console.log(val)
         alert("Chỉnh sửa thành công")
-        this.service.getquanlythu().subscribe(val => {
-          this.data = []
-          this.sotien = "", this.date = "", this.mucdich = "", this.id = ""
-          console.log(val)
-          val.forEach(element => {
-            if (element.mucdich.includes('dh')) {
-              this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
-                element.mucdich = 'Mã ĐH: ' + data[0].madonhang
-                this.data.push(element)
-              })
-            }
-            else {
-              this.data.push(element)
-            }
+        // this.service.getquanlythu().subscribe(val => {
+        //   this.data = []
+        //   this.sotien = "", this.date = "", this.mucdich = "", this.id = ""
+        //   console.log(val)
+        //   val.forEach(element => {
+        //     if (element.mucdich.includes('dh')) {
+        //       this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
+        //         element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+        //         this.data.push(element)
+        //       })
+        //     }
+        //     else {
+        //       this.data.push(element)
+        //     }
 
-          });
+        //   });
 
 
 
-        });
+        // });
+        window.location.reload()
       });
     }
 
@@ -266,12 +267,17 @@ export class QuanlythuComponent implements OnInit {
       this.data = []
       console.log(event.target.value)
       this.hinhthucthanhtoanfilter = event.target.value
-      this.datatemp.forEach(element => {
-        if (element.hinhthucthanhtoan == this.hinhthucthanhtoanfilter) {
-          this.data.push(element)
-        }
+      if (this.hinhthucthanhtoanfilter != 'default') {
+        this.datatemp.forEach(element => {
+          if (element.hinhthucthanhtoan == this.hinhthucthanhtoanfilter) {
+            this.data.push(element)
+          }
 
-      });
+        });
+      }
+      else {
+        this.data = this.datatemp
+      }
     }
     if (this.date1 != "" && this.date2 == "") {
 
