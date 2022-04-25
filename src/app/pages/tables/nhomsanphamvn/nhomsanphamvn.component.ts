@@ -3,19 +3,19 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 
 @Component({
-  selector: 'ngx-nhomsanpham',
-  templateUrl: './nhomsanpham.component.html',
-  styleUrls: ['./nhomsanpham.component.scss']
+  selector: 'ngx-nhomsanphamvn',
+  templateUrl: './nhomsanphamvn.component.html',
+  styleUrls: ['./nhomsanphamvn.component.scss']
 })
-export class NhomsanphamComponent implements OnInit {
+export class NhomsanphamvnComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
   data
   constructor(private service: NetworkserviceService) {
 
     this.service.getnhomsanpham().subscribe(val => {
-      this.source.load(val);
-      this.data = val
+      this.source.load(val.filer(data=>data.location=="SHOP_VN"));
+      this.data = val.filer(data=>data.location=="SHOP_VN")
     });
 
 
@@ -82,7 +82,7 @@ export class NhomsanphamComponent implements OnInit {
       this.service.nhomsanpham(
         [
           event['newData']['nhomsanpham'],
-          "WAREHOUSE"
+          "SHOP_VN"
         ]
       )
         .subscribe(data => {
@@ -113,7 +113,8 @@ export class NhomsanphamComponent implements OnInit {
 
           this.service.nhomsanpham(
             [
-              event['newData']['nhomsanpham']
+              event['newData']['nhomsanpham'],
+              "SHOP_VN"
             ]
           )
             .subscribe(data => {

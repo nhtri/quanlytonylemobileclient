@@ -119,7 +119,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
             children: [
                 {
                     title: 'Quản Lý Nhóm Sản Phẩm',
-                    link: '/pages/tables/nhomsanpham',
+                    link: '/pages/tables/nhomsanphamjp',
                 },
                 // {
                 //     title: 'Quản Lý Tên Sản Phẩm',
@@ -232,7 +232,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
             children: [
                 {
                     title: 'Quản Lý Nhóm Sản Phẩm',
-                    link: '/pages/tables/nhomsanpham',
+                    link: '/pages/tables/nhomsanphamvn',
                 },
                 // {
                 //     title: 'Quản Lý Tên Sản Phẩm',
