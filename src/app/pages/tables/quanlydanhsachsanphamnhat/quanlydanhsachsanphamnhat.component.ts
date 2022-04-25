@@ -120,13 +120,13 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
 
     pager: false,
     columns: {
-      id: {
-        title: 'ID',
-        type: 'string',
-        // filter: false,
-        editable: false,
-        addable: false,
-      },
+      // id: {
+      //   title: 'ID',
+      //   type: 'string',
+      //   // filter: false,
+      //   editable: false,
+      //   addable: false,
+      // },
       // nhomsanpham: {
       //   title: 'Nhóm Sản Phẩm',
       //   editor: {
