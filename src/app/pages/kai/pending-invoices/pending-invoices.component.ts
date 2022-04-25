@@ -104,8 +104,7 @@ export class PendingInvoicesComponent implements OnInit {
             sale_date: this.order.sale_date,
             quantity: products.length,
         };
-
-        this.kaiService.approveForSaleInvoice(forSaleInvoiceDto, this.order.id).subscribe(val => {
+        this.kaiService.approveForSaleInvoice(forSaleInvoiceDto, this.order.invoice_id).subscribe(val => {
             alert('Lưu Thành Công');
             this.getOrdersPending();
             this.displayDetailModal = false;
@@ -114,7 +113,7 @@ export class PendingInvoicesComponent implements OnInit {
     }
 
     cancelForSaleInvoice() {
-        this.kaiService.cancelForSaleInvoice(this.order.id).subscribe((val) => {
+        this.kaiService.cancelForSaleInvoice(this.order.invoice_id).subscribe((val) => {
             alert('Hủy Đơn Hàng Thành Công');
             this.getOrdersPending();
             this.displayDetailModal = false;

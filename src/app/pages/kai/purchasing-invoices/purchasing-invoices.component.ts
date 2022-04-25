@@ -115,10 +115,10 @@ export class PurchasingInvoicesComponent implements OnInit {
         this.router.navigate([KAI_PAGES.PURCHASING_INVOICE], {state: rowData}).then(r => r);
     }
 
-    onRowDelete(val, index) {
-        const isDel = confirm(`Bạn có chắc chắn muốn xóa đơn thu mua của ${val.name_vietnamese} không?`);
+    onRowDelete(invoice, index) {
+        const isDel = confirm(`Bạn có chắc chắn muốn xóa đơn thu mua của ${invoice.customer.name_vietnamese} không?`);
         if (isDel === true) {
-            this.kaiService.deletePurchasingInvoice(val.invoice_id).subscribe(
+            this.kaiService.deletePurchasingInvoice(invoice.invoice_id).subscribe(
                 data => {
                     alert('Xóa Thành Công');
                     location.reload();
