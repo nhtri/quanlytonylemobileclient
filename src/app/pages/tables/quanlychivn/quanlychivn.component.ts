@@ -70,7 +70,7 @@ export class QuanlychivnComponent implements OnInit {
   hoantat() {
     console.log(this.sotien, this.mucdich, this.date)
     if (this.id == "") {
-      this.service.quanlychi([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, 'WAREHOUSE']).subscribe(val => {
+      this.service.quanlychi([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, 'SHOP_VN']).subscribe(val => {
         console.log(val)
         alert("Tạo mới thành công")
         window.location.reload()

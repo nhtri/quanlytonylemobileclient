@@ -126,6 +126,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         // filter: false,
         editable: false,
         addable: false,
+        hidden:true,
       },
       // nhomsanpham: {
       //   title: 'Nhóm Sản Phẩm',
