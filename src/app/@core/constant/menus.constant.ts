@@ -5,35 +5,37 @@ import { KAI_PAGES } from './pages.constant';
 export const KAI_MENU_ITEMS: MobileMenuItem[] = [
     {
         title: 'Kai',
-        group: true,
-    },
-    {
-        title: 'Quản Lý Người Bán',
-        link: KAI_PAGES.DATA_CUSTOMERS,
-    },
-    {
-        title: 'Quản Lý Đơn Thu Mua',
-        link: KAI_PAGES.DATA_PURCHASING_INVOICES,
-    },
-    {
-        title: 'DS Máy Trong Kho',
-        link: KAI_PAGES.DATA_PRODUCTS,
-    },
-    {
-        title: 'DS ĐH Đang Xữ Lý',
-        link: KAI_PAGES.DATA_PENDING_ORDERS,
-    },
-    {
-        title: 'DS ĐH Hoàn Thành',
-        link: KAI_PAGES.DATA_COMPLETED_ORDERS,
-    },
-    {
-        title: 'Quản Lý Thu Chi',
-        link: KAI_PAGES.STATISTICS,
-    },
-    {
-        title: 'Quản Lý Máy',
-        link: KAI_PAGES.DATA_DEVICES,
+        icon: 'shopping-cart-outline',
+        children: [
+            {
+                title: 'Quản Lý Người Bán',
+                link: KAI_PAGES.DATA_CUSTOMERS,
+            },
+            {
+                title: 'Quản Lý Đơn Thu Mua',
+                link: KAI_PAGES.DATA_PURCHASING_INVOICES,
+            },
+            {
+                title: 'DS Máy Trong Kho',
+                link: KAI_PAGES.DATA_PRODUCTS,
+            },
+            {
+                title: 'DS ĐH Đang Xữ Lý',
+                link: KAI_PAGES.DATA_PENDING_ORDERS,
+            },
+            {
+                title: 'DS ĐH Hoàn Thành',
+                link: KAI_PAGES.DATA_COMPLETED_ORDERS,
+            },
+            {
+                title: 'Quản Lý Thu Chi',
+                link: KAI_PAGES.STATISTICS,
+            },
+            {
+                title: 'Quản Lý Máy',
+                link: KAI_PAGES.DATA_DEVICES,
+            },
+        ],
     },
 ];
 
