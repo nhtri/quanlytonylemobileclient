@@ -143,25 +143,26 @@ export class QuanlythuvnComponent implements OnInit {
     this.service.deletequanlythu([value]).subscribe(val => {
       console.log(val)
       alert("Xoá thành công")
-      this.service.getquanlythuvn().subscribe(val => {
-        this.data = []
-        console.log(val)
-        val.forEach(element => {
-          if (element.mucdich.includes('dh')) {
-            this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
-              element.mucdich = 'Mã ĐH: ' + data[0].madonhang
-              this.data.push(element)
-            })
-          }
-          else {
-            this.data.push(element)
-          }
+      window.location.reload()
+      // this.service.getquanlythuvn().subscribe(val => {
+      //   this.data = []
+      //   console.log(val)
+      //   val.forEach(element => {
+      //     if (element.mucdich.includes('dh')) {
+      //       this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
+      //         element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+      //         this.data.push(element)
+      //       })
+      //     }
+      //     else {
+      //       this.data.push(element)
+      //     }
 
-        });
+      //   });
 
 
 
-      });
+      // });
     });
   }
 
@@ -430,5 +431,9 @@ export class QuanlythuvnComponent implements OnInit {
       }
     }
 
+  }
+
+  refresh(){
+    window.location.reload()
   }
 }

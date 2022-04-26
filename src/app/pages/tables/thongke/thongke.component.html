@@ -73,6 +73,8 @@
     </table>
 
   </nb-card-body>
-  <nb-card-footer><div style="color:#2e61fa">Lợi nhuận theo tháng: {{tongloinhuantheothang|number}}</div></nb-card-footer>
+  <nb-card-footer *ngIf="date1!=''"><div style="color:#2e61fa" >Lợi nhuận theo tháng: {{tongloinhuantheothang|number}}</div></nb-card-footer>
+  <nb-card-footer *ngIf="date1==''"><div style="color:#2e61fa" >Lợi nhuận theo tháng: {{tongloinhuan|number}}</div></nb-card-footer>
+
   <nb-card-footer><div style="color: blue;">Tổng lợi nhuận: {{tongloinhuan|number}}</div></nb-card-footer>
 </nb-card>

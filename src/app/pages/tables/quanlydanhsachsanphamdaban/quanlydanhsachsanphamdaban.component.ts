@@ -42,6 +42,7 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
   datafilter = []
 
   dataorigin =[]
+  role=''
   constructor(private service: NetworkserviceService, private router: Router) {
 
     this.service.getdanhsachsanphamdabanquanlymobile().subscribe(value => {
@@ -148,6 +149,7 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
 
 
   ngOnInit(): void {
+    this.role = localStorage.getItem('role')
   }
 
 

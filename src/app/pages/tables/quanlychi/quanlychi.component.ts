@@ -93,14 +93,17 @@ export class QuanlychiComponent implements OnInit {
     this.service.deletequanlychi([value]).subscribe(val => {
       console.log(val)
       alert("Xoá thành công")
-      this.service.getquanlychi().subscribe(val => {
-        console.log(val)
-        this.data = val
-      });
+      // this.service.getquanlychi().subscribe(val => {
+      //   console.log(val)
+      //   this.data = val
+      // });
+      window.location.reload()
     });
   }
 
-
+  refresh(){
+    window.location.reload()
+  }
 
   change1() {
     this.tienmat = 0

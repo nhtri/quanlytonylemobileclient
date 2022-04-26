@@ -24,7 +24,7 @@
           <th>Loại sản phẩm</th>
           <th>Phiên bản</th> -->
           <th>Imei</th>
-          <th>Giá tiền thu</th>
+          <th *ngIf="role == 'admin'">Giá tiền thu</th>
           <th>Giá tiền bán</th>
           <th>Số Lượng</th>
           <th>Ngày bán</th>
@@ -95,7 +95,7 @@
           <td>{{sanpham.loaisanpham}}</td>
           <td>{{sanpham.phienban}}</td> -->
           <td>{{sanpham.imei}}</td>
-          <td>{{sanpham.giatien}}</td>
+          <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
           <td>{{sanpham.giaban}}</td>
           <td>{{sanpham.soluong}}</td>
           <td>{{sanpham.ngayban| date: 'dd/MM/yyyy'}}</td>
