@@ -14,8 +14,8 @@ export class NhomsanphamComponent implements OnInit {
   constructor(private service: NetworkserviceService) {
 
     this.service.getnhomsanpham().subscribe(val => {
-      this.source.load(val.filer(data=>data.location=="WAREHOUSE"));
-      this.data = val.filer(data=>data.location=="WAREHOUSE")
+      this.source.load(val.filter(data=>data.vitri=="WAREHOUSE"));
+      this.data = val.filter(data=>data.vitri=="WAREHOUSE")
     });
 
 

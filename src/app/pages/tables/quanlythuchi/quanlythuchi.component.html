@@ -8,13 +8,14 @@
   <nb-card-body>
 
     <div style="display: flex;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1"
-      (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()">
-  </div>
-  <br>
+        (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()">
+        <i class="fa fa-refresh" style="font-size:18px ;margin-left: 15px;" (click)="refresh()"></i>
+      </div>
+    <br>
 
     <table class="styled-table" id="excel-table">
 
- 
+
       <thead>
         <tr>
           <th>Ngày tạo</th>
@@ -39,7 +40,13 @@
 
       </tbody>
     </table>
-<br/>
-<div>Tổng thu chi: {{totalthu - totalchi}}</div>
+    <br />
+    <div *ngIf="totalthutheothang == 0 && totalchitheothang == 0" style="color: #2e61fa;">Tổng thu chi theo tháng:
+      {{totalthu - totalchi}}</div>
+
+    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Tổng thu chi theo tháng: {{totalthutheothang - totalchitheothang}}</div>
   </nb-card-body>
+  <nb-card-footer>
+    <div style="color: blue; ">Tổng thu chi: {{totalthu - totalchi}}</div>
+  </nb-card-footer>
 </nb-card>

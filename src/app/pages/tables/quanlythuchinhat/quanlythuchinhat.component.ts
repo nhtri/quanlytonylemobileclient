@@ -28,6 +28,9 @@ export class QuanlythuchinhatComponent implements OnInit {
   datatemp = []
   totalthu = 0
   totalchi = 0
+
+  totalthutheothang = 0
+  totalchitheothang = 0
   constructor(private service: NetworkserviceService) {
     // this.service.getquanlythu().subscribe(val => {
     //   console.log(val)
@@ -78,7 +81,7 @@ export class QuanlythuchinhatComponent implements OnInit {
         }
       });
 
-      await new Promise(f => setTimeout(f, 3000));
+      await new Promise(f => setTimeout(f, 5000));
       const res1 = this.datathu.reduce((acc, curr) => {
         if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
         acc[curr.ngaytao].push(curr);
@@ -258,6 +261,8 @@ export class QuanlythuchinhatComponent implements OnInit {
 
 
   change1() {
+    this.totalchitheothang = 0
+    this.totalthutheothang = 0
     if (this.date2 == "") {
       this.datatongedit = []
       console.log(this.date1, this.date2)
@@ -289,8 +294,18 @@ export class QuanlythuchinhatComponent implements OnInit {
       });
       console.log(this.daterangefilter)
     }
+    this.datatongedit.forEach(element => {
+      if (element.tienchi != "") {
+        this.totalchitheothang += parseInt(element.tienchi)
+      }
+      if (element.tienthu != "") {
+        this.totalthutheothang += parseInt(element.tienthu)
+      }
+    });
   }
   change2() {
+    this.totalchitheothang = 0
+    this.totalthutheothang = 0
     this.datatongedit = []
     this.daterangefilter = []
     console.log(this.date1, this.date2)
@@ -310,5 +325,17 @@ export class QuanlythuchinhatComponent implements OnInit {
 
     });
     console.log(this.daterangefilter)
+    this.datatongedit.forEach(element => {
+      if (element.tienchi != "") {
+        this.totalchitheothang += parseInt(element.tienchi)
+      }
+      if (element.tienthu != "") {
+        this.totalthutheothang += parseInt(element.tienthu)
+      }
+    });
+  }
+
+  refresh(){
+    window.location.reload()
   }
 }
