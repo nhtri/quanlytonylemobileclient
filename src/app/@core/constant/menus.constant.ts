@@ -10,31 +10,67 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
         children: [
             {
                 title: 'Quản Lý Người Bán',
-                link: KAI_PAGES.DATA_CUSTOMERS,
+                icon: 'people-outline',
+                children: [
+                    {
+                        title: 'DS Người Bán',
+                        link: KAI_PAGES.DATA_CUSTOMERS,
+                    },
+                ],
             },
             {
-                title: 'Quản Lý Đơn Thu Mua',
-                link: KAI_PAGES.DATA_PURCHASING_INVOICES,
+                title: 'Quản Lý Mua Hàng',
+                children: [
+                    {
+                        title: 'Nhóm Sản Phẩm',
+                    },
+                    {
+                        title: 'DS Máy Trong Kho',
+                        link: KAI_PAGES.DATA_PRODUCTS,
+                    },
+                    {
+                        title: 'Quản Lý Máy',
+                        link: KAI_PAGES.DATA_DEVICES,
+                    },
+                    {
+                        title: 'Quản Lý Đơn Thu Mua',
+                        link: KAI_PAGES.DATA_PURCHASING_INVOICES,
+                    },
+                ],
             },
             {
-                title: 'DS Máy Trong Kho',
-                link: KAI_PAGES.DATA_PRODUCTS,
-            },
-            {
-                title: 'DS ĐH Đang Xữ Lý',
-                link: KAI_PAGES.DATA_PENDING_ORDERS,
-            },
-            {
-                title: 'DS ĐH Hoàn Thành',
-                link: KAI_PAGES.DATA_COMPLETED_ORDERS,
+                title: 'Quản Lý Đơn Hàng',
+                children: [
+                    {
+                        title: 'DS ĐH Đang Xữ Lý',
+                        link: KAI_PAGES.DATA_PENDING_ORDERS,
+                    },
+                    {
+                        title: 'DS ĐH Hoàn Thành',
+                        link: KAI_PAGES.DATA_COMPLETED_ORDERS,
+                    },
+                ],
             },
             {
                 title: 'Quản Lý Thu Chi',
                 link: KAI_PAGES.STATISTICS,
             },
             {
-                title: 'Quản Lý Máy',
-                link: KAI_PAGES.DATA_DEVICES,
+                title: 'Quản Lý Chuyển Kho',
+                icon: 'car-outline',
+                children: [
+                    {
+                        title: 'Chuyển Kho Đi',
+                        icon: 'diagonal-arrow-right-up-outline',
+                        children: [
+                            {
+                                title: 'DS Hàng Chuyển Đi',
+                                icon: 'paper-plane-outline',
+                                link: KAI_PAGES.DATA_OUTGOING_TRANSFER_PRODUCTS,
+                            },
+                        ],
+                    },
+                ],
             },
         ],
     },
@@ -161,6 +197,40 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                     {
                         title: 'DS ĐH Hoàn Thành',
                         link: KAI_PAGES.DATA_COMPLETED_ORDERS_JP,
+                    },
+                ],
+            },
+            {
+                title: 'Quản Lý Chuyển Kho',
+                icon: 'car-outline',
+                children: [
+                    {
+                        title: 'Chuyển Kho Đi',
+                        icon: 'diagonal-arrow-right-up-outline',
+                        children: [
+                            {
+                                title: 'DS Hàng Chuyển Đi',
+                                icon: 'paper-plane-outline',
+                            },
+                        ],
+                    },
+                    {
+                        title: 'Chuyển Kho Đến',
+                        icon: 'diagonal-arrow-left-down-outline',
+                        children: [
+                            {
+                                title: 'SP Đang Đến',
+                                icon: 'collapse-outline',
+                            },
+                            {
+                                title: 'SP Đã Đến',
+                                icon: 'done-all-outline',
+                            },
+                            {
+                                title: 'SP Thất Lạc',
+                                icon: 'eye-off-outline',
+                            },
+                        ],
                     },
                 ],
             },
@@ -291,6 +361,40 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                     },
                 ],
             },
+            {
+                title: 'Quản Lý Chuyển Kho',
+                icon: 'car-outline',
+                children: [
+                    {
+                        title: 'Chuyển Kho Đi',
+                        icon: 'diagonal-arrow-right-up-outline',
+                        children: [
+                            {
+                                title: 'DS Hàng Chuyển Đi',
+                                icon: 'paper-plane-outline',
+                            },
+                        ],
+                    },
+                    {
+                        title: 'Chuyển Kho Đến',
+                        icon: 'diagonal-arrow-left-down-outline',
+                        children: [
+                            {
+                                title: 'SP Đang Đến',
+                                icon: 'collapse-outline',
+                            },
+                            {
+                                title: 'SP Đã Đến',
+                                icon: 'done-all-outline',
+                            },
+                            {
+                                title: 'SP Thất Lạc',
+                                icon: 'eye-off-outline',
+                            },
+                        ],
+                    },
+                ],
+            },
         ],
     }];
 
@@ -418,6 +522,40 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                     },
                 ],
             },
+            {
+                title: 'Quản Lý Chuyển Kho',
+                icon: 'car-outline',
+                children: [
+                    {
+                        title: 'Chuyển Kho Đi',
+                        icon: 'diagonal-arrow-right-up-outline',
+                        children: [
+                            {
+                                title: 'DS Hàng Chuyển Đi',
+                                icon: 'paper-plane-outline',
+                            },
+                        ],
+                    },
+                    {
+                        title: 'Chuyển Kho Đến',
+                        icon: 'diagonal-arrow-left-down-outline',
+                        children: [
+                            {
+                                title: 'SP Đang Đến',
+                                icon: 'collapse-outline',
+                            },
+                            {
+                                title: 'SP Đã Đến',
+                                icon: 'done-all-outline',
+                            },
+                            {
+                                title: 'SP Thất Lạc',
+                                icon: 'eye-off-outline',
+                            },
+                        ],
+                    },
+                ],
+            },
         ],
     }];
 
@@ -473,7 +611,7 @@ export const GENERAL_MENU_ITEMS: MobileMenuItem[] = [
         title: 'Đăng Nhập',
         icon: 'lock-outline',
         link: '/pages/tables/login',
-        roles: null,
+        roles: [USER_ROLE.GUEST],
         // hidden: localStorage.getItem('role') != null,
     },
     {
@@ -487,7 +625,7 @@ export const GENERAL_MENU_ITEMS: MobileMenuItem[] = [
         title: 'Đăng Xuất',
         icon: 'lock-outline',
         link: '/pages/tables/logout',
-        roles: null,
+        roles: [USER_ROLE.ADMIN, USER_ROLE.KAI, USER_ROLE.WAREHOUSE, USER_ROLE.SHOP_VN, USER_ROLE.SHOP_JP],
         // hidden: localStorage.getItem('role') != null,
     },
 ];

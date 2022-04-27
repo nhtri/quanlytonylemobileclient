@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DialogModule } from 'primeng/dialog';
 import { ProductStatusPipe } from '../../@core/shared/pipes/product-status.pipe';
 import { DropdownModule } from 'primeng/dropdown';
+import { PositionTitlePipe } from '../../@core/shared/pipes/position-title.pipe';
 
 @NgModule({
     imports: [
@@ -30,6 +31,7 @@ import { DropdownModule } from 'primeng/dropdown';
         KaiComponent,
         JobTitlePipe,
         ProductStatusPipe,
+        PositionTitlePipe,
     ],
 })
 export class KaiModule {

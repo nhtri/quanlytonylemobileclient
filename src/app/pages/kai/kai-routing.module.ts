@@ -18,6 +18,9 @@ import { PendingInvoicesWarehouseComponent } from './pending-invoices-warehouse/
 import {
     CompletedInvoicesWarehouseComponent,
 } from './completed-invoices-warehouse/completed-invoices-warehouse.component';
+import { IncomingTransferComponent } from './incoming-transfer/incoming-transfer.component';
+import { IncomingTransferProductsComponent } from './incoming-transfer-products/incoming-transfer-products.component';
+import { OutgoingTransferProductsComponent } from './outgoing-transfer-products/outgoing-transfer-products.component';
 
 const KAI_ROUTES: Routes = [{
     path: '',
@@ -83,6 +86,10 @@ const KAI_ROUTES: Routes = [{
             path: 'devices',
             component: DevicesComponent,
         },
+        {
+            path: 'outgoing-transfer/products',
+            component: OutgoingTransferProductsComponent,
+        },
     ],
 }];
 
@@ -109,4 +116,7 @@ export const KAI_COMPONENTS = [
     CompletedInvoicesVnComponent,
     PendingInvoicesWarehouseComponent,
     CompletedInvoicesWarehouseComponent,
+    IncomingTransferComponent,
+    IncomingTransferProductsComponent,
+    OutgoingTransferProductsComponent,
 ];

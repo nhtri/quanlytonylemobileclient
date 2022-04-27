@@ -11,6 +11,7 @@ export const enum KAI_PAGES {
     DATA_COMPLETED_ORDERS_VN = '/pages/kai/completed-orders-vn',
     DATA_COMPLETED_ORDERS_WAREHOUSE = '/pages/kai/completed-orders-warehouse',
     DATA_DEVICES = '/pages/kai/devices',
+    DATA_OUTGOING_TRANSFER_PRODUCTS = '/pages/kai/outgoing-transfer/products',
     STATISTICS = '/pages/kai/statistics',
     CUSTOMER = '/pages/kai/customer',
     PURCHASING_INVOICE = '/pages/kai/invoice',
