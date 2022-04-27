@@ -125,6 +125,9 @@ export const enum USER_ROLE {
     EMPLOYEE = 'employee',
     GUEST = 'guest',
     KAI = 'kai',
+    WAREHOUSE = 'khohang',
+    SHOP_JP = 'cuahangnhat',
+    SHOP_VN = 'cuahangvietnam',
 }
 
 export const USERS: User[] = [

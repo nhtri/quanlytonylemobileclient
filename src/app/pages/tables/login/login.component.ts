@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+import { KAI_PAGES } from '../../../@core/constant/pages.constant';
 
 @Component({
     selector: 'ngx-login',
@@ -34,6 +35,9 @@ export class LoginComponent implements OnInit {
         }
         if (this.role == 'cuahangnhat') {
             this.router.navigateByUrl('/pages/tables/danhsachsanphamjp')
+        }
+        if (this.role === 'kai') {
+            this.router.navigateByUrl(KAI_PAGES.DATA_PRODUCTS).then(r => r);
         }
         // if(this.role!='admin' && this.role!=null)
         // {
