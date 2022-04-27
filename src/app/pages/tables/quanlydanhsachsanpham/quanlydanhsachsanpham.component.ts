@@ -31,10 +31,11 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
     this.service.getproductgroups().subscribe(val => {
       // let data = val.map(val => val.name)
       let data=val
-      let datanhomsanphamfilter
+      let datanhomsanphamfilter = []
       data.forEach(data => {
         this.datanhomsanpham.push({ "value": data.id, "title": data.name })
         datanhomsanphamfilter.push({ "value": data.name, "title": data.name })
+        console.log('datanhomsanphamfilter',datanhomsanphamfilter, 'datanhomsanpham', this.datanhomsanpham)
       });
       console.log(this.datanhomsanpham)
       this.settings.columns.group_name.editor.config.list = this.datanhomsanpham
@@ -323,6 +324,7 @@ this.dataedit=[]
     // el.loaisanpham === (event['newData']['loaisanpham']) &&
     // el.phienban === (event['newData']['phienban'])
     // )) {
+      console.log(event['newData']['imei'])
       this.service.sanphamtonkhovn(
         {
           'imei':event['newData']['imei'],
@@ -332,7 +334,8 @@ this.dataedit=[]
           'quantity' :event['newData']['quantity'],
          'price': event['newData']['price'],
          'position' :'WAREHOUSE',
-          'source':'WAREHOUSE'
+          'source':'WAREHOUSE',
+          'product_group_id':event['newData']['group_name'],
         }
       )
         .subscribe(data => {
