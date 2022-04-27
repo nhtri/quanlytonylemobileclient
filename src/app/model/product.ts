@@ -9,6 +9,8 @@ export interface Product {
     quantity: number;
     transfer_quantity?: number;
     transfer_status?: TRANSFER_STATUS;
+    product_group_id?: number;
+    group_name?: string;
     price: number;
     position: PRODUCT_SOURCE;
     source: PRODUCT_SOURCE;

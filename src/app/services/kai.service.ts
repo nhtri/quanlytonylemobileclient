@@ -112,6 +112,18 @@ export class KaiService extends RestService {
         return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/kai/detail/${invoiceId}`);
     }
 
+    getShopVNForSaleInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/shop-vn/detail/${invoiceId}`);
+    }
+
+    getShopJPForSaleInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/shop-jp/detail/${invoiceId}`);
+    }
+
+    getWarehouseForSaleInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/warehouse/detail/${invoiceId}`);
+    }
+
     // Cancel for sale invoice
     cancelForSaleInvoice(invoiceId: number): Observable<any> {
         return this.get<any>(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}/cancel/${invoiceId}`);
@@ -125,6 +137,18 @@ export class KaiService extends RestService {
     // Get for sale invoice detail
     getKaiTransferringInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
         return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/kai/detail/${invoiceId}`);
+    }
+
+    getShopVNTransferringInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/shop-vn/detail/${invoiceId}`);
+    }
+
+    getShopJPTransferringInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/shop-jp/detail/${invoiceId}`);
+    }
+
+    getWarehouseTransferringInvoiceDetail(invoiceId: number): Observable<InvoiceDetail> {
+        return this.getAll<InvoiceDetail>(`${SERVICE_RESOURCES.TRANSFERRING_INVOICES}/warehouse/detail/${invoiceId}`);
     }
 
     cancelTransferringInvoiceProduct(invoiceId: number, productId: number): Observable<any> {
@@ -156,8 +180,32 @@ export class KaiService extends RestService {
         return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/pending/kai`);
     }
 
+    getShopJpPendingInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/pending/shop-jp`);
+    }
+
+    getShopVnPendingInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/pending/shop-vn`);
+    }
+
+    getWarehousePendingInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/pending/warehouse`);
+    }
+
     getKaiCompletedInvoices(): Observable<InvoiceDetail[]> {
         return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/completed/kai`);
+    }
+
+    getShopJPCompletedInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/completed/shop-jp`);
+    }
+
+    getShopVnCompletedInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/completed/shop-vn`);
+    }
+
+    getWarehouseCompletedInvoices(): Observable<InvoiceDetail[]> {
+        return this.getAll<InvoiceDetail[]>(`${SERVICE_RESOURCES.INVOICES}/completed/warehouse`);
     }
 
     // Transfer Invoice
