@@ -10,6 +10,14 @@ import { ProductsComponent } from './products/products.component';
 import { PendingInvoicesComponent } from './pending-invoices/pending-invoices.component';
 import { CompletedInvoicesComponent } from './completed-invoices/completed-invoices.component';
 import { DevicesComponent } from './devices/devices.component';
+import { PendingInvoicesJpComponent } from './pending-invoices-jp/pending-invoices-jp.component';
+import { CompletedInvoicesJpComponent } from './completed-invoices-jp/completed-invoices-jp.component';
+import { PendingInvoicesVnComponent } from './pending-invoices-vn/pending-invoices-vn.component';
+import { CompletedInvoicesVnComponent } from './completed-invoices-vn/completed-invoices-vn.component';
+import { PendingInvoicesWarehouseComponent } from './pending-invoices-warehouse/pending-invoices-warehouse.component';
+import {
+    CompletedInvoicesWarehouseComponent,
+} from './completed-invoices-warehouse/completed-invoices-warehouse.component';
 
 const KAI_ROUTES: Routes = [{
     path: '',
@@ -40,8 +48,32 @@ const KAI_ROUTES: Routes = [{
             component: PendingInvoicesComponent,
         },
         {
+            path: 'pending-orders-jp',
+            component: PendingInvoicesJpComponent,
+        },
+        {
+            path: 'pending-orders-vn',
+            component: PendingInvoicesVnComponent,
+        },
+        {
+            path: 'pending-orders-warehouse',
+            component: PendingInvoicesWarehouseComponent,
+        },
+        {
             path: 'completed-orders',
             component: CompletedInvoicesComponent,
+        },
+        {
+            path: 'completed-orders-jp',
+            component: CompletedInvoicesJpComponent,
+        },
+        {
+            path: 'completed-orders-vn',
+            component: CompletedInvoicesVnComponent,
+        },
+        {
+            path: 'completed-orders-warehouse',
+            component: CompletedInvoicesWarehouseComponent,
         },
         {
             path: 'statistics',
@@ -71,4 +103,10 @@ export const KAI_COMPONENTS = [
     PendingInvoicesComponent,
     CompletedInvoicesComponent,
     DevicesComponent,
+    PendingInvoicesJpComponent,
+    CompletedInvoicesJpComponent,
+    PendingInvoicesVnComponent,
+    CompletedInvoicesVnComponent,
+    PendingInvoicesWarehouseComponent,
+    CompletedInvoicesWarehouseComponent,
 ];

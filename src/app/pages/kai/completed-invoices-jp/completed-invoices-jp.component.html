@@ -1,0 +1,91 @@
+<nb-card>
+    <nb-card-header>
+        DS ĐƠN HÀNG HOÀN THÀNH
+    </nb-card-header>
+
+    <nb-card-body>
+        <div class="row filter-input-group">
+            <div class="col-9 col-md-9 form-inline">
+                <p-calendar [inputStyleClass]="'form-control'" [styleClass]="'my-calendar birthday-calendar'" placeholder="Từ Ngày"
+                            [(ngModel)]="orderCompletedSearch.from_date"
+                            dateFormat="dd-mm-yy" (onClickOutside)="onSearchOrderCompleted($event)"
+                            (ngModelChange)="onSearchOrderCompleted($event)" [ngModelOptions]="{standalone: true}"
+                            [monthNavigator]="true" [showButtonBar]="true" [yearNavigator]="true" [yearRange]="yearRange">
+                </p-calendar>
+                <p-calendar [inputStyleClass]="'form-control'" [styleClass]="'my-calendar birthday-calendar'" placeholder="Đến Ngày"
+                            [(ngModel)]="orderCompletedSearch.to_date"
+                            dateFormat="dd-mm-yy" (onClickOutside)="onSearchOrderCompleted($event)"
+                            (ngModelChange)="onSearchOrderCompleted($event)" [ngModelOptions]="{standalone: true}"
+                            [monthNavigator]="true" [showButtonBar]="true" [yearNavigator]="true" [yearRange]="yearRange">
+                </p-calendar>
+            </div>
+        </div>
+
+        <p-table dataKey="id" editMode="row" #tt [columns]="cols" [value]="data" [paginator]="true"
+                 [rows]="20" [tableStyleClass]="'kai-styled-table'"
+                 [tableStyle]="{'table-layout':'auto'}">
+
+            <ng-template pTemplate="header" let-columns class=" text-primary">
+                <tr>
+                    <th></th>
+                    <th pSortableColumn="sale_date" >Ngày Bán <p-sortIcon field="sale_date"></p-sortIcon> </th>
+                    <th>Số Máy Bán</th>
+                    <th>Tổng Số Tiền</th>
+                    <th></th>
+                </tr>
+            </ng-template>
+            <ng-template let-i="rowIndex" pTemplate="body" let-rowData let-columns="columns"
+                         let-editing="editing" let-ri="rowIndex">
+                <tr [pEditableRow]="rowData">
+                    <td>{{i + 1}}</td>
+                    <td>{{rowData.sale_date | date: dateFormat }}</td>
+                    <td>{{rowData.quantity}}</td>
+                    <td>{{rowData.total_money}}</td>
+                    <td style="text-align:center">
+                        <button (click)="onShowDetail($event, rowData)" pButton pRipple type="button"
+                                pInitEditableRow icon="pi pi-eye"
+                                class="p-button-rounded p-button-text"></button>
+
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>
+        <p-dialog
+                header="Chi Tiết Đơn Hàng"
+                [(visible)]="displayDetailModal"
+                [modal]="true"
+                [style]="{width: '50vw'}"
+                [baseZIndex]="10000"
+                [draggable]="false"
+                [resizable]="false">
+            <div class="row">
+
+            </div>
+            <p-table
+                    [value]="listProducts"
+                    [tableStyleClass]="'kai-styled-table'"
+                    [styleClass]="'my-scrollable-table'"
+                    dataKey="vin"
+            >
+                <ng-template pTemplate="header">
+                    <tr>
+                        <th>Tên</th>
+                        <th>IMEI</th>
+                        <th>Màu</th>
+                        <th>Tình Trạng</th>
+                        <th style="width: 200px;">Giá</th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-product>
+                    <tr [pSelectableRow]="product">
+                        <td>{{product.name}}</td>
+                        <td>{{product.imei}}</td>
+                        <td>{{product.color}}</td>
+                        <td>{{product.status | productStatus}}</td>
+                        <td>{{product.price}}</td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </p-dialog>
+    </nb-card-body>
+</nb-card>

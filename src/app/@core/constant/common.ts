@@ -124,6 +124,7 @@ export const enum USER_ROLE {
     ADMIN = 'admin',
     EMPLOYEE = 'employee',
     GUEST = 'guest',
+    KAI = 'kai',
 }
 
 export const USERS: User[] = [
