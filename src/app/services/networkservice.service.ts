@@ -304,9 +304,24 @@ export class NetworkserviceService {
         return this.httpClient.get<any>(get);
     }
 
+    getproductgroups() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/product-groups';
+        return this.httpClient.get<any>(get);
+    }
+
     nhomsanpham(data): Observable<any> {
         const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/nhomsanpham`;
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
+    productgroups(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/product-groups`;
+        return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
+    editproductgroups(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/product-groups`;
+        return this.httpClient.put<any>(quanlymayAPI, data, this.httpOptions);
     }
 
     forsale(data): Observable<any> {
@@ -314,9 +329,14 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
     }
 
+    // deletenhomsanpham(data): Observable<any> {
+    //     const ocungAPI = `https://quanlytonylemobile.herokuapp.com/deletenhomsanpham`;
+    //     return this.httpClient.post<any>(ocungAPI, data, this.httpOptions);
+    // }
+
     deletenhomsanpham(data): Observable<any> {
-        const ocungAPI = `https://quanlytonylemobile.herokuapp.com/deletenhomsanpham`;
-        return this.httpClient.post<any>(ocungAPI, data, this.httpOptions);
+        return this.httpClient.delete(`https://quanlytonylemobile.herokuapp.com/product-groups/`+data)
+
     }
 
 

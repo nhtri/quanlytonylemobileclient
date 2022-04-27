@@ -28,16 +28,20 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
     });
 
-    // this.service.getnhomsanpham().subscribe(val => {
-    //   let data = val.map(val => val.nhomsanpham)
-    //   data.forEach(data => {
-    //     this.datanhomsanpham.push({ "value": data, "title": data })
-    //   });
-    //   console.log(this.datanhomsanpham)
-    //   this.settings.columns.nhomsanpham.editor.config.list = this.datanhomsanpham
-    //   this.settings = Object.assign({}, this.settings);
+    this.service.getproductgroups().subscribe(val => {
+      // let data = val.map(val => val.name)
+      let data=val
+      let datanhomsanphamfilter
+      data.forEach(data => {
+        this.datanhomsanpham.push({ "value": data.id, "title": data.name })
+        datanhomsanphamfilter.push({ "value": data.name, "title": data.name })
+      });
+      console.log(this.datanhomsanpham)
+      this.settings.columns.group_name.editor.config.list = this.datanhomsanpham
+      this.settings.columns.group_name.filter.config.list = datanhomsanphamfilter
+      this.settings = Object.assign({}, this.settings);
 
-    // })
+    })
 
     this.service.gettensanpham().subscribe(val => {
       let data = val.map(val => val.tensanpham)
@@ -128,17 +132,23 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       //   addable: false,
       //   hidden:true,
       // },
-      // nhomsanpham: {
-      //   title: 'Nhóm Sản Phẩm',
-      //   editor: {
-      //     type: 'list',
-      //     config: {
-      //       selectText: 'Select',
-      //       list: []
-      //     }
-      //   },
-      //   // filter: false,
-      // },
+      group_name: {
+        title: 'Nhóm Sản Phẩm',
+        editor: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
+        },
+         filter: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
+        },
+      },
       name: {
         title: 'Tên Sản Phẩm',
         editor: {

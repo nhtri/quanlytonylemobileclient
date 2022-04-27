@@ -13,11 +13,14 @@ export class NhomsanphamvnComponent implements OnInit {
   data
   constructor(private service: NetworkserviceService) {
 
-    this.service.getnhomsanpham().subscribe(val => {
-      this.source.load(val.filter(data=>data.vitri=="SHOP_VN"));
-      this.data = val.filter(data=>data.vitri=="SHOP_VN")
+    // this.service.getnhomsanpham().subscribe(val => {
+    //   this.source.load(val.filter(data=>data.vitri=="WAREHOUSE"));
+    //   this.data = val.filter(data=>data.vitri=="WAREHOUSE")
+    // });
+    this.service.getproductgroups().subscribe(val => {
+      this.source.load(val);
+      this.data = val
     });
-
 
   }
 
@@ -32,7 +35,7 @@ export class NhomsanphamvnComponent implements OnInit {
     },
 
     columns: {
-      nhomsanpham: {
+      name: {
         title: 'Nhóm Sản Phẩm',
         type: 'string',
       },
@@ -59,7 +62,7 @@ export class NhomsanphamvnComponent implements OnInit {
     if (window.confirm('Bạn có chắc muốn xóa không ????')) {
       this.service.deletenhomsanpham(
         [
-          event['data']['nhomsanpham']
+          event['data']['id']
         ]
       )
         .subscribe(data => {
@@ -76,14 +79,41 @@ export class NhomsanphamvnComponent implements OnInit {
     }
   }
 
+  // onCreateConfirm(event): void {
+  //   console.log("Create Event In Console")
+  //   if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']))) {
+  //     this.service.nhomsanpham(
+  //       [
+  //         event['newData']['nhomsanpham'],
+  //         "WAREHOUSE"
+  //       ]
+  //     )
+  //       .subscribe(data => {
+
+  //         console.log("POST Request is successful ", data);
+  //       },
+  //         error => {
+  //           console.log("Error", error);
+
+  //         })
+  //     event.confirm.resolve();
+  //   }
+  //   else {
+  //     alert("Dữ liệu đã tồn tại")
+  //     event.confirm.reject();
+  //   }
+
+  // }
+
+
   onCreateConfirm(event): void {
     console.log("Create Event In Console")
-    if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']))) {
-      this.service.nhomsanpham(
-        [
-          event['newData']['nhomsanpham'],
-          "SHOP_VN"
-        ]
+    if (!this.data.some(el => el.name === (event['newData']['name']))) {
+      this.service.productgroups(
+        {
+          "name":event['newData']['name'],
+        
+        }
       )
         .subscribe(data => {
 
@@ -103,28 +133,51 @@ export class NhomsanphamvnComponent implements OnInit {
   }
 
   onSaveConfirm(event) {
+    // if (window.confirm('Bạn có muốn thay đổi không?')) {
+    //   this.service.deletenhomsanpham(
+    //     [
+    //       event['data']['nhomsanpham']
+    //     ]
+    //   )
+    //     .subscribe(data => {
+
+    //       this.service.nhomsanpham(
+    //         [
+    //           event['newData']['nhomsanpham']
+    //         ]
+    //       )
+    //         .subscribe(data => {
+
+    //           console.log("POST Request is successful ", data);
+    //         },
+    //           error => {
+    //             console.log("Error", error);
+
+    //           })
+
+    //       console.log("POST Request is successful ", data);
+    //     },
+    //       error => {
+    //         console.log("Error", error);
+
+    //       })
+    //   event.confirm.resolve();
+    // } else {
+    //   event.confirm.reject();
+    // }
+
+
     if (window.confirm('Bạn có muốn thay đổi không?')) {
-      this.service.deletenhomsanpham(
-        [
-          event['data']['nhomsanpham']
-        ]
+      this.service.editproductgroups(
+        {
+          "id": event['newData']['id'],
+          "name": event['newData']['name'],
+          "sort_order": 3
+        }
       )
         .subscribe(data => {
 
-          this.service.nhomsanpham(
-            [
-              event['newData']['nhomsanpham'],
-              "SHOP_VN"
-            ]
-          )
-            .subscribe(data => {
-
-              console.log("POST Request is successful ", data);
-            },
-              error => {
-                console.log("Error", error);
-
-              })
+          
 
           console.log("POST Request is successful ", data);
         },
