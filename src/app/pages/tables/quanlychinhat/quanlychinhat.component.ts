@@ -15,6 +15,7 @@ export class QuanlychinhatComponent implements OnInit {
   tienmat = 0
   daibiki = 0
   chuyenkhoan = 0
+  hinhthuc="default"
 
   constructor(private service: NetworkserviceService) {
 
@@ -77,18 +78,19 @@ export class QuanlychinhatComponent implements OnInit {
       });
     }
     if (this.id != "") {
-      this.service.editquanlychi([this.sotien, this.date, this.mucdich, this.id]).subscribe(val => {
+      this.service.editquanlychi([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan,this.id]).subscribe(val => {
         console.log(val)
         alert("Chỉnh sửa thành công")
         window.location.reload()
       });
     }
   }
-  edit(id, ngaytao, sotien, mucdich) {
+  edit(id, ngaytao, sotien, mucdich,hinhthuc) {
     this.date = ngaytao
     this.sotien = sotien
     this.mucdich = mucdich
     this.id = id
+    this.hinhthuc = hinhthuc
   }
   delete(value) {
     this.service.deletequanlychi([value]).subscribe(val => {

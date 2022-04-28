@@ -50,6 +50,7 @@ export class QuanlychiComponent implements OnInit {
   daterange = []
   datatemp = []
   hinhthucthanhtoan = "tienmat"
+  hinhthuc="default"
 
   ngOnInit(): void {
     this.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '-' + new Date().getDate().toString().padStart(2, '0')
@@ -76,18 +77,19 @@ export class QuanlychiComponent implements OnInit {
       });
     }
     if (this.id != "") {
-      this.service.editquanlychi([this.sotien, this.date, this.mucdich, this.id]).subscribe(val => {
+      this.service.editquanlychi([this.sotien, this.date, this.mucdich,this.hinhthucthanhtoan ,this.id]).subscribe(val => {
         console.log(val)
         alert("Chỉnh sửa thành công")
         window.location.reload()
       });
     }
   }
-  edit(id, ngaytao, sotien, mucdich) {
+  edit(id, ngaytao, sotien, mucdich,hinhthuc) {
     this.date = ngaytao
     this.sotien = sotien
     this.mucdich = mucdich
     this.id = id
+    this.hinhthuc=hinhthuc
   }
   delete(value) {
     this.service.deletequanlychi([value]).subscribe(val => {
