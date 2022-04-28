@@ -13,11 +13,11 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
     this.service.getsanphamtonkhovn().subscribe(val => {
 
       val.forEach(element => {
-        this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
+        this.arrayImei = (element['imei'].split(",")).filter(val => val != '')
         // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
-        
+
         // element.soluong = this.arrayImei.length
-        element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
+        element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         this.dataedit.push(element)
       });
       this.source.load(this.dataedit);
@@ -27,26 +27,31 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
 
     });
 
-    // this.service.getnhomsanpham().subscribe(val => {
-    //   let data = val.map(val => val.nhomsanpham)
-    //   data.forEach(data => {
-    //     this.datanhomsanpham.push({ "value": data, "title": data })
-    //   });
-    //   console.log(this.datanhomsanpham)
-    //   this.settings.columns.nhomsanpham.editor.config.list = this.datanhomsanpham
-    //   this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    this.service.gettensanpham().subscribe(val => {
-      let data = val.map(val => val.tensanpham)
+    this.service.getproductgroups().subscribe(val => {
+      // let data = val.map(val => val.name)
+      let data = val
+      let datanhomsanphamfilter = []
       data.forEach(data => {
-        this.datatensanpham.push({ "value": data, "title": data })
+        this.datanhomsanpham.push({ "value": data.id, "title": data.name })
+        datanhomsanphamfilter.push({ "value": data.name, "title": data.name })
+        console.log('datanhomsanphamfilter', datanhomsanphamfilter, 'datanhomsanpham', this.datanhomsanpham)
       });
-      // this.settings.columns.name.editor.config.list = this.datatensanpham
+      console.log(this.datanhomsanpham)
+      this.settings.columns.group_name.editor.config.list = this.datanhomsanpham
+      this.settings.columns.group_name.filter.config.list = datanhomsanphamfilter
       this.settings = Object.assign({}, this.settings);
 
     })
+
+    // this.service.gettensanpham().subscribe(val => {
+    //   let data = val.map(val => val.tensanpham)
+    //   data.forEach(data => {
+    //     this.datatensanpham.push({ "value": data, "title": data })
+    //   });
+    //   // this.settings.columns.name.editor.config.list = this.datatensanpham
+    //   this.settings = Object.assign({}, this.settings);
+
+    // })
 
     // this.service.getdungluong().subscribe(val => {
     //   let data = val.map(val => val.dungluong)
@@ -58,15 +63,15 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
 
     // })
 
-    this.service.getmau().subscribe(val => {
-      let data = val.map(val => val.mau)
-      data.forEach(data => {
-        this.datamau.push({ "value": data, "title": data })
-      });
-      // this.settings.columns.color.editor.config.list = this.datamau
-      this.settings = Object.assign({}, this.settings);
+    // this.service.getmau().subscribe(val => {
+    //   let data = val.map(val => val.mau)
+    //   data.forEach(data => {
+    //     this.datamau.push({ "value": data, "title": data })
+    //   });
+    //   // this.settings.columns.color.editor.config.list = this.datamau
+    //   this.settings = Object.assign({}, this.settings);
 
-    })
+    // })
 
     // this.service.getloaisanpham().subscribe(val => {
     //   let data = val.map(val => val.loaisanpham)
@@ -125,18 +130,25 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
       //   // filter: false,
       //   editable: false,
       //   addable: false,
+      //   hidden:true,
       // },
-      // nhomsanpham: {
-      //   title: 'Nhóm Sản Phẩm',
-      //   editor: {
-      //     type: 'list',
-      //     config: {
-      //       selectText: 'Select',
-      //       list: []
-      //     }
-      //   },
-      //   // filter: false,
-      // },
+      group_name: {
+        title: 'Nhóm Sản Phẩm',
+        editor: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
+        },
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
+        },
+      },
       name: {
         title: 'Tên Sản Phẩm',
         editor: {
@@ -146,7 +158,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
           //   list: [
           //   ]
           // }
-          type:'string'
+          type: 'string'
         },
         // filter: false,
       },
@@ -176,7 +188,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
           //   list: [
           //   ]
           // }
-          type:'string'
+          type: 'string'
         },
         // filter: false,
       },
@@ -189,7 +201,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
           //   list: [
           //   ]
           // }
-          type:'string'
+          type: 'string'
         },
         // filter: false,
       },
@@ -205,7 +217,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
       //   },
       //   // filter: false,
       // },
-     
+
       quantity: {
         title: 'Số Lượng',
         type: 'string',
@@ -234,41 +246,73 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
     },
   };
 
+  //   onSaveConfirm(event) {
+  //     if (window.confirm('Bạn có muốn thay đổi không?')) {
+  //       this.service.updatesanpham(
+  //         [
+  //           event['newData']['nhomsanpham'],
+  //           event['newData']['tensanpham'],
+  //           event['newData']['dungluong'],
+  //           event['newData']['loaisanpham'],
+  //           event['newData']['phienban'],
+  //           event['newData']['imei'],
+  //           event['newData']['id'],
+  //         ]
+  //       )
+  //         .subscribe(data => {
+
+  //           console.log("POST Request is successful ", data);
+
+  //           this.service.getsanphamtonkhokhohang().subscribe(val => {
+  // this.dataedit=[]
+  //             val.forEach(element => {
+  //               this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
+  //               // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
+
+  //               element.soluong = this.arrayImei.length
+  //               element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
+  //               this.dataedit.push(element)
+  //             });
+  //             this.source.load(this.dataedit);
+  //             this.data = val
+
+
+
+  //           });
+
+
+  //         },
+  //           error => {
+  //             console.log("Error", error);
+
+  //           })
+  //       event.confirm.resolve();
+  //     } else {
+  //       event.confirm.reject();
+  //     }
+  //   }
+
+
   onSaveConfirm(event) {
     if (window.confirm('Bạn có muốn thay đổi không?')) {
-      this.service.updatesanpham(
-        [
-          event['newData']['nhomsanpham'],
-          event['newData']['tensanpham'],
-          event['newData']['dungluong'],
-          event['newData']['loaisanpham'],
-          event['newData']['phienban'],
-          event['newData']['imei'],
-          event['newData']['id'],
-        ]
+      console.log(event['newData']['imei'])
+      this.service.editsanphamtonkhovn(
+        {
+          'id': event['newData']['id'],
+          'imei': event['newData']['imei'],
+          'name': event['newData']['name'],
+          'color': event['newData']['color'],
+          'status': event['newData']['status'],
+          'quantity': event['newData']['quantity'],
+          'price': event['newData']['price'],
+          'position': 'SHOP_VN',
+          'source': 'SHOP_VN',
+          'product_group_id': event['newData']['group_name'],
+        }
       )
         .subscribe(data => {
-        
+          window.location.reload()
           console.log("POST Request is successful ", data);
-
-          this.service.getsanphamtonkhovn().subscribe(val => {
-this.dataedit=[]
-            val.forEach(element => {
-              this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
-              // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
-              
-              element.soluong = this.arrayImei.length
-              element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
-              this.dataedit.push(element)
-            });
-            this.source.load(this.dataedit);
-            this.data = val
-      
-      
-      
-          });
-
-          
         },
           error => {
             console.log("Error", error);
@@ -283,10 +327,10 @@ this.dataedit=[]
   onDeleteConfirm(event): void {
     console.log(event)
     if (window.confirm('Bạn có chắc muốn xóa không ????')) {
-      this.service.deletesanphamtonkhovn(
-        
-          event['data']['id']
-        
+      this.service.deletesanphamtonkho(
+
+        event['data']['id']
+
       )
         .subscribe(data => {
 
@@ -311,27 +355,29 @@ this.dataedit=[]
     // el.loaisanpham === (event['newData']['loaisanpham']) &&
     // el.phienban === (event['newData']['phienban'])
     // )) {
-      this.service.sanphamtonkhovn(
-        {
-          'imei':event['newData']['imei'],
-          'name':event['newData']['name'],
-          'color':event['newData']['color'],
-          'status':event['newData']['status'],
-          'quantity' :event['newData']['quantity'],
-         'price': event['newData']['price'],
-         'position' :'SHOP_VN',
-          'source':'SHOP_VN'
-        }
-      )
-        .subscribe(data => {
+    console.log(event['newData']['imei'])
+    this.service.sanphamtonkhovn(
+      {
+        'imei': event['newData']['imei'],
+        'name': event['newData']['name'],
+        'color': event['newData']['color'],
+        'status': event['newData']['status'],
+        'quantity': event['newData']['quantity'],
+        'price': event['newData']['price'],
+        'position': 'SHOP_VN',
+        'source': 'SHOP_VN',
+        'product_group_id': event['newData']['group_name'],
+      }
+    )
+      .subscribe(data => {
+        window.location.reload()
+        console.log("POST Request is successful ", data);
+      },
+        error => {
+          console.log("Error", error);
 
-          console.log("POST Request is successful ", data);
-        },
-          error => {
-            console.log("Error", error);
-
-          })
-      event.confirm.resolve();
+        })
+    event.confirm.resolve();
     // }
     // else {
     //   alert("Dữ liệu đã tồn tại")

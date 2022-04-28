@@ -44,15 +44,15 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
     })
 
-    this.service.gettensanpham().subscribe(val => {
-      let data = val.map(val => val.tensanpham)
-      data.forEach(data => {
-        this.datatensanpham.push({ "value": data, "title": data })
-      });
-      // this.settings.columns.name.editor.config.list = this.datatensanpham
-      this.settings = Object.assign({}, this.settings);
+    // this.service.gettensanpham().subscribe(val => {
+    //   let data = val.map(val => val.tensanpham)
+    //   data.forEach(data => {
+    //     this.datatensanpham.push({ "value": data, "title": data })
+    //   });
+    //   // this.settings.columns.name.editor.config.list = this.datatensanpham
+    //   this.settings = Object.assign({}, this.settings);
 
-    })
+    // })
 
     // this.service.getdungluong().subscribe(val => {
     //   let data = val.map(val => val.dungluong)
@@ -64,15 +64,15 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
     // })
 
-    this.service.getmau().subscribe(val => {
-      let data = val.map(val => val.mau)
-      data.forEach(data => {
-        this.datamau.push({ "value": data, "title": data })
-      });
-      // this.settings.columns.color.editor.config.list = this.datamau
-      this.settings = Object.assign({}, this.settings);
+    // this.service.getmau().subscribe(val => {
+    //   let data = val.map(val => val.mau)
+    //   data.forEach(data => {
+    //     this.datamau.push({ "value": data, "title": data })
+    //   });
+    //   // this.settings.columns.color.editor.config.list = this.datamau
+    //   this.settings = Object.assign({}, this.settings);
 
-    })
+    // })
 
     // this.service.getloaisanpham().subscribe(val => {
     //   let data = val.map(val => val.loaisanpham)
@@ -247,51 +247,83 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
     },
   };
 
-  onSaveConfirm(event) {
-    if (window.confirm('Bạn có muốn thay đổi không?')) {
-      this.service.updatesanpham(
-        [
-          event['newData']['nhomsanpham'],
-          event['newData']['tensanpham'],
-          event['newData']['dungluong'],
-          event['newData']['loaisanpham'],
-          event['newData']['phienban'],
-          event['newData']['imei'],
-          event['newData']['id'],
-        ]
-      )
-        .subscribe(data => {
+//   onSaveConfirm(event) {
+//     if (window.confirm('Bạn có muốn thay đổi không?')) {
+//       this.service.updatesanpham(
+//         [
+//           event['newData']['nhomsanpham'],
+//           event['newData']['tensanpham'],
+//           event['newData']['dungluong'],
+//           event['newData']['loaisanpham'],
+//           event['newData']['phienban'],
+//           event['newData']['imei'],
+//           event['newData']['id'],
+//         ]
+//       )
+//         .subscribe(data => {
         
-          console.log("POST Request is successful ", data);
+//           console.log("POST Request is successful ", data);
 
-          this.service.getsanphamtonkhokhohang().subscribe(val => {
-this.dataedit=[]
-            val.forEach(element => {
-              this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
-              // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
+//           this.service.getsanphamtonkhokhohang().subscribe(val => {
+// this.dataedit=[]
+//             val.forEach(element => {
+//               this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
+//               // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
               
-              element.soluong = this.arrayImei.length
-              element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
-              this.dataedit.push(element)
-            });
-            this.source.load(this.dataedit);
-            this.data = val
+//               element.soluong = this.arrayImei.length
+//               element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
+//               this.dataedit.push(element)
+//             });
+//             this.source.load(this.dataedit);
+//             this.data = val
       
       
       
-          });
+//           });
 
           
-        },
-          error => {
-            console.log("Error", error);
+//         },
+//           error => {
+//             console.log("Error", error);
 
-          })
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
+//           })
+//       event.confirm.resolve();
+//     } else {
+//       event.confirm.reject();
+//     }
+//   }
+
+
+onSaveConfirm(event) {
+  if (window.confirm('Bạn có muốn thay đổi không?')) {
+    console.log(event['newData']['imei'])
+    this.service.editsanphamtonkhokhohang(
+      {
+        'id':event['newData']['id'],
+        'imei':event['newData']['imei'],
+        'name':event['newData']['name'],
+        'color':event['newData']['color'],
+        'status':event['newData']['status'],
+        'quantity' :event['newData']['quantity'],
+       'price': event['newData']['price'],
+       'position' :'WAREHOUSE',
+        'source':'WAREHOUSE',
+        'product_group_id':event['newData']['group_name'],
+      }
+    )
+      .subscribe(data => {
+window.location.reload()
+        console.log("POST Request is successful ", data);
+      },
+        error => {
+          console.log("Error", error);
+
+        })
+    event.confirm.resolve();
+  } else {
+    event.confirm.reject();
   }
+}
 
   onDeleteConfirm(event): void {
     console.log(event)
@@ -325,7 +357,7 @@ this.dataedit=[]
     // el.phienban === (event['newData']['phienban'])
     // )) {
       console.log(event['newData']['imei'])
-      this.service.sanphamtonkhovn(
+      this.service.sanphamtonkhokhohang(
         {
           'imei':event['newData']['imei'],
           'name':event['newData']['name'],
@@ -339,7 +371,7 @@ this.dataedit=[]
         }
       )
         .subscribe(data => {
-
+window.location.reload()
           console.log("POST Request is successful ", data);
         },
           error => {

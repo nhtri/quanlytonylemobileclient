@@ -18,6 +18,7 @@ export class QuanlythuComponent implements OnInit {
   tienmat = 0
   daibiki = 0
   chuyenkhoan = 0
+  hinhthuc = "default"
   constructor(private service: NetworkserviceService) {
 
     this.service.getquanlythu().subscribe(val => {
@@ -132,11 +133,12 @@ export class QuanlythuComponent implements OnInit {
 
 
   }
-  edit(id, ngaytao, sotien, mucdich) {
+  edit(id, ngaytao, sotien, mucdich, hinhthuc) {
     this.date = ngaytao
     this.sotien = sotien
     this.mucdich = mucdich
     this.id = id
+    this.hinhthuc = hinhthuc
   }
   delete(value) {
     this.service.deletequanlythu([value]).subscribe(val => {
@@ -432,7 +434,7 @@ export class QuanlythuComponent implements OnInit {
 
   }
 
-  refresh(){
+  refresh() {
     window.location.reload()
   }
 }
