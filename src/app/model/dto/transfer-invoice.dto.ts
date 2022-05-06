@@ -10,4 +10,6 @@ export interface TransferInvoiceDto {
     exchange_rate: number;
     sub_fee: number;
     products?: ProductDto[];
+    transfer_date?: Date | string;
+    receive_date?: Date | string;
 }

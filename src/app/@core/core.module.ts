@@ -156,7 +156,6 @@ export const NB_CORE_PROVIDERS = [
   declarations: [],
   providers: [
       DatePipe,
-      JobTitlePipe,
   ],
 })
 export class CoreModule {
