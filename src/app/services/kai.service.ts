@@ -15,6 +15,9 @@ import { CustomerSearchDto } from '../model/dto/customer-search.dto';
 import { PurchasingInvoiceDto } from '../model/dto/purchasing-invoice.dto';
 import { PurchasingInvoiceSearchDto } from '../model/dto/purchasing-invoice-search.dto';
 import { TransferInvoiceDto } from '../model/dto/transfer-invoice.dto';
+import { OutgoingProduct } from '../model/outgoing-product';
+import { IncomingProduct } from '../model/incoming-product';
+import { ReceiveTransferProductDto } from '../model/dto/receive-transfer-product.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -221,6 +224,79 @@ export class KaiService extends RestService {
 
     getAllKaiProducts(): Observable<Product[]> {
         return this.getAll<Product[]>(`${SERVICE_RESOURCES.PRODUCTS}/kai`);
+    }
+
+    /**
+     * ======================================
+     * TRANSFERRING
+     * ======================================
+     */
+    transferProduct(invoice_id, product_id): Observable<any> {
+        return this.getAll<any>(`${SERVICE_RESOURCES.TRANSFERRING}/${invoice_id}/${product_id}`);
+    }
+
+    receiveTransferringProduct(receiveTransferProductDto: ReceiveTransferProductDto): Observable<any> {
+        return this.update<any>(`${SERVICE_RESOURCES.TRANSFERRING}/receive`, receiveTransferProductDto);
+    }
+
+    lostProduct(invoice_id, product_id): Observable<OutgoingProduct[]> {
+        return this.getAll<OutgoingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/lost/${invoice_id}/${product_id}`);
+    }
+
+    cancelTransferProduct(invoice_id, product_id): Observable<OutgoingProduct[]> {
+        return this.getAll<OutgoingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/cancel/${invoice_id}/${product_id}`);
+    }
+
+    getKaiOutgoingProducts(): Observable<OutgoingProduct[]> {
+        return this.getAll<OutgoingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/outgoing/kai`);
+    }
+
+    getShopJPOutgoingProducts(): Observable<OutgoingProduct[]> {
+        return this.getAll<OutgoingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/outgoing/shop-jp`);
+    }
+
+    getShopVNOutgoingProducts(): Observable<OutgoingProduct[]> {
+        return this.getAll<OutgoingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/outgoing/shop-vn`);
+    }
+
+    getWarehouseOutgoingProducts(): Observable<OutgoingProduct[]> {
+        return this.getAll<OutgoingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/outgoing/warehouse`);
+    }
+
+    getShopJPTransferringProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/shop-jp`);
+    }
+
+    getShopJPTransferredProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/received/shop-jp`);
+    }
+
+    getShopJPNotFoundProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/not-found/shop-jp`);
+    }
+
+    getShopVNTransferringProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/shop-vn`);
+    }
+
+    getShopVNTransferredProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/received/shop-vn`);
+    }
+
+    getShopVNNotFoundProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/not-found/shop-vn`);
+    }
+
+    getWarehouseTransferringProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/warehouse`);
+    }
+
+    getWarehouseTransferredProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/received/warehouse`);
+    }
+
+    getWarehouseNotFoundProducts(): Observable<IncomingProduct[]> {
+        return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/not-found/warehouse`);
     }
 
     /**

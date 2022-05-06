@@ -1,0 +1,53 @@
+<nb-card>
+    <nb-card-header>
+        DANH SÁCH HÀNG CHUYỂN ĐI
+    </nb-card-header>
+
+    <nb-card-body>
+        <table class="styled-table" id="excel-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>Số IMEI</th>
+                    <th>Kho Đích</th>
+                    <th>Ngày Chuyển</th>
+                    <th>Trạng Thái</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="text" placeholder="IMEI"
+                           class="rounded p-1"
+                           [(ngModel)]="outgoingTransferProductsFilter.imei"
+                           (ngModelChange)="onSearchOutgoingProducts($event)"/>
+                </td>
+                <td></td>
+                <td>
+                    <input type="date"
+                           class="rounded p-1"
+                           [(ngModel)]="outgoingTransferProductsFilter.transfer_date"
+                           (ngModelChange)="onSearchOutgoingProducts($event)"/>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr *ngFor="let rowData of data; let i = index;">
+                <td>{{i + 1}}</td>
+                <td>{{rowData.imei}}</td>
+                <td>{{rowData.to_position | positionTitle}}</td>
+                <td>{{rowData.transfer_date | date: dateFormat}}</td>
+                <td>{{rowData.transfer_status | outgoingTransferStatus}}</td>
+                <td>
+                    <button nbButton ghost status="primary" (click)="onTransferProduct($event, rowData)" type="button"
+                            class="btn p-button-sm p-button-info p-1">
+                        <nb-icon icon="checkmark"></nb-icon>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </nb-card-body>
+</nb-card>

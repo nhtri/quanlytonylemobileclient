@@ -6,7 +6,7 @@ import { notEmpty } from '../../../@core/utils/data.utils';
 import { ForSaleInvoiceDto } from '../../../model/dto/for-sale-invoice.dto';
 import { ProductDto } from '../../../model/dto/product.dto';
 import { TransferInvoiceDto } from '../../../model/dto/transfer-invoice.dto';
-import { PRODUCT_SOURCE, PRODUCT_STORAGES } from '../../../@core/constant/common';
+import { DATE_CONSTANT, PRODUCT_SOURCE, PRODUCT_STORAGES } from '../../../@core/constant/common';
 import { calculateProductSummary } from '../../../@core/utils/kai.utils';
 
 @Component({
@@ -140,6 +140,7 @@ export class ProductsComponent implements OnInit {
                 sub_fee = 0;
             }
             const productSummary = calculateProductSummary(this.listProducts, exchange_rate, sub_fee);
+            const transfer_date = this.datePipe.transform(new Date(), DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
             this.transferInvoice = {
                 sale_date,
                 total_money: productSummary.total_money,
@@ -149,6 +150,7 @@ export class ProductsComponent implements OnInit {
                 exchange_rate,
                 sub_fee,
                 products,
+                transfer_date,
             };
             this.kaiService.createTransferInvoice(this.transferInvoice).subscribe(val => {
                 alert('Lưu Thành Công');

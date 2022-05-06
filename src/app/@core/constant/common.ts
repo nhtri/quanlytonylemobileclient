@@ -1,7 +1,7 @@
 import { User } from '../../model/user';
 
-export const QUAN_LY_TONY_SERVICE = 'https://quanlytonylemobile.herokuapp.com';
-// export const QUAN_LY_TONY_SERVICE = 'http://localhost:3001';
+// export const QUAN_LY_TONY_SERVICE = 'https://quanlytonylemobile.herokuapp.com';
+export const QUAN_LY_TONY_SERVICE = 'http://localhost:3001';
 
 export const enum SERVICE_RESOURCES {
     CUSTOMERS = 'customers',
@@ -12,6 +12,7 @@ export const enum SERVICE_RESOURCES {
     FOR_SALE_INVOICES = 'invoices/for-sale',
     TRANSFERRING_INVOICES = 'invoices/transferring',
     STATISTICS = 'statistics',
+    TRANSFERRING = 'transferring',
 }
 
 export const enum STRING_CONSTANT {
@@ -54,9 +55,20 @@ export const enum PRODUCT_STATUS {
 export const enum TRANSFER_STATUS {
     NEW = 'NEW',
     PROCESSING = 'PROCESSING',
+    TRANSFERRING = 'TRANSFERRING',
     TRANSFERRED = 'TRANSFERRED',
+    NOT_FOUND = 'NOT_FOUND',
     CANCELED = 'CANCELED',
 }
+
+export const TRANSFER_STATUSES = [
+    {label: 'Mới', value: TRANSFER_STATUS.NEW},
+    {label: 'Đang Xữ Lý', value: TRANSFER_STATUS.PROCESSING},
+    {label: 'Đang Chuyển', value: TRANSFER_STATUS.TRANSFERRING},
+    {label: 'Thất Lạc', value: TRANSFER_STATUS.NOT_FOUND},
+    {label: 'Đã Chuyển', value: TRANSFER_STATUS.TRANSFERRED},
+    {label: 'Đã Hủy', value: TRANSFER_STATUS.TRANSFERRED},
+];
 
 export const enum INVOICE_TYPE {
     PURCHASING = 'PURCHASING',
@@ -109,7 +121,7 @@ export const PRODUCT_STORAGES = [
     {label: 'KAI', value: PRODUCT_SOURCE.KAI},
     {label: 'Kho Việt Nam', value: PRODUCT_SOURCE.SHOP_VN},
     {label: 'Kho Nhật', value: PRODUCT_SOURCE.SHOP_JP},
-    {label: 'Kho Tổng', value: PRODUCT_SOURCE.WAREHOUSE},
+    {label: 'Kho Hàng', value: PRODUCT_SOURCE.WAREHOUSE},
 ];
 
 export const enum REPORT_TYPE {

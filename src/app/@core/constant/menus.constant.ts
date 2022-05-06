@@ -1,6 +1,6 @@
 import { MobileMenuItem } from '../../model/mobile-menu-item';
 import { USER_ROLE } from './common';
-import { KAI_PAGES } from './pages.constant';
+import { KAI_PAGES, SHOP_JP_PAGES, SHOP_VN_PAGES, SHOP_WAREHOUSE_PAGES } from './pages.constant';
 
 export const KAI_MENU_ITEMS: MobileMenuItem[] = [
     {
@@ -211,6 +211,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                             {
                                 title: 'DS Hàng Chuyển Đi',
                                 icon: 'paper-plane-outline',
+                                link: SHOP_JP_PAGES.DATA_OUTGOING_TRANSFER_PRODUCTS,
                             },
                         ],
                     },
@@ -221,14 +222,17 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                             {
                                 title: 'SP Đang Đến',
                                 icon: 'collapse-outline',
+                                link: SHOP_JP_PAGES.DATA_TRANSFERRING_PRODUCTS,
                             },
                             {
                                 title: 'SP Đã Đến',
                                 icon: 'done-all-outline',
+                                link: SHOP_JP_PAGES.DATA_TRANSFERRED_PRODUCTS,
                             },
                             {
                                 title: 'SP Thất Lạc',
                                 icon: 'eye-off-outline',
+                                link: SHOP_JP_PAGES.DATA_NOT_FOUND_PRODUCTS,
                             },
                         ],
                     },
@@ -372,6 +376,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                             {
                                 title: 'DS Hàng Chuyển Đi',
                                 icon: 'paper-plane-outline',
+                                link: SHOP_VN_PAGES.DATA_OUTGOING_TRANSFER_PRODUCTS,
                             },
                         ],
                     },
@@ -382,14 +387,17 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                             {
                                 title: 'SP Đang Đến',
                                 icon: 'collapse-outline',
+                                link: SHOP_VN_PAGES.DATA_TRANSFERRING_PRODUCTS,
                             },
                             {
                                 title: 'SP Đã Đến',
                                 icon: 'done-all-outline',
+                                link: SHOP_VN_PAGES.DATA_TRANSFERRED_PRODUCTS,
                             },
                             {
                                 title: 'SP Thất Lạc',
                                 icon: 'eye-off-outline',
+                                link: SHOP_VN_PAGES.DATA_NOT_FOUND_PRODUCTS,
                             },
                         ],
                     },
@@ -482,26 +490,6 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                         title: 'Quản Lý Nhóm Sản Phẩm',
                         link: '/pages/tables/nhomsanpham',
                     },
-                    // {
-                    //     title: 'Quản Lý Tên Sản Phẩm',
-                    //     link: '/pages/tables/tensanpham',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Dung Lượng',
-                    //     link: '/pages/tables/dungluong',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Loại Sản Phẩm',
-                    //     link: '/pages/tables/loaisanpham',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Màu Sắc',
-                    //     link: '/pages/tables/mau',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Phiên Bản',
-                    //     link: '/pages/tables/phienban',
-                    // },
                     {
                         title: 'Quản Lý Danh Sách Sản Phẩm',
                         link: '/pages/tables/quanlydanhsachsanpham',
@@ -533,6 +521,7 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                             {
                                 title: 'DS Hàng Chuyển Đi',
                                 icon: 'paper-plane-outline',
+                                link: SHOP_WAREHOUSE_PAGES.DATA_OUTGOING_TRANSFER_PRODUCTS,
                             },
                         ],
                     },
@@ -543,14 +532,17 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                             {
                                 title: 'SP Đang Đến',
                                 icon: 'collapse-outline',
+                                link: SHOP_WAREHOUSE_PAGES.DATA_TRANSFERRING_PRODUCTS,
                             },
                             {
                                 title: 'SP Đã Đến',
                                 icon: 'done-all-outline',
+                                link: SHOP_WAREHOUSE_PAGES.DATA_TRANSFERRED_PRODUCTS,
                             },
                             {
                                 title: 'SP Thất Lạc',
                                 icon: 'eye-off-outline',
+                                link: SHOP_WAREHOUSE_PAGES.DATA_NOT_FOUND_PRODUCTS,
                             },
                         ],
                     },
@@ -578,14 +570,6 @@ export const ADMIN_MENU_ITEMS: MobileMenuItem[] = [
         icon: 'pie-chart-outline',
         roles: [USER_ROLE.ADMIN],
         children: [
-            // {
-            //     title: 'Echarts (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/echarts',
-            // },
-            // {
-            //     title: 'Charts.js (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/chartjs',
-            // },
             {
                 title: 'Thống Kê Bán Hàng',
                 link: '/pages/charts/d3',
