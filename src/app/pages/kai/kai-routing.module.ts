@@ -21,6 +21,9 @@ import {
 import { IncomingTransferComponent } from './incoming-transfer/incoming-transfer.component';
 import { IncomingTransferProductsComponent } from './incoming-transfer-products/incoming-transfer-products.component';
 import { OutgoingTransferProductsComponent } from './outgoing-transfer-products/outgoing-transfer-products.component';
+import { TransferringProductsComponent } from './transferring-products/transferring-products.component';
+import { TransferredProductsComponent } from './transferred-products/transferred-products.component';
+import { NotFoundProductsComponent } from './not-found-products/not-found-products.component';
 
 const KAI_ROUTES: Routes = [{
     path: '',
@@ -119,4 +122,7 @@ export const KAI_COMPONENTS = [
     IncomingTransferComponent,
     IncomingTransferProductsComponent,
     OutgoingTransferProductsComponent,
+    TransferringProductsComponent,
+    TransferredProductsComponent,
+    NotFoundProductsComponent,
 ];

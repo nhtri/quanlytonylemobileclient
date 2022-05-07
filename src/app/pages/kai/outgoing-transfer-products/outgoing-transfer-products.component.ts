@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { DATE_CONSTANT, DEFAULT_BIRTHDAY_YEAR_RANGE } from '../../../@core/constant/common';
+import { DATE_CONSTANT } from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
-import { Router } from '@angular/router';
+import { notEmpty } from '../../../@core/utils/data.utils';
+import { Product } from '../../../model/product';
+import { DatePipe } from '@angular/common';
 
 @Component({
     selector: 'ngx-outgoing-transfer-products',
@@ -21,22 +23,45 @@ export class OutgoingTransferProductsComponent implements OnInit {
         transfer_date: null,
     };
 
-    constructor(private kaiService: KaiService, private router: Router) {
+    constructor(
+        private kaiService: KaiService,
+        private datePipe: DatePipe,
+    ) {
     }
 
     ngOnInit() {
-        this.getTransferProducts();
+        this.getKaiOutgoingProducts();
     }
 
-    getTransferProducts() {
-        this.kaiService.getAllKaiProducts().subscribe(products => {
+    getKaiOutgoingProducts() {
+        this.kaiService.getKaiOutgoingProducts().subscribe(products => {
             this.originalData = products;
             this.data = products;
         });
     }
 
-    onSearchProduct(event) {
+    onTransferProduct = (event, outgoingProduct) => {
         event.preventDefault();
+        this.kaiService.transferProduct(outgoingProduct.invoice_id, outgoingProduct.product_id)
+            .subscribe((result) => {
+                this.getKaiOutgoingProducts();
+            });
     }
 
+    onSearchOutgoingProducts = (event) => {
+        this.data = JSON.parse(JSON.stringify(this.originalData));
+        if (notEmpty(this.outgoingTransferProductsFilter.imei)) {
+            this.data = this.data.filter(
+                (x: Product) => x.imei.toLowerCase().includes(this.outgoingTransferProductsFilter.imei.toLowerCase()),
+            );
+        }
+
+        if (notEmpty(this.outgoingTransferProductsFilter.transfer_date)) {
+            this.data = this.data.filter(x => {
+                return this.datePipe.transform(x.transfer_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT)
+                    === this.datePipe.transform(
+                        this.outgoingTransferProductsFilter.transfer_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT);
+            });
+        }
+    }
 }

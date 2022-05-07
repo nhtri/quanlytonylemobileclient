@@ -1,0 +1,61 @@
+<nb-card>
+    <nb-card-header>
+        DANH SÁCH HÀNG ĐANG ĐẾN
+    </nb-card-header>
+
+    <nb-card-body>
+        <table class="styled-table" id="excel-table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Số IMEI</th>
+                <th>Kho Nguồn</th>
+                <th>Ngày Chuyển</th>
+                <th>Trạng Thái</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td></td>
+                <td>
+                    <input type="text" placeholder="IMEI"
+                           class="rounded p-1"
+                           [(ngModel)]="transferringProductsFilter.imei"
+                           (ngModelChange)="onSearchTransferringProducts($event)"/>
+                </td>
+                <td></td>
+                <td>
+                    <input type="date"
+                           class="rounded p-1"
+                           [(ngModel)]="transferringProductsFilter.transfer_date"
+                           (ngModelChange)="onSearchTransferringProducts($event)"/>
+                </td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr *ngFor="let rowData of data; let i = index;">
+                <td>{{i + 1}}</td>
+                <td>{{rowData.imei}}</td>
+                <td>{{rowData.from_position | positionTitle}}</td>
+                <td>{{rowData.transfer_date | date: dateFormat}}</td>
+                <td>{{rowData.transfer_status | outgoingTransferStatus}}</td>
+                <td>
+                    <button nbButton ghost status="primary" (click)="onReceiveTransferProduct($event, rowData)" type="button"
+                            class="btn p-button-sm p-button-info p-1">
+                        <nb-icon icon="done-all"></nb-icon>
+                    </button>
+                    <button nbButton ghost status="danger" (click)="onCancelTransferProduct($event, rowData)" type="button"
+                            class="btn p-button-sm p-button-info p-1">
+                        <nb-icon icon="trash-2"></nb-icon>
+                    </button>
+                    <button nbButton ghost status="warning" (click)="onLostProduct($event, rowData)" type="button"
+                            class="btn p-button-sm p-button-info p-1">
+                        <nb-icon icon="eye-off"></nb-icon>
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </nb-card-body>
+</nb-card>
