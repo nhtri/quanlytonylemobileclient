@@ -20,7 +20,7 @@ export class BansanphamComponent implements OnInit {
   imeiduocchon = []
   giatiensanpham = []
   tongtienban = 0
-
+  role = ''
   vitri = ''
 
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
@@ -52,7 +52,7 @@ export class BansanphamComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    this.role = localStorage.getItem('role')
   }
 
   onClick() { }
@@ -100,10 +100,10 @@ export class BansanphamComponent implements OnInit {
   }
 
   hoantat() {
-if(this.hinhthucthanhtoan=='default'){
-  this.hinhthucthanhtoan = "tienmat"
-}
-    console.log('this.datas',this.datas)
+    if (this.hinhthucthanhtoan == 'default') {
+      this.hinhthucthanhtoan = "tienmat"
+    }
+    console.log('this.datas', this.datas)
     let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
     let today = new Date();
     let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
@@ -134,10 +134,10 @@ if(this.hinhthucthanhtoan=='default'){
     //     let newimei = value[0].imei.replace(element.imei, "")
     //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
     //   })
-    let datasale=[]
+    let datasale = []
 
     this.datas.forEach(element => {
-datasale.push({"id":element[0].id,"quantity":element[0].quantity,"price":parseInt(element[0].sotienban),"position":this.vitri})
+      datasale.push({ "id": element[0].id, "quantity": element[0].quantity, "price": parseInt(element[0].sotienban), "position": this.vitri })
       this.service.danhsachsanphamdaban(['', element[0].name,
         '',
         '',
@@ -156,10 +156,10 @@ datasale.push({"id":element[0].id,"quantity":element[0].quantity,"price":parseIn
 
     this.service.forsale(
       {
-        "quantity":soluongsanpham,
-        "total_money":parseInt(this.tienhoadon),
-        "sale_date":date,
-        "products":datasale
+        "quantity": soluongsanpham,
+        "total_money": parseInt(this.tienhoadon),
+        "sale_date": date,
+        "products": datasale
       }
     ).subscribe(val => { })
 
