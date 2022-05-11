@@ -20,7 +20,7 @@
         [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
     </th>
     <!-- <th>Id</th> -->
-    <!-- <th>Nhóm sản phẩm</th> -->
+    <th>Nhóm sản phẩm</th>
     <th>Tên sản phẩm</th>
     <th>Imei</th>
     <!-- <th>Dung lượng</th>
@@ -29,7 +29,7 @@
     <th>Màu sắc</th>
     <th>Tình trạng</th>
     <th>Số lượng</th>
-    <th *ngIf="role == 'admin'">Giá tiền</th>
+    <th *ngIf="role == 'admin'">Giá tiền thu</th>
    
     <!-- <th></th>
     <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
@@ -47,18 +47,20 @@
       </option>
 
     </select></td> -->
-
     <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
-      (change)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+      (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
     </td>
     <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
-      (change)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+      (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+    </td>
+    <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+      (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
     </td>
     <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
-      (change)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
+      (input)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
     </td>
     <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
-      (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
+      (input)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
     </td>
 
   <!-- <td><select (change)="selectdungluong($event)"
@@ -141,7 +143,7 @@
   <tr *ngFor="let sanpham of data">
     <td><input type="checkbox" (click)="select(sanpham.id)"></td>
     <!-- <td>{{sanpham.id}}</td> -->
-    <!-- <td>{{sanpham.nhomsanpham}}</td> -->
+    <td>{{sanpham.group_name}}</td>
     <td>{{sanpham.name}}</td>
     <td>{{sanpham.imei}}</td>
     <td>{{sanpham.color}}</td>

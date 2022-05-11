@@ -37,6 +37,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   imeisp = ""
   mausacsp = ""
   tinhtrangsp = ""
+  nhomsp=""
 
   constructor(private service: NetworkserviceService, private router: Router) {
 
@@ -259,6 +260,9 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   filterdanhsachsanpham() {
     console.log(this.data)
     this.data = []
+    if (this.nhomsp != "") {
+      this.data = this.datafilter.filter(data => data.group_name.includes(this.tensp))
+    }
     if (this.tensp != "") {
       this.data = this.datafilter.filter(data => data.name.includes(this.tensp))
     }
@@ -271,7 +275,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     if (this.tinhtrangsp != "") {
       this.data = this.datafilter.filter(data => data.status.includes(this.tinhtrangsp))
     }
-    if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""){
+    if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp==""){
       this.data = this.datafilter
     }
   }

@@ -43,6 +43,7 @@ export class DanhsachsanphamComponent implements OnInit {
   imeisp = ""
   mausacsp = ""
   tinhtrangsp = ""
+  nhomsp = ""
   constructor(private service: NetworkserviceService, private router: Router) {
 
     // this.service.getsanphamtonkho().subscribe(val => {
@@ -300,6 +301,7 @@ export class DanhsachsanphamComponent implements OnInit {
   //     })
   // }
   selectnhomsanpham(event) {
+    console.log('event.target.value',event.target.value)
     this.dataselectnhomsanpham = event.target.value
     this.data = this.datafilter
     if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
@@ -319,6 +321,7 @@ export class DanhsachsanphamComponent implements OnInit {
     }
   }
   selecttensanpham(event) {
+    console.log('event.target.value',event.target.value)
     this.dataselecttensanpham = event.target.value
     this.data = this.datafilter
     if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
@@ -338,6 +341,7 @@ export class DanhsachsanphamComponent implements OnInit {
     }
   }
   selectdungluong(event) {
+    console.log('event.target.value',event.target.value)
     this.dataselectdungluong = event.target.value
     this.data = this.datafilter
     if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
@@ -357,6 +361,7 @@ export class DanhsachsanphamComponent implements OnInit {
     }
   }
   selectloaisanpham(event) {
+    console.log('event.target.value',event.target.value)
     this.dataselectloaisanpham = event.target.value
     this.data = this.datafilter
     if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
@@ -376,6 +381,7 @@ export class DanhsachsanphamComponent implements OnInit {
     }
   }
   selectphienban(event) {
+    console.log('event.target.value',event.target.value)
     this.dataselectphienban = event.target.value
     this.data = this.datafilter
     if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
@@ -397,8 +403,12 @@ export class DanhsachsanphamComponent implements OnInit {
 
 
   filterdanhsachsanpham() {
+    console.log(this.tensp,this.imeisp,this.mausacsp,this.tinhtrangsp)
     console.log(this.data)
     this.data = []
+    if (this.nhomsp != "") {
+      this.data = this.datafilter.filter(data => data.group_name.includes(this.nhomsp))
+    }
     if (this.tensp != "") {
       this.data = this.datafilter.filter(data => data.name.includes(this.tensp))
     }
@@ -411,7 +421,7 @@ export class DanhsachsanphamComponent implements OnInit {
     if (this.tinhtrangsp != "") {
       this.data = this.datafilter.filter(data => data.status.includes(this.tinhtrangsp))
     }
-    if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""){
+    if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp==""){
       this.data = this.datafilter
     }
   }
