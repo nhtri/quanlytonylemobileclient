@@ -28,9 +28,13 @@ export class QuanlythuchivnComponent implements OnInit {
   datatemp = []
   totalthu = 0
   totalchi = 0
-  
+
   totalthutheothang = 0
   totalchitheothang = 0
+  totalthutheongay = 0
+  totalchitheongay = 0
+
+  curentDate
   constructor(private service: NetworkserviceService) {
     // this.service.getquanlythu().subscribe(val => {
     //   console.log(val)
@@ -124,8 +128,8 @@ export class QuanlythuchivnComponent implements OnInit {
       this.service.getquanlychivn().subscribe(val => {
 
         console.log(val)
-        this.datachi = val.filter(val=>val.hinhthucthanhtoan=="tienmat")
-        this.datatempchi = val.filter(val=>val.hinhthucthanhtoan=="tienmat")
+        this.datachi = val.filter(val => val.hinhthucthanhtoan == "tienmat")
+        this.datatempchi = val.filter(val => val.hinhthucthanhtoan == "tienmat")
 
         const res = this.datachi.reduce((acc, curr) => {
           if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
@@ -147,11 +151,11 @@ export class QuanlythuchivnComponent implements OnInit {
               mucdich = mucdich + ',' + element.mucdich
               hinhthucthanhtoan = element.hinhthucthanhtoan
             });
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': tienchi, 'mucdich': mucdich, 'hinhthucthanhtoan':hinhthucthanhtoan })
+            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': tienchi, 'mucdich': mucdich, 'hinhthucthanhtoan': hinhthucthanhtoan })
 
           }
           else {
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': element.sotien, 'mucdich': element.mucdich, 'hinhthucthanhtoan':element.hinhthucthanhtoan  })
+            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': element.sotien, 'mucdich': element.mucdich, 'hinhthucthanhtoan': element.hinhthucthanhtoan })
           }
 
         });
@@ -233,6 +237,16 @@ export class QuanlythuchivnComponent implements OnInit {
         // });
         this.datatemp = this.datatongedit
         console.log('datatongedit', this.datatongedit)
+
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+        this.curentDate = date
+        this.datatongedit.forEach(element => {
+          if (element.ngaytao == date) {
+            this.totalthutheongay = element.tienthu
+            this.totalchitheongay = element.tienchi
+          }
+        });
       });
 
 
@@ -334,7 +348,7 @@ export class QuanlythuchivnComponent implements OnInit {
       }
     });
   }
-  refresh(){
+  refresh() {
     window.location.reload()
   }
 }

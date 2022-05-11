@@ -18,7 +18,7 @@
       <thead>
         <tr>
           <th>Đơn hàng</th>
-          <th>Nhóm sản phẩm</th>
+          <!-- <th>Nhóm sản phẩm</th> -->
           <th>Tên sản phẩm</th>
           <!-- <th>Dung lượng</th>
           <th>Loại sản phẩm</th>
@@ -34,14 +34,24 @@
       </thead>
       <tbody>
         <td></td>
-        <td><select (change)="selectnhomsanpham($event)"
+        <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+          (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
+        </td> -->
+        <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+          (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+        </td>
+        <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+          (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+        </td>
+   
+        <!-- <td><select (change)="selectnhomsanpham($event)"
             style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
             <option value="default">Nhóm sản phẩm</option>
             <option *ngFor="let data of datanhomsanpham" [value]="data.value">
               {{data.title}}
             </option>
 
-          </select></td>
+          </select></td> -->
 <!-- 
         <td><select (change)="selecttensanpham($event)"
             style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
@@ -78,9 +88,7 @@
             </option>
 
           </select></td> -->
-          <td></td>
-        <td></td>
-        <td></td>
+      
         <td></td>
         <td></td>
         <td></td>
@@ -89,7 +97,7 @@
         <tr *ngFor="let sanpham of data">
           <td><a routerLink="/pages/tables/chitietdonhang"
               [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td>
-          <td>{{sanpham.nhomsanpham}}</td>
+          <!-- <td>{{sanpham.nhomsanpham}}</td> -->
           <td>{{sanpham.tensanpham}}</td>
           <!-- <td>{{sanpham.dungluong}}</td>
           <td>{{sanpham.loaisanpham}}</td>

@@ -29,6 +29,11 @@ export class QuanlythuchiComponent implements OnInit {
   totalchi = 0
   totalthutheothang = 0
   totalchitheothang = 0
+
+  totalthutheongay = 0
+  totalchitheongay = 0
+
+  curentDate
   constructor(private service: NetworkserviceService) {
     // this.service.getquanlythu().subscribe(val => {
     //   console.log(val)
@@ -231,6 +236,16 @@ export class QuanlythuchiComponent implements OnInit {
         // });
         this.datatemp = this.datatongedit
         console.log('datatongedit', this.datatongedit)
+
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+        this.curentDate = date
+        this.datatongedit.forEach(element => {
+          if (element.ngaytao == date) {
+            this.totalthutheongay = element.tienthu
+            this.totalchitheongay = element.tienchi
+          }
+        });
       });
 
 

@@ -43,6 +43,10 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
 
   dataorigin =[]
   role=''
+
+  nhomsp=""
+  tensp=""
+  imeisp=""
   constructor(private service: NetworkserviceService, private router: Router) {
 
     this.service.getdanhsachsanphamdabanquanlymobile().subscribe(value => {
@@ -407,5 +411,24 @@ console.log('daterange',this.daterange)
 
   refresh(){
     window.location.reload()
+  }
+
+  filterdanhsachsanpham() {
+    console.log(this.tensp,this.imeisp)
+    console.log(this.data)
+    console.log("this.datafilter",this.datafilter)
+    this.data = []
+    // if (this.nhomsp != "") {
+    //   this.data = this.datafilter.filter(data => data.group_name.includes(this.nhomsp))
+    // }
+    if (this.tensp != "") {
+      this.data = this.datafilter.filter(data => data.tensanpham.includes(this.tensp))
+    }
+    if (this.imeisp != "") {
+      this.data = this.datafilter.filter(data => data.imei.includes(this.imeisp))
+    }
+    if(this.tensp==""&&this.imeisp==""){
+      this.data = this.datafilter
+    }
   }
 }
