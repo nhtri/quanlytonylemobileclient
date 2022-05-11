@@ -9,6 +9,7 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
   styleUrls: ['./bansanpham.component.scss']
 })
 export class BansanphamComponent implements OnInit {
+  position
   datas = []
   imei = []
   id = []
@@ -35,12 +36,26 @@ export class BansanphamComponent implements OnInit {
         else {
           this.id = params.id.split(",")
         }
+        if (params.position.length == 1) {
+          this.position = params.position[0].split(",")
+        }
+        else {
+          this.position = params.position.split(",")
+        }
         console.log('this.id', this.id)
+        console.log('this.position', this.position)
         this.id.forEach(element => {
           this.service.getsanpham([element]).subscribe(value => {
             console.log('value', value)
-
-            this.datas.push(value.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
+            value.forEach(element => {
+              if (element.position == this.position) {
+                // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
+                element["quantitytemp"]= element.quantity 
+                element["quantity"]= 1 
+                this.datas.push(element)
+ 
+              }
+            });
 
           })
         });
@@ -90,8 +105,8 @@ export class BansanphamComponent implements OnInit {
     this.tongtienthu = 0
     this.tongtienban = 0
     this.datas.forEach(e => {
-      this.tongtienban += parseInt(e[0].quantity) * parseInt(e[0].sotienban)
-      this.tongtienthu += parseInt(e[0].quantity) * parseInt(e[0].price)
+      this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
+      this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
     });
     this.tienhoadon = this.tongtienban.toString()
     this.hinhthucthanhtoan = event.target.value
@@ -110,9 +125,9 @@ export class BansanphamComponent implements OnInit {
     let danhsachimei = ""
     let soluongsanpham = 0
     this.datas.forEach(element => {
-      danhsachimei += element[0].imei + ','
-      soluongsanpham += parseInt(element[0].quantity)
-      this.vitri = element[0].position
+      danhsachimei += element.imei + ','
+      soluongsanpham += parseInt(element.quantity)
+      this.vitri = element.position
     });
     // for (let i = 0; i < this.imeiduocchon.length; i++) {
     //   for (let j = 0; j < this.giatiensanpham.length; j++) {
@@ -137,17 +152,17 @@ export class BansanphamComponent implements OnInit {
     let datasale = []
 
     this.datas.forEach(element => {
-      datasale.push({ "id": element[0].id, "quantity": element[0].quantity, "price": parseInt(element[0].sotienban), "position": this.vitri })
-      this.service.danhsachsanphamdaban(['', element[0].name,
+      datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
+      this.service.danhsachsanphamdaban(['', element.name,
         '',
         '',
         '',
-        element[0].imei,
+        element.imei,
         transactionkey,
-        parseInt(element[0].price) * parseInt(element[0].quantity),
+        parseInt(element.price) * parseInt(element.quantity),
         date, this.hinhthucthanhtoan,
-        this.vitri, parseInt(element[0].sotienban) * parseInt(element[0].quantity)
-        , element[0].quantity
+        this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
+        , element.quantity
       ]).subscribe(value => {
         console.log(value)
       })
@@ -171,12 +186,15 @@ export class BansanphamComponent implements OnInit {
       alert("Mua Hàng Thành Công")
       if (this.vitri == "WAREHOUSE") {
         this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+        console.log(this.vitri)
       }
       if (this.vitri == "SHOP_VN") {
         this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+        console.log(this.vitri)
       }
       if (this.vitri == "SHOP_JP") {
         this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+        console.log(this.vitri)
       }
     })
 
@@ -198,10 +216,10 @@ export class BansanphamComponent implements OnInit {
   thaydoisoluong(event, id) {
     console.log(event.target.value, id)
     this.datas.forEach(data => {
-      console.log('data.id', data[0].id)
-      if (data[0].id == id) {
-        data[0].quantity = event.target.value
-        console.log('data.quantity', data[0].quantity)
+      console.log('data.id', data.id)
+      if (data.id == id) {
+        data.quantity = event.target.value
+        console.log('data.quantity', data.quantity)
       }
     }
     )
@@ -210,8 +228,8 @@ export class BansanphamComponent implements OnInit {
     this.tongtienban = 0
     this.tongtienthu
     this.datas.forEach(e => {
-      this.tongtienban += parseInt(e[0].quantity) * parseInt(e[0].sotienban)
-      this.tongtienthu += parseInt(e[0].quantity) * parseInt(e[0].price)
+      this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
+      this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
     });
     this.tienhoadon = this.tongtienban.toString()
   }
@@ -219,11 +237,11 @@ export class BansanphamComponent implements OnInit {
   nhapsotienban(event, id) {
     console.log(event.target.value, id)
     this.datas.forEach(data => {
-      console.log('data.id', data[0].id)
-      if (data[0].id == id) {
-        data[0].sotienban = event.target.value
+      console.log('data.id', data.id)
+      if (data.id == id) {
+        data.sotienban = event.target.value
       }
-      console.log('data.quantity', data[0].quantity)
+      console.log('data.quantity', data.quantity)
     }
 
     )
@@ -231,8 +249,8 @@ export class BansanphamComponent implements OnInit {
     this.tongtienban = 0
     this.tongtienthu = 0
     this.datas.forEach(e => {
-      this.tongtienban += (parseInt(e[0].quantity) * parseInt(e[0].sotienban))
-      this.tongtienthu += (parseInt(e[0].quantity) * parseInt(e[0].price))
+      this.tongtienban += (parseInt(e.quantity) * parseInt(e.sotienban))
+      this.tongtienthu += (parseInt(e.quantity) * parseInt(e.price))
     });
     console.log('this.datas', this.datas)
     this.tienhoadon = this.tongtienban.toString()

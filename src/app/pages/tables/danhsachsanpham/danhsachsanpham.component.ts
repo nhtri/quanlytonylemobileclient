@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./danhsachsanpham.component.scss']
 })
 export class DanhsachsanphamComponent implements OnInit {
+  position = 'WAREHOUSE'
   fileName = 'DanhSachSanPham.xlsx';
   source: LocalDataSource = new LocalDataSource();
   data = []

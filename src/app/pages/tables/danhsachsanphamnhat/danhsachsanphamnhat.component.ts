@@ -9,6 +9,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./danhsachsanphamnhat.component.scss']
 })
 export class DanhsachsanphamnhatComponent implements OnInit {
+  position = 'SHOP_JP'
   fileName = 'DanhSachSanPham.xlsx';
   source: LocalDataSource = new LocalDataSource();
   data = []

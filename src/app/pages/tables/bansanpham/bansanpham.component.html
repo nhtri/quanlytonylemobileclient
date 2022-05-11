@@ -94,11 +94,11 @@
       <tbody>
 
         <tr *ngFor="let sanpham of datas">
-          <td>{{sanpham[0].id}}</td>
-          <td>{{sanpham[0].name}}</td>
-          <td>{{sanpham[0].imei}}</td>
-          <td>{{sanpham[0].color}}</td>
-          <td>{{sanpham[0].status}}</td>
+          <td>{{sanpham.id}}</td>
+          <td>{{sanpham.name}}</td>
+          <td>{{sanpham.imei}}</td>
+          <td>{{sanpham.color}}</td>
+          <td>{{sanpham.status}}</td>
           <!-- <td> -->
           
             <!-- <div *ngFor="let data of sanpham[0].imei.split(',')">
@@ -109,11 +109,11 @@
             </div> -->
 
          
-            <td><input type="number" [min]="1" [max]="sanpham[0].quantitytemp"
-              style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham[0].id)" [value]="1"></td>
-            <td *ngIf="role == 'admin'">{{sanpham[0].price}}</td>
+            <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
+              style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham.id)" [value]="1"></td>
+            <td *ngIf="role == 'admin'">{{sanpham.price}}</td>
             <td><input type="text"
-              style="height: 22px; width: 80px; border-radius: 5px;"(change)="nhapsotienban($event,sanpham[0].id)"></td>
+              style="height: 22px; width: 80px; border-radius: 5px;"(change)="nhapsotienban($event,sanpham.id)"></td>
           <!-- <td>
           
             <mat-form-field appearance="fill" class="mySelectForm">

@@ -9,7 +9,7 @@ import * as XLSX from 'xlsx';
   styleUrls: ['./danhsachsanphamvn.component.scss']
 })
 export class DanhsachsanphamvnComponent implements OnInit {
-
+  position = 'SHOP_VN'
   fileName = 'DanhSachSanPham.xlsx';
   source: LocalDataSource = new LocalDataSource();
   data = []
