@@ -132,17 +132,9 @@
                 </ng-template>
             </p-table>
             <div class="row mt-3">
-<!--                <div class="col-md-3">-->
-<!--                    <label> Kho Gởi &nbsp;</label>-->
-<!--                    <p-dropdown [styleClass]="'form-control'" [options]="productStorages"-->
-<!--                                (onChange)="onChangeTransferSource($event.value)"-->
-<!--                                [(ngModel)]="transferSource" optionLabel="label" optionValue="value"-->
-<!--                                required [ngModelOptions]="{standalone: true}">-->
-<!--                    </p-dropdown>-->
-<!--                </div>-->
                 <div class="col-md-3">
                     <label> Kho Nhận &nbsp;</label>
-                    <p-dropdown [styleClass]="'form-control'" [options]="productStorages"
+                    <p-dropdown [styleClass]="'form-control position-select'" [options]="productStorages"
                                 (onChange)="onChangeTransferDestination($event.value)"
                                 [(ngModel)]="transferDestination" optionLabel="label" optionValue="value"
                                 required [ngModelOptions]="{standalone: true}">

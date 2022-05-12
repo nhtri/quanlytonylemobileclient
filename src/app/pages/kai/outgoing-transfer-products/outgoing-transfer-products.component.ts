@@ -48,6 +48,16 @@ export class OutgoingTransferProductsComponent implements OnInit {
             });
     }
 
+    onCancelTransferProduct(event, outgoingProduct) {
+        event.preventDefault();
+        this.kaiService.cancelTransferProduct(
+            outgoingProduct.invoice_id, outgoingProduct.product_id,
+        )
+            .subscribe((result) => {
+                this.getKaiOutgoingProducts();
+            });
+    }
+
     onSearchOutgoingProducts = (event) => {
         this.data = JSON.parse(JSON.stringify(this.originalData));
         if (notEmpty(this.outgoingTransferProductsFilter.imei)) {

@@ -13,6 +13,7 @@ export const enum SERVICE_RESOURCES {
     TRANSFERRING_INVOICES = 'invoices/transferring',
     STATISTICS = 'statistics',
     TRANSFERRING = 'transferring',
+    PRODUCT_GROUPS = 'product-groups',
 }
 
 export const enum STRING_CONSTANT {
@@ -119,8 +120,8 @@ export const enum PRODUCT_SOURCE {
 
 export const PRODUCT_STORAGES = [
     {label: 'KAI', value: PRODUCT_SOURCE.KAI},
-    {label: 'Kho Việt Nam', value: PRODUCT_SOURCE.SHOP_VN},
-    {label: 'Kho Nhật', value: PRODUCT_SOURCE.SHOP_JP},
+    {label: 'Cửa Hàng Việt Nam', value: PRODUCT_SOURCE.SHOP_VN},
+    {label: 'Cửa Hàng Nhật', value: PRODUCT_SOURCE.SHOP_JP},
     {label: 'Kho Hàng', value: PRODUCT_SOURCE.WAREHOUSE},
 ];
 
