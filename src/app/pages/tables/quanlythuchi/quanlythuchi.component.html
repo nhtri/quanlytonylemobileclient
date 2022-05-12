@@ -8,7 +8,7 @@
   <nb-card-body>
 
     <div style="display: flex;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1"
-        (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()">
+        (input)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (input)="change2()">
         <i class="fa fa-refresh" style="font-size:18px ;margin-left: 15px;" (click)="refresh()"></i>
       </div>
     <br>
@@ -26,9 +26,22 @@
           <th>Mục đích chi</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody *ngIf="date1!=today">
 
-        <tr *ngFor="let sanpham of datatongedit">
+        <tr  *ngFor="let sanpham of datatongedit">
+          <td>{{sanpham.ngaytao}}</td>
+          <td>{{sanpham.tienthu - sanpham.tienchi}}</td>
+          <td>{{sanpham.tienthu}}</td>
+          <td>{{sanpham.mucdichthu}}</td>
+          <td>{{sanpham.tienchi}}</td>
+          <td>{{sanpham.mucdichchi}}</td>
+
+        </tr>
+
+      </tbody>
+      <tbody *ngIf="date1==today">
+
+        <tr  *ngFor="let sanpham of datatongedittheongay">
           <td>{{sanpham.ngaytao}}</td>
           <td>{{sanpham.tienthu - sanpham.tienchi}}</td>
           <td>{{sanpham.tienthu}}</td>
@@ -41,12 +54,12 @@
       </tbody>
     </table>
     <br />
-    <div *ngIf="totalthutheothang == 0 && totalchitheothang == 0" style="color: #2e61fa;">Tổng thu chi ngày hôm nay ( {{curentDate}} ):
+    <div *ngIf="totalthutheothang == 0 && totalchitheothang == 0" style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng:
       {{totalthutheongay - totalchitheongay}}</div>
 
-    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Tổng thu chi theo tháng: {{totalthutheothang - totalchitheothang}}</div>
+    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng: {{totalthutheothang - totalchitheothang}}</div>
   </nb-card-body>
   <nb-card-footer>
-    <div style="color: blue; ">Tổng thu chi: {{totalthu - totalchi}}</div>
+    <div style="color: blue; ">Tổng Tiền Mặt Hiện Có: {{totalthu - totalchi}}</div>
   </nb-card-footer>
 </nb-card>

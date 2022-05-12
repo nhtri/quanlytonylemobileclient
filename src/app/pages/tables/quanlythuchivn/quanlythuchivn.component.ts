@@ -19,8 +19,8 @@ export class QuanlythuchivnComponent implements OnInit {
   datatongedit = []
   datatongconvert = []
   daterange = []
-
-
+  datatongedittheongay = []
+  today
 
   date1 = ""
   date2 = ""
@@ -244,9 +244,11 @@ export class QuanlythuchivnComponent implements OnInit {
         this.datatongedit.forEach(element => {
           if (element.ngaytao == date) {
             this.totalthutheongay = element.tienthu
-            this.totalchitheongay = element.tienchi
+            this.datatongedittheongay.push(element)
           }
         });
+        this.date1 = date
+        this.today =date
       });
 
 
@@ -258,7 +260,7 @@ export class QuanlythuchivnComponent implements OnInit {
   }
   fileName = "DanhSachThuChi"
   ngOnInit(): void {
-
+    this.date1 = new Date().toString()
   }
   exportexcel() {
     let element = document.getElementById('excel-table');
