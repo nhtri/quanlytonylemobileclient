@@ -30,11 +30,11 @@ export class TransferredProductsWarehouseComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getShopJPTransferredProducts();
+        this.getWarehouseTransferredProducts();
     }
 
-    getShopJPTransferredProducts() {
-        this.kaiService.getShopJPTransferredProducts().subscribe(products => {
+    getWarehouseTransferredProducts() {
+        this.kaiService.getWarehouseTransferredProducts().subscribe(products => {
             this.originalData = products;
             this.data = products;
         });
@@ -46,7 +46,7 @@ export class TransferredProductsWarehouseComponent implements OnInit {
             transferringProduct.invoice_id, transferringProduct.product_id,
         )
             .subscribe((result) => {
-                this.getShopJPTransferredProducts();
+                this.getWarehouseTransferredProducts();
             });
     }
 
@@ -56,7 +56,7 @@ export class TransferredProductsWarehouseComponent implements OnInit {
             transferringProduct.invoice_id, transferringProduct.product_id,
         )
             .subscribe((result) => {
-                this.getShopJPTransferredProducts();
+                this.getWarehouseTransferredProducts();
             });
     }
 

@@ -18,6 +18,8 @@ import { TransferInvoiceDto } from '../model/dto/transfer-invoice.dto';
 import { OutgoingProduct } from '../model/outgoing-product';
 import { IncomingProduct } from '../model/incoming-product';
 import { ReceiveTransferProductDto } from '../model/dto/receive-transfer-product.dto';
+import { ProductGroup } from '../model/product-group';
+import { OnSaleProduct } from '../model/on-sale-product';
 
 @Injectable({
     providedIn: 'root',
@@ -222,8 +224,16 @@ export class KaiService extends RestService {
      * =====================================
      */
 
+    getAllProducts(): Observable<Product[]> {
+        return this.getAll<Product[]>(`${SERVICE_RESOURCES.PRODUCTS}`);
+    }
+
     getAllKaiProducts(): Observable<Product[]> {
         return this.getAll<Product[]>(`${SERVICE_RESOURCES.PRODUCTS}/kai`);
+    }
+
+    getKaiOnSaleProducts(): Observable<OnSaleProduct[]> {
+        return this.getAll<OnSaleProduct[]>(`${SERVICE_RESOURCES.PRODUCTS}/on-sale/kai`);
     }
 
     /**
@@ -297,6 +307,27 @@ export class KaiService extends RestService {
 
     getWarehouseNotFoundProducts(): Observable<IncomingProduct[]> {
         return this.getAll<IncomingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/not-found/warehouse`);
+    }
+
+    /**
+     * =======================
+     * Product Groups
+     * ======================
+     */
+    getProductGroups(): Observable<ProductGroup[]> {
+        return this.getAll<ProductGroup[]>(`${SERVICE_RESOURCES.PRODUCT_GROUPS}`);
+    }
+
+    createProductGroup(name: string): Observable<ProductGroup> {
+        return this.create(`${SERVICE_RESOURCES.PRODUCT_GROUPS}`, {name});
+    }
+
+    updateProductGroup(productGroupData: any): Observable<ProductGroup> {
+        return this.put(`${SERVICE_RESOURCES.PRODUCT_GROUPS}`, productGroupData);
+    }
+
+    deleteProductGroup(productGroupId: number): Observable<any> {
+        return this.remove<any>(`${SERVICE_RESOURCES.PRODUCT_GROUPS}/${productGroupId}`);
     }
 
     /**

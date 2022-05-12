@@ -308,7 +308,7 @@ onSaveConfirm(event) {
        'price': event['newData']['price'],
        'position' :'SHOP_JP',
         'source':'SHOP_JP',
-        'product_group_id':event['newData']['group_name'],
+        'product_group_id':event['newData']['product_group_id'],
       }
     )
       .subscribe(data => {
@@ -367,7 +367,7 @@ window.location.reload()
          'price': event['newData']['price'],
          'position' :'SHOP_JP',
           'source':'SHOP_JP',
-          'product_group_id':event['newData']['group_name'],
+          'product_group_id':event['newData']['product_group_id'],
         }
       )
         .subscribe(data => {

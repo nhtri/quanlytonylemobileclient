@@ -8,6 +8,8 @@
             <thead>
             <tr>
                 <th></th>
+                <th>Nhóm SP</th>
+                <th>Tên Máy</th>
                 <th>Số IMEI</th>
                 <th>Kho Nguồn</th>
                 <th>Ngày Chuyển</th>
@@ -18,6 +20,8 @@
             </thead>
             <tbody>
             <tr>
+                <td></td>
+                <td></td>
                 <td></td>
                 <td>
                     <input type="text" placeholder="IMEI"
@@ -38,6 +42,8 @@
             </tr>
             <tr *ngFor="let rowData of data; let i = index;">
                 <td>{{i + 1}}</td>
+                <td>{{rowData.group_name}}</td>
+                <td>{{rowData.name}}</td>
                 <td>{{rowData.imei}}</td>
                 <td>{{rowData.from_position | positionTitle}}</td>
                 <td>{{rowData.transfer_date | date: dateFormat}}</td>

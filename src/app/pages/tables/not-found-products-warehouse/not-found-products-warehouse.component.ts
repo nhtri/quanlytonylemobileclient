@@ -30,11 +30,11 @@ export class NotFoundProductsWarehouseComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getShopJPNotFoundProducts();
+        this.getWarehouseNotFoundProducts();
     }
 
-    getShopJPNotFoundProducts() {
-        this.kaiService.getShopJPNotFoundProducts().subscribe(products => {
+    getWarehouseNotFoundProducts() {
+        this.kaiService.getWarehouseNotFoundProducts().subscribe(products => {
             this.originalData = products;
             this.data = products;
         });
@@ -47,7 +47,7 @@ export class NotFoundProductsWarehouseComponent implements OnInit {
             product_id: transferringProduct.product_id,
         })
             .subscribe((result) => {
-                this.getShopJPNotFoundProducts();
+                this.getWarehouseNotFoundProducts();
             });
     }
 
@@ -57,7 +57,7 @@ export class NotFoundProductsWarehouseComponent implements OnInit {
             transferringProduct.invoice_id, transferringProduct.product_id,
         )
             .subscribe((result) => {
-                this.getShopJPNotFoundProducts();
+                this.getWarehouseNotFoundProducts();
             });
     }
 

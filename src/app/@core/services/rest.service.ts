@@ -85,6 +85,15 @@ export default class RestService {
         return this.http.post<T>(this.requestUrl(resourceUri), data, this.httpOptions);
     }
 
+    public put<T>(resourceUri?: string, data?: any | undefined, headers?: {
+        [header: string]: string | string[];
+    }): Observable<T> {
+        if (notEmpty(headers)) {
+            this.httpOptions.headers = new HttpHeaders(headers);
+        }
+        return this.http.put<T>(this.requestUrl(resourceUri), data, this.httpOptions);
+    }
+
     public get<T>(resourceUri?: string, headers?: {
         [header: string]: string | string[];
     }): Observable<T> {
