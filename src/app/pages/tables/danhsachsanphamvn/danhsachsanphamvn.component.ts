@@ -262,19 +262,19 @@ export class DanhsachsanphamvnComponent implements OnInit {
     console.log(this.data)
     this.data = []
     if (this.tensp != "") {
-      this.data = this.datafilter.filter(data => data.name.includes(this.tensp))
+      this.data = this.datafilter.filter(data => data.name.toLowerCase().includes(this.tensp.toLowerCase()))
     }
     if (this.nhomsp != "") {
-      this.data = this.datafilter.filter(data => data.group_name.includes(this.nhomsp))
+      this.data = this.datafilter.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
     }
     if (this.imeisp != "") {
-      this.data = this.datafilter.filter(data => data.imei.includes(this.imeisp))
+      this.data = this.datafilter.filter(data => data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
     }
     if (this.mausacsp != "") {
-      this.data = this.datafilter.filter(data => data.color.includes(this.mausacsp))
+      this.data = this.datafilter.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
     }
     if (this.tinhtrangsp != "") {
-      this.data = this.datafilter.filter(data => data.status.includes(this.tinhtrangsp))
+      this.data = this.datafilter.filter(data => data.status.toLowerCase().includes(this.tinhtrangsp.toLowerCase()))
     }
     if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp == ""){
       this.data = this.datafilter

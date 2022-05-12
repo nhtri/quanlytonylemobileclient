@@ -422,10 +422,10 @@ console.log('daterange',this.daterange)
     //   this.data = this.datafilter.filter(data => data.group_name.includes(this.nhomsp))
     // }
     if (this.tensp != "") {
-      this.data = this.datafilter.filter(data => data.tensanpham.includes(this.tensp))
+      this.data = this.datafilter.filter(data => data.tensanpham.toLowerCase().includes(this.tensp.toLowerCase()))
     }
     if (this.imeisp != "") {
-      this.data = this.datafilter.filter(data => data.imei.includes(this.imeisp))
+      this.data = this.datafilter.filter(data => data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
     }
     if(this.tensp==""&&this.imeisp==""){
       this.data = this.datafilter
