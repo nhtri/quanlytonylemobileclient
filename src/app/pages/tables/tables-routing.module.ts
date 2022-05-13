@@ -107,6 +107,8 @@ import {
 import {
     NotFoundProductsWarehouseComponent,
 } from './not-found-products-warehouse/not-found-products-warehouse.component';
+import { ProductGroupsKaiComponent } from './product-groups-kai/product-groups-kai.component';
+import { ProductStoragesComponent } from './product-storages/product-storages.component';
 
 const routes: Routes = [{
     path: '',
@@ -349,6 +351,10 @@ const routes: Routes = [{
             component: TreeGridComponent,
         },
         {
+            path: 'product-group-kai',
+            component: ProductGroupsKaiComponent,
+        },
+        {
             path: 'outgoing-transfer-jp/products',
             component: OutgoingTransferProductsJpComponent,
         },
@@ -395,6 +401,10 @@ const routes: Routes = [{
         {
             path: 'not-found-warehouse/products',
             component: NotFoundProductsWarehouseComponent,
+        },
+        {
+            path: 'product-storages',
+            component: ProductStoragesComponent,
         },
     ],
 }];

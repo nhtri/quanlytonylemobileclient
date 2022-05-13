@@ -1,6 +1,6 @@
 import { MobileMenuItem } from '../../model/mobile-menu-item';
 import { USER_ROLE } from './common';
-import { KAI_PAGES, SHOP_JP_PAGES, SHOP_VN_PAGES, SHOP_WAREHOUSE_PAGES } from './pages.constant';
+import { GENERAL_PAGES, KAI_PAGES, SHOP_JP_PAGES, SHOP_VN_PAGES, SHOP_WAREHOUSE_PAGES } from './pages.constant';
 
 export const KAI_MENU_ITEMS: MobileMenuItem[] = [
     {
@@ -23,6 +23,7 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
                 children: [
                     {
                         title: 'Nhóm Sản Phẩm',
+                        link: KAI_PAGES.DATA_PRODUCT_GROUP,
                     },
                     {
                         title: 'DS Máy Trong Kho',
@@ -35,19 +36,6 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
                     {
                         title: 'Quản Lý Đơn Thu Mua',
                         link: KAI_PAGES.DATA_PURCHASING_INVOICES,
-                    },
-                ],
-            },
-            {
-                title: 'Quản Lý Đơn Hàng',
-                children: [
-                    {
-                        title: 'DS ĐH Đang Xữ Lý',
-                        link: KAI_PAGES.DATA_PENDING_ORDERS,
-                    },
-                    {
-                        title: 'DS ĐH Hoàn Thành',
-                        link: KAI_PAGES.DATA_COMPLETED_ORDERS,
                     },
                 ],
             },
@@ -71,6 +59,10 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
                         ],
                     },
                 ],
+            },
+            {
+                title: 'Sản Phẩm Tồn Kho',
+                link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
             },
         ],
     },
@@ -124,32 +116,6 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                     },
                 ],
             },
-            // {
-            //     title: 'Thống Kê & Báo Cáo',
-            //     icon: 'pie-chart-outline',
-            //     children: [
-            //         // {
-            //         //     title: 'Echarts (Tham khảo lựa mẫu)',
-            //         //     link: '/pages/charts/echarts',
-            //         // },
-            //         // {
-            //         //     title: 'Charts.js (Tham khảo lựa mẫu)',
-            //         //     link: '/pages/charts/chartjs',
-            //         // },
-            //         {
-            //             title: 'Thống Kê Bán Hàng',
-            //             link: '/pages/charts/d3',
-            //         },
-            //         {
-            //             title: 'Thống Kê Lợi Nhuận',
-            //             link: '/pages/tables/thongke',
-            //         },
-            //         {
-            //             title: 'Báo Cáo Thuế',
-            //             link: '/pages/tables/baocaothue',
-            //         },
-            //     ],
-            // },
             {
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
@@ -160,43 +126,9 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                         title: 'Quản Lý Nhóm Sản Phẩm',
                         link: '/pages/tables/nhomsanphamjp',
                     },
-                    // {
-                    //     title: 'Quản Lý Tên Sản Phẩm',
-                    //     link: '/pages/tables/tensanpham',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Dung Lượng',
-                    //     link: '/pages/tables/dungluong',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Loại Sản Phẩm',
-                    //     link: '/pages/tables/loaisanpham',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Màu Sắc',
-                    //     link: '/pages/tables/mau',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Phiên Bản',
-                    //     link: '/pages/tables/phienban',
-                    // },
                     {
                         title: 'Quản Lý Danh Sách Sản Phẩm',
                         link: '/pages/tables/quanlydanhsachsanphamjp',
-                    },
-                ],
-            },
-            {
-                title: 'Quản Lý Đơn Hàng',
-                icon: 'grid-outline',
-                children: [
-                    {
-                        title: 'DS ĐH Đang Xữ Lý',
-                        link: KAI_PAGES.DATA_PENDING_ORDERS_JP,
-                    },
-                    {
-                        title: 'DS ĐH Hoàn Thành',
-                        link: KAI_PAGES.DATA_COMPLETED_ORDERS_JP,
                     },
                 ],
             },
@@ -237,6 +169,10 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                         ],
                     },
                 ],
+            },
+            {
+                title: 'Sản Phẩm Tồn Kho',
+                link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
             },
         ],
     }];
@@ -289,32 +225,6 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                     },
                 ],
             },
-            // {
-            //     title: 'Thống Kê & Báo Cáo',
-            //     icon: 'pie-chart-outline',
-            //     children: [
-            //         // {
-            //         //     title: 'Echarts (Tham khảo lựa mẫu)',
-            //         //     link: '/pages/charts/echarts',
-            //         // },
-            //         // {
-            //         //     title: 'Charts.js (Tham khảo lựa mẫu)',
-            //         //     link: '/pages/charts/chartjs',
-            //         // },
-            //         {
-            //             title: 'Thống Kê Bán Hàng',
-            //             link: '/pages/charts/d3',
-            //         },
-            //         {
-            //             title: 'Thống Kê Lợi Nhuận',
-            //             link: '/pages/tables/thongke',
-            //         },
-            //         {
-            //             title: 'Báo Cáo Thuế',
-            //             link: '/pages/tables/baocaothue',
-            //         },
-            //     ],
-            // },
             {
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
@@ -325,26 +235,6 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                         title: 'Quản Lý Nhóm Sản Phẩm',
                         link: '/pages/tables/nhomsanphamvn',
                     },
-                    // {
-                    //     title: 'Quản Lý Tên Sản Phẩm',
-                    //     link: '/pages/tables/tensanpham',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Dung Lượng',
-                    //     link: '/pages/tables/dungluong',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Loại Sản Phẩm',
-                    //     link: '/pages/tables/loaisanpham',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Màu Sắc',
-                    //     link: '/pages/tables/mau',
-                    // },
-                    // {
-                    //     title: 'Quản Lý Phiên Bản',
-                    //     link: '/pages/tables/phienban',
-                    // },
                     {
                         title: 'Quản Lý Danh Sách Sản Phẩm',
                         link: '/pages/tables/quanlydanhsachsanphamvn',
@@ -352,34 +242,20 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 ],
             },
             {
-                title: 'Quản Lý Đơn Hàng',
-                icon: 'grid-outline',
-                children: [
-                    {
-                        title: 'DS ĐH Đang Xữ Lý',
-                        link: KAI_PAGES.DATA_PENDING_ORDERS_VN,
-                    },
-                    {
-                        title: 'DS ĐH Hoàn Thành',
-                        link: KAI_PAGES.DATA_COMPLETED_ORDERS_VN,
-                    },
-                ],
-            },
-            {
                 title: 'Quản Lý Chuyển Kho',
                 icon: 'car-outline',
                 children: [
-                    {
-                        title: 'Chuyển Kho Đi',
-                        icon: 'diagonal-arrow-right-up-outline',
-                        children: [
-                            {
-                                title: 'DS Hàng Chuyển Đi',
-                                icon: 'paper-plane-outline',
-                                link: SHOP_VN_PAGES.DATA_OUTGOING_TRANSFER_PRODUCTS,
-                            },
-                        ],
-                    },
+                    // {
+                    //     title: 'Chuyển Kho Đi',
+                    //     icon: 'diagonal-arrow-right-up-outline',
+                    //     children: [
+                    //         {
+                    //             title: 'DS Hàng Chuyển Đi',
+                    //             icon: 'paper-plane-outline',
+                    //             link: SHOP_VN_PAGES.DATA_OUTGOING_TRANSFER_PRODUCTS,
+                    //         },
+                    //     ],
+                    // },
                     {
                         title: 'Chuyển Kho Đến',
                         icon: 'diagonal-arrow-left-down-outline',
@@ -454,32 +330,6 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                     },
                 ],
             },
-            // {
-            // title: 'Thống Kê & Báo Cáo',
-            // icon: 'pie-chart-outline',
-            // children: [
-            // {
-            //     title: 'Echarts (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/echarts',
-            // },
-            // {
-            //     title: 'Charts.js (Tham khảo lựa mẫu)',
-            //     link: '/pages/charts/chartjs',
-            // },
-            // {
-            //     title: 'Thống Kê Bán Hàng',
-            //     link: '/pages/charts/d3',
-            // },
-            // {
-            //     title: 'Thống Kê Lợi Nhuận',
-            //     link: '/pages/tables/thongke',
-            // },
-            // {
-            //     title: 'Báo Cáo Thuế',
-            //     link: '/pages/tables/baocaothue',
-            // },
-            // ],
-            // },
             {
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
@@ -493,20 +343,6 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                     {
                         title: 'Quản Lý Danh Sách Sản Phẩm',
                         link: '/pages/tables/quanlydanhsachsanpham',
-                    },
-                ],
-            },
-            {
-                title: 'Quản Lý Đơn Hàng',
-                icon: 'grid-outline',
-                children: [
-                    {
-                        title: 'DS ĐH Đang Xữ Lý',
-                        link: KAI_PAGES.DATA_PENDING_ORDERS_WAREHOUSE,
-                    },
-                    {
-                        title: 'DS ĐH Hoàn Thành',
-                        link: KAI_PAGES.DATA_COMPLETED_ORDERS_WAREHOUSE,
                     },
                 ],
             },

@@ -21,6 +21,7 @@ export const enum KAI_PAGES {
     STATISTICS = '/pages/kai/statistics',
     CUSTOMER = '/pages/kai/customer',
     PURCHASING_INVOICE = '/pages/kai/invoice',
+    DATA_PRODUCT_GROUP = '/pages/tables/product-group-kai',
 }
 
 export const enum SHOP_JP_PAGES {
@@ -42,4 +43,8 @@ export const enum SHOP_WAREHOUSE_PAGES {
     DATA_TRANSFERRING_PRODUCTS = '/pages/tables/transferring-warehouse/products',
     DATA_TRANSFERRED_PRODUCTS = '/pages/tables/transferred-warehouse/products',
     DATA_NOT_FOUND_PRODUCTS = '/pages/tables/not-found-warehouse/products',
+}
+
+export const enum GENERAL_PAGES {
+    DATA_PRODUCT_STORAGE = '/pages/tables/product-storages',
 }
