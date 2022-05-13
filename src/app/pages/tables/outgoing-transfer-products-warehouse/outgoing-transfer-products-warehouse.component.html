@@ -7,14 +7,19 @@
         <table class="styled-table" id="excel-table">
             <thead>
                 <tr>
-                    <th></th>
+                    <th>
+                        <input type="checkbox" (select)="isSelectAll" checked="{{isSelectAll ? 'checked' : ''}}"
+                               (change)="onSelectAll($event)">
+                    </th>
                     <th>Nhóm SP</th>
                     <th>Tên Máy</th>
                     <th>Số IMEI</th>
                     <th>Kho Đích</th>
                     <th>Ngày Chuyển</th>
                     <th>Trạng Thái</th>
-                    <th></th>
+                    <th class="text-center">
+                        <button pButton (click)="onMultiTransferring($event)" type="button" nbButton status="success"><nb-icon icon="done-all"></nb-icon></button>
+                    </th>
                 </tr>
             </thead>
             <tbody>
@@ -39,7 +44,8 @@
                 <td></td>
             </tr>
             <tr *ngFor="let rowData of data; let i = index;">
-                <td>{{i + 1}}</td>
+                <td class="text-center"><input type="checkbox" (select)="rowData.isSelected" checked="{{rowData.isSelected ? 'checked' : ''}}"
+                                               (change)="onSelectItem($event, rowData)"></td>
                 <td>{{rowData.group_name}}</td>
                 <td>{{rowData.name}}</td>
                 <td>{{rowData.imei}}</td>
@@ -50,6 +56,10 @@
                     <button nbButton ghost status="primary" (click)="onTransferProduct($event, rowData)" type="button"
                             class="btn p-button-sm p-button-info p-1">
                         <nb-icon icon="checkmark"></nb-icon>
+                    </button>
+                    <button nbButton ghost status="danger" (click)="onCancelTransferProduct($event, rowData)" type="button"
+                            class="btn p-button-sm p-button-info p-1">
+                        <nb-icon icon="trash-2"></nb-icon>
                     </button>
                 </td>
             </tr>

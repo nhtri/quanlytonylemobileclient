@@ -4,6 +4,7 @@ import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { notEmpty } from '../../../@core/utils/data.utils';
 import { Product } from '../../../model/product';
+import { TransferringProductDto } from '../../../model/dto/transferring-product.dto';
 
 @Component({
     selector: 'ngx-outgoing-transfer-products-vn',
@@ -23,6 +24,9 @@ export class OutgoingTransferProductsVnComponent implements OnInit {
         transfer_date: null,
     };
 
+    selectedProducts: TransferringProductDto[] = [];
+    isSelectAll: boolean;
+
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
@@ -37,12 +41,67 @@ export class OutgoingTransferProductsVnComponent implements OnInit {
         this.kaiService.getShopVNOutgoingProducts().subscribe(products => {
             this.originalData = products;
             this.data = products;
+            this.data.map((x) => x['isSelected'] = false);
+            this.isSelectAll = false;
+            this.selectedProducts = [];
         });
+    }
+
+    onSelectItem(event, rowData) {
+        const index = this.selectedProducts.findIndex((x) => {
+            return x.product_id === rowData.product_id && x.invoice_id === rowData.invoice_id;
+        });
+        if (index === -1) {
+            this.selectedProducts.push({
+                product_id: rowData.product_id,
+                invoice_id: rowData.invoice_id,
+            });
+        } else {
+            this.selectedProducts.splice(index, 1);
+        }
+        this.data.find(
+            (item) => item.product_id === rowData.product_id && item.invoice_id === rowData.invoice_id,
+        ).isSelected = !rowData.isSelected;
+    }
+
+    onSelectAll(event) {
+        event.preventDefault();
+        this.isSelectAll = !this.isSelectAll;
+        this.data.map((x) => x.isSelected = this.isSelectAll);
+        if (this.isSelectAll) {
+            this.data.forEach(x => {
+                this.selectedProducts.push({
+                    product_id: x.product_id,
+                    invoice_id: x.invoice_id,
+                });
+            });
+        } else {
+            this.selectedProducts = [];
+        }
+    }
+
+    onMultiTransferring(event) {
+        event.preventDefault();
+        if (notEmpty(this.selectedProducts) && this.selectedProducts.length > 0) {
+            this.kaiService.transferProducts(this.selectedProducts).subscribe(r => {
+                this.getShopVNOutgoingProducts();
+            });
+        }
     }
 
     onTransferProduct = (event, outgoingProduct) => {
         event.preventDefault();
         this.kaiService.transferProduct(outgoingProduct.invoice_id, outgoingProduct.product_id)
+            .subscribe((result) => {
+                this.getShopVNOutgoingProducts();
+            });
+    }
+
+    onCancelTransferProduct(event, transferringProduct) {
+        event.preventDefault();
+        this.kaiService.cancelTransferProduct(
+            transferringProduct.invoice_id, transferringProduct.product_id,
+        )
             .subscribe((result) => {
                 this.getShopVNOutgoingProducts();
             });

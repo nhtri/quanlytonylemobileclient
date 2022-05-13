@@ -20,6 +20,7 @@ import { IncomingProduct } from '../model/incoming-product';
 import { ReceiveTransferProductDto } from '../model/dto/receive-transfer-product.dto';
 import { ProductGroup } from '../model/product-group';
 import { OnSaleProduct } from '../model/on-sale-product';
+import { TransferringProductDto } from '../model/dto/transferring-product.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -243,6 +244,10 @@ export class KaiService extends RestService {
      */
     transferProduct(invoice_id, product_id): Observable<any> {
         return this.getAll<any>(`${SERVICE_RESOURCES.TRANSFERRING}/${invoice_id}/${product_id}`);
+    }
+
+    transferProducts(transferProductDto: TransferringProductDto[]): Observable<any> {
+        return this.post<any>(`${SERVICE_RESOURCES.TRANSFERRING}/transfer`, transferProductDto);
     }
 
     receiveTransferringProduct(receiveTransferProductDto: ReceiveTransferProductDto): Observable<any> {

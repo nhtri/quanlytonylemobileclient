@@ -15,7 +15,7 @@
                 <th>Ngày Chuyển</th>
                 <th>Ngày Nhận</th>
                 <th>Trạng Thái</th>
-                <th></th>
+<!--                <th></th>-->
             </tr>
             </thead>
             <tbody>
@@ -38,7 +38,7 @@
                 </td>
                 <td></td>
                 <td></td>
-                <td></td>
+<!--                <td></td>-->
             </tr>
             <tr *ngFor="let rowData of data; let i = index;">
                 <td>{{i + 1}}</td>
@@ -49,16 +49,16 @@
                 <td>{{rowData.transfer_date | date: dateFormat}}</td>
                 <td>{{rowData.receive_date | date: dateFormat}}</td>
                 <td>{{rowData.transfer_status | outgoingTransferStatus}}</td>
-                <td>
-                    <button nbButton ghost status="danger" (click)="onCancelTransferProduct($event, rowData)" type="button"
-                            class="btn p-button-sm p-button-info p-1">
-                        <nb-icon icon="trash-2"></nb-icon>
-                    </button>
-                    <button nbButton ghost status="warning" (click)="onLostProduct($event, rowData)" type="button"
-                            class="btn p-button-sm p-button-info p-1">
-                        <nb-icon icon="eye-off"></nb-icon>
-                    </button>
-                </td>
+<!--                <td>-->
+<!--                    <button nbButton ghost status="danger" (click)="onCancelTransferProduct($event, rowData)" type="button"-->
+<!--                            class="btn p-button-sm p-button-info p-1">-->
+<!--                        <nb-icon icon="trash-2"></nb-icon>-->
+<!--                    </button>-->
+<!--                    <button nbButton ghost status="warning" (click)="onLostProduct($event, rowData)" type="button"-->
+<!--                            class="btn p-button-sm p-button-info p-1">-->
+<!--                        <nb-icon icon="eye-off"></nb-icon>-->
+<!--                    </button>-->
+<!--                </td>-->
             </tr>
             </tbody>
         </table>

@@ -61,16 +61,6 @@ export class TransferringProductsJpComponent implements OnInit {
             });
     }
 
-    onCancelTransferProduct(event, transferringProduct) {
-        event.preventDefault();
-        this.kaiService.cancelTransferProduct(
-            transferringProduct.invoice_id, transferringProduct.product_id,
-        )
-            .subscribe((result) => {
-                this.getShopJPTransferringProducts();
-            });
-    }
-
     onSearchTransferringProducts(event) {
         this.data = JSON.parse(JSON.stringify(this.originalData));
         if (notEmpty(this.transferringProductsFilter.imei)) {
