@@ -9,16 +9,18 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
 })
 export class QuanlydanhsachsanphamComponent implements OnInit {
 
+  datadaxuly
+
   constructor(private service: NetworkserviceService) {
 
     this.service.getsanphamtonkhokhohang().subscribe(val => {
 
       val.forEach(element => {
-        this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
+        this.arrayImei = (element['imei'].split(",")).filter(val => val != '')
         // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
-        
+
         // element.soluong = this.arrayImei.length
-        element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
+        element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         this.dataedit.push(element)
       });
       this.source.load(this.dataedit);
@@ -30,12 +32,12 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
     this.service.getproductgroups().subscribe(val => {
       // let data = val.map(val => val.name)
-      let data=val
+      let data = val
       let datanhomsanphamfilter = []
       data.forEach(data => {
         this.datanhomsanpham.push({ "value": data.id, "title": data.name })
         datanhomsanphamfilter.push({ "value": data.name, "title": data.name })
-        console.log('datanhomsanphamfilter',datanhomsanphamfilter, 'datanhomsanpham', this.datanhomsanpham)
+        console.log('datanhomsanphamfilter', datanhomsanphamfilter, 'datanhomsanpham', this.datanhomsanpham)
       });
       console.log(this.datanhomsanpham)
       this.settings.columns.group_name.editor.config.list = this.datanhomsanpham
@@ -142,7 +144,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
             list: []
           }
         },
-         filter: {
+        filter: {
           type: 'list',
           config: {
             selectText: 'Select',
@@ -159,7 +161,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
           //   list: [
           //   ]
           // }
-          type:'string'
+          type: 'string'
         },
         // filter: false,
       },
@@ -189,7 +191,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
           //   list: [
           //   ]
           // }
-          type:'string'
+          type: 'string'
         },
         // filter: false,
       },
@@ -202,7 +204,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
           //   list: [
           //   ]
           // }
-          type:'string'
+          type: 'string'
         },
         // filter: false,
       },
@@ -218,7 +220,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       //   },
       //   // filter: false,
       // },
-     
+
       quantity: {
         title: 'Số Lượng',
         type: 'string',
@@ -247,91 +249,91 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
     },
   };
 
-//   onSaveConfirm(event) {
-//     if (window.confirm('Bạn có muốn thay đổi không?')) {
-//       this.service.updatesanpham(
-//         [
-//           event['newData']['nhomsanpham'],
-//           event['newData']['tensanpham'],
-//           event['newData']['dungluong'],
-//           event['newData']['loaisanpham'],
-//           event['newData']['phienban'],
-//           event['newData']['imei'],
-//           event['newData']['id'],
-//         ]
-//       )
-//         .subscribe(data => {
-        
-//           console.log("POST Request is successful ", data);
+  //   onSaveConfirm(event) {
+  //     if (window.confirm('Bạn có muốn thay đổi không?')) {
+  //       this.service.updatesanpham(
+  //         [
+  //           event['newData']['nhomsanpham'],
+  //           event['newData']['tensanpham'],
+  //           event['newData']['dungluong'],
+  //           event['newData']['loaisanpham'],
+  //           event['newData']['phienban'],
+  //           event['newData']['imei'],
+  //           event['newData']['id'],
+  //         ]
+  //       )
+  //         .subscribe(data => {
 
-//           this.service.getsanphamtonkhokhohang().subscribe(val => {
-// this.dataedit=[]
-//             val.forEach(element => {
-//               this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
-//               // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
-              
-//               element.soluong = this.arrayImei.length
-//               element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
-//               this.dataedit.push(element)
-//             });
-//             this.source.load(this.dataedit);
-//             this.data = val
-      
-      
-      
-//           });
+  //           console.log("POST Request is successful ", data);
 
-          
-//         },
-//           error => {
-//             console.log("Error", error);
+  //           this.service.getsanphamtonkhokhohang().subscribe(val => {
+  // this.dataedit=[]
+  //             val.forEach(element => {
+  //               this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
+  //               // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
 
-//           })
-//       event.confirm.resolve();
-//     } else {
-//       event.confirm.reject();
-//     }
-//   }
+  //               element.soluong = this.arrayImei.length
+  //               element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
+  //               this.dataedit.push(element)
+  //             });
+  //             this.source.load(this.dataedit);
+  //             this.data = val
 
 
-onSaveConfirm(event) {
-  if (window.confirm('Bạn có muốn thay đổi không?')) {
-    console.log(event['newData']['imei'])
-    this.service.editsanphamtonkhokhohang(
-      {
-        'id':event['newData']['id'],
-        'imei':event['newData']['imei'],
-        'name':event['newData']['name'],
-        'color':event['newData']['color'],
-        'status':event['newData']['status'],
-        'quantity' :event['newData']['quantity'],
-       'price': event['newData']['price'],
-       'position' :'WAREHOUSE',
-        'source':'WAREHOUSE',
-        'product_group_id':event['newData']['group_name'],
-      }
-    )
-      .subscribe(data => {
-window.location.reload()
-        console.log("POST Request is successful ", data);
-      },
-        error => {
-          console.log("Error", error);
 
-        })
-    event.confirm.resolve();
-  } else {
-    event.confirm.reject();
+  //           });
+
+
+  //         },
+  //           error => {
+  //             console.log("Error", error);
+
+  //           })
+  //       event.confirm.resolve();
+  //     } else {
+  //       event.confirm.reject();
+  //     }
+  //   }
+
+
+  onSaveConfirm(event) {
+    if (window.confirm('Bạn có muốn thay đổi không?')) {
+      console.log(event['newData']['imei'])
+      this.service.editsanphamtonkhokhohang(
+        {
+          'id': event['newData']['id'],
+          'imei': event['newData']['imei'],
+          'name': event['newData']['name'],
+          'color': event['newData']['color'],
+          'status': event['newData']['status'],
+          'quantity': event['newData']['quantity'],
+          'price': event['newData']['price'],
+          'position': 'WAREHOUSE',
+          'source': 'WAREHOUSE',
+          'product_group_id': event['newData']['group_name'],
+        }
+      )
+        .subscribe(data => {
+          window.location.reload()
+          console.log("POST Request is successful ", data);
+        },
+          error => {
+            console.log("Error", error);
+
+          })
+      event.confirm.resolve();
+    } else {
+      event.confirm.reject();
+    }
   }
-}
 
   onDeleteConfirm(event): void {
     console.log(event)
     if (window.confirm('Bạn có chắc muốn xóa không ????')) {
       this.service.deletesanphamtonkho(
-        
-          event['data']['id']
-      
+
+        event['data']['id']
+
       )
         .subscribe(data => {
 
@@ -356,29 +358,29 @@ window.location.reload()
     // el.loaisanpham === (event['newData']['loaisanpham']) &&
     // el.phienban === (event['newData']['phienban'])
     // )) {
-      console.log(event['newData']['imei'])
-      this.service.sanphamtonkhokhohang(
-        {
-          'imei':event['newData']['imei'],
-          'name':event['newData']['name'],
-          'color':event['newData']['color'],
-          'status':event['newData']['status'],
-          'quantity' :event['newData']['quantity'],
-         'price': event['newData']['price'],
-         'position' :'WAREHOUSE',
-          'source':'WAREHOUSE',
-          'product_group_id':event['newData']['group_name'],
-        }
-      )
-        .subscribe(data => {
-window.location.reload()
-          console.log("POST Request is successful ", data);
-        },
-          error => {
-            console.log("Error", error);
+    console.log(event['newData']['imei'])
+    this.service.sanphamtonkhokhohang(
+      {
+        'imei': event['newData']['imei'],
+        'name': event['newData']['name'],
+        'color': event['newData']['color'],
+        'status': event['newData']['status'],
+        'quantity': event['newData']['quantity'],
+        'price': event['newData']['price'],
+        'position': 'WAREHOUSE',
+        'source': 'WAREHOUSE',
+        'product_group_id': event['newData']['group_name'],
+      }
+    )
+      .subscribe(data => {
+        window.location.reload()
+        console.log("POST Request is successful ", data);
+      },
+        error => {
+          console.log("Error", error);
 
-          })
-      event.confirm.resolve();
+        })
+    event.confirm.resolve();
     // }
     // else {
     //   alert("Dữ liệu đã tồn tại")
@@ -386,4 +388,84 @@ window.location.reload()
     // }
 
   }
+
+  uploadExcel(e) {
+
+    try {
+
+      const fileName = e.target.files[0].name;
+
+      import('xlsx').then(xlsx => {
+        let workBook = null;
+        let jsonData = null;
+        const reader = new FileReader();
+        // const file = ev.target.files[0];
+        reader.onload = (event) => {
+          const data = reader.result;
+          workBook = xlsx.read(data, { type: 'binary' });
+          jsonData = workBook.SheetNames.reduce((initial, name) => {
+            const sheet = workBook.Sheets[name];
+            initial[name] = xlsx.utils.sheet_to_json(sheet);
+            return initial;
+          }, {});
+
+          console.log(this.getData(jsonData[Object.keys(jsonData)[0]]));
+          this.datadaxuly = this.getData(jsonData[Object.keys(jsonData)[0]])
+        };
+        reader.readAsBinaryString(e.target.files[0]);
+      });
+
+    } catch (e) {
+      console.log('error', e);
+    }
+  }
+
+
+  getData(input) {
+    var output = [];
+    for (var i = 0; i < input.length; i++) {
+      output.push({
+        'product_group_id': input[i]['Nhóm Sản Phẩm'],
+        'name': input[i]['Tên Sản Phẩm'],
+        'imei': input[i]['IMEI'],
+        'color': input[i]['Màu'],
+        'status': input[i]['Tình Trạng'],
+        'quantity': input[i]['Số Lượng'],
+        'price': input[i]['Giá Tiền'],
+        'position': 'WAREHOUSE',
+        'source': 'WAREHOUSE',
+      });
+    }
+    console.log("output", output)
+    
+    output.forEach(elementoutput => {
+      this.datanhomsanpham.forEach(element => {
+        if(elementoutput.product_group_id == element.title){
+          elementoutput.product_group_id = element.value
+        }
+      });
+      console.log("output", output)
+});
+return output;
+  }
+
+  taosanpham() {
+    this.datadaxuly.forEach(element => {
+      this.service.sanphamtonkhokhohang(
+       element
+      )
+        .subscribe(data => {
+          console.log("POST Request is successful ", data);
+        },
+          error => {
+            console.log("Error", error);
+  
+          })
+    });
+  
+    setTimeout(() => {
+      window.location.reload()
+    },
+      30000);
+   }
 }

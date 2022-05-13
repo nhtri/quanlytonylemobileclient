@@ -1,6 +1,14 @@
 <nb-card>
     <nb-card-header>
       Quản Lý Danh Sách Sản Phẩm
+
+      <a href="../../../../assets/data/SanPham.xlsx" style="color: #2e61fa ;font-weight: 300; margin-left: 80px;">File Danh
+        Sách Sản Phẩm Mẫu</a>
+  
+        <input style="margin-left: 20px;" type="file" id="file" (change)="uploadExcel($event)">
+        <button (click)="taosanpham()" style="margin-left: 5px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">Thêm Sản Phẩm</button>
+  
+  
     </nb-card-header>
   
     <nb-card-body>

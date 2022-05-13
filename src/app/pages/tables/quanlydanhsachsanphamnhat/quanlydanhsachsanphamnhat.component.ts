@@ -9,6 +9,7 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
 })
 export class QuanlydanhsachsanphamnhatComponent implements OnInit {
 
+  datadaxuly
   constructor(private service: NetworkserviceService) {
 
     this.service.getsanphamtonkhojp().subscribe(val => {
@@ -385,5 +386,85 @@ window.location.reload()
     //   event.confirm.reject();
     // }
 
+  }
+
+  uploadExcel(e) {
+
+    try {
+
+      const fileName = e.target.files[0].name;
+
+      import('xlsx').then(xlsx => {
+        let workBook = null;
+        let jsonData = null;
+        const reader = new FileReader();
+        // const file = ev.target.files[0];
+        reader.onload = (event) => {
+          const data = reader.result;
+          workBook = xlsx.read(data, { type: 'binary' });
+          jsonData = workBook.SheetNames.reduce((initial, name) => {
+            const sheet = workBook.Sheets[name];
+            initial[name] = xlsx.utils.sheet_to_json(sheet);
+            return initial;
+          }, {});
+
+          console.log(this.getData(jsonData[Object.keys(jsonData)[0]]));
+          this.datadaxuly = this.getData(jsonData[Object.keys(jsonData)[0]])
+        };
+        reader.readAsBinaryString(e.target.files[0]);
+      });
+
+    } catch (e) {
+      console.log('error', e);
+    }
+  }
+
+
+  getData(input) {
+    var output = [];
+    for (var i = 0; i < input.length; i++) {
+      output.push({
+        'product_group_id': input[i]['Nhóm Sản Phẩm'],
+        'name': input[i]['Tên Sản Phẩm'],
+        'imei': input[i]['IMEI'],
+        'color': input[i]['Màu'],
+        'status': input[i]['Tình Trạng'],
+        'quantity': input[i]['Số Lượng'],
+        'price': input[i]['Giá Tiền'],
+        'position': 'SHOP_JP',
+        'source': 'SHOP_JP',
+      });
+    }
+    console.log("output", output)
+    
+    output.forEach(elementoutput => {
+      this.datanhomsanpham.forEach(element => {
+        if(elementoutput.product_group_id == element.title){
+          elementoutput.product_group_id = element.value
+        }
+      });
+      console.log("output", output)
+});
+return output;
+  }
+
+  taosanpham(){
+    this.datadaxuly.forEach(element => {
+      this.service.sanphamtonkhojp(
+        element
+      )
+        .subscribe(data => {
+          console.log("POST Request is successful ", data);
+        },
+          error => {
+            console.log("Error", error);
+  
+          })
+    });
+  
+    setTimeout(() => {
+      window.location.reload()
+    },
+      30000);
   }
 }

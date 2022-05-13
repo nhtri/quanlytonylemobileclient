@@ -23,7 +23,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
   taomoisanpham = false
   role
 
-
+  datadaxuly
 
   dataselectnhomsanpham = ""
   dataselecttensanpham = ""
@@ -280,4 +280,65 @@ export class DanhsachsanphamvnComponent implements OnInit {
       this.data = this.datafilter
     }
   }
+
+  uploadExcel(e) {
+
+    try {
+
+      const fileName = e.target.files[0].name;
+
+      import('xlsx').then(xlsx => {
+        let workBook = null;
+        let jsonData = null;
+        const reader = new FileReader();
+        // const file = ev.target.files[0];
+        reader.onload = (event) => {
+          const data = reader.result;
+          workBook = xlsx.read(data, { type: 'binary' });
+          jsonData = workBook.SheetNames.reduce((initial, name) => {
+            const sheet = workBook.Sheets[name];
+            initial[name] = xlsx.utils.sheet_to_json(sheet);
+            return initial;
+          }, {});
+
+          console.log(this.getData(jsonData[Object.keys(jsonData)[0]]));
+          this.datadaxuly = this.getData(jsonData[Object.keys(jsonData)[0]])
+        };
+        reader.readAsBinaryString(e.target.files[0]);
+      });
+
+    } catch (e) {
+      console.log('error', e);
+    }
+  }
+
+
+  getData(input) {
+    var output = [];
+    for (var i = 0; i < input.length; i++) {
+      output.push({
+        'masanpham': input[i]['Mã Sản Phẩm'],
+        'loaimay': input[i]['Loại Máy'],
+        'doimay': input[i]['Đời Máy'],
+        'manhinh': input[i]['Màn Hình'],
+        'chip': input[i]['Chip'],
+        'tanso': input[i]['Tần số'],
+        'ram': input[i]['Ram'],
+        'ocung': input[i]['Ổ cứng'],
+        'nhom': input[i]['Nhóm'],
+        'imei': input[i]['IMEI'],
+        'gia1': input[i]['Giá 1'],
+        'gia2': input[i]['Giá 2'],
+        'gia3': input[i]['Khách lẻ'],
+        'chitiet': input[i]['Chi Tiết'],
+        'mausac': input[i]['Màu Sắc'],
+        'chitietdacbiet': input[i]['Chi Tiết Đặc Biệt'],
+        'madonhang': '',
+        'ngayban': '',
+        'khohang': input[i]['Kho Hàng']
+      });
+    }
+    return output;
+  }
+  taosanpham(){}
 }
