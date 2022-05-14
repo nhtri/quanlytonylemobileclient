@@ -22,11 +22,13 @@
             <ng-template pTemplate="header" class=" text-primary">
                 <tr>
                     <th></th>
+                    <th>Nhóm SP</th>
                     <th>Tên máy</th>
                     <th>IMEI</th>
+                    <th>Màu Sắc</th>
                     <th>Tình trạng</th>
-                    <th>Giá mua</th>
                     <th>Số lượng</th>
+                    <th>Giá mua</th>
                     <th>Người Bán</th>
                     <th></th>
                 </tr>
@@ -35,11 +37,13 @@
                          let-editing="editing" let-ri="rowIndex">
                 <tr [pEditableRow]="rowData">
                     <td>{{i + 1}}</td>
+                    <td>{{rowData.group_name}}</td>
                     <td>{{rowData.name}}</td>
                     <td>{{rowData.imei}}</td>
+                    <td>{{rowData.color}}</td>
                     <td>{{rowData.status | productStatus}}</td>
-                    <td>{{rowData.price}}</td>
                     <td>{{rowData.quantity}}</td>
+                    <td>{{rowData.price}}</td>
                     <td>{{rowData.name_vietnamese}}</td>
                     <td style="text-align:center">
                         <button nbButton status="primary" (click)="onShowInvoice(rowData)">

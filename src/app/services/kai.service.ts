@@ -21,6 +21,7 @@ import { ReceiveTransferProductDto } from '../model/dto/receive-transfer-product
 import { ProductGroup } from '../model/product-group';
 import { OnSaleProduct } from '../model/on-sale-product';
 import { TransferringProductDto } from '../model/dto/transferring-product.dto';
+import { SearchProductDto } from '../model/dto/search-product.dto';
 
 @Injectable({
     providedIn: 'root',
@@ -235,6 +236,10 @@ export class KaiService extends RestService {
 
     getKaiOnSaleProducts(): Observable<OnSaleProduct[]> {
         return this.getAll<OnSaleProduct[]>(`${SERVICE_RESOURCES.PRODUCTS}/on-sale/kai`);
+    }
+
+    searchProducts(searchProductDto: SearchProductDto): Observable<Product[]> {
+        return this.post<Product[]>(`${SERVICE_RESOURCES.PRODUCTS}/search`, searchProductDto);
     }
 
     /**

@@ -27,6 +27,8 @@
   <tr>
     <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;" routerLink="/pages/tables/bansanpham"
         [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
+      <i class="fa fa-exchange-alt" style="font-size:16px;color:whitesmoke;" [routerLink]="transferProductPage"
+         [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
     </th>
     <!-- <th>Id</th> -->
     <th>Nhóm sản phẩm</th>

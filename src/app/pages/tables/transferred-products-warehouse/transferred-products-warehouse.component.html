@@ -11,6 +11,10 @@
                 <th>Nhóm SP</th>
                 <th>Tên Máy</th>
                 <th>Số IMEI</th>
+                <th>Màu</th>
+                <th>Tình Trạng</th>
+                <th>Số Lượng</th>
+                <th>Giá</th>
                 <th>Kho Nguồn</th>
                 <th>Ngày Chuyển</th>
                 <th>Ngày Nhận</th>
@@ -30,6 +34,10 @@
                            (ngModelChange)="onSearchTransferredProducts($event)"/>
                 </td>
                 <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>
                     <input type="date"
                            class="rounded p-1"
@@ -45,6 +53,10 @@
                 <td>{{rowData.group_name}}</td>
                 <td>{{rowData.name}}</td>
                 <td>{{rowData.imei}}</td>
+                <td>{{rowData.color}}</td>
+                <td>{{rowData.status | productStatus}}</td>
+                <td>{{rowData.quantity}}</td>
+                <td>{{rowData.price}}</td>
                 <td>{{rowData.from_position | positionTitle}}</td>
                 <td>{{rowData.transfer_date | date: dateFormat}}</td>
                 <td>{{rowData.receive_date | date: dateFormat}}</td>

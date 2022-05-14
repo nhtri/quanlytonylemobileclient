@@ -26,30 +26,37 @@
             <ng-template pTemplate="header" let-columns class=" text-primary">
                 <tr>
                     <th class="text-center">
-                        <button (click)="onShowForSaleDialog()" pButton type="button"
-                                class="btn p-button-sm p-button-info p-1"
-                        >
+                        <span>
+                            <button (click)="onShowForSaleDialog()" pButton type="button"
+                                    class="btn p-button-sm p-button-info p-1 d-block"
+                            >
                             <nb-icon icon="shopping-cart-outline"></nb-icon>
                         </button>
-                        <button (click)="onShowTransferDialog()" pButton type="button"
-                                class="btn p-button-sm p-button-success p-1 ml-2"
-                        >
+                        </span>
+                        <span>
+                            <button (click)="onShowTransferDialog()" pButton type="button"
+                                    class="btn p-button-sm p-button-success p-1 mt-1"
+                            >
                             <nb-icon icon="flip-2-outline"></nb-icon>
                         </button>
+                        </span>
                     </th>
+                    <th>Nhóm SP</th>
                     <th>Tên Máy</th>
                     <th>Số IMEI</th>
                     <th>Màu Sắc</th>
                     <th>Tình Trạng</th>
                     <th>Số Lượng</th>
-                    <th>Giá ( giá mua vào )</th>
+                    <th>Giá (Mua vào)</th>
                 </tr>
             </ng-template>
             <ng-template let-i="rowIndex" pTemplate="body" let-rowData let-columns="columns"
                          let-editing="editing" let-ri="rowIndex">
                 <tr [pEditableRow]="rowData">
-                    <td class="text-center"><input type="checkbox" (select)="rowData.isSelected" checked="{{rowData.isSelected ? 'checked' : ''}}"
+                    <td class="text-center"><input type="checkbox" (select)="rowData.isSelected"
+                                                   checked="{{rowData.isSelected ? 'checked' : ''}}"
                                                    (change)="onSelectItem($event, rowData)"></td>
+                    <td>{{rowData.group_name}}</td>
                     <td>{{rowData.name}}</td>
                     <td>{{rowData.imei}}</td>
                     <td>{{rowData.color}}</td>
@@ -123,7 +130,8 @@
                         <td>{{product.color}}</td>
                         <td>{{product.status | productStatus}}</td>
                         <td>{{product.price}}</td>
-                        <td><input type="number" min="1" [max]="product.quantity" class="form-control" [(ngModel)]="product.transfer_quantity"></td>
+                        <td><input type="number" min="1" [max]="product.quantity" class="form-control"
+                                   [(ngModel)]="product.transfer_quantity"></td>
                         <td>
                             <button (click)="onRowEditInit(product)" pButton pRipple type="button"
                                     icon="pi pi-trash" class="p-button-rounded p-button-text"></button>
@@ -140,11 +148,11 @@
                                 required [ngModelOptions]="{standalone: true}">
                     </p-dropdown>
                 </div>
-                <div class="col-md-3" *ngIf="transferDestination === SHOP_VN_SOURCE" >
+                <div class="col-md-3" *ngIf="transferDestination === SHOP_VN_SOURCE">
                     <label> Tỉ giá tiền JPY/VNĐ &nbsp;</label>
                     <input type="text" class="form-control" [(ngModel)]="rate_exchange">
                 </div>
-                <div class="col-md-3" *ngIf="transferDestination === SHOP_VN_SOURCE" >
+                <div class="col-md-3" *ngIf="transferDestination === SHOP_VN_SOURCE">
                     <label> Phụ Phí &nbsp;</label>
                     <input type="text" class="form-control" [(ngModel)]="sub_fee">
                 </div>
