@@ -10,8 +10,9 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
 export class QuanlydanhsachsanphamnhatComponent implements OnInit {
 
   datadaxuly
+  role
   constructor(private service: NetworkserviceService) {
-
+    this.role = localStorage.getItem("role")
     this.service.getsanphamtonkhojp().subscribe(val => {
 
       val.forEach(element => {
