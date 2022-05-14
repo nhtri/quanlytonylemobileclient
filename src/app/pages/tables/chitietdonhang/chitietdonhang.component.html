@@ -21,7 +21,7 @@
       <th>Loại sản phẩm</th>
       <th>Phiên bản</th> -->
       <th>Imei</th>
-      <th>Giá thu</th>
+      <th *ngIf="role == 'admin'">Giá thu</th>
       <th>Giá bán</th>
       <th>Ngày bán</th>
       </tr>
@@ -39,7 +39,7 @@
       <td>{{sanpham.phienban}}</td> -->
       <td>{{sanpham.soluong}}</td>
       <td>{{sanpham.imei}}</td>
-      <td>{{sanpham.giatien}}</td>
+      <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
       <td>{{sanpham.giaban}}</td>
       <td>{{sanpham.ngayban}}</td>
       <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"

@@ -10,8 +10,9 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
 export class ChitietdonhangComponent implements OnInit {
   data
   madonhang
+  role
   constructor(private service: NetworkserviceService, private route: ActivatedRoute) {
-
+this.role = localStorage.getItem('role')
     this.route.queryParams
       .subscribe(params => {
         console.log("params.id[0]", params.id[0])

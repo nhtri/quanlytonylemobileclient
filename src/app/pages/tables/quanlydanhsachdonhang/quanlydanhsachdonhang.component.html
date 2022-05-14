@@ -17,7 +17,7 @@
   <thead>
     <tr>
       <th>Đơn hàng</th>
-      <th>Giá thu</th>
+      <th *ngIf="role == 'admin'">Giá thu</th>
       <th>Giá bán</th>
       <th>Imei</th>
       <th>Số lượng máy</th>

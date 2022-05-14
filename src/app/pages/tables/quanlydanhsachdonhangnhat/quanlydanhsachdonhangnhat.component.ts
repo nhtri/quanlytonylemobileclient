@@ -29,9 +29,9 @@ export class QuanlydanhsachdonhangnhatComponent implements OnInit {
   dataloaisanphamtaomoi = ""
   dataphienbantaomoi = ""
   dataimeitaomoi = ""
-
+role
   constructor(private service: NetworkserviceService, private router: Router) {
-
+this.role = localStorage.getItem('role')
     this.service.getdanhsachdonhangquanlymobilejp().subscribe(value => {
 this.data =value
     });
