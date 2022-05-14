@@ -20,6 +20,7 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
             },
             {
                 title: 'Quản Lý Mua Hàng',
+                icon: 'car-outline',
                 children: [
                     {
                         title: 'Nhóm Sản Phẩm',
@@ -41,6 +42,7 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
             },
             {
                 title: 'Quản Lý Thu Chi',
+                icon: 'grid-outline',
                 link: KAI_PAGES.STATISTICS,
             },
             {
@@ -62,6 +64,7 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
             },
             {
                 title: 'Sản Phẩm Tồn Kho',
+                icon: 'home-outline',
                 link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
             },
         ],
@@ -172,6 +175,7 @@ export const MENU_ITEMS: MobileMenuItem[] = [
             },
             {
                 title: 'Sản Phẩm Tồn Kho',
+                icon: 'home-outline',
                 link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
             },
         ],
@@ -279,6 +283,11 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                     },
                 ],
             },
+            {
+                title: 'Sản Phẩm Tồn Kho',
+                icon: 'home-outline',
+                link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
+            },
         ],
     }];
 
@@ -383,6 +392,11 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                         ],
                     },
                 ],
+            },
+            {
+                title: 'Sản Phẩm Tồn Kho',
+                icon: 'home-outline',
+                link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
             },
         ],
     }];

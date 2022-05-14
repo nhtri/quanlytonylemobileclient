@@ -42,6 +42,7 @@ export class InvoiceComponent implements OnInit {
     selectedStatus = PRODUCT_STATUSES[0];
     products: Product[] = [];
     status = PRODUCT_STATUSES;
+    product_groups = [];
     customers = [];
     suggestCustomers: Customer[] = [];
     displaySuggestModal: boolean = false;
@@ -65,6 +66,14 @@ export class InvoiceComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.kaiService.getProductGroups().subscribe((groups) => {
+            this.product_groups = groups.map(pg => {
+                return {
+                    value: pg.id,
+                    label: pg.name,
+                };
+            });
+        });
         this.editData = window.history.state;
         this.sale_date = new Date();
         if (this.editData.invoice_id) {

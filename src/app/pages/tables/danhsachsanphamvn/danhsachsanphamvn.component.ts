@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
+import { GENERAL_PAGES } from '../../../@core/constant/pages.constant';
 @Component({
   selector: 'ngx-danhsachsanphamvn',
   templateUrl: './danhsachsanphamvn.component.html',
@@ -39,6 +40,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
   mausacsp = ""
   tinhtrangsp = ""
   nhomsp = ""
+  transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
 
   constructor(private service: NetworkserviceService, private router: Router) {
 

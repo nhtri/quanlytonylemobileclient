@@ -109,6 +109,7 @@ import {
 } from './not-found-products-warehouse/not-found-products-warehouse.component';
 import { ProductGroupsKaiComponent } from './product-groups-kai/product-groups-kai.component';
 import { ProductStoragesComponent } from './product-storages/product-storages.component';
+import { TransferProductsComponent } from './transfer-products/transfer-products.component';
 
 const routes: Routes = [{
     path: '',
@@ -405,6 +406,10 @@ const routes: Routes = [{
         {
             path: 'product-storages',
             component: ProductStoragesComponent,
+        },
+        {
+            path: 'transfer-products',
+            component: TransferProductsComponent,
         },
     ],
 }];

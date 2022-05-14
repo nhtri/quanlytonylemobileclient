@@ -29,6 +29,7 @@ export const enum SHOP_JP_PAGES {
     DATA_TRANSFERRING_PRODUCTS = '/pages/tables/transferring-jp/products',
     DATA_TRANSFERRED_PRODUCTS = '/pages/tables/transferred-jp/products',
     DATA_NOT_FOUND_PRODUCTS = '/pages/tables/not-found-jp/products',
+    DATA_PRODUCTS = '/pages/tables/danhsachsanphamjp',
 }
 
 export const enum SHOP_VN_PAGES {
@@ -36,6 +37,7 @@ export const enum SHOP_VN_PAGES {
     DATA_TRANSFERRING_PRODUCTS = '/pages/tables/transferring-vn/products',
     DATA_TRANSFERRED_PRODUCTS = '/pages/tables/transferred-vn/products',
     DATA_NOT_FOUND_PRODUCTS = '/pages/tables/not-found-vn/products',
+    DATA_PRODUCTS = '/pages/tables/danhsachsanphamvn',
 }
 
 export const enum SHOP_WAREHOUSE_PAGES {
@@ -43,8 +45,10 @@ export const enum SHOP_WAREHOUSE_PAGES {
     DATA_TRANSFERRING_PRODUCTS = '/pages/tables/transferring-warehouse/products',
     DATA_TRANSFERRED_PRODUCTS = '/pages/tables/transferred-warehouse/products',
     DATA_NOT_FOUND_PRODUCTS = '/pages/tables/not-found-warehouse/products',
+    DATA_PRODUCTS = '/pages/tables/danhsachsanpham',
 }
 
 export const enum GENERAL_PAGES {
     DATA_PRODUCT_STORAGE = '/pages/tables/product-storages',
+    TRANSFER_PRODUCTS = '/pages/tables/transfer-products',
 }

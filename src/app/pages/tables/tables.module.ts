@@ -116,6 +116,7 @@ import {
 } from './not-found-products-warehouse/not-found-products-warehouse.component';
 import { ProductGroupsKaiComponent } from './product-groups-kai/product-groups-kai.component';
 import { ProductStoragesComponent } from './product-storages/product-storages.component';
+import { TransferProductsComponent } from './transfer-products/transfer-products.component';
 
 @NgModule({
     imports: [
@@ -208,6 +209,7 @@ import { ProductStoragesComponent } from './product-storages/product-storages.co
         NotFoundProductsWarehouseComponent,
         ProductGroupsKaiComponent,
         ProductStoragesComponent,
+        TransferProductsComponent,
     ],
 })
 export class TablesModule {

@@ -1,0 +1,66 @@
+
+<nb-card>
+    <nb-card-header>
+        CHUYỂN KHO: KHO NGUỒN CỬA HÀNG NHẬT
+    </nb-card-header>
+
+    <nb-card-body>
+        <table class="styled-table" id="excel-table">
+
+
+            <thead>
+            <tr>
+                <th>Nhóm SP</th>
+                <th>Tên sản phẩm</th>
+                <th>Imei</th>
+                <th>Màu sắc</th>
+                <th>Tình trạng</th>
+                <th>Số lượng</th>
+                <th>Giá tiền bán</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <tr *ngFor="let product of data">
+                <td>{{product.group_name}}</td>
+                <td>{{product.name}}</td>
+                <td>{{product.imei}}</td>
+                <td>{{product.color}}</td>
+                <td>{{product.status | productStatus}}</td>
+                <td><input type="number" [min]="1" [max]="product.init_quantity"
+                           style="height: 22px; width: 60px; border-radius: 5px;" (change)="onChangeProductQuantity($event,product.id)" [value]="1"></td>
+                <td>{{product.price}}</td>
+            </tr>
+
+
+            </tbody>
+        </table>
+
+        <div class="row mt-3">
+            <div class="col-md-3">
+                <label> Kho Nhận &nbsp;</label>
+                <select class="form-control position-select"
+                            (change)="onChangeTransferDestination($event)"
+                            [(ngModel)]="transferDestination">
+                    <option *ngFor="let ps of productStorages" [value]="ps.value">
+                        {{ps.label}}
+                    </option>
+                </select>
+            </div>
+            <div class="col-md-3" *ngIf="transferDestination === SHOP_VN_SOURCE" >
+                <label> Tỉ giá tiền JPY/VNĐ &nbsp;</label>
+                <input type="text" class="form-control" [(ngModel)]="rate_exchange">
+            </div>
+            <div class="col-md-3" *ngIf="transferDestination === SHOP_VN_SOURCE" >
+                <label> Phụ Phí &nbsp;</label>
+                <input type="text" class="form-control" [(ngModel)]="sub_fee">
+            </div>
+        </div>
+        <div class="d-flex justify-content-center text-center mt-3">
+            <div class="text-center">
+                <button (click)="createTransferInvoice($event)" type="button" class="btn btn-primary">Chuyển Kho</button>
+                <button (click)="cancelTransferInvoice($event)" type="button" class="btn btn-danger ml-2">Hủy</button>
+            </div>
+        </div>
+    </nb-card-body>
+</nb-card>

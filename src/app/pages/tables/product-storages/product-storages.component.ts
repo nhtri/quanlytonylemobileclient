@@ -19,6 +19,42 @@ export class ProductStoragesComponent implements OnInit {
         actions: {columnTitle: '', position: 'right', add: false, edit: false, delete: false},
 
         columns: {
+            group_name: {
+                title: 'Nhóm SP',
+                type: 'string',
+                filter: false,
+            },
+            name: {
+                title: 'Tên sản phẩm',
+                type: 'string',
+            },
+            imei: {
+                title: 'IMEI',
+                type: 'string',
+            },
+            color: {
+                title: 'Màu Sắc',
+                type: 'string',
+                filter: false,
+            },
+            status: {
+                filter: false,
+                title: 'Tình Trạng',
+                type: 'string',
+                valuePrepareFunction: (cell, row) => {
+                    return this.productStatusPipe.transform(cell);
+                },
+            },
+            quantity: {
+                filter: false,
+                title: 'Số Lượng',
+                type: 'number',
+            },
+            price: {
+                filter: false,
+                title: 'Giá Mua',
+                type: 'number',
+            },
             position: {
                 filter: {
                     type: 'list',
@@ -33,33 +69,6 @@ export class ProductStoragesComponent implements OnInit {
                     return this.positionTitlePipe.transform(cell);
                 },
             },
-            name: {
-                title: 'Tên sản phẩm',
-                type: 'string',
-            },
-            imei: {
-                title: 'IMEI',
-                type: 'string',
-            },
-            status: {
-                filter: false,
-                title: 'Tình Trạng',
-                type: 'string',
-                valuePrepareFunction: (cell, row) => {
-                    return this.productStatusPipe.transform(cell);
-                },
-            },
-            price: {
-                filter: false,
-                title: 'Giá Mua',
-                type: 'number',
-            },
-            quantity: {
-                filter: false,
-                title: 'Số Lượng',
-                type: 'number',
-            },
-
         },
     };
 

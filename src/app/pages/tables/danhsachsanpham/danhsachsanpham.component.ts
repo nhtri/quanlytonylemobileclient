@@ -3,6 +3,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
 import { ActivatedRoute, Router } from '@angular/router';
+import { GENERAL_PAGES } from '../../../@core/constant/pages.constant';
 
 @Component({
   selector: 'ngx-danhsachsanpham',
@@ -46,6 +47,7 @@ export class DanhsachsanphamComponent implements OnInit {
   nhomsp = ""
 
   datadaxuly
+  transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
   constructor(private service: NetworkserviceService, private router: Router) {
 
     // this.service.getsanphamtonkho().subscribe(val => {
