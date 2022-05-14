@@ -100,12 +100,15 @@ export class OutgoingTransferProductsJpComponent implements OnInit {
 
     onCancelTransferProduct(event, transferringProduct) {
         event.preventDefault();
-        this.kaiService.cancelTransferProduct(
-            transferringProduct.invoice_id, transferringProduct.product_id,
-        )
-            .subscribe((result) => {
-                this.getShopJPOutgoingProducts();
-            });
+        const isOk = confirm(`Bạn có muốn hủy bỏ chuyển kho cho sản phẩm: ${transferringProduct.name} không?`);
+        if (isOk === true) {
+            this.kaiService.cancelTransferProduct(
+                transferringProduct.invoice_id, transferringProduct.product_id,
+            )
+                .subscribe((result) => {
+                    this.getShopJPOutgoingProducts();
+                });
+        }
     }
 
     onSearchOutgoingProducts = (event) => {

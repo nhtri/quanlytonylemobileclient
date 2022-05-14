@@ -99,12 +99,15 @@ export class OutgoingTransferProductsComponent implements OnInit {
 
     onCancelTransferProduct(event, outgoingProduct) {
         event.preventDefault();
-        this.kaiService.cancelTransferProduct(
-            outgoingProduct.invoice_id, outgoingProduct.product_id,
-        )
-            .subscribe((result) => {
-                this.getKaiOutgoingProducts();
-            });
+        const isOk = confirm(`Bạn có muốn hủy bỏ chuyển kho cho sản phẩm ${outgoingProduct.name} không?`);
+        if (isOk === true) {
+            this.kaiService.cancelTransferProduct(
+                outgoingProduct.invoice_id, outgoingProduct.product_id,
+            )
+                .subscribe((result) => {
+                    this.getKaiOutgoingProducts();
+                });
+        }
     }
 
     onSearchOutgoingProducts(event) {

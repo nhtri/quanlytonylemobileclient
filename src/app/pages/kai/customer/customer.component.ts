@@ -81,7 +81,10 @@ export class CustomerComponent implements OnInit {
     }
 
     onCancel() {
-        this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
+        const isOk = confirm(`Bạn có muốn hủy bỏ các thay đổi không?`);
+        if (isOk === true) {
+            this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
+        }
     }
 
     onSubmit() {

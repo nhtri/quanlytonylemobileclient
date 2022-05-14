@@ -32,6 +32,9 @@ export class TransferProductsComponent implements OnInit {
     productIds: number[];
     position: PRODUCT_SOURCE;
 
+    pageTitle = '';
+    navigationPage = '';
+
     constructor(
         private kaiService: KaiService,
         private route: ActivatedRoute,
@@ -62,6 +65,7 @@ export class TransferProductsComponent implements OnInit {
                     }
                 }
                 this.transferSource = this.position;
+                this.setupPage(this.position);
                 this.kaiService.searchProducts({ids: this.productIds, position: this.position})
                     .subscribe((products) => {
                         const listProducts = products.map((product) => {
@@ -72,6 +76,28 @@ export class TransferProductsComponent implements OnInit {
                         this.data = listProducts;
                     });
             });
+    }
+
+    setupPage(position: PRODUCT_SOURCE) {
+        switch (position) {
+            case PRODUCT_SOURCE.SHOP_VN:
+                this.pageTitle = 'CHUYỂN KHO: KHO NGUỒN CỬA HÀNG VIỆT NAM';
+                this.navigationPage = SHOP_VN_PAGES.DATA_PRODUCTS;
+                break;
+            case PRODUCT_SOURCE.SHOP_JP:
+                this.pageTitle = 'CHUYỂN KHO: KHO NGUỒN CỬA HÀNG VIỆT NHẬT';
+                this.navigationPage =  SHOP_JP_PAGES.DATA_PRODUCTS;
+                break;
+            case PRODUCT_SOURCE.WAREHOUSE:
+                this.pageTitle = 'CHUYỂN KHO: KHO NGUỒN KHO HÀNG';
+                this.navigationPage =  SHOP_WAREHOUSE_PAGES.DATA_PRODUCTS;
+                break;
+            case PRODUCT_SOURCE.KAI:
+            default:
+                this.pageTitle = 'CHUYỂN KHO: KHO NGUỒN KAI';
+                this.navigationPage = KAI_PAGES.DATA_PRODUCTS;
+                break;
+        }
     }
 
     onChangeProductQuantity(event, product_id) {
@@ -90,27 +116,9 @@ export class TransferProductsComponent implements OnInit {
         }
     }
 
-    navigateByPosition(position: PRODUCT_SOURCE) {
-        switch (position) {
-            case PRODUCT_SOURCE.SHOP_VN:
-                this.router.navigateByUrl(SHOP_VN_PAGES.DATA_PRODUCTS).then(r => r);
-                break;
-            case PRODUCT_SOURCE.SHOP_JP:
-                this.router.navigateByUrl(SHOP_JP_PAGES.DATA_PRODUCTS).then(r => r);
-                break;
-            case PRODUCT_SOURCE.WAREHOUSE:
-                this.router.navigateByUrl(SHOP_WAREHOUSE_PAGES.DATA_PRODUCTS).then(r => r);
-                break;
-            case PRODUCT_SOURCE.KAI:
-            default:
-                this.router.navigateByUrl(KAI_PAGES.DATA_PRODUCTS).then(r => r);
-                break;
-        }
-    }
-
     cancelTransferInvoice(event) {
         event.preventDefault();
-        this.navigateByPosition(this.position);
+        this.router.navigateByUrl(this.navigationPage).then(r => r);
     }
 
     createTransferInvoice(event) {
@@ -148,7 +156,7 @@ export class TransferProductsComponent implements OnInit {
             };
             this.kaiService.createTransferInvoice(this.transferInvoice).subscribe(val => {
                 alert('Lưu Thành Công');
-                this.navigateByPosition(this.position);
+                this.router.navigateByUrl(this.navigationPage).then(r => r);
             });
         }
     }
