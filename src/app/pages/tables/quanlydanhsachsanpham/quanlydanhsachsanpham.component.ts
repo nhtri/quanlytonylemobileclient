@@ -476,6 +476,6 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
     setTimeout(() => {
       window.location.reload()
     },
-      15000);
+      10000);
   }
 }
