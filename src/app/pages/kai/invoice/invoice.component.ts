@@ -26,7 +26,15 @@ import { ExcelService } from '../../../services/excel.service';
 })
 export class InvoiceComponent implements OnInit {
 
-    invoice: PurchasingInvoiceDto = null;
+    invoice: PurchasingInvoiceDto = {
+        invoice_id: 0,
+        position: undefined,
+        products: [],
+        quantity: 0,
+        sale_date: null,
+        total_money: 0,
+        customer: null,
+    };
     customer: Customer = {
         address: '',
         age: 0,
@@ -94,12 +102,16 @@ export class InvoiceComponent implements OnInit {
         }
     }
 
-    onChangeStatus(value, index) {
-        this.products[index].status = value.value;
+    onChangeStatus(event, index) {
+        this.products[index].status = event.value;
     }
 
-    onChangeColor(value, index) {
-        this.products[index].color = value.color;
+    onChangeProductGroup(event, index) {
+        this.products[index].product_group_id = event.value;
+    }
+
+    onChangeColor(event, index) {
+        this.products[index].color = event.value;
     }
 
     onChangeQuantity(product, index) {
@@ -107,7 +119,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     onChangePrice(product, index) {
-        this.products[index].price = +product.price;
+        this.products[index].price = product.price;
     }
 
     onChangeBirthday() {
@@ -149,7 +161,7 @@ export class InvoiceComponent implements OnInit {
         if (item !== null) {
             this.customer = item;
             this.customer.birthday = this.datePipe.transform(item.birthday, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
-            this.invoice.customer.id = this.customer.id;
+            this.invoice.customer = {id: this.customer.id} as Customer;
             const job = this.jobs.find(x => x.value === this.customer.job);
             if (job) {
                 this.selectedJobs = job.value;
@@ -164,7 +176,7 @@ export class InvoiceComponent implements OnInit {
             this.selectedJobs = PEOPLE_JOBS[0].value;
             this.customer.job = this.selectedJobs;
             this.customer.phone = null;
-            this.invoice.customer.id = 0;
+            this.invoice.customer = {id: 0} as Customer;
         }
     }
 

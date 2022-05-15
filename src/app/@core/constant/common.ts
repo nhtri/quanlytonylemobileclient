@@ -50,7 +50,9 @@ export const enum JOB_TYPE {
 
 export const enum PRODUCT_STATUS {
     NEW = 'NEW',
-    USED = 'USED',
+    LIKE_NEW = 'LIKE_NEW',
+    LIKE_NEW_TBH = 'LIKE_NEW_TBH',
+    SECOND_HAND = 'SECOND_HAND',
 }
 
 export const enum TRANSFER_STATUS {
@@ -85,8 +87,10 @@ export const PEOPLE_JOBS = [
 ];
 
 export const PRODUCT_STATUSES = [
-    {label: '新品', value: PRODUCT_STATUS.NEW},
-    {label: '中古', value: PRODUCT_STATUS.USED},
+    {label: 'New', value: PRODUCT_STATUS.NEW},
+    {label: 'Like New', value: PRODUCT_STATUS.LIKE_NEW},
+    {label: 'Like New TBH', value: PRODUCT_STATUS.LIKE_NEW_TBH},
+    {label: 'Second Hand', value: PRODUCT_STATUS.SECOND_HAND},
 ];
 
 export const enum PRODUCT_COLOR {
