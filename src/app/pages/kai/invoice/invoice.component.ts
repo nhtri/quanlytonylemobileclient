@@ -220,9 +220,12 @@ export class InvoiceComponent implements OnInit {
     }
 
     cloneProduct(index) {
-        const {name, imei, status, color, quantity, price} = this.products[index];
+        const {name, imei, status, color, quantity, price, product_group_id} = this.products[index];
         this.products.splice(index, 0,
-            {name, imei, status, color, quantity, price, position: PRODUCT_SOURCE.KAI, source: PRODUCT_SOURCE.KAI},
+            {
+                name, imei, status, color, quantity, price,
+                position: PRODUCT_SOURCE.KAI, source: PRODUCT_SOURCE.KAI, product_group_id,
+            },
         );
     }
 
