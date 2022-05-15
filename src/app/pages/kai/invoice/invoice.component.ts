@@ -94,12 +94,19 @@ export class InvoiceComponent implements OnInit {
         }
     }
 
-    onChangeStatus(value, index) {
-        this.products[index].status = value.value;
+    onChangeStatus(event, index) {
+        event.preventDefault();
+        this.products[index].status = event.target.value;
     }
 
-    onChangeColor(value, index) {
-        this.products[index].color = value.color;
+    onChangeProductGroup(event, index) {
+        event.preventDefault();
+        this.products[index].product_group_id = event.target.value;
+    }
+
+    onChangeColor(event, index) {
+        event.preventDefault();
+        this.products[index].color = event.target.value;
     }
 
     onChangeQuantity(product, index) {

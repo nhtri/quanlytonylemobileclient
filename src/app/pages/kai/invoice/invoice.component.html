@@ -182,9 +182,9 @@
                                 <div class="form-group">
                                     <label>Nhóm Sản Phẩm</label>
                                     <p-dropdown [styleClass]="'form-control'" [options]="product_groups"
-                                                (onChange)="onChangeStatus($event.value, i)"
+                                                (onChange)="onChangeProductGroup($event, i)"
                                                 [(ngModel)]="product.product_group_id" optionLabel="label" optionValue="value"
-                                                id="status{{i}}" name="status{{i}}" #status{{i}}="ngModel"
+                                                id="product_group_id{{i}}" name="product_group_id{{i}}" #product_group_id{{i}}="ngModel"
                                                 required [ngModelOptions]="{standalone: true}">
                                     </p-dropdown>
                                 </div>
@@ -210,7 +210,7 @@
                                 <div class=" form-group">
                                     <label> Trạng thái &nbsp;</label>
                                     <p-dropdown [styleClass]="'form-control'" [options]="status"
-                                                (onChange)="onChangeStatus($event.value, i)"
+                                                (onChange)="onChangeStatus($event, i)"
                                                 [(ngModel)]="product.status" optionLabel="label" optionValue="value"
                                                 id="status{{i}}" name="status{{i}}" #status{{i}}="ngModel"
                                                 required [ngModelOptions]="{standalone: true}">
@@ -221,7 +221,7 @@
                                 <div class=" form-group">
                                     <label> Màu </label>
                                     <p-dropdown [styleClass]="'form-control'" [options]="productColors"
-                                                (onChange)="onChangeColor($event.value, i)"
+                                                (onChange)="onChangeColor($event, i)"
                                                 [(ngModel)]="product.color" optionLabel="label" optionValue="value"
                                                 id="color{{i}}" name="color{{i}}" #color{{i}}="ngModel"
                                                 required [ngModelOptions]="{standalone: true}">
