@@ -11,7 +11,17 @@ export const getAge = (date: Date) => {
     if (!isDate(date)) {
         return 0;
     }
-    return CURRENT_YEAR - date.getFullYear();
+    let age = CURRENT_YEAR - date.getFullYear();
+    const currentDate = new Date();
+    if (
+        (date.getMonth() < currentDate.getMonth())
+        ||
+        (date.getMonth() === currentDate.getMonth() && date.getDate() < currentDate.getDate())
+    ) {
+        age = age - 1;
+    }
+
+    return age;
 };
 
 export const parseDate = (dateStr: string, format: DATE_CONSTANT = DATE_CONSTANT.ORIGINAL_DATE_FORMAT): Date => {

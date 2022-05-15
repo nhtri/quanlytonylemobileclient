@@ -18,10 +18,15 @@ export class TransferredProductsJpComponent implements OnInit {
     transferredProductsFilter: {
         imei: string,
         transfer_date: Date | string,
+        receive_date: Date | string,
     } = {
         imei: '',
         transfer_date: null,
+        receive_date: null,
     };
+
+    isAscendingOrder: boolean;
+    orderIcon = 'arrow-downward-outline';
 
     constructor(
         private kaiService: KaiService,
@@ -60,6 +65,35 @@ export class TransferredProductsJpComponent implements OnInit {
             });
     }
 
+    onSortData(event) {
+        event.preventDefault();
+        this.isAscendingOrder = !this.isAscendingOrder;
+        if (this.isAscendingOrder) {
+            this.orderIcon = 'arrow-upward-outline';
+        } else {
+            this.orderIcon = 'arrow-downward-outline';
+        }
+        this.data.sort((a, b) => {
+            if (this.isAscendingOrder) {
+                if (a.transfer_date < b.transfer_date) {
+                    return 1;
+                }
+                if (a.transfer_date > b.transfer_date) {
+                    return -1;
+                }
+                return 0;
+            } else {
+                if (a.transfer_date > b.transfer_date) {
+                    return 1;
+                }
+                if (a.transfer_date < b.transfer_date) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+    }
+
     onSearchTransferredProducts(event) {
         this.data = JSON.parse(JSON.stringify(this.originalData));
         if (notEmpty(this.transferredProductsFilter.imei)) {
@@ -68,11 +102,11 @@ export class TransferredProductsJpComponent implements OnInit {
             );
         }
 
-        if (notEmpty(this.transferredProductsFilter.transfer_date)) {
+        if (notEmpty(this.transferredProductsFilter.receive_date)) {
             this.data = this.data.filter(x => {
-                return this.datePipe.transform(x.transfer_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT)
+                return this.datePipe.transform(x.receive_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT)
                     === this.datePipe.transform(
-                        this.transferredProductsFilter.transfer_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT);
+                        this.transferredProductsFilter.receive_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT);
             });
         }
     }

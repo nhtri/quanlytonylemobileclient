@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DATE_CONSTANT } from '../../../@core/constant/common';
+import {
+    DATE_CONSTANT,
+    PRODUCT_SOURCE,
+    PRODUCT_STORAGES,
+    TRANSFER_STATUS,
+    TRANSFER_STATUSES,
+} from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
 import { notEmpty } from '../../../@core/utils/data.utils';
 import { Product } from '../../../model/product';
@@ -17,15 +23,23 @@ export class OutgoingTransferProductsComponent implements OnInit {
     data = [];
     dateFormat = DATE_CONSTANT.ORIGINAL_DATE_FORMAT;
     outgoingTransferProductsFilter: {
+        transfer_status: TRANSFER_STATUS,
+        source: PRODUCT_SOURCE,
         imei: string,
         transfer_date: Date | string,
     } = {
+        transfer_status: null,
+        source: null,
         imei: '',
         transfer_date: null,
     };
 
     selectedProducts: TransferringProductDto[] = [];
     isSelectAll: boolean;
+    productStorages = PRODUCT_STORAGES;
+    transferStatuses = TRANSFER_STATUSES.filter(x => {
+        return x.value === TRANSFER_STATUS.PROCESSING || x.value === TRANSFER_STATUS.TRANSFERRING;
+    });
 
     constructor(
         private kaiService: KaiService,
@@ -124,6 +138,26 @@ export class OutgoingTransferProductsComponent implements OnInit {
                     === this.datePipe.transform(
                         this.outgoingTransferProductsFilter.transfer_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT);
             });
+        }
+
+        if (notEmpty(this.outgoingTransferProductsFilter.source)) {
+            this.data = this.data.filter(
+                (x) => x.to_position === this.outgoingTransferProductsFilter.source,
+            );
+        } else {
+            this.data = this.data.filter(
+                (x) => x.to_position !== null,
+            );
+        }
+
+        if (notEmpty(this.outgoingTransferProductsFilter.transfer_status)) {
+            this.data = this.data.filter(
+                (x) => x.transfer_status === this.outgoingTransferProductsFilter.transfer_status,
+            );
+        } else {
+            this.data = this.data.filter(
+                (x) => x.transfer_status !== null,
+            );
         }
 
         this.data.map((x) => {

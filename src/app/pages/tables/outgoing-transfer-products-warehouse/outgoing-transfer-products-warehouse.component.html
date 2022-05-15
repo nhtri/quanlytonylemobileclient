@@ -19,7 +19,7 @@
                     <th>Số Lượng</th>
                     <th>Giá</th>
                     <th>Kho Đích</th>
-                    <th>Ngày Chuyển</th>
+                    <th style="cursor: pointer;" (click)="onSortData($event)" >Ngày Chuyển <nb-icon [icon]="orderIcon"></nb-icon></th>
                     <th>Trạng Thái</th>
                     <th class="text-center">
                         <button pButton (click)="onMultiTransferring($event)" type="button" nbButton status="success"><nb-icon icon="done-all"></nb-icon></button>
@@ -30,25 +30,36 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td style="min-width: 150px; width: 150px;"></td>
                 <td>
-                    <input type="text" placeholder="IMEI"
+                    <input  style="width: 120px;" type="text" placeholder="IMEI"
                            class="rounded p-1"
                            [(ngModel)]="outgoingTransferProductsFilter.imei"
                            (ngModelChange)="onSearchOutgoingProducts($event)"/>
                 </td>
+                <td style="width: 50px;"></td>
+                <td style="width: 50px;" ></td>
+                <td style="width: 50px;" ></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                    <select style="width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.source" >
+                        <option [value]="''" >--All--</option>
+                        <option *ngFor="let source of productStorages" [value]="source.value" >{{source.label}}</option>
+                    </select>
+                </td>
                 <td>
                     <input type="date"
                            class="rounded p-1"
+                           style="width: 120px;"
                            [(ngModel)]="outgoingTransferProductsFilter.transfer_date"
                            (ngModelChange)="onSearchOutgoingProducts($event)"/>
                 </td>
-                <td></td>
+                <td>
+                    <select style="width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.transfer_status" >
+                        <option [value]="''" >--All--</option>
+                        <option *ngFor="let status of transferStatuses" [value]="status.value" >{{status.label}}</option>
+                    </select>
+                </td>
                 <td></td>
             </tr>
             <tr *ngFor="let rowData of data; let i = index;">
