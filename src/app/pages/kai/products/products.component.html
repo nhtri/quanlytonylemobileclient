@@ -3,22 +3,7 @@
         DANH SÁCH MÁY TRONG KHO
     </nb-card-header>
 
-    <nb-card-body>
-        <div class="row filter-input-group">
-            <div class="col-12 col-md-12 form-inline">
-                <input type="text"
-                       [(ngModel)]="mobileSearch.name" required id="searchNameText"
-                       (keydown.enter)="onSearchMobiles($event)"
-                       (ngModelChange)="onSearchMobiles($event)"
-                       name="searchNameText" placeholder="Tên Máy" class="filter-text form-control" />
-
-                <input type="text"
-                       [(ngModel)]="mobileSearch.imei" required id="searchImeiText"
-                       (keydown.enter)="onSearchMobiles($event)"
-                       (ngModelChange)="onSearchMobiles($event)"
-                       name="searchImeiText" placeholder="Số Imei" class="filter-text form-control" />
-            </div>
-        </div>
+    <nb-card-body [style]="{overflow: 'auto'}">
 
         <p-table dataKey="id" editMode="row" #tt [value]="data" [paginator]="true"
                  [rows]="20" [tableStyleClass]="'kai-styled-table'" [tableStyle]="{'table-layout':'auto'}">
@@ -48,6 +33,31 @@
                     <th>Tình Trạng</th>
                     <th>Số Lượng</th>
                     <th>Giá (Mua vào)</th>
+                </tr>
+                <tr class="filter-header" >
+                    <th></th>
+                    <th>
+                        <select class="rounded p-1" (change)="onSearchMobiles($event)" [(ngModel)]="mobileSearch.product_group_id"  >
+                            <option [value]="''" >--All--</option>
+                            <option *ngFor="let pg of productGroups" [value]="pg.id" >{{pg.name}}</option>
+                        </select>
+                    </th>
+                    <th><input type="text"
+                               [(ngModel)]="mobileSearch.name" required id="searchNameText"
+                               (keydown.enter)="onSearchMobiles($event)"
+                               (ngModelChange)="onSearchMobiles($event)"
+                               name="searchNameText" placeholder="Tên Máy" class="rounded p-1" /></th>
+                    <th>
+                        <input type="text"
+                               [(ngModel)]="mobileSearch.imei" required id="searchImeiText"
+                               (keydown.enter)="onSearchMobiles($event)"
+                               (ngModelChange)="onSearchMobiles($event)"
+                               name="searchImeiText" placeholder="Số Imei" class="rounded p-1" />
+                    </th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
                 </tr>
             </ng-template>
             <ng-template let-i="rowIndex" pTemplate="body" let-rowData let-columns="columns"

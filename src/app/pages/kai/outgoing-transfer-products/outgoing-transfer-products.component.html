@@ -3,28 +3,7 @@
         DANH SÁCH HÀNG CHUYỂN ĐI
     </nb-card-header>
 
-    <nb-card-body>
-        <div class="row filter-input-group customer-search">
-            <div class="col-9 col-md-9 form-inline">
-                <input type="text" [(ngModel)]="outgoingTransferProductsFilter.imei" required id="searchImeiText"
-                       placeholder="IMEI" (ngModelChange)="onSearchOutgoingProducts($event)" class="filter-text form-control"
-                       name="searchImeiText" />
-                <p-calendar
-                        [inputStyleClass]="'form-control'"
-                        [styleClass]="'my-calendar birthday-calendar'"
-                        placeholder="Ngày Chuyển"
-                        [(ngModel)]="outgoingTransferProductsFilter.transfer_date"
-                        dateFormat="dd-mm-yy"
-                        (ngModelChange)="onSearchOutgoingProducts($event)"
-                        [ngModelOptions]="{standalone: true}"
-                        [monthNavigator]="true"
-                        [yearNavigator]="true"
-                        [showButtonBar]="true"
-                        #birthdayValidate="ngModel"
-                >
-                </p-calendar>
-            </div>
-        </div>
+    <nb-card-body [style]="{overflow: 'auto'}" >
 
         <p-table dataKey="id" editMode="row" #tt [value]="data" [paginator]="true"
                  [rows]="20" [tableStyleClass]="'kai-styled-table'" [tableStyle]="{'table-layout':'auto'}">
@@ -43,7 +22,7 @@
                     <th>Số Lượng</th>
                     <th>Giá</th>
                     <th>Kho Đích</th>
-                    <th>Ngày Chuyển</th>
+                    <th pSortableColumn="transfer_date" >Ngày Chuyển <p-sortIcon field="transfer_date"></p-sortIcon></th>
                     <th>Trạng Thái</th>
                     <th class="text-center">
                         <button pButton (click)="onMultiTransferring($event)" type="button" class="btn p-button-sm p-button-success p-1 pl-2"><nb-icon icon="checkmark-circle-2-outline"></nb-icon></button>
@@ -52,15 +31,31 @@
                 <tr class="filter-header" >
                     <th></th>
                     <th></th>
+                    <th style="width: 150px; min-width: 150px;" ></th>
+                    <th><input style="width: 120px;" type="text" [(ngModel)]="outgoingTransferProductsFilter.imei"
+                               placeholder="IMEI" (ngModelChange)="onSearchOutgoingProducts($event)" class="rounded p-1" />
+                    </th>
+                    <th style="max-width: 50px;width: 50px;"></th>
+                    <th style="max-width: 50px;width: 50px;" ></th>
+                    <th style="max-width: 50px;width: 50px;" ></th>
                     <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
-                    <th></th>
+                    <th>
+                        <select style="max-width: 85px;width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.source" >
+                            <option [value]="''" >--All--</option>
+                            <option *ngFor="let source of productStorages" [value]="source.value" >{{source.label}}</option>
+                        </select>
+                    </th>
+                    <th><input type="date"
+                               class="rounded p-1"
+                               style="width: 120px;"
+                               [(ngModel)]="outgoingTransferProductsFilter.transfer_date"
+                               (ngModelChange)="onSearchOutgoingProducts($event)"/></th>
+                    <th>
+                        <select style="max-width: 85px;width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.transfer_status" >
+                            <option [value]="''" >--All--</option>
+                            <option *ngFor="let status of transferStatuses" [value]="status.value" >{{status.label}}</option>
+                        </select>
+                    </th>
                     <th></th>
                 </tr>
             </ng-template>

@@ -2,12 +2,13 @@ import { Component, OnInit } from '@angular/core';
 import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { Product } from '../../../model/product';
-import { notEmpty } from '../../../@core/utils/data.utils';
+import { notEmpty, notNull } from '../../../@core/utils/data.utils';
 import { ForSaleInvoiceDto } from '../../../model/dto/for-sale-invoice.dto';
 import { ProductDto } from '../../../model/dto/product.dto';
 import { TransferInvoiceDto } from '../../../model/dto/transfer-invoice.dto';
 import { DATE_CONSTANT, PRODUCT_SOURCE, PRODUCT_STORAGES } from '../../../@core/constant/common';
 import { calculateProductSummary } from '../../../@core/utils/kai.utils';
+import { ProductGroup } from '../../../model/product-group';
 
 @Component({
     selector: 'ngx-products',
@@ -24,9 +25,11 @@ export class ProductsComponent implements OnInit {
     displayForSaleModal: boolean = false;
     displayTransferModal = false;
     mobileSearch: {
+        product_group_id: string,
         name: string,
         imei: string,
     } = {
+        product_group_id: null,
         name: null,
         imei: null,
     };
@@ -40,12 +43,17 @@ export class ProductsComponent implements OnInit {
 
     SHOP_VN_SOURCE = PRODUCT_SOURCE.SHOP_VN;
 
+    productGroups: ProductGroup[];
+
     constructor(private kaiService: KaiService, public datePipe: DatePipe) {
     }
 
     ngOnInit() {
         this.getMobiles();
         this.productStorages = PRODUCT_STORAGES.filter(ps => ps.value !== PRODUCT_SOURCE.KAI);
+        this.kaiService.getProductGroups().subscribe((productGroups) => {
+            this.productGroups = productGroups;
+        });
     }
 
     getMobiles() {
@@ -82,9 +90,20 @@ export class ProductsComponent implements OnInit {
                 (x: Product) => x.name.toLowerCase().includes(this.mobileSearch.name.toLowerCase()),
             );
         }
+
         if (notEmpty(this.mobileSearch.imei)) {
             this.data = this.data.filter(
                 (x: Product) => x.imei.toLowerCase().includes(this.mobileSearch.imei.toLowerCase()),
+            );
+        }
+
+        if (notEmpty(this.mobileSearch.product_group_id)) {
+            this.data = this.data.filter(
+                (x) => x.product_group_id === +this.mobileSearch.product_group_id,
+            );
+        } else {
+            this.data = this.data.filter(
+                (x) => x.product_group_id != null,
             );
         }
 

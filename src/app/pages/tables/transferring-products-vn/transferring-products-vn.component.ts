@@ -23,6 +23,9 @@ export class TransferringProductsVnComponent implements OnInit {
         transfer_date: null,
     };
 
+    isAscendingOrder: boolean;
+    orderIcon = 'arrow-downward-outline';
+
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
@@ -69,6 +72,35 @@ export class TransferringProductsVnComponent implements OnInit {
             .subscribe((result) => {
                 this.getShopVNTransferringProducts();
             });
+    }
+
+    onSortData(event) {
+        event.preventDefault();
+        this.isAscendingOrder = !this.isAscendingOrder;
+        if (this.isAscendingOrder) {
+            this.orderIcon = 'arrow-upward-outline';
+        } else {
+            this.orderIcon = 'arrow-downward-outline';
+        }
+        this.data.sort((a, b) => {
+            if (this.isAscendingOrder) {
+                if (a.transfer_date < b.transfer_date) {
+                    return 1;
+                }
+                if (a.transfer_date > b.transfer_date) {
+                    return -1;
+                }
+                return 0;
+            } else {
+                if (a.transfer_date > b.transfer_date) {
+                    return 1;
+                }
+                if (a.transfer_date < b.transfer_date) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
     }
 
     onSearchTransferringProducts(event) {

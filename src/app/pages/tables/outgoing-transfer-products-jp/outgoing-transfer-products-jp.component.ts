@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { DATE_CONSTANT } from '../../../@core/constant/common';
+import {
+    DATE_CONSTANT,
+    PRODUCT_SOURCE,
+    PRODUCT_STORAGES,
+    TRANSFER_STATUS,
+    TRANSFER_STATUSES,
+} from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { notEmpty } from '../../../@core/utils/data.utils';
@@ -17,15 +23,26 @@ export class OutgoingTransferProductsJpComponent implements OnInit {
     data = [];
     dateFormat = DATE_CONSTANT.ORIGINAL_DATE_FORMAT;
     outgoingTransferProductsFilter: {
+        transfer_status: TRANSFER_STATUS,
+        source: PRODUCT_SOURCE,
         imei: string,
         transfer_date: Date | string,
     } = {
+        transfer_status: null,
+        source: null,
         imei: '',
         transfer_date: null,
     };
 
     selectedProducts: TransferringProductDto[] = [];
     isSelectAll: boolean;
+    productStorages = PRODUCT_STORAGES;
+    transferStatuses = TRANSFER_STATUSES.filter(x => {
+        return x.value === TRANSFER_STATUS.PROCESSING || x.value === TRANSFER_STATUS.TRANSFERRING;
+    });
+
+    isAscendingOrder: boolean;
+    orderIcon = 'arrow-downward-outline';
 
     constructor(
         private kaiService: KaiService,
@@ -111,6 +128,35 @@ export class OutgoingTransferProductsJpComponent implements OnInit {
         }
     }
 
+    onSortData(event) {
+        event.preventDefault();
+        this.isAscendingOrder = !this.isAscendingOrder;
+        if (this.isAscendingOrder) {
+            this.orderIcon = 'arrow-upward-outline';
+        } else {
+            this.orderIcon = 'arrow-downward-outline';
+        }
+        this.data.sort((a, b) => {
+            if (this.isAscendingOrder) {
+                if (a.transfer_date < b.transfer_date) {
+                    return 1;
+                }
+                if (a.transfer_date > b.transfer_date) {
+                    return -1;
+                }
+                return 0;
+            } else {
+                if (a.transfer_date > b.transfer_date) {
+                    return 1;
+                }
+                if (a.transfer_date < b.transfer_date) {
+                    return -1;
+                }
+                return 0;
+            }
+        });
+    }
+
     onSearchOutgoingProducts = (event) => {
         this.data = JSON.parse(JSON.stringify(this.originalData));
         if (notEmpty(this.outgoingTransferProductsFilter.imei)) {
@@ -125,6 +171,26 @@ export class OutgoingTransferProductsJpComponent implements OnInit {
                     === this.datePipe.transform(
                         this.outgoingTransferProductsFilter.transfer_date, DATE_CONSTANT.ORIGINAL_DATE_FORMAT);
             });
+        }
+
+        if (notEmpty(this.outgoingTransferProductsFilter.source)) {
+            this.data = this.data.filter(
+                (x) => x.to_position === this.outgoingTransferProductsFilter.source,
+            );
+        } else {
+            this.data = this.data.filter(
+                (x) => x.to_position !== null,
+            );
+        }
+
+        if (notEmpty(this.outgoingTransferProductsFilter.transfer_status)) {
+            this.data = this.data.filter(
+                (x) => x.transfer_status === this.outgoingTransferProductsFilter.transfer_status,
+            );
+        } else {
+            this.data = this.data.filter(
+                (x) => x.transfer_status !== null,
+            );
         }
 
         this.data.map((x) => {

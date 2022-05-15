@@ -16,7 +16,7 @@
                 <th>Số Lượng</th>
                 <th>Giá</th>
                 <th>Kho Nguồn</th>
-                <th>Ngày Chuyển</th>
+                <th style="cursor: pointer;" (click)="onSortData($event)" >Ngày Chuyển <nb-icon [icon]="orderIcon"></nb-icon></th>
                 <th>Trạng Thái</th>
                 <th></th>
             </tr>
@@ -25,16 +25,17 @@
             <tr>
                 <td></td>
                 <td></td>
-                <td></td>
+                <td style="min-width: 150px; width: 150px;"></td>
                 <td>
                     <input type="text" placeholder="IMEI"
                            class="rounded p-1"
+                           style="width: 120px;"
                            [(ngModel)]="notFoundProductsFilter.imei"
                            (ngModelChange)="onSearchNotFoundProducts($event)"/>
                 </td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td style="width: 50px;"></td>
+                <td style="width: 50px;" ></td>
+                <td style="width: 50px;" ></td>
                 <td></td>
                 <td></td>
                 <td>
