@@ -162,7 +162,7 @@ export class BansanphamComponent implements OnInit {
         parseInt(element.price) * parseInt(element.quantity),
         date, this.hinhthucthanhtoan,
         this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-        , element.quantity
+        , element.quantity, element.id
       ]).subscribe(value => {
         console.log(value)
       })

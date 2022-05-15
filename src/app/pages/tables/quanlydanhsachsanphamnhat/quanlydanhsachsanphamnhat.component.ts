@@ -443,6 +443,15 @@ window.location.reload()
         if(elementoutput.product_group_id == element.title){
           elementoutput.product_group_id = element.value
         }
+        else{
+          elementoutput.product_group_id = 1
+        }
+        if (elementoutput.color == null || elementoutput.color == undefined) {
+          elementoutput.color = ""
+        }
+        if (elementoutput.status == null || elementoutput.status == undefined) {
+          elementoutput.status = ""
+        }
       });
       console.log("output", output)
 });
@@ -450,6 +459,7 @@ return output;
   }
 
   taosanpham(){
+    alert("Đang thực hiện upload vui lòng đợi trong giây lát")
     this.datadaxuly.forEach(element => {
       this.service.sanphamtonkhojp(
         element
@@ -466,6 +476,6 @@ return output;
     setTimeout(() => {
       window.location.reload()
     },
-      30000);
+      15000);
   }
 }

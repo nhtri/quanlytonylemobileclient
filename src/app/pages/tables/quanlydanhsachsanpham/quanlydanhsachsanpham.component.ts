@@ -10,7 +10,7 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
 export class QuanlydanhsachsanphamComponent implements OnInit {
 
   datadaxuly
-role
+  role
   constructor(private service: NetworkserviceService) {
     this.role = localStorage.getItem("role")
     this.service.getsanphamtonkhokhohang().subscribe(val => {
@@ -437,35 +437,45 @@ role
       });
     }
     console.log("output", output)
-    
+
     output.forEach(elementoutput => {
       this.datanhomsanpham.forEach(element => {
-        if(elementoutput.product_group_id == element.title){
+        if (elementoutput.product_group_id == element.title) {
           elementoutput.product_group_id = element.value
+        }
+        else {
+          elementoutput.product_group_id = 1
+        }
+        if (elementoutput.color == null || elementoutput.color == undefined) {
+          elementoutput.color = ""
+        }
+        if (elementoutput.status == null || elementoutput.status == undefined) {
+          elementoutput.status = ""
         }
       });
       console.log("output", output)
-});
-return output;
+    });
+    return output;
   }
 
   taosanpham() {
+    alert("Đang thực hiện upload vui lòng đợi trong giây lát")
     this.datadaxuly.forEach(element => {
       this.service.sanphamtonkhokhohang(
-       element
+        element
       )
         .subscribe(data => {
           console.log("POST Request is successful ", data);
         },
           error => {
             console.log("Error", error);
-  
+
           })
     });
-  
+
     setTimeout(() => {
       window.location.reload()
     },
-      30000);
-   }
+      15000);
+  }
 }
