@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+import { notEmpty } from '../../../@core/utils/data.utils';
 
 @Component({
   selector: 'ngx-nhomsanphamnhat',
@@ -66,14 +67,17 @@ export class NhomsanphamnhatComponent implements OnInit {
         ]
       )
         .subscribe(data => {
-
+              if (notEmpty(data)) {
+                event.confirm.resolve();
+              } else {
+                alert(`Không thể xóa nhóm sản phẩm: ${event['data']['name']} vì đang được sử dụng.`);
+              }
           console.log("POST Request is successful ", data);
         },
           error => {
             console.log("Error", error);
-
+            alert(`Không thể xóa nhóm sản phẩm: ${event['data']['name']} vì đang được sử dụng.`);
           })
-      event.confirm.resolve();
     } else {
       event.confirm.reject();
     }

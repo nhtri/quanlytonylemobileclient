@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { KaiService } from '../../../services/kai.service';
 import { ProductGroup } from '../../../model/product-group';
 import { LocalDataSource } from 'ng2-smart-table';
+import { notEmpty } from '../../../@core/utils/data.utils';
 
 @Component({
     selector: 'ngx-product-groups-kai',
@@ -55,14 +56,17 @@ export class ProductGroupsKaiComponent implements OnInit {
         if (window.confirm('Bạn có chắc muốn xóa không ????')) {
             this.kaiService.deleteProductGroup(event['data']['id'])
                 .subscribe(data => {
-
+                        if (notEmpty(data)) {
+                            event.confirm.resolve();
+                        } else {
+                            alert(`Không thể xóa nhóm sản phẩm: ${event['data']['name']} vì đang được sử dụng.`);
+                        }
                         console.log('POST Request is successful ', data);
                     },
                     error => {
                         console.log('Error', error);
 
                     });
-            event.confirm.resolve();
         } else {
             event.confirm.reject();
         }
