@@ -4,7 +4,7 @@ import { GENERAL_PAGES, KAI_PAGES, SHOP_JP_PAGES, SHOP_VN_PAGES, SHOP_WAREHOUSE_
 
 export const KAI_MENU_ITEMS: MobileMenuItem[] = [
     {
-        title: 'Kai',
+        title: 'Bộ Phận Thu Mua',
         icon: 'shopping-cart-outline',
         roles: [USER_ROLE.ADMIN, USER_ROLE.KAI],
         children: [

@@ -57,6 +57,14 @@
         text-align: left;
         padding: 12px 15px;
       }
+
+      & > tr {
+        &.filter-header {
+          & > th, td {
+            background-color: #fff;
+          }
+        }
+      }
     }
 
     .p-datatable-tbody {
