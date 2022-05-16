@@ -24,7 +24,38 @@ export class DanhsachsanphamComponent implements OnInit {
   danhsachidsanpham = []
   taomoisanpham = false
   role
-
+  datanhomsanphamselect = [
+    {
+      "value": "", "title": ""
+    },{
+    "value": "ipad", "title": "ipad"
+  },
+  {
+    "value": "iphone", "title": "iphone"
+  },
+  {
+    "value": "Macbook", "title": "Macbook"
+  },
+  {
+    "value": "Imac", "title": "Imac"
+  }
+  ,
+  {
+    "value": "Mac mini", "title": "Mac mini"
+  }
+  ,
+  {
+    "value": "Watch", "title": "Watch"
+  }
+  ,
+  {
+    "value": "Phụ Kiện", "title": "Phụ Kiện"
+  }
+  ,
+  {
+    "value": "Android", "title": "Android"
+  }
+  ]
   // datanhomsanphamtaomoi = ""
   // datatensanphamtaomoi = ""
   // datadungluongtaomoi = ""
@@ -407,7 +438,7 @@ export class DanhsachsanphamComponent implements OnInit {
 
 
   filterdanhsachsanpham() {
-    console.log(this.tensp,this.imeisp,this.mausacsp,this.tinhtrangsp)
+    console.log('this.nhomsp',this.nhomsp)
     console.log(this.data)
     this.data = []
     if (this.nhomsp != "") {

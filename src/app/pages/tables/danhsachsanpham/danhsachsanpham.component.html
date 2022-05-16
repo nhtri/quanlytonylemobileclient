@@ -55,13 +55,17 @@
         </option>
 
       </select></td> -->
-      <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+      <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
         (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
-      </td>
-        <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+      </td> -->
+      <select style="width: 120px; height: 24px; border-radius: 5px; margin-top: 15px;" (change)="filterdanhsachsanpham()" [(ngModel)]="nhomsp" >
+        <option *ngFor="let oneOption of datanhomsanphamselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+      </select>
+
+        <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
         </td>
-        <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+        <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
         </td>
         <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
