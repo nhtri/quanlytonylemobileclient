@@ -3,7 +3,7 @@
         DANH SÁCH HÀNG CHUYỂN ĐI
     </nb-card-header>
 
-    <nb-card-body [style]="{overflow: 'auto'}" >
+    <nb-card-body [class]="'table-card-body'"  [style]="{overflow: 'auto'}" >
 
         <p-table dataKey="id" editMode="row" #tt [value]="data" [paginator]="true"
                  [rows]="20" [tableStyleClass]="'kai-styled-table'" [tableStyle]="{'table-layout':'auto'}">
@@ -40,8 +40,8 @@
                     <th style="max-width: 50px;width: 50px;" ></th>
                     <th></th>
                     <th>
-                        <select style="max-width: 85px;width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.source" >
-                            <option [value]="''" >--All--</option>
+                        <select style="max-width: 85px;width: 85px;" class="rounded p-1" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.source" >
+                            <option [value]="''">--All--</option>
                             <option *ngFor="let source of productStorages" [value]="source.value" >{{source.label}}</option>
                         </select>
                     </th>
@@ -51,7 +51,7 @@
                                [(ngModel)]="outgoingTransferProductsFilter.transfer_date"
                                (ngModelChange)="onSearchOutgoingProducts($event)"/></th>
                     <th>
-                        <select style="max-width: 85px;width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.transfer_status" >
+                        <select style="max-width: 85px;width: 85px;" class="rounded p-1" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.transfer_status" >
                             <option [value]="''" >--All--</option>
                             <option *ngFor="let status of transferStatuses" [value]="status.value" >{{status.label}}</option>
                         </select>

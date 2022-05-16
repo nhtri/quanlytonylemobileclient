@@ -22,7 +22,13 @@ export class ProductStoragesComponent implements OnInit {
             group_name: {
                 title: 'Nhóm SP',
                 type: 'string',
-                filter: false,
+                filter: {
+                    type: 'list',
+                    config: {
+                        selectText: 'Select',
+                        list: [],
+                    },
+                },
             },
             name: {
                 title: 'Tên sản phẩm',
@@ -77,6 +83,17 @@ export class ProductStoragesComponent implements OnInit {
         private productStatusPipe: ProductStatusPipe,
         private positionTitlePipe: PositionTitlePipe,
     ) {
+        this.kaiService.getProductGroups().subscribe((productGroups) => {
+            this.settings.columns.position.filter.config.list = productGroups.map(pg => {
+                return {
+                    value: pg.id,
+                    title: pg.name,
+                };
+            });
+        });
+    }
+
+    ngOnInit(): void {
         this.kaiService.getAllProducts().subscribe((productsGroups) => {
             this.source.load(productsGroups);
             this.data = productsGroups;
@@ -87,8 +104,5 @@ export class ProductStoragesComponent implements OnInit {
                 title: x.label,
             };
         });
-    }
-
-    ngOnInit(): void {
     }
 }
