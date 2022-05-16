@@ -11,6 +11,46 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
   datadaxuly
   role
+  datamau = [{
+    "value": "BLACK", "title": "BLACK"
+  },
+  {
+    "value": "GRAY", "title": "GRAY"
+  },
+  {
+    "value": "WHITE", "title": "WHITE"
+  },
+  {
+    "value": "RED", "title": "RED"
+  },
+  {
+    "value": "GREEN", "title": "GREEN"
+  },
+  {
+    "value": "BLUE", "title": "BLUE"
+  },
+  {
+    "value": "PINK", "title": "PINK"
+  },
+  {
+    "value": "SILVER_BLACK", "title": "SILVER_BLACK"
+  },
+  ]
+
+  datatrangthai = [{
+    "value": "NEW", "title": "NEW"
+  },
+  {
+    "value": "LIKE_NEW", "title": "LIKE_NEW"
+  },
+  {
+    "value": "LIKE_NEW_TBH", "title": "LIKE_NEW_TBH"
+  },
+  {
+    "value": "SECOND_HAND", "title": "SECOND_HAND"
+  }
+
+  ]
   constructor(private service: NetworkserviceService) {
     this.role = localStorage.getItem("role")
     this.service.getsanphamtonkhokhohang().subscribe(val => {
@@ -71,8 +111,14 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
     //   data.forEach(data => {
     //     this.datamau.push({ "value": data, "title": data })
     //   });
-    //   // this.settings.columns.color.editor.config.list = this.datamau
-    //   this.settings = Object.assign({}, this.settings);
+       this.settings.columns.color.editor.config.list = this.datamau
+       this.settings.columns.color.filter.config.list = this.datamau
+      this.settings = Object.assign({}, this.settings);
+
+
+      this.settings.columns.status.editor.config.list = this.datatrangthai
+       this.settings.columns.status.filter.config.list = this.datatrangthai
+      this.settings = Object.assign({}, this.settings);
 
     // })
 
@@ -101,7 +147,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
   datadungluong = []
   datanhomsanpham = []
   datatensanpham = []
-  datamau = []
+  // datamau = []
   dataloaisanpham = []
   dataphienban = []
   id
@@ -185,28 +231,36 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
       color: {
         title: 'Màu',
         editor: {
-          // type: 'list',
-          // config: {
-          //   selectText: 'Select',
-          //   list: [
-          //   ]
-          // }
-          type: 'string'
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
         },
-        // filter: false,
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
+        },
       },
       status: {
         title: 'Tình Trạng',
         editor: {
-          // type: 'list',
-          // config: {
-          //   selectText: 'Select',
-          //   list: [
-          //   ]
-          // }
-          type: 'string'
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
         },
-        // filter: false,
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: []
+          }
+        },
       },
       // phienban: {
       //   title: 'Phiên Bản',
