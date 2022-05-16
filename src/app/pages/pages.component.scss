@@ -16,6 +16,17 @@
     }
   }
 
+  ::ng-deep  .table-card-body {
+    &::-webkit-scrollbar {
+      height: 0.5rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #a9a9a9;
+    }
+
+  }
+
   ::ng-deep .main-menu {
     .menu-group {
       font-size: 1rem;

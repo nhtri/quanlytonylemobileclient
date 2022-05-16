@@ -3,7 +3,7 @@
         DANH SÁCH HÀNG CHUYỂN ĐI
     </nb-card-header>
 
-    <nb-card-body>
+    <nb-card-body [class]="'table-card-body'" >
         <table class="styled-table" id="excel-table">
             <thead>
                 <tr>
@@ -42,7 +42,7 @@
                 <td style="width: 50px;" ></td>
                 <td></td>
                 <td>
-                    <select style="width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.source" >
+                    <select style="width: 85px;" class="rounded p-1" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.source" >
                         <option [value]="''" >--All--</option>
                         <option *ngFor="let source of productStorages" [value]="source.value" >{{source.label}}</option>
                     </select>
@@ -55,7 +55,7 @@
                            (ngModelChange)="onSearchOutgoingProducts($event)"/>
                 </td>
                 <td>
-                    <select style="width: 85px;" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.transfer_status" >
+                    <select style="width: 85px;" class="rounded p-1" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.transfer_status" >
                         <option [value]="''" >--All--</option>
                         <option *ngFor="let status of transferStatuses" [value]="status.value" >{{status.label}}</option>
                     </select>
