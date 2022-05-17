@@ -42,6 +42,90 @@ export class DanhsachsanphamvnComponent implements OnInit {
   nhomsp = ""
   transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
 
+
+  datanhomsanphamselect = [
+    {
+      "value": "", "title": ""
+    },{
+    "value": "ipad", "title": "ipad"
+  },
+  {
+    "value": "iphone", "title": "iphone"
+  },
+  {
+    "value": "Macbook", "title": "Macbook"
+  },
+  {
+    "value": "Imac", "title": "Imac"
+  }
+  ,
+  {
+    "value": "Mac mini", "title": "Mac mini"
+  }
+  ,
+  {
+    "value": "Watch", "title": "Watch"
+  }
+  ,
+  {
+    "value": "Phụ Kiện", "title": "Phụ Kiện"
+  }
+  ,
+  {
+    "value": "Android", "title": "Android"
+  }
+  ]
+
+
+  datamauselect = [
+    {
+      "value": "", "title": ""
+    },
+    {
+    "value": "BLACK", "title": "BLACK"
+  },
+  {
+    "value": "GRAY", "title": "GRAY"
+  },
+  {
+    "value": "WHITE", "title": "WHITE"
+  },
+  {
+    "value": "RED", "title": "RED"
+  },
+  {
+    "value": "GREEN", "title": "GREEN"
+  },
+  {
+    "value": "BLUE", "title": "BLUE"
+  },
+  {
+    "value": "PINK", "title": "PINK"
+  },
+  {
+    "value": "SILVER_BLACK", "title": "SILVER_BLACK"
+  },
+  ]
+
+  datatrangthaiselect = [
+    {
+      "value": "", "title": ""
+    },
+    {
+    "value": "NEW", "title": "NEW"
+  },
+  {
+    "value": "LIKE_NEW", "title": "LIKE_NEW"
+  },
+  {
+    "value": "LIKE_NEW_TBH", "title": "LIKE_NEW_TBH"
+  },
+  {
+    "value": "SECOND_HAND", "title": "SECOND_HAND"
+  }
+
+  ]
+
   constructor(private service: NetworkserviceService, private router: Router) {
 
    

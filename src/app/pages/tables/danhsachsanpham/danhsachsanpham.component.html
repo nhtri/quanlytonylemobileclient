@@ -58,22 +58,31 @@
       <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
         (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
       </td> -->
-      <select style="width: 120px; height: 24px; border-radius: 5px; margin-top: 15px;" (change)="filterdanhsachsanpham()" [(ngModel)]="nhomsp" >
+      <td>
+      <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="nhomsp" >
         <option *ngFor="let oneOption of datanhomsanphamselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
       </select>
-
+    </td>
         <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
         </td>
         <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
         </td>
-        <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+        <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
-        </td>
-        <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+        </td> -->
+        <td>
+        <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="mausacsp" >
+          <option *ngFor="let oneOption of datamauselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+        </select></td>
+        <td>
+        <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
-        </td>
+        </td> -->
+        <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp" >
+          <option *ngFor="let oneOption of datatrangthaiselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+        </select></td>
         <!-- <td><select (change)="selectdungluong($event)"
         style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
         <option value="default">Dung lượng</option>

@@ -49,107 +49,119 @@
   <!-- <td></td> -->
   <td></td>
   <!-- <td></td>
-  <td><select (change)="selectnhomsanpham($event)"
-      style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-      <option value="default">Nhóm sản phẩm</option>
-      <option *ngFor="let data of datanhomsanpham" [value]="data.value">
-        {{data.title}}
-      </option>
+<td><select (change)="selectnhomsanpham($event)"
+  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+  <option value="default">Nhóm sản phẩm</option>
+  <option *ngFor="let data of datanhomsanpham" [value]="data.value">
+    {{data.title}}
+  </option>
 
-    </select></td> -->
-    <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
-      (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
-    </td>
-    <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
-      (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
-    </td>
-    <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
-      (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
-    </td>
-    <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
-      (input)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
-    </td>
-    <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
-      (input)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
-    </td>
-
+</select></td> -->
+<!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+  (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
+</td> -->
+<td>
+<select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="nhomsp" >
+  <option *ngFor="let oneOption of datanhomsanphamselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+</select>
+</td>
+  <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
+    (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+  </td>
+  <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
+    (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+  </td>
+  <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+    (input)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
+  </td> -->
+  <td>
+  <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="mausacsp" >
+    <option *ngFor="let oneOption of datamauselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+  </select></td>
+  <td>
+  <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+    (input)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
+  </td> -->
+  <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp" >
+    <option *ngFor="let oneOption of datatrangthaiselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+  </select></td>
   <!-- <td><select (change)="selectdungluong($event)"
-      style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
-      <option value="default">Dung lượng</option>
-      <option *ngFor="let data of datadungluong" [value]="data.value">
-        {{data.title}}
-      </option>
+  style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
+  <option value="default">Dung lượng</option>
+  <option *ngFor="let data of datadungluong" [value]="data.value">
+    {{data.title}}
+  </option>
 
-    </select></td> -->
+</select></td> -->
 
   <!-- <td><select (change)="selectloaisanpham($event)"
-      style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-      <option value="default">Loại sản phẩm</option>
-      <option *ngFor="let data of dataloaisanpham" [value]="data.value">
-        {{data.title}}
-      </option>
+  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+  <option value="default">Loại sản phẩm</option>
+  <option *ngFor="let data of dataloaisanpham" [value]="data.value">
+    {{data.title}}
+  </option>
 
-    </select></td> -->
+</select></td> -->
 
   <!-- <td><select (change)="selectphienban($event)"
-      style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-      <option value="default">Phiên bản</option>
-      <option *ngFor="let data of dataphienban" [value]="data.value">
-        {{data.title}}
-      </option>
+  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+  <option value="default">Phiên bản</option>
+  <option *ngFor="let data of dataphienban" [value]="data.value">
+    {{data.title}}
+  </option>
 
-    </select></td> -->
+</select></td> -->
 
   <!-- <tr *ngIf="taomoisanpham==true">
-    <td></td>
-    <td></td>
-    <td><select (change)="selecttaomoinhomsanpham($event.target.value)"
-        style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-        <option value="default">Nhóm sản phẩm</option>
-        <option *ngFor="let data of datanhomsanpham" [value]="data.value">
-          {{data.title}}
-        </option>
+<td></td>
+<td></td>
+<td><select (change)="selecttaomoinhomsanpham($event.target.value)"
+    style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+    <option value="default">Nhóm sản phẩm</option>
+    <option *ngFor="let data of datanhomsanpham" [value]="data.value">
+      {{data.title}}
+    </option>
 
-      </select></td>
+  </select></td>
 
-    <td><select (change)="selecttaomoitensanpham($event.target.value)"
-        style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-        <option value="default">Tên sản phẩm</option>
-        <option *ngFor="let data of datatensanpham" [value]="data.value">
-          {{data.title}}
-        </option>
+<td><select (change)="selecttaomoitensanpham($event.target.value)"
+    style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+    <option value="default">Tên sản phẩm</option>
+    <option *ngFor="let data of datatensanpham" [value]="data.value">
+      {{data.title}}
+    </option>
 
-      </select></td>
+  </select></td>
 
-    <td><select (change)="selecttaomoidungluong($event.target.value)"
-        style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
-        <option value="default">Dung lượng</option>
-        <option *ngFor="let data of datadungluong" [value]="data.value">
-          {{data.title}}
-        </option>
+<td><select (change)="selecttaomoidungluong($event.target.value)"
+    style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
+    <option value="default">Dung lượng</option>
+    <option *ngFor="let data of datadungluong" [value]="data.value">
+      {{data.title}}
+    </option>
 
-      </select></td>
+  </select></td>
 
-    <td><select (change)="selecttaomoiloaisanpham($event.target.value)" style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-      <option value="default">Loại sản phẩm</option>  
-      <option *ngFor="let data of dataloaisanpham" [value]="data.value">
-          {{data.title}}
-        </option>
+<td><select (change)="selecttaomoiloaisanpham($event.target.value)" style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+  <option value="default">Loại sản phẩm</option>  
+  <option *ngFor="let data of dataloaisanpham" [value]="data.value">
+      {{data.title}}
+    </option>
 
-      </select></td>
+  </select></td>
 
-    <td><select (change)="selecttaomoiphienban($event.target.value)"  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-      <option value="default">Phiên bản</option>  
-      <option *ngFor="let data of dataphienban" [value]="data.value">
-          {{data.title}}
-        </option>
+<td><select (change)="selecttaomoiphienban($event.target.value)"  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+  <option value="default">Phiên bản</option>  
+  <option *ngFor="let data of dataphienban" [value]="data.value">
+      {{data.title}}
+    </option>
 
-      </select></td>
-    <td><input type="text" style="width: 120px;"  [(ngModel)]="dataimeitaomoi"></td>
-    <td><i class="fa fa-check" style="font-size:18px;color:darkblue;" (click)="taosanphammoi()"></i></td>
-    <td><i class="fa fa-times" style="font-size:18px;color:tomato;" (click)="canceltaomoi()"></i></td>
+  </select></td>
+<td><input type="text" style="width: 120px;"  [(ngModel)]="dataimeitaomoi"></td>
+<td><i class="fa fa-check" style="font-size:18px;color:darkblue;" (click)="taosanphammoi()"></i></td>
+<td><i class="fa fa-times" style="font-size:18px;color:tomato;" (click)="canceltaomoi()"></i></td>
 
-  </tr> -->
+</tr> -->
   <tr *ngFor="let sanpham of data">
     <td><input type="checkbox" (click)="select(sanpham.id)"></td>
     <!-- <td>{{sanpham.id}}</td> -->
@@ -160,10 +172,10 @@
     <td>{{sanpham.status}}</td>
     <td>{{sanpham.quantity}}</td>
     <td *ngIf="role == 'admin'">{{sanpham.price}}</td>
-   
+
     <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
-        [queryParams]={id:[sanpham.id]}></i></td>
-    <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
+    [queryParams]={id:[sanpham.id]}></i></td>
+<td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
 
   </tr>
 
