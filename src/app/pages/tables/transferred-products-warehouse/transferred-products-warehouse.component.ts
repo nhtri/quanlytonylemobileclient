@@ -4,14 +4,14 @@ import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { notEmpty } from '../../../@core/utils/data.utils';
 import { Product } from '../../../model/product';
-
+import * as XLSX from 'xlsx';
 @Component({
     selector: 'ngx-transferred-products-warehouse',
     templateUrl: './transferred-products-warehouse.component.html',
     styleUrls: ['./transferred-products-warehouse.component.scss'],
 })
 export class TransferredProductsWarehouseComponent implements OnInit {
-
+    fileName = 'DanhSachHangDaDen.xlsx';
     originalData = [];
     data = [];
     dateFormat = DATE_CONSTANT.ORIGINAL_DATE_FORMAT;
@@ -110,4 +110,16 @@ export class TransferredProductsWarehouseComponent implements OnInit {
             });
         }
     }
+
+    exportexcel() {
+        let element = document.getElementById('excel-table');
+        const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
+    
+        /* generate workbook and add the worksheet */
+        const wb: XLSX.WorkBook = XLSX.utils.book_new();
+        XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
+    
+        /* save to file */
+        XLSX.writeFile(wb, this.fileName);
+      }
 }
