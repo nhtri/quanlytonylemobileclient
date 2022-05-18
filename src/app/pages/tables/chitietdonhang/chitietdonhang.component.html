@@ -1,60 +1,60 @@
 <nb-card>
-    <nb-card-header>
-      Chi Tiết Đơn Hàng 
+  <nb-card-header>
+    Chi Tiết Đơn Hàng 
 
-    </nb-card-header>
-  
-    <nb-card-body>
-  
+  </nb-card-header>
+
+  <nb-card-body>
+
 
 
 <table class="styled-table" id="excel-table">
 
 
-  <thead>
-    <tr>
-      <th>Đơn hàng</th>
-      <!-- <th>Nhóm sản phẩm</th> -->
-      <th>Tên sản phẩm</th>
-      <th>Số lượng</th>
-      <!-- <th>Dung lượng</th>
-      <th>Loại sản phẩm</th>
-      <th>Phiên bản</th> -->
-      <th>Imei</th>
-      <th *ngIf="role == 'admin'">Giá thu</th>
-      <th>Giá bán</th>
-      <th>Ngày bán</th>
-      </tr>
-  </thead>
-  <tbody>
-   
-
-
-    <tr *ngFor="let sanpham of data">
-      <td>{{madonhang}}</td>
-      <!-- <td>{{sanpham.nhomsanpham}}</td> -->
-      <td>{{sanpham.tensanpham}}</td>
-      <!-- <td>{{sanpham.dungluong}}</td> -->
-      <!-- <td>{{sanpham.loaisanpham}}</td>
-      <td>{{sanpham.phienban}}</td> -->
-      <td>{{sanpham.soluong}}</td>
-      <td>{{sanpham.imei}}</td>
-      <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
-      <td>{{sanpham.giaban}}</td>
-      <td>{{sanpham.ngayban}}</td>
-      <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
-          [queryParams]={id:[sanpham.id]}></i></td>
-      <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
-
+<thead>
+  <tr>
+    <th>Đơn hàng</th>
+    <!-- <th>Nhóm sản phẩm</th> -->
+    <th>Tên sản phẩm</th>
+    <th>Số lượng</th>
+    <!-- <th>Dung lượng</th>
+    <th>Loại sản phẩm</th>
+    <th>Phiên bản</th> -->
+    <th>Imei</th>
+    <th *ngIf="role == 'admin'">Giá thu</th>
+    <th>Giá bán</th>
+    <th>Ngày bán</th>
     </tr>
+</thead>
+<tbody>
+ 
 
 
-  </tbody>
+  <tr *ngFor="let sanpham of data">
+    <td>{{madonhang}}</td>
+    <!-- <td>{{sanpham.nhomsanpham}}</td> -->
+    <td>{{sanpham.tensanpham}}</td>
+    <!-- <td>{{sanpham.dungluong}}</td> -->
+    <!-- <td>{{sanpham.loaisanpham}}</td>
+    <td>{{sanpham.phienban}}</td> -->
+    <td>{{sanpham.soluong}}</td>
+    <td>{{sanpham.imei}}</td>
+    <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
+    <td>{{sanpham.giaban}}</td>
+    <td>{{sanpham.ngayban}}</td>
+    <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
+        [queryParams]={id:[sanpham.id]}></i></td>
+    <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
+
+  </tr>
+
+
+</tbody>
 </table>
 
 </nb-card-body>
 <nb-card-footer>
-  <button  style="height: 36px;width: 150px;border-radius: 5px;border-color: #fa2e2e;color: white;background-color:tomato;font-weight: 300;">Hủy Đơn Hàng</button>
-  
+<button  style="height: 36px;width: 150px;border-radius: 5px;border-color: #fa2e2e;color: white;background-color:tomato;font-weight: 300;" (click)="huydonhang()">Hủy Đơn Hàng</button>
+
 </nb-card-footer>
 </nb-card> 

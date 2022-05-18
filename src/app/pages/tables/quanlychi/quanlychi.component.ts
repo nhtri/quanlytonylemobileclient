@@ -50,7 +50,7 @@ export class QuanlychiComponent implements OnInit {
   daterange = []
   datatemp = []
   hinhthucthanhtoan = "tienmat"
-  hinhthuc="default"
+  hinhthuc = "default"
 
   ngOnInit(): void {
     this.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '-' + new Date().getDate().toString().padStart(2, '0')
@@ -77,33 +77,35 @@ export class QuanlychiComponent implements OnInit {
       });
     }
     if (this.id != "") {
-      this.service.editquanlychi([this.sotien, this.date, this.mucdich,this.hinhthucthanhtoan ,this.id]).subscribe(val => {
+      this.service.editquanlychi([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, this.id]).subscribe(val => {
         console.log(val)
         alert("Chỉnh sửa thành công")
         window.location.reload()
       });
     }
   }
-  edit(id, ngaytao, sotien, mucdich,hinhthuc) {
+  edit(id, ngaytao, sotien, mucdich, hinhthuc) {
     this.date = ngaytao
     this.sotien = sotien
     this.mucdich = mucdich
     this.id = id
-    this.hinhthuc=hinhthuc
+    this.hinhthuc = hinhthuc
   }
   delete(value) {
-    this.service.deletequanlychi([value]).subscribe(val => {
-      console.log(val)
-      alert("Xoá thành công")
-      // this.service.getquanlychi().subscribe(val => {
-      //   console.log(val)
-      //   this.data = val
-      // });
-      window.location.reload()
-    });
+    if (window.confirm('Bạn có chắc muốn xóa không ????')) {
+      this.service.deletequanlychi([value]).subscribe(val => {
+        console.log(val)
+        alert("Xoá thành công")
+        // this.service.getquanlychi().subscribe(val => {
+        //   console.log(val)
+        //   this.data = val
+        // });
+        window.location.reload()
+      });
+    }
   }
 
-  refresh(){
+  refresh() {
     window.location.reload()
   }
 

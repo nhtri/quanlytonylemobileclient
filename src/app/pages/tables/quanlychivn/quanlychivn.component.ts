@@ -15,7 +15,7 @@ export class QuanlychivnComponent implements OnInit {
   tienmat = 0
   daibiki = 0
   chuyenkhoan = 0
-hinhthuc = "default"
+  hinhthuc = "default"
   constructor(private service: NetworkserviceService) {
 
     this.service.getquanlychivn().subscribe(val => {
@@ -77,14 +77,14 @@ hinhthuc = "default"
       });
     }
     if (this.id != "") {
-      this.service.editquanlychi([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan,this.id]).subscribe(val => {
+      this.service.editquanlychi([this.sotien, this.date, this.mucdich, this.hinhthucthanhtoan, this.id]).subscribe(val => {
         console.log(val)
         alert("Chỉnh sửa thành công")
         window.location.reload()
       });
     }
   }
-  edit(id, ngaytao, sotien, mucdich,hinhthuc) {
+  edit(id, ngaytao, sotien, mucdich, hinhthuc) {
     this.date = ngaytao
     this.sotien = sotien
     this.mucdich = mucdich
@@ -92,18 +92,20 @@ hinhthuc = "default"
     this.hinhthuc = hinhthuc
   }
   delete(value) {
-    this.service.deletequanlychi([value]).subscribe(val => {
-      console.log(val)
-      alert("Xoá thành công")
-      // this.service.getquanlychi().subscribe(val => {
-      //   console.log(val)
-      //   this.data = val
-      // });
-      window.location.reload()
-    });
+    if (window.confirm('Bạn có chắc muốn xóa không ????')) {
+      this.service.deletequanlychi([value]).subscribe(val => {
+        console.log(val)
+        alert("Xoá thành công")
+        // this.service.getquanlychi().subscribe(val => {
+        //   console.log(val)
+        //   this.data = val
+        // });
+        window.location.reload()
+      });
+    }
   }
 
-  refresh(){
+  refresh() {
     window.location.reload()
   }
 
