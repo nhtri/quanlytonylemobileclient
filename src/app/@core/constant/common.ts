@@ -102,6 +102,7 @@ export const enum PRODUCT_COLOR {
     BLUE = 'BLUE',
     PINK = 'PINK',
     SILVER_BLACK = 'SILVER_BLACK',
+   GOLD = 'GOLD'
 }
 
 export const PRODUCT_COLORS = [
@@ -113,6 +114,7 @@ export const PRODUCT_COLORS = [
     {label: 'Blue', code: '#0000FF', value: PRODUCT_COLOR.BLUE},
     {label: 'Pink', code: '#FFC0CB', value: PRODUCT_COLOR.PINK},
     {label: 'Silver Black', code: '#C0C0C0,#000000', value: PRODUCT_COLOR.SILVER_BLACK},
+    {label: 'Gold', code: '#FFDF00', value: PRODUCT_COLOR.GOLD}
 ];
 
 export const enum PRODUCT_SOURCE {
