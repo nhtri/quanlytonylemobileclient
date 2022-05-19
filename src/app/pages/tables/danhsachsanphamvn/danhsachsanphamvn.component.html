@@ -39,7 +39,7 @@
     <th>Phiên bản</th> -->
     <th>Màu sắc</th>
     <th>Tình trạng</th>
-    <th>Số lượng</th>
+    <th style="cursor: pointer;" (click)="onSortData($event)" >Số lượng <nb-icon [icon]="orderIcon"></nb-icon></th>
     <th *ngIf="role == 'admin'">Giá thu</th>
    
     <!-- <th></th>

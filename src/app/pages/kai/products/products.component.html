@@ -31,7 +31,7 @@
                     <th>Số IMEI</th>
                     <th>Màu Sắc</th>
                     <th>Tình Trạng</th>
-                    <th>Số Lượng</th>
+                    <th pSortableColumn="quantity" >Số Lượng <p-sortIcon field="quantity"></p-sortIcon></th>
                     <th>Giá (Mua vào)</th>
                 </tr>
                 <tr class="filter-header" >
@@ -54,8 +54,18 @@
                                (ngModelChange)="onSearchMobiles($event)"
                                name="searchImeiText" placeholder="Số Imei" class="rounded p-1" />
                     </th>
-                    <th></th>
-                    <th></th>
+                    <th>
+                        <select class="rounded p-1" (change)="onSearchMobiles($event)" [(ngModel)]="mobileSearch.color"  >
+                            <option [value]="''" >--All--</option>
+                            <option *ngFor="let pc of productColors" [value]="pc.value" >{{pc.label}}</option>
+                        </select>
+                    </th>
+                    <th>
+                        <select class="rounded p-1" (change)="onSearchMobiles($event)" [(ngModel)]="mobileSearch.status"  >
+                            <option [value]="''" >--All--</option>
+                            <option *ngFor="let ps of productStatuses" [value]="ps.value" >{{ps.label}}</option>
+                        </select>
+                    </th>
                     <th></th>
                     <th></th>
                 </tr>

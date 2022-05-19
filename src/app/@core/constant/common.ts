@@ -52,7 +52,10 @@ export const enum PRODUCT_STATUS {
     NEW = 'NEW',
     LIKE_NEW = 'LIKE_NEW',
     LIKE_NEW_TBH = 'LIKE_NEW_TBH',
-    SECOND_HAND = 'SECOND_HAND',
+    SECOND_HAND_A = 'SECOND_HAND_A',
+    SECOND_HAND_B = 'SECOND_HAND_B',
+    SECOND_HAND_C = 'SECOND_HAND_C',
+    SECOND_HAND_D = 'SECOND_HAND_D',
 }
 
 export const enum TRANSFER_STATUS {
@@ -90,7 +93,10 @@ export const PRODUCT_STATUSES = [
     {label: 'New', value: PRODUCT_STATUS.NEW},
     {label: 'Like New', value: PRODUCT_STATUS.LIKE_NEW},
     {label: 'Like New TBH', value: PRODUCT_STATUS.LIKE_NEW_TBH},
-    {label: 'Second Hand', value: PRODUCT_STATUS.SECOND_HAND},
+    {label: 'Second-A', value: PRODUCT_STATUS.SECOND_HAND_A},
+    {label: 'Second-B', value: PRODUCT_STATUS.SECOND_HAND_B},
+    {label: 'Second-C', value: PRODUCT_STATUS.SECOND_HAND_C},
+    {label: 'Second-D', value: PRODUCT_STATUS.SECOND_HAND_D},
 ];
 
 export const enum PRODUCT_COLOR {
@@ -102,7 +108,8 @@ export const enum PRODUCT_COLOR {
     BLUE = 'BLUE',
     PINK = 'PINK',
     SILVER_BLACK = 'SILVER_BLACK',
-   GOLD = 'GOLD'
+    GOLD = 'GOLD',
+    PURPLE = 'PURPLE',
 }
 
 export const PRODUCT_COLORS = [
@@ -114,7 +121,8 @@ export const PRODUCT_COLORS = [
     {label: 'Blue', code: '#0000FF', value: PRODUCT_COLOR.BLUE},
     {label: 'Pink', code: '#FFC0CB', value: PRODUCT_COLOR.PINK},
     {label: 'Silver Black', code: '#C0C0C0,#000000', value: PRODUCT_COLOR.SILVER_BLACK},
-    {label: 'Gold', code: '#FFDF00', value: PRODUCT_COLOR.GOLD}
+    {label: 'Gold', code: '#FFDF00', value: PRODUCT_COLOR.GOLD},
+    {label: 'Purple', code: '#800080', value: PRODUCT_COLOR.PURPLE},
 ];
 
 export const enum PRODUCT_SOURCE {
