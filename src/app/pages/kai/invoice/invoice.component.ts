@@ -186,13 +186,21 @@ export class InvoiceComponent implements OnInit {
 
     get totalMoney() {
         let totalMoney = 0;
-        this.products.forEach((product) => totalMoney += +product.quantity * +product.price);
+        this.products.forEach((product) => {
+            if (product.id !== -1) {
+            totalMoney += +product.quantity * +product.price;
+            }
+        });
         return totalMoney;
     }
 
     get getQuantity() {
         let totalQuantity = 0;
-        this.products.forEach((product) => totalQuantity += +product.quantity);
+        this.products.forEach((product) => {
+            if (product.id !== -1) {
+                totalQuantity += +product.quantity;
+            }
+        });
         return totalQuantity;
     }
 
