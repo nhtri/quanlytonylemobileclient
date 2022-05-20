@@ -52,7 +52,16 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
     "value": "LIKE_NEW_TBH", "title": "LIKE_NEW_TBH"
   },
   {
-    "value": "SECOND_HAND", "title": "SECOND_HAND"
+    "value": "SECOND_HAND_A", "title": "SECOND_HAND_A"
+  },
+  {
+    "value": "SECOND_HAND_B", "title": "SECOND_HAND_B"
+  },
+  {
+    "value": "SECOND_HAND_C", "title": "SECOND_HAND_C"
+  },
+  {
+    "value": "SECOND_HAND_D", "title": "SECOND_HAND_D"
   }
 
   ]
