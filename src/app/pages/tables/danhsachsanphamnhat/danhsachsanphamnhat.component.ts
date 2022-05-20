@@ -4,6 +4,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
 import { GENERAL_PAGES } from '../../../@core/constant/pages.constant';
+import { PRODUCT_COLORS, PRODUCT_STATUSES } from '../../../@core/constant/common';
+import { KaiService } from '../../../services/kai.service';
 @Component({
   selector: 'ngx-danhsachsanphamnhat',
   templateUrl: './danhsachsanphamnhat.component.html',
@@ -42,96 +44,45 @@ export class DanhsachsanphamnhatComponent implements OnInit {
 
 
   datanhomsanphamselect = [
-    {
-      "value": "", "title": ""
-    },{
-    "value": "ipad", "title": "ipad"
-  },
-  {
-    "value": "iphone", "title": "iphone"
-  },
-  {
-    "value": "Macbook", "title": "Macbook"
-  },
-  {
-    "value": "Imac", "title": "Imac"
-  }
-  ,
-  {
-    "value": "Mac mini", "title": "Mac mini"
-  }
-  ,
-  {
-    "value": "Watch", "title": "Watch"
-  }
-  ,
-  {
-    "value": "Phụ Kiện", "title": "Phụ Kiện"
-  }
-  ,
-  {
-    "value": "Android", "title": "Android"
-  }
-  ]
+    {value: '', title: ''},
+  ];
 
 
-  datamauselect = [
-    {
-      "value": "", "title": ""
-    },
-    {
-    "value": "BLACK", "title": "BLACK"
-  },
-  {
-    "value": "GRAY", "title": "GRAY"
-  },
-  {
-    "value": "WHITE", "title": "WHITE"
-  },
-  {
-    "value": "RED", "title": "RED"
-  },
-  {
-    "value": "GREEN", "title": "GREEN"
-  },
-  {
-    "value": "BLUE", "title": "BLUE"
-  },
-  {
-    "value": "PINK", "title": "PINK"
-  },
-  {
-    "value": "SILVER_BLACK", "title": "SILVER_BLACK"
-  },
-  {
-    "value": "GOLD", "title": "GOLD"
-  },
-  ]
+  datamauselect = PRODUCT_COLORS.map(x => {
+    return {
+      value: x.value.toString(),
+      title: x.label,
+    };
+  });
 
-  datatrangthaiselect = [
-    {
-      "value": "", "title": ""
-    },
-    {
-    "value": "NEW", "title": "NEW"
-  },
-  {
-    "value": "LIKE_NEW", "title": "LIKE_NEW"
-  },
-  {
-    "value": "LIKE_NEW_TBH", "title": "LIKE_NEW_TBH"
-  },
-  {
-    "value": "SECOND_HAND", "title": "SECOND_HAND"
-  }
-
-  ]
+  datatrangthaiselect = PRODUCT_STATUSES.map(x => {
+    return {
+      value: x.value.toString(),
+      title: x.label,
+    };
+  });
   transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
 
-  constructor(private service: NetworkserviceService, private router: Router) {
+  isAscendingOrder: boolean;
+  orderIcon = 'arrow-downward-outline';
 
-   
+  constructor(
+      private service: NetworkserviceService,
+      private kaiService: KaiService,
+      private router: Router) {
 
+   this.datamauselect.unshift({value: '', title: ''});
+   this.datatrangthaiselect.unshift({value: '', title: ''});
+
+   this.kaiService.getProductGroups().subscribe((productGroups) => {
+     this.datanhomsanphamselect = productGroups.map(x => {
+       return {
+         value: x.name,
+         title: x.name,
+       };
+     });
+     this.datanhomsanphamselect.unshift({value: '', title: ''});
+   });
 
     this.service.getsanphamtonkhojp().subscribe(val => {
       this.source.load(val);
@@ -182,6 +133,35 @@ export class DanhsachsanphamnhatComponent implements OnInit {
 
   }
 
+  onSortData(event) {
+    event.preventDefault();
+    this.isAscendingOrder = !this.isAscendingOrder;
+    if (this.isAscendingOrder) {
+      this.orderIcon = 'arrow-upward-outline';
+    } else {
+      this.orderIcon = 'arrow-downward-outline';
+    }
+    this.data.sort((a, b) => {
+      if (this.isAscendingOrder) {
+        if (a.quantity < b.quantity) {
+          return 1;
+        }
+        if (a.quantity > b.quantity) {
+          return -1;
+        }
+        return 0;
+      } else {
+        if (a.quantity > b.quantity) {
+          return 1;
+        }
+        if (a.quantity < b.quantity) {
+          return -1;
+        }
+        return 0;
+      }
+    });
+    this.datafilter = this.data;
+  }
 
 
 

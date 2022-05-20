@@ -6,7 +6,13 @@ import { notEmpty, notNull } from '../../../@core/utils/data.utils';
 import { ForSaleInvoiceDto } from '../../../model/dto/for-sale-invoice.dto';
 import { ProductDto } from '../../../model/dto/product.dto';
 import { TransferInvoiceDto } from '../../../model/dto/transfer-invoice.dto';
-import { DATE_CONSTANT, PRODUCT_SOURCE, PRODUCT_STORAGES } from '../../../@core/constant/common';
+import {
+    DATE_CONSTANT,
+    PRODUCT_COLOR,
+    PRODUCT_COLORS,
+    PRODUCT_SOURCE, PRODUCT_STATUSES,
+    PRODUCT_STORAGES,
+} from '../../../@core/constant/common';
 import { calculateProductSummary } from '../../../@core/utils/kai.utils';
 import { ProductGroup } from '../../../model/product-group';
 
@@ -26,10 +32,14 @@ export class ProductsComponent implements OnInit {
     displayTransferModal = false;
     mobileSearch: {
         product_group_id: string,
+        color: string,
+        status: string,
         name: string,
         imei: string,
     } = {
-        product_group_id: null,
+        product_group_id: '',
+        color: '',
+        status: '',
         name: null,
         imei: null,
     };
@@ -44,6 +54,8 @@ export class ProductsComponent implements OnInit {
     SHOP_VN_SOURCE = PRODUCT_SOURCE.SHOP_VN;
 
     productGroups: ProductGroup[];
+    productColors = PRODUCT_COLORS;
+    productStatuses = PRODUCT_STATUSES;
 
     constructor(private kaiService: KaiService, public datePipe: DatePipe) {
     }
@@ -104,6 +116,26 @@ export class ProductsComponent implements OnInit {
         } else {
             this.data = this.data.filter(
                 (x) => x.product_group_id != null,
+            );
+        }
+
+        if (notEmpty(this.mobileSearch.color)) {
+            this.data = this.data.filter(
+                (x) => x.color === this.mobileSearch.color,
+            );
+        } else {
+            this.data = this.data.filter(
+                (x) => x.color != null,
+            );
+        }
+
+        if (notEmpty(this.mobileSearch.status)) {
+            this.data = this.data.filter(
+                (x) => x.color === this.mobileSearch.status,
+            );
+        } else {
+            this.data = this.data.filter(
+                (x) => x.status != null,
             );
         }
 

@@ -57,13 +57,13 @@ export class StatisticsComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log('>>>> statisticFilter: ', this.statisticFilter);
+        // console.log('>>>> statisticFilter: ', this.statisticFilter);
     }
 
     onSearch = (event) => {
         const fromDate = this.datepipe.transform(this.statisticFilter.from_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
         const toDate = this.datepipe.transform(this.statisticFilter.to_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
-        console.log('>>>> this.statisticFilter: ', this.statisticFilter);
+        // console.log('>>>> this.statisticFilter: ', this.statisticFilter);
         if (notEmpty(fromDate) && notEmpty(toDate) && notEmpty(this.statisticFilter.type)) {
             this.kaiService.getKaiStatistics({
                 type: this.statisticFilter.type,
