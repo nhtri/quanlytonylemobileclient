@@ -1,7 +1,7 @@
 import { KaiStatistic } from './kai-statistic';
 
 export interface KaiRevenueStatistic {
-    purchasing: KaiStatistic[];
-    for_sale: KaiStatistic[];
+    purchasing_statistics: KaiStatistic[];
+    for_sale_statistics: KaiStatistic[];
 }
 

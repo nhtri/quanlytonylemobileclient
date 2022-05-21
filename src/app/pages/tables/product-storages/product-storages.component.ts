@@ -4,7 +4,8 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { ProductStatusPipe } from '../../../@core/shared/pipes/product-status.pipe';
 import { Product } from '../../../model/product';
 import { PositionTitlePipe } from '../../../@core/shared/pipes/position-title.pipe';
-import { PRODUCT_COLORS, PRODUCT_STATUS, PRODUCT_STATUSES, PRODUCT_STORAGES } from '../../../@core/constant/common';
+import { PRODUCT_COLORS, PRODUCT_STATUSES, PRODUCT_STORAGES } from '../../../@core/constant/common';
+import { ColorTitlePipe } from '../../../@core/shared/pipes/color-title.pipe';
 
 @Component({
     selector: 'ngx-product-storages',
@@ -48,6 +49,9 @@ export class ProductStoragesComponent implements OnInit {
                         list: [],
                     },
                 },
+                valuePrepareFunction: (cell, row) => {
+                    return this.colorTitlePipe.transform(cell);
+                },
             },
             status: {
                 filter: {
@@ -61,6 +65,9 @@ export class ProductStoragesComponent implements OnInit {
                 type: 'string',
                 valuePrepareFunction: (cell, row) => {
                     return this.productStatusPipe.transform(cell);
+                },
+                filterFunction(cell?: any, search?: string): boolean {
+                    return cell.trim().toUpperCase() === search.trim().toUpperCase();
                 },
             },
             quantity: {
@@ -95,6 +102,7 @@ export class ProductStoragesComponent implements OnInit {
     constructor(
         private kaiService: KaiService,
         private productStatusPipe: ProductStatusPipe,
+        private colorTitlePipe: ColorTitlePipe,
         private positionTitlePipe: PositionTitlePipe,
     ) {
         this.settings.columns.position.filter.config.list = PRODUCT_STORAGES.map(x => {
@@ -118,15 +126,15 @@ export class ProductStoragesComponent implements OnInit {
         this.kaiService.getProductGroups().subscribe((productGroups) => {
             this.settings.columns.group_name.filter.config.list = productGroups.map(pg => {
                 return {
-                    value: pg.name,
+                    value: pg.id,
                     title: pg.name,
                 };
             });
             this.settings = Object.assign({}, this.settings);
         });
-        this.kaiService.getAllProducts().subscribe((productsGroups) => {
-            this.source.load(productsGroups);
-            this.data = productsGroups;
+        this.kaiService.getAllProducts().subscribe((products) => {
+            this.source.load(products);
+            this.data = products;
         });
     }
 
