@@ -16,6 +16,14 @@ export class AuthService {
         const userRole = this.localStorageService.getData('role');
     }
 
+    isNormalUser() {
+        const currentUserRole = this.localStorageService.getData('role');
+        if (isEmpty(currentUserRole)) {
+            return false;
+        }
+        return [USER_ROLE.KAI, USER_ROLE.SHOP_VN, USER_ROLE.SHOP_JP, USER_ROLE.GUEST].indexOf(currentUserRole) > -1;
+    }
+
     canAccess(roles: USER_ROLE[] | null) {
         // If not set any roles that's mean anyone can access
         if (isEmpty(roles)) {

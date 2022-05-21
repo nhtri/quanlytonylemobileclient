@@ -6,7 +6,7 @@ import {
     STATISTICS_DATE_LIMIT,
     STATISTICS_MONTH_LIMIT,
 } from '../../../@core/constant/common';
-import { notEmpty } from '../../../@core/utils/data.utils';
+import { isEmpty, notEmpty } from '../../../@core/utils/data.utils';
 import { DatePipe } from '@angular/common';
 import { KaiService } from '../../../services/kai.service';
 import { KaiRevenueStatistic } from '../../../model/kai-revenue-statistic';
@@ -60,7 +60,7 @@ export class StatisticsComponent implements OnInit {
         // console.log('>>>> statisticFilter: ', this.statisticFilter);
     }
 
-    onSearch = (event) => {
+    onSearch(event) {
         const fromDate = this.datepipe.transform(this.statisticFilter.from_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
         const toDate = this.datepipe.transform(this.statisticFilter.to_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
         // console.log('>>>> this.statisticFilter: ', this.statisticFilter);
@@ -71,8 +71,8 @@ export class StatisticsComponent implements OnInit {
                 to_date: this.datepipe.transform(toDate, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
             }).subscribe((kaiRevenueStatistic) => {
                 this.kaiStatistics = kaiRevenueStatistic;
-                this.purchasingStats = kaiRevenueStatistic.purchasing;
-                this.forSaleStats = kaiRevenueStatistic.for_sale;
+                this.purchasingStats = kaiRevenueStatistic.purchasing_statistics;
+                this.forSaleStats = kaiRevenueStatistic.for_sale_statistics;
                 const {profits, totalProfit} = this.calculate(kaiRevenueStatistic);
                 this.profits = profits;
                 this.totalProfit = totalProfit;
@@ -89,12 +89,12 @@ export class StatisticsComponent implements OnInit {
     }
 
     private _calculateDateRangeStatistics(kaiRevenueStatistic: KaiRevenueStatistic) {
-        const {purchasing, for_sale} = kaiRevenueStatistic;
+        const {purchasing_statistics, for_sale_statistics} = kaiRevenueStatistic;
         const profits = [];
         let totalProfit = 0;
-        for_sale.forEach((for_sale_stat) => {
+        for_sale_statistics.forEach((for_sale_stat) => {
             const {sale_date} = for_sale_stat;
-            const purchasing_stat = purchasing.find(y => y.sale_date === sale_date);
+            const purchasing_stat = purchasing_statistics.find(y => y.sale_date === sale_date);
             const profit = notEmpty(purchasing_stat)
                 ? for_sale_stat.total_money - purchasing_stat.total_money
                 : +for_sale_stat.total_money;
@@ -103,9 +103,9 @@ export class StatisticsComponent implements OnInit {
                 profit,
             });
         });
-        purchasing.forEach((purchasing_stat) => {
+        purchasing_statistics.forEach((purchasing_stat) => {
             const {sale_date} = purchasing_stat;
-            const for_sale_stat = for_sale.find(y => y.sale_date === sale_date);
+            const for_sale_stat = for_sale_statistics.find(y => y.sale_date === sale_date);
             if (!for_sale_stat) {
                 profits.push({
                     sale_date,
@@ -127,12 +127,13 @@ export class StatisticsComponent implements OnInit {
     }
 
     private _calculateMonthStatistics(kaiRevenueStatistic: KaiRevenueStatistic) {
-        const {purchasing, for_sale} = kaiRevenueStatistic;
+        const {purchasing_statistics, for_sale_statistics} = kaiRevenueStatistic;
         const profits = [];
         let totalProfit = 0;
-        for_sale.forEach((for_sale_stat) => {
+        for_sale_statistics.forEach((for_sale_stat) => {
             const {month_date, year_date} = for_sale_stat;
-            const purchasing_stat = purchasing.find(y => y.month_date === month_date && y.year_date === year_date);
+            const purchasing_stat = purchasing_statistics
+                .find(y => y.month_date === month_date && y.year_date === year_date);
             const profit = notEmpty(purchasing_stat)
                 ? for_sale_stat.total_money - purchasing_stat.total_money
                 : +for_sale_stat.total_money;
@@ -142,9 +143,10 @@ export class StatisticsComponent implements OnInit {
                 profit,
             });
         });
-        purchasing.forEach((purchasing_stat) => {
+        purchasing_statistics.forEach((purchasing_stat) => {
             const {month_date, year_date} = purchasing_stat;
-            const for_sale_stat = for_sale.find(y => y.month_date === month_date && y.year_date === year_date);
+            const for_sale_stat = for_sale_statistics
+                .find(y => y.month_date === month_date && y.year_date === year_date);
             if (!for_sale_stat) {
                 profits.push({
                     month_date,
@@ -169,21 +171,22 @@ export class StatisticsComponent implements OnInit {
         };
     }
 
-    onTypeChange(event) {
-        this.statisticFilter.type = event.value;
+    onTypeChange(filterType) {
+        this.statisticFilter.type = filterType;
         this.statisticFilter.to_date = null;
-        this.selectedType = event;
+        this.selectedType = filterType;
         this.totalProfit = 0;
-        if (notEmpty(this.statisticFilter.from_date)) {
-            this.updateFilter(this.statisticFilter.from_date);
+        if (isEmpty(this.statisticFilter.from_date)) {
+            this.statisticFilter.from_date = new Date();
         }
+        this.updateFilter(this.statisticFilter.from_date);
     }
 
-    onChangeFromDate = (event) => {
+    onChangeFromDate(event) {
         this.updateFilter(event);
     }
 
-    updateFilter = (fromDate: Date) => {
+    updateFilter(fromDate: Date) {
         if (notEmpty(fromDate)) {
             this.minToDate = fromDate;
             if (this.statisticFilter.type === REPORT_TYPE.MONTH) {

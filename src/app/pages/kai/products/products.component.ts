@@ -131,7 +131,7 @@ export class ProductsComponent implements OnInit {
 
         if (notEmpty(this.mobileSearch.status)) {
             this.data = this.data.filter(
-                (x) => x.color === this.mobileSearch.status,
+                (x) => x.status === this.mobileSearch.status,
             );
         } else {
             this.data = this.data.filter(
