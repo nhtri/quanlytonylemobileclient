@@ -54,20 +54,21 @@ export class ChitietdonhangComponent implements OnInit {
             this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
               va => {
                 this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t => {
+                  this.service.deletequanlythutransactionkey([this.transactionkey]).subscribe(c => {
+                    if (this.location == "WAREHOUSE") {
+                      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+                      console.log(this.location)
+                    }
+                    if (this.location == "SHOP_VN") {
+                      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+                      console.log(this.location)
+                    }
+                    if (this.location == "SHOP_JP") {
+                      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+                      console.log(this.location)
+                    }
 
-                  if (this.location == "WAREHOUSE") {
-                    this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
-                    console.log(this.location)
-                  }
-                  if (this.location == "SHOP_VN") {
-                    this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
-                    console.log(this.location)
-                  }
-                  if (this.location == "SHOP_JP") {
-                    this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
-                    console.log(this.location)
-                  }
-
+                  })
                 })
               }
             )

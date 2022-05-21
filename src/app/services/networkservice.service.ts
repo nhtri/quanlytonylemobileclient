@@ -370,6 +370,12 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(ocungAPI, data, this.httpOptions);
     }
 
+
+    deletequanlythutransactionkey(data): Observable<any> {
+        const ocungAPI = `https://quanlytonylemobile.herokuapp.com/deletequanlythutransactionkey`;
+        return this.httpClient.post<any>(ocungAPI, data, this.httpOptions);
+    }
+
     getloaisanpham() {
         const get = 'https://quanlytonylemobile.herokuapp.com/getloaisanpham';
         return this.httpClient.get<any>(get);
