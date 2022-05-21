@@ -162,7 +162,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
         return 0;
       }
     });
-    this.datafilter = this.data;
+    // this.datafilter = this.data;
   }
 
 
@@ -231,119 +231,28 @@ export class DanhsachsanphamvnComponent implements OnInit {
   }
 
   
-  selectnhomsanpham(event) {
-    this.dataselectnhomsanpham = event.target.value
-    this.data = this.datafilter
-    if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
-      this.data = this.data.filter(val => val.nhomsanpham == this.dataselectnhomsanpham)
-    }
-    if (this.dataselecttensanpham != '' && this.dataselecttensanpham != 'default') {
-      this.data = this.data.filter(val => val.tensanpham == this.dataselecttensanpham)
-    }
-    if (this.dataselectdungluong != '' && this.dataselectdungluong != 'default') {
-      this.data = this.data.filter(val => val.dungluong == this.dataselectdungluong)
-    }
-    if (this.dataselectloaisanpham != '' && this.dataselectloaisanpham != 'default') {
-      this.data = this.data.filter(val => val.loaisanpham == this.dataselectloaisanpham)
-    }
-    if (this.dataselectphienban != '' && this.dataselectphienban != 'default') {
-      this.data = this.data.filter(val => val.phienban == this.dataselectphienban)
-    }
-  }
-  selecttensanpham(event) {
-    this.dataselecttensanpham = event.target.value
-    this.data = this.datafilter
-    if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
-      this.data = this.data.filter(val => val.nhomsanpham == this.dataselectnhomsanpham)
-    }
-    if (this.dataselecttensanpham != '' && this.dataselecttensanpham != 'default') {
-      this.data = this.data.filter(val => val.name == this.dataselecttensanpham)
-    }
-    if (this.dataselectdungluong != '' && this.dataselectdungluong != 'default') {
-      this.data = this.data.filter(val => val.dungluong == this.dataselectdungluong)
-    }
-    if (this.dataselectloaisanpham != '' && this.dataselectloaisanpham != 'default') {
-      this.data = this.data.filter(val => val.loaisanpham == this.dataselectloaisanpham)
-    }
-    if (this.dataselectphienban != '' && this.dataselectphienban != 'default') {
-      this.data = this.data.filter(val => val.phienban == this.dataselectphienban)
-    }
-  }
-  selectdungluong(event) {
-    this.dataselectdungluong = event.target.value
-    this.data = this.datafilter
-    if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
-      this.data = this.data.filter(val => val.nhomsanpham == this.dataselectnhomsanpham)
-    }
-    if (this.dataselecttensanpham != '' && this.dataselecttensanpham != 'default') {
-      this.data = this.data.filter(val => val.tensanpham == this.dataselecttensanpham)
-    }
-    if (this.dataselectdungluong != '' && this.dataselectdungluong != 'default') {
-      this.data = this.data.filter(val => val.dungluong == this.dataselectdungluong)
-    }
-    if (this.dataselectloaisanpham != '' && this.dataselectloaisanpham != 'default') {
-      this.data = this.data.filter(val => val.loaisanpham == this.dataselectloaisanpham)
-    }
-    if (this.dataselectphienban != '' && this.dataselectphienban != 'default') {
-      this.data = this.data.filter(val => val.phienban == this.dataselectphienban)
-    }
-  }
-  selectloaisanpham(event) {
-    this.dataselectloaisanpham = event.target.value
-    this.data = this.datafilter
-    if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
-      this.data = this.data.filter(val => val.nhomsanpham == this.dataselectnhomsanpham)
-    }
-    if (this.dataselecttensanpham != '' && this.dataselecttensanpham != 'default') {
-      this.data = this.data.filter(val => val.tensanpham == this.dataselecttensanpham)
-    }
-    if (this.dataselectdungluong != '' && this.dataselectdungluong != 'default') {
-      this.data = this.data.filter(val => val.dungluong == this.dataselectdungluong)
-    }
-    if (this.dataselectloaisanpham != '' && this.dataselectloaisanpham != 'default') {
-      this.data = this.data.filter(val => val.loaisanpham == this.dataselectloaisanpham)
-    }
-    if (this.dataselectphienban != '' && this.dataselectphienban != 'default') {
-      this.data = this.data.filter(val => val.phienban == this.dataselectphienban)
-    }
-  }
-  selectphienban(event) {
-    this.dataselectphienban = event.target.value
-    this.data = this.datafilter
-    if (this.dataselectnhomsanpham != '' && this.dataselectnhomsanpham != 'default') {
-      this.data = this.data.filter(val => val.nhomsanpham == this.dataselectnhomsanpham)
-    }
-    if (this.dataselecttensanpham != '' && this.dataselecttensanpham != 'default') {
-      this.data = this.data.filter(val => val.tensanpham == this.dataselecttensanpham)
-    }
-    if (this.dataselectdungluong != '' && this.dataselectdungluong != 'default') {
-      this.data = this.data.filter(val => val.dungluong == this.dataselectdungluong)
-    }
-    if (this.dataselectloaisanpham != '' && this.dataselectloaisanpham != 'default') {
-      this.data = this.data.filter(val => val.loaisanpham == this.dataselectloaisanpham)
-    }
-    if (this.dataselectphienban != '' && this.dataselectphienban != 'default') {
-      this.data = this.data.filter(val => val.phienban == this.dataselectphienban)
-    }
-  }
+ 
 
   filterdanhsachsanpham() {
     console.log(this.data)
-    this.data = []
+    this.data = this.datafilter
     if (this.tensp != "") {
-      this.data = this.datafilter.filter(data => data.name.toLowerCase().includes(this.tensp.toLowerCase()))
+      this.data = this.data.filter(data => data.name.toLowerCase().includes(this.tensp.toLowerCase()))
     }
     if (this.nhomsp != "") {
-      this.data = this.datafilter.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
+      this.data = this.data.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
     }
     if (this.imeisp != "") {
-      this.data = this.datafilter.filter(data => data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
+      this.data = this.data.filter(data => data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
     }
     if (this.mausacsp != "") {
-      this.data = this.datafilter.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
+      this.data = this.data.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
     }
     if (this.tinhtrangsp != "") {
-      this.data = this.datafilter.filter(data => data.status.toLowerCase().includes(this.tinhtrangsp.toLowerCase()))
+      this.data = this.data.filter(data => data.status.toLowerCase().includes(this.tinhtrangsp.toLowerCase()))
+    }
+    if (this.tinhtrangsp == "NEW") {
+      this.data = this.data.filter(data => data.status.toLowerCase() == this.tinhtrangsp.toLowerCase())
     }
     if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp == ""){
       this.data = this.datafilter

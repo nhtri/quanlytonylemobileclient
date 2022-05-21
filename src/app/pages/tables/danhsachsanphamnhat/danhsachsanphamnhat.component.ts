@@ -327,22 +327,26 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   }
 
   filterdanhsachsanpham() {
-    console.log(this.data)
+    console.log('this.data',this.data)
+    this.data = this.datafilter
     this.data = []
     if (this.nhomsp != "") {
-      this.data = this.datafilter.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
+      this.data = this.data.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
     }
     if (this.tensp != "") {
-      this.data = this.datafilter.filter(data => data.name.toLowerCase().includes(this.tensp.toLowerCase()))
+      this.data = this.data.filter(data => data.name.toLowerCase().includes(this.tensp.toLowerCase()))
     }
     if (this.imeisp != "") {
-      this.data = this.datafilter.filter(data => data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
+      this.data = this.data.filter(data => data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
     }
     if (this.mausacsp != "") {
-      this.data = this.datafilter.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
+      this.data = this.data.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
     }
     if (this.tinhtrangsp != "") {
-      this.data = this.datafilter.filter(data => data.status.toLowerCase().includes(this.tinhtrangsp.toLowerCase()))
+      this.data = this.data.filter(data => data.status.toLowerCase().includes(this.tinhtrangsp.toLowerCase()))
+    }
+    if (this.tinhtrangsp == "NEW") {
+      this.data = this.data.filter(data => data.status.toLowerCase() == this.tinhtrangsp.toLowerCase())
     }
     if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp==""){
       this.data = this.datafilter
