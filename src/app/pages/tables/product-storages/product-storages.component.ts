@@ -1,11 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { KaiService } from '../../../services/kai.service';
-import { LocalDataSource } from 'ng2-smart-table';
-import { ProductStatusPipe } from '../../../@core/shared/pipes/product-status.pipe';
-import { Product } from '../../../model/product';
-import { PositionTitlePipe } from '../../../@core/shared/pipes/position-title.pipe';
-import { PRODUCT_COLORS, PRODUCT_STATUSES, PRODUCT_STORAGES } from '../../../@core/constant/common';
-import { ColorTitlePipe } from '../../../@core/shared/pipes/color-title.pipe';
+import {Component, OnInit} from '@angular/core';
+import {KaiService} from '../../../services/kai.service';
+import {LocalDataSource} from 'ng2-smart-table';
+import {ProductStatusPipe} from '../../../@core/shared/pipes/product-status.pipe';
+import {Product} from '../../../model/product';
+import {PositionTitlePipe} from '../../../@core/shared/pipes/position-title.pipe';
+import {PRODUCT_COLORS, PRODUCT_STATUSES, PRODUCT_STORAGES} from '../../../@core/constant/common';
+import {ColorTitlePipe} from '../../../@core/shared/pipes/color-title.pipe';
+import {AuthService} from '../../../services/auth.service';
 
 @Component({
     selector: 'ngx-product-storages',
@@ -16,6 +17,7 @@ export class ProductStoragesComponent implements OnInit {
 
     data: Product[];
     source: LocalDataSource = new LocalDataSource();
+    isNormalUser: boolean;
     settings = {
         actions: {columnTitle: '', position: 'right', add: false, edit: false, delete: false},
 
@@ -104,6 +106,7 @@ export class ProductStoragesComponent implements OnInit {
         private productStatusPipe: ProductStatusPipe,
         private colorTitlePipe: ColorTitlePipe,
         private positionTitlePipe: PositionTitlePipe,
+        private authService: AuthService,
     ) {
         this.settings.columns.position.filter.config.list = PRODUCT_STORAGES.map(x => {
             return {
@@ -136,6 +139,11 @@ export class ProductStoragesComponent implements OnInit {
             this.source.load(products);
             this.data = products;
         });
+
+        if (this.authService.isNormalUser()) {
+            delete this.settings.columns.price;
+        }
+
     }
 
     ngOnInit(): void {

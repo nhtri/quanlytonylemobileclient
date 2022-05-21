@@ -174,7 +174,7 @@ export class StatisticsComponent implements OnInit {
     onTypeChange(filterType) {
         this.statisticFilter.type = filterType;
         this.statisticFilter.to_date = null;
-        this.selectedType.value = filterType;
+        this.selectedType = filterType;
         this.totalProfit = 0;
         if (isEmpty(this.statisticFilter.from_date)) {
             this.statisticFilter.from_date = new Date();

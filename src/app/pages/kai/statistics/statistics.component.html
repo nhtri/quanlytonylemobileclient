@@ -40,8 +40,7 @@
                 </div>
             </div>
         </form>
-        <h4 class=" card-title" style="margin: 20px; font-weight: bold;">Danh sách nhập
-        </h4>
+        <h4 class=" card-title" style="margin: 20px; font-weight: bold;">Danh sách nhập</h4>
         <p-table dataKey="invoices" editMode="row" #tt [value]="purchasingStats" [paginator]="true"
                  [rows]="20" [tableStyle]="{'table-layout':'auto'}">
 
@@ -56,8 +55,8 @@
             <ng-template let-i="rowIndex" pTemplate="body" let-rowData let-columns="columns"
                          let-editing="editing" let-ri="rowIndex">
                 <tr [pEditableRow]="rowData">
-                    <td *ngIf="selectedType.value === MONTH ">{{rowData.datemonth}}/{{rowData.dateyear}}</td>
-                    <td *ngIf="selectedType.value === DATE_RANGE">{{rowData.sale_date | date: dateFormat}}</td>
+                    <td *ngIf="selectedType === MONTH ">{{rowData.datemonth}}/{{rowData.dateyear}}</td>
+                    <td *ngIf="selectedType === DATE_RANGE">{{rowData.sale_date | date: dateFormat}}</td>
                     <td>{{rowData.quantity}}</td>
                     <td>{{rowData.total_money}}</td>
                 </tr>
@@ -69,8 +68,8 @@
                  [rows]="20" [tableStyle]="{'table-layout':'auto'}">
             <ng-template pTemplate="header" let-columns class=" text-primary">
                 <tr>
-                    <th *ngIf="selectedType.value === MONTH ">Tháng</th>
-                    <th *ngIf="selectedType.value === DATE_RANGE">Ngày</th>
+                    <th *ngIf="selectedType === MONTH ">Tháng</th>
+                    <th *ngIf="selectedType === DATE_RANGE">Ngày</th>
                     <th>Tổng số máy</th>
                     <th>Tổng Số Tiền</th>
                 </tr>
@@ -78,8 +77,8 @@
             <ng-template let-i="rowIndex" pTemplate="body" let-rowData let-columns="columns"
                          let-editing="editing" let-ri="rowIndex">
                 <tr [pEditableRow]="rowData">
-                    <td *ngIf="selectedType.value === MONTH ">{{rowData.datemonth}}/{{rowData.dateyear}}</td>
-                    <td *ngIf="selectedType.value === DATE_RANGE">{{rowData.sale_date | date: dateFormat}}</td>
+                    <td *ngIf="selectedType === MONTH ">{{rowData.datemonth}}/{{rowData.dateyear}}</td>
+                    <td *ngIf="selectedType === DATE_RANGE">{{rowData.sale_date | date: dateFormat}}</td>
                     <td>{{rowData.quantity}}</td>
                     <td>{{rowData.total_money}}</td>
                 </tr>
@@ -92,16 +91,16 @@
 
             <ng-template pTemplate="header" let-columns class=" text-primary">
                 <tr>
-                    <th *ngIf="selectedType.value==='month'">Tháng</th>
-                    <th *ngIf="selectedType.value==='day'">Ngày</th>
+                    <th *ngIf="selectedType === MONTH ">Tháng</th>
+                    <th *ngIf="selectedType === DATE_RANGE">Ngày</th>
                     <th>Lợi Nhuận</th>
                 </tr>
             </ng-template>
             <ng-template let-i="rowIndex" pTemplate="body" let-rowData let-columns="columns"
                          let-editing="editing" let-ri="rowIndex">
                 <tr [pEditableRow]="rowData">
-                    <td *ngIf="selectedType.value=='month'">{{rowData.datemonth}}/{{rowData.dateyear}}</td>
-                    <td *ngIf="selectedType.value=='day'">{{rowData.sale_date | date: dateFormat}}</td>
+                    <td *ngIf="selectedType === MONTH">{{rowData.datemonth}}/{{rowData.dateyear}}</td>
+                    <td *ngIf="selectedType === DATE_RANGE">{{rowData.sale_date | date: dateFormat}}</td>
                     <td>{{rowData.profit}}</td>
                 </tr>
             </ng-template>
