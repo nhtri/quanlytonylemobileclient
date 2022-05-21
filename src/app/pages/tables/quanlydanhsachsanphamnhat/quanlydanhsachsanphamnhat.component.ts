@@ -514,9 +514,9 @@ window.location.reload()
         if(elementoutput.product_group_id == element.title){
           elementoutput.product_group_id = element.value
         }
-        else{
-          elementoutput.product_group_id = 1
-        }
+        // else{
+        //   elementoutput.product_group_id = 1
+        // }
         if (elementoutput.color == null || elementoutput.color == undefined) {
           elementoutput.color = ""
         }
