@@ -329,7 +329,6 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   filterdanhsachsanpham() {
     console.log('this.data',this.data)
     this.data = this.datafilter
-    this.data = []
     if (this.nhomsp != "") {
       this.data = this.data.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
     }
