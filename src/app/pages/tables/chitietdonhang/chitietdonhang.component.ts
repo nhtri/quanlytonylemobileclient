@@ -19,8 +19,15 @@ export class ChitietdonhangComponent implements OnInit {
     this.route.queryParams
       .subscribe(params => {
         console.log("params.id[0]", params.id[0])
-        this.madonhang = params.id[0]
-        this.service.getdanhsachdonhangquanlymobileid([params.id[0]]).subscribe(value => {
+        console.log("params.id", params.id)
+        if (params.id.length == 1) {
+          this.madonhang = params.id[0]
+        }
+        else {
+          this.madonhang = params.id
+        }
+        // this.madonhang = params.id[0]
+        this.service.getdanhsachdonhangquanlymobileid([this.madonhang]).subscribe(value => {
           this.transactionkey = value[0].transactionkey
           this.location = value[0].vitri
           this.service.getdanhsachsanphamdabanquanlymobiletransaction([value[0].transactionkey]).subscribe(data => {
@@ -37,17 +44,17 @@ export class ChitietdonhangComponent implements OnInit {
 
   huydonhang() {
     if (window.confirm('Bạn có chắc muốn xóa không ????')) {
-    this.data.forEach(element => {
-      this.service.getsoluongsanphamhientaidangco([element.productid, element.vitri]).subscribe(d => {
-        console.log('d', d)
-        console.log('parseInt(d[0].quantity) ',parseInt(d[0].quantity) )
-        console.log('parseInt(element.quantity)',parseInt(element.quantity))
-    
-        this.service.updatesoluongsanphamhuy([parseInt(d[0].quantity) + parseInt(element.soluong), element.productid, element.vitri]).subscribe(val => {
-          this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
-            va => {
-              this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t=>{
-    
+      this.data.forEach(element => {
+        this.service.getsoluongsanphamhientaidangco([element.productid, element.vitri]).subscribe(d => {
+          console.log('d', d)
+          console.log('parseInt(d[0].quantity) ', parseInt(d[0].quantity))
+          console.log('parseInt(element.quantity)', parseInt(element.quantity))
+
+          this.service.updatesoluongsanphamhuy([parseInt(d[0].quantity) + parseInt(element.soluong), element.productid, element.vitri]).subscribe(val => {
+            this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
+              va => {
+                this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t => {
+
                   if (this.location == "WAREHOUSE") {
                     this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
                     console.log(this.location)
@@ -60,14 +67,14 @@ export class ChitietdonhangComponent implements OnInit {
                     this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
                     console.log(this.location)
                   }
-                
-              })
-            }
-          )
-          
-         })
-      })
-    });
-  }
+
+                })
+              }
+            )
+
+          })
+        })
+      });
+    }
   }
 }
