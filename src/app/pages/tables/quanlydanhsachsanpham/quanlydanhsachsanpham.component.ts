@@ -38,6 +38,9 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
   {
     "value": "GOLD", "title": "GOLD"
   },
+  {
+    "value": "PURPLE", "title": "PURPLE"
+  },
   ]
 
   datatrangthai = [{
@@ -506,7 +509,10 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
     output.forEach(elementoutput => {
       this.datanhomsanpham.forEach(element => {
+        console.log('test test', this.datanhomsanpham)
+       
         if (elementoutput.product_group_id == element.title) {
+         
           elementoutput.product_group_id = element.value
         }
         // else {

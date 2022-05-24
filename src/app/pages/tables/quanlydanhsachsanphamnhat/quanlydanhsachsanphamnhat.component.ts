@@ -39,6 +39,9 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
   {
     "value": "GOLD", "title": "GOLD"
   },
+  {
+    "value": "PURPLE", "title": "PURPLE"
+  },
   ]
 
   datatrangthai = [{
