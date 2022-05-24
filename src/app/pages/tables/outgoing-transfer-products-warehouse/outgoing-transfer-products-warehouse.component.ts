@@ -28,11 +28,11 @@ export class OutgoingTransferProductsWarehouseComponent implements OnInit {
         imei: string,
         transfer_date: Date | string,
     } = {
-        transfer_status: null,
-        source: null,
-        imei: '',
-        transfer_date: null,
-    };
+            transfer_status: null,
+            source: null,
+            imei: '',
+            transfer_date: null,
+        };
 
     selectedProducts: TransferringProductDto[] = [];
     isSelectAll: boolean;
@@ -43,11 +43,12 @@ export class OutgoingTransferProductsWarehouseComponent implements OnInit {
 
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
-
+    role
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
     ) {
+        this.role = localStorage.getItem("role")
     }
 
     ngOnInit() {
@@ -202,12 +203,12 @@ export class OutgoingTransferProductsWarehouseComponent implements OnInit {
     exportexcel() {
         let element = document.getElementById('excel-table');
         const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-    
+
         /* generate workbook and add the worksheet */
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    
+
         /* save to file */
         XLSX.writeFile(wb, this.fileName);
-      }
+    }
 }

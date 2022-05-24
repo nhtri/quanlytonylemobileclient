@@ -26,11 +26,12 @@ export class OutgoingTransferProductsVnComponent implements OnInit {
 
     selectedProducts: TransferringProductDto[] = [];
     isSelectAll: boolean;
-
+role
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
     ) {
+        this.role = localStorage.getItem("role")
     }
 
     ngOnInit() {

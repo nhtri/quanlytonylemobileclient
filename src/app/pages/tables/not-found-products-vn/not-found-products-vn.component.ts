@@ -25,11 +25,12 @@ export class NotFoundProductsVnComponent implements OnInit {
 
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
-
+role
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
     ) {
+        this.role=localStorage.getItem("role")
     }
 
     ngOnInit() {

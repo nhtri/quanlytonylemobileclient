@@ -28,11 +28,11 @@ export class OutgoingTransferProductsComponent implements OnInit {
         imei: string,
         transfer_date: Date | string,
     } = {
-        transfer_status: null,
-        source: null,
-        imei: '',
-        transfer_date: null,
-    };
+            transfer_status: null,
+            source: null,
+            imei: '',
+            transfer_date: null,
+        };
 
     selectedProducts: TransferringProductDto[] = [];
     isSelectAll: boolean;
@@ -40,11 +40,12 @@ export class OutgoingTransferProductsComponent implements OnInit {
     transferStatuses = TRANSFER_STATUSES.filter(x => {
         return x.value === TRANSFER_STATUS.PROCESSING || x.value === TRANSFER_STATUS.TRANSFERRING;
     });
-
+    role
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
     ) {
+        this.role = localStorage.getItem("role")
     }
 
     ngOnInit() {
