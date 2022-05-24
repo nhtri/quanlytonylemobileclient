@@ -401,6 +401,23 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
         ],
     }];
 
+    export const MENU_ITEMS_CTV: MobileMenuItem[] = [
+        {
+            title: 'Kho Hàng',
+            icon: 'shopping-cart-outline',
+            // group: true,
+            // },
+            // {
+            children: [
+              
+                {
+                    title: 'Sản Phẩm Tồn Kho',
+                    icon: 'home-outline',
+                    link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
+                },
+            ],
+        }];
+
 export const ADMIN_MENU_ITEMS: MobileMenuItem[] = [
     {
         title: 'Admin',
@@ -459,7 +476,8 @@ export const GENERAL_MENU_ITEMS: MobileMenuItem[] = [
         title: 'Đăng Xuất',
         icon: 'lock-outline',
         link: '/pages/tables/logout',
-        roles: [USER_ROLE.ADMIN, USER_ROLE.KAI, USER_ROLE.WAREHOUSE, USER_ROLE.SHOP_VN, USER_ROLE.SHOP_JP],
+        // roles: [USER_ROLE.ADMIN, USER_ROLE.KAI, USER_ROLE.WAREHOUSE, USER_ROLE.SHOP_VN, USER_ROLE.SHOP_JP],
         // hidden: localStorage.getItem('role') != null,
+        roles:null,
     },
 ];

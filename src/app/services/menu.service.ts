@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { MobileMenuItem } from '../model/mobile-menu-item';
-import { ADMIN_MENU_ITEMS, GENERAL_MENU_ITEMS, KAI_MENU_ITEMS, MENU_ITEMS, MENU_ITEMS_KHO, MENU_ITEMS_VN } from '../@core/constant/menus.constant';
+import { ADMIN_MENU_ITEMS, GENERAL_MENU_ITEMS, KAI_MENU_ITEMS, MENU_ITEMS, MENU_ITEMS_CTV, MENU_ITEMS_KHO, MENU_ITEMS_VN } from '../@core/constant/menus.constant';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -14,6 +14,7 @@ export class MenuService {
     private kaiMenus: MobileMenuItem[];
     private adminMenus: MobileMenuItem[];
     private generalMenus: MobileMenuItem[];
+    private congtacvienMenus: MobileMenuItem[];
 
     constructor(
         private authService: AuthService,
@@ -24,6 +25,7 @@ export class MenuService {
         this.kaiMenus = KAI_MENU_ITEMS;
         this.adminMenus = ADMIN_MENU_ITEMS;
         this.generalMenus = GENERAL_MENU_ITEMS;
+        this.congtacvienMenus=MENU_ITEMS_CTV;
     }
 
     kaiMenuItems(): MobileMenuItem[] {
@@ -51,6 +53,13 @@ export class MenuService {
     mainMenuItemskho(): MobileMenuItem[] {
         return this.mainMenuskho.map((menuItem) => {
             menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'kho'
+            return menuItem;
+        });
+    }
+
+    mainMenuItemsCTV(): MobileMenuItem[] {
+        return this.congtacvienMenus.map((menuItem) => {
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'congtacvien'
             return menuItem;
         });
     }

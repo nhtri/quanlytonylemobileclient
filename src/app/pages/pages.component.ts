@@ -25,6 +25,7 @@ export class PagesComponent {
             ...this.menuService.mainMenuItemsvn(),
             ...this.menuService.mainMenuItemskho(),
             ...this.menuService.adminMenuItems(),
+            ...this.menuService.mainMenuItemsCTV(),
             ...this.menuService.generalMenuItems(),
         ];
     }

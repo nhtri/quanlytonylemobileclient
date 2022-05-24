@@ -36,6 +36,9 @@ export class LoginComponent implements OnInit {
         if (this.role == 'cuahangnhat') {
             this.router.navigateByUrl('/pages/tables/danhsachsanphamjp')
         }
+        if (this.role == 'congtacvien') {
+            this.router.navigateByUrl('/pages/tables/product-storages')
+        }
         if (this.role === 'kai') {
             this.router.navigateByUrl(KAI_PAGES.DATA_PRODUCTS).then(r => r);
         }

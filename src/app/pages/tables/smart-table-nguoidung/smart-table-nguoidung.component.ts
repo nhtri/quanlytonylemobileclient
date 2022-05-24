@@ -51,6 +51,7 @@ export class SmartTableNguoidungComponent implements OnInit {
               { value: 'cuahangnhat', title: 'Cửa Hàng Nhật' },
               { value: 'cuahangvietnam', title: 'Cửa Hàng Việt Nam' },
               { value: 'kho', title: 'Kho Hàng' },
+              { value: 'congtacvien', title: 'Cộng Tác Viên' },
               { value: 'admin', title: 'Admin' },
             ]
           }
