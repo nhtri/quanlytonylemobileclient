@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
         if (this.role == 'admin') {
             this.router.navigateByUrl('/pages/tables/danhsachsanpham')
         }
-        if (this.role == 'khohang') {
+        if (this.role == 'kho') {
             this.router.navigateByUrl('/pages/tables/danhsachsanpham')
         }
         if (this.role == 'cuahangvietnam') {

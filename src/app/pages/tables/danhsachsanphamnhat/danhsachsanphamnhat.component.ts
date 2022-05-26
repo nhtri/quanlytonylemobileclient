@@ -40,11 +40,11 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   imeisp = ""
   mausacsp = ""
   tinhtrangsp = ""
-  nhomsp=""
-
-
+  nhomsp = ""
+  danhsachidsanphamfull = []
+  checked = false
   datanhomsanphamselect = [
-    {value: '', title: ''},
+    { value: '', title: '' },
   ];
 
 
@@ -67,27 +67,28 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   orderIcon = 'arrow-downward-outline';
 
   constructor(
-      private service: NetworkserviceService,
-      private kaiService: KaiService,
-      private router: Router) {
+    private service: NetworkserviceService,
+    private kaiService: KaiService,
+    private router: Router) {
 
-   this.datamauselect.unshift({value: '', title: ''});
-   this.datatrangthaiselect.unshift({value: '', title: ''});
+    this.datamauselect.unshift({ value: '', title: '' });
+    this.datatrangthaiselect.unshift({ value: '', title: '' });
 
-   this.kaiService.getProductGroups().subscribe((productGroups) => {
-     this.datanhomsanphamselect = productGroups.map(x => {
-       return {
-         value: x.name,
-         title: x.name,
-       };
-     });
-     this.datanhomsanphamselect.unshift({value: '', title: ''});
-   });
+    this.kaiService.getProductGroups().subscribe((productGroups) => {
+      this.datanhomsanphamselect = productGroups.map(x => {
+        return {
+          value: x.name,
+          title: x.name,
+        };
+      });
+      this.datanhomsanphamselect.unshift({ value: '', title: '' });
+    });
 
     this.service.getsanphamtonkhojp().subscribe(val => {
       this.source.load(val);
-      this.data =val
+      this.data = val
       val.forEach(element => {
+        this.danhsachidsanphamfull.push(element.id)
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)
         if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
@@ -119,7 +120,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
       this.datafilter = this.data
     });
 
-  
+
 
   }
 
@@ -127,7 +128,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role')
-    if (this.role != 'cuahangnhat'  && this.role!='admin') {
+    if (this.role != 'cuahangnhat' && this.role != 'admin') {
       this.router.navigateByUrl('/pages/tables/login')
     }
 
@@ -229,7 +230,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     this.taomoisanpham = false
   }
 
-  
+
   selectnhomsanpham(event) {
     this.dataselectnhomsanpham = event.target.value
     this.data = this.datafilter
@@ -327,7 +328,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   }
 
   filterdanhsachsanpham() {
-    console.log('this.data',this.data)
+    console.log('this.data', this.data)
     this.data = this.datafilter
     if (this.nhomsp != "") {
       this.data = this.data.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
@@ -347,7 +348,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     if (this.tinhtrangsp == "NEW") {
       this.data = this.data.filter(data => data.status.toLowerCase() == this.tinhtrangsp.toLowerCase())
     }
-    if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp==""){
+    if (this.tensp == "" && this.imeisp == "" && this.mausacsp == "" && this.tinhtrangsp == "" && this.nhomsp == "") {
       this.data = this.datafilter
     }
   }
@@ -412,5 +413,20 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     }
     return output;
   }
-  taosanpham(){}
+  taosanpham() { }
+  selectall(event) {
+    if (this.checked == false) {
+      this.checked = true
+      this.danhsachidsanpham = this.danhsachidsanphamfull
+      console.log('event', this.checked)
+      console.log('danhsachidsanpham', this.danhsachidsanpham)
+    }
+    else {
+      this.checked = false
+      this.danhsachidsanpham = []
+      console.log('event', this.checked)
+      console.log('danhsachidsanpham', this.danhsachidsanpham)
+    }
+
+  }
 }

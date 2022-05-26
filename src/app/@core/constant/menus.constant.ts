@@ -122,8 +122,9 @@ export const MENU_ITEMS: MobileMenuItem[] = [
             {
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
-                // roles: [USER_ROLE.ADMIN],
-                // hidden: localStorage.getItem('role') != 'admin',
+            
+                //  roles: [USER_ROLE.ADMIN],
+                hidden: localStorage.getItem('role') != 'admin',
                 children: [
                     {
                         title: 'Quản Lý Nhóm Sản Phẩm',
@@ -213,7 +214,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 title: 'Quản Lý Thu Chi',
                 icon: 'grid-outline',
                 // roles: [USER_ROLE.ADMIN],
-                // hidden: localStorage.getItem('role') != 'admin',
+                //  hidden: localStorage.getItem('role') != 'admin',
                 children: [
                     {
                         title: 'Quản Lý Thu',
@@ -233,7 +234,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
                 // roles: [USER_ROLE.ADMIN],
-                // hidden: localStorage.getItem('role') != 'admin',
+                hidden: localStorage.getItem('role') != 'admin',
                 children: [
                     {
                         title: 'Quản Lý Nhóm Sản Phẩm',
@@ -343,7 +344,7 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
                 // roles: [USER_ROLE.ADMIN],
-                // hidden: localStorage.getItem('role') != 'admin',
+                 hidden: localStorage.getItem('role') != 'admin',
                 children: [
                     {
                         title: 'Quản Lý Nhóm Sản Phẩm',

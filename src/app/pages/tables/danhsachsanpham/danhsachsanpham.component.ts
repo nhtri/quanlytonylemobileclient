@@ -74,6 +74,8 @@ export class DanhsachsanphamComponent implements OnInit {
 
   datadaxuly
   transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
+
+  danhsachidsanphamfull=[]
   constructor(private service: NetworkserviceService,
     private kaiService: KaiService,
     private router: Router) {
@@ -97,6 +99,7 @@ export class DanhsachsanphamComponent implements OnInit {
       this.source.load(val);
       this.data = val
       val.forEach(element => {
+        this.danhsachidsanphamfull.push(element.id)
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)
         // if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
@@ -378,4 +381,10 @@ export class DanhsachsanphamComponent implements OnInit {
 
 
   taosanpham() { }
+
+  selectall(event){
+    this.danhsachidsanpham = this.danhsachidsanphamfull
+    console.log('event',event.target.value)
+    console.log('danhsachidsanpham',this.danhsachidsanpham)
+  }
 }
