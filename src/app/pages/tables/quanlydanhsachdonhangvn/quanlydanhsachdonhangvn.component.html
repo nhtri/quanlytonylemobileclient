@@ -19,10 +19,10 @@
       <th>Đơn hàng</th>
       <th *ngIf="role == 'admin'">Giá thu</th>
       <th>Giá bán</th>
-      <th>Imei</th>
+      <!-- <th>Imei</th> -->
       <th>Số lượng máy</th>
       <th>Ngày bán</th>
-      <th>Hình thức thanh toán</th>
+      <!-- <th>Hình thức thanh toán</th> -->
       <!-- <th></th>
       <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
     </tr>
@@ -34,16 +34,16 @@
     <tr *ngFor="let sanpham of data">
       <td ><a routerLink="/pages/tables/chitietdonhang"
         [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td>
-      <td>{{sanpham.giatien}}</td>
+      <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
       <td>{{sanpham.giatienban}}</td>
      
-      <td>{{sanpham.danhsachimei}}</td>
+      <!-- <td>{{sanpham.danhsachimei}}</td> -->
       <td>{{sanpham.soluongmay}}</td>
       <td>{{sanpham.ngayban}}</td>
       <!-- <td>{{sanpham.hinhthucthanhtoan}}</td> -->
-      <td *ngIf="sanpham.hinhthucthanhtoan == 'tienmat'">Tiền Mặt</td>
+      <!-- <td *ngIf="sanpham.hinhthucthanhtoan == 'tienmat'">Tiền Mặt</td>
       <td *ngIf="sanpham.hinhthucthanhtoan == 'daibiki'">Daibiki</td>
-      <td *ngIf="sanpham.hinhthucthanhtoan == 'chuyenkhoan'">Chuyển Khoản</td>
+      <td *ngIf="sanpham.hinhthucthanhtoan == 'chuyenkhoan'">Chuyển Khoản</td> -->
       <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
           [queryParams]={id:[sanpham.id]}></i></td>
       <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->

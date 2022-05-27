@@ -21,7 +21,7 @@ export class AuthService {
         if (isEmpty(currentUserRole)) {
             return false;
         }
-        return [USER_ROLE.KAI, USER_ROLE.SHOP_VN, USER_ROLE.SHOP_JP, USER_ROLE.GUEST, USER_ROLE.CONGTACVIEN].indexOf(currentUserRole) > -1;
+        return [USER_ROLE.KAI, USER_ROLE.SHOP_VN, USER_ROLE.SHOP_JP, USER_ROLE.GUEST, USER_ROLE.CONGTACVIEN, USER_ROLE.WAREHOUSE ].indexOf(currentUserRole) > -1;
     }
 
     canAccess(roles: USER_ROLE[] | null) {

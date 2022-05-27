@@ -23,7 +23,7 @@ export class BansanphamComponent implements OnInit {
   tongtienban = 0
   role = ''
   vitri = ''
-
+  tongsosanpham = 0
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
@@ -50,17 +50,17 @@ export class BansanphamComponent implements OnInit {
             value.forEach(element => {
               if (element.position == this.position) {
                 // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
-                element["quantitytemp"]= element.quantity 
-                element["quantity"]= 1 
+                element["quantitytemp"] = element.quantity
+                element["quantity"] = 1
                 this.datas.push(element)
- 
+
               }
             });
 
           })
         });
         console.log('this.datas', this.datas)
-
+   
 
       })
 
@@ -68,6 +68,7 @@ export class BansanphamComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role')
+
   }
 
   onClick() { }
