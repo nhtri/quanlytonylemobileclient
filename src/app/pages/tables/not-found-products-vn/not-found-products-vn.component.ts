@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DATE_CONSTANT } from '../../../@core/constant/common';
+import { DATE_CONSTANT, PRODUCT_SOURCE } from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { notEmpty } from '../../../@core/utils/data.utils';
@@ -25,12 +25,14 @@ export class NotFoundProductsVnComponent implements OnInit {
 
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
-role
+    role: string;
+    shopSource = PRODUCT_SOURCE.SHOP_VN;
+
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
     ) {
-        this.role=localStorage.getItem("role")
+        this.role = localStorage.getItem('role');
     }
 
     ngOnInit() {

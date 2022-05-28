@@ -3,6 +3,11 @@ import { User } from '../../model/user';
 export const QUAN_LY_TONY_SERVICE = 'https://quanlytonylemobile.herokuapp.com';
 // export const QUAN_LY_TONY_SERVICE = 'http://localhost:3001';
 
+export const enum MONEY_SYMBOL {
+    VND = 'đ',
+    JPY = '¥',
+}
+
 export const enum SERVICE_RESOURCES {
     CUSTOMERS = 'customers',
     PRODUCTS = 'products',
@@ -116,7 +121,7 @@ export const PRODUCT_COLORS = [
     {label: 'Black', code: '#000000', value: PRODUCT_COLOR.BLACK},
     {label: 'Gray', code: '#808080', value: PRODUCT_COLOR.GRAY},
     {label: 'White', code: '#FFFFFF', value: PRODUCT_COLOR.WHITE},
-    {label: 'Red', code: '#FF0000' , value: PRODUCT_COLOR.RED},
+    {label: 'Red', code: '#FF0000', value: PRODUCT_COLOR.RED},
     {label: 'Green', code: '#00FF00', value: PRODUCT_COLOR.GREEN},
     {label: 'Blue', code: '#0000FF', value: PRODUCT_COLOR.BLUE},
     {label: 'Pink', code: '#FFC0CB', value: PRODUCT_COLOR.PINK},
@@ -156,7 +161,7 @@ export const enum USER_ROLE {
     SHOP_JP = 'cuahangnhat',
     SHOP_VN = 'cuahangvietnam',
     CONGTACVIEN = 'congtacvien',
-    KHO = 'kho'
+    KHO = 'kho',
 }
 
 export const USERS: User[] = [

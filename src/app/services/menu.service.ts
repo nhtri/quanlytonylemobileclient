@@ -30,8 +30,8 @@ export class MenuService {
         this.mainMenus = MENU_ITEMS;
         this.mainMenusvn = MENU_ITEMS_VN;
         this.mainMenuskho = MENU_ITEMS_KHO;
-        this.kaiMenus = KAI_MENU_ITEMS;
-        // this.kaiMenus = [];
+        // this.kaiMenus = KAI_MENU_ITEMS;
+        this.kaiMenus = [];
         this.adminMenus = ADMIN_MENU_ITEMS;
         this.generalMenus = GENERAL_MENU_ITEMS;
         this.congtacvienMenus = MENU_ITEMS_CTV;

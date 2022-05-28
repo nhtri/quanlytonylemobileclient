@@ -4,7 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
 import { GENERAL_PAGES } from '../../../@core/constant/pages.constant';
-import { PRODUCT_COLORS, PRODUCT_STATUSES } from '../../../@core/constant/common';
+import { PRODUCT_COLORS, PRODUCT_SOURCE, PRODUCT_STATUSES } from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
 
 @Component({
@@ -66,6 +66,8 @@ export class DanhsachsanphamnhatComponent implements OnInit {
 
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
+
+    shopSource = PRODUCT_SOURCE.SHOP_JP;
 
     constructor(
         private service: NetworkserviceService,

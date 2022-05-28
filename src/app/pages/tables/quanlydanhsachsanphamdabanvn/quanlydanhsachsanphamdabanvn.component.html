@@ -103,8 +103,8 @@
           <td>{{sanpham.loaisanpham}}</td>
           <td>{{sanpham.phienban}}</td> -->
           <td>{{sanpham.imei}}</td>
-          <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
-          <td>{{sanpham.giaban}}</td>
+          <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice}}</td>
+          <td>{{sanpham.giaban | productPrice}}</td>
           <td>{{sanpham.soluong}}</td>
           <td>{{sanpham.ngayban| date: 'dd/MM/yyyy'}}</td>
           <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
