@@ -167,7 +167,7 @@
             </div>
             <div>
                 <div *ngFor="let product of products; let i = index">
-                    <div *ngIf="product.id != -1">
+                    <div *ngIf="product.id != -1" id="product-item-{{i}}" >
                         <div class=" row">
                             <div class=" col-md-6 pr-md-1 mt-2">
                                 <div class=" form-group">
@@ -200,10 +200,10 @@
                                 </div>
                             </div>
                             <div class="col-kai-half-5 col-md-2 pr-md-1">
-                                <div class=" form-group">
+                                <div class="form-group">
                                     <label> Số imei </label>
-                                    <input class=" form-control" autocomplete="off" placeholder="Số imei" [(ngModel)]="product.imei"
-                                           type="text" id="imei{{i}}" name="imei{{i}}" #imei{{i}}="ngModel" />
+                                    <input class="form-control p-imei" autocomplete="off" placeholder="Số imei" [(ngModel)]="product.imei"
+                                           type="text" id="imei{{i}}" name="imei{{i}}" #imei{{i}}="ngModel" (keyup.enter)="gotoNextImei($event, i+1)"  />
                                 </div>
                             </div>
                             <div class="col-kai-half-3 col-md-2 pr-md-1">

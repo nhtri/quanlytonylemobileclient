@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import {
     DATE_CONSTANT,
     PEOPLE_JOBS,
@@ -67,6 +67,7 @@ export class InvoiceComponent implements OnInit {
     CURRENT_DATE = TODAY;
 
     constructor(private formBuilder: FormBuilder,
+                private elementRef: ElementRef,
                 private kaiService: KaiService,
                 private excelService: ExcelService,
                 private router: Router,
@@ -150,7 +151,7 @@ export class InvoiceComponent implements OnInit {
             imei: null,
             color: null,
             status: this.selectedStatus.value,
-            quantity: 0,
+            quantity: 1,
             price: 0,
             position: PRODUCT_SOURCE.SHOP_JP,
             source: PRODUCT_SOURCE.SHOP_JP,
@@ -241,6 +242,16 @@ export class InvoiceComponent implements OnInit {
             this.products[index].id = -1;
         } else {
             this.products.splice(index, 1);
+        }
+    }
+
+    gotoNextImei(event, next_index: number = 0) {
+        event.preventDefault();
+        const nextImeiElem = document.getElementById(`imei${next_index}`);
+        if (notEmpty(nextImeiElem)) {
+            nextImeiElem.focus();
+        } else {
+            return;
         }
     }
 

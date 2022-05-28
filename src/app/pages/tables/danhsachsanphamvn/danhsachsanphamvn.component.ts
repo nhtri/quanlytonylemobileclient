@@ -234,7 +234,6 @@ export class DanhsachsanphamvnComponent implements OnInit {
  
 
   filterdanhsachsanpham() {
-    console.log(this.data)
     this.data = this.datafilter
     if (this.tensp != "") {
       this.data = this.data.filter(data => data.name.toLowerCase().includes(this.tensp.toLowerCase()))
@@ -249,10 +248,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
       this.data = this.data.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
     }
     if (this.tinhtrangsp != "") {
-      this.data = this.data.filter(data => data.status.toLowerCase().includes(this.tinhtrangsp.toLowerCase()))
-    }
-    if (this.tinhtrangsp == "NEW") {
-      this.data = this.data.filter(data => data.status.toLowerCase() == this.tinhtrangsp.toLowerCase())
+        this.data = this.data.filter(data => data.status.toUpperCase() === this.tinhtrangsp.toUpperCase())
     }
     if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp == ""){
       this.data = this.datafilter
