@@ -181,6 +181,7 @@ export class ProductsComponent implements OnInit {
                 return {
                     id: product.id,
                     price: product.price,
+                    estimated_price: product.estimated_price,
                     quantity: notEmpty(product.transfer_quantity) ? product.transfer_quantity : 1,
                 };
             });

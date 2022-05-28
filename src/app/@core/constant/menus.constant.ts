@@ -9,16 +9,6 @@ export const KAI_MENU_ITEMS: MobileMenuItem[] = [
         roles: [USER_ROLE.ADMIN, USER_ROLE.KAI],
         children: [
             {
-                title: 'Quản Lý Người Bán',
-                icon: 'people-outline',
-                children: [
-                    {
-                        title: 'DS Người Bán',
-                        link: KAI_PAGES.DATA_CUSTOMERS,
-                    },
-                ],
-            },
-            {
                 title: 'Quản Lý Mua Hàng',
                 icon: 'car-outline',
                 children: [
@@ -78,7 +68,18 @@ export const MENU_ITEMS: MobileMenuItem[] = [
         icon: 'shopping-cart-outline',
         // },
         // {
-        children: [{
+        children: [
+            {
+                title: 'Quản Lý Người Bán',
+                icon: 'people-outline',
+                children: [
+                    {
+                        title: 'DS Người Bán',
+                        link: KAI_PAGES.DATA_CUSTOMERS,
+                    },
+                ],
+            },
+            {
             title: 'Quản Lý Mua Hàng',
             icon: 'shopping-cart-outline',
             // link: '/pages/tables/danhsachsanphamjp',
@@ -95,6 +96,10 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                 {
                     title: 'Danh Sách Đơn Hàng',
                     link: '/pages/tables/quanlydanhsachdonhangjp',
+                },
+                {
+                    title: 'Quản Lý Đơn Thu Mua',
+                    link: KAI_PAGES.DATA_PURCHASING_INVOICES,
                 },
 
             ],
@@ -410,7 +415,6 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
             // },
             // {
             children: [
-              
                 {
                     title: 'Sản Phẩm Tồn Kho',
                     icon: 'home-outline',
@@ -479,6 +483,6 @@ export const GENERAL_MENU_ITEMS: MobileMenuItem[] = [
         link: '/pages/tables/logout',
         // roles: [USER_ROLE.ADMIN, USER_ROLE.KAI, USER_ROLE.WAREHOUSE, USER_ROLE.SHOP_VN, USER_ROLE.SHOP_JP],
         // hidden: localStorage.getItem('role') != null,
-        roles:null,
+        roles: null,
     },
 ];

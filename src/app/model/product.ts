@@ -12,6 +12,8 @@ export interface Product {
     product_group_id?: number;
     group_name?: string;
     price: number;
+    display_order?: number;
+    estimated_price?: number;
     position: PRODUCT_SOURCE;
     source: PRODUCT_SOURCE;
     created_at?: Date;

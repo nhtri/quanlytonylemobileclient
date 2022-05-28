@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {
     DATE_CONSTANT,
     PEOPLE_JOBS,
@@ -7,17 +7,17 @@ import {
     PRODUCT_STATUSES,
     TODAY,
 } from '../../../@core/constant/common';
-import { Customer } from '../../../model/customer';
-import { PurchasingInvoiceDto } from '../../../model/dto/purchasing-invoice.dto';
-import { Product } from '../../../model/product';
-import { FormBuilder } from '@angular/forms';
-import { KaiService } from '../../../services/kai.service';
-import { Router } from '@angular/router';
-import { DatePipe } from '@angular/common';
-import { isEmpty, notEmpty } from '../../../@core/utils/data.utils';
-import { getAge } from '../../../@core/utils/date.utils';
-import { KAI_PAGES } from '../../../@core/constant/pages.constant';
-import { ExcelService } from '../../../services/excel.service';
+import {Customer} from '../../../model/customer';
+import {PurchasingInvoiceDto} from '../../../model/dto/purchasing-invoice.dto';
+import {Product} from '../../../model/product';
+import {FormBuilder} from '@angular/forms';
+import {KaiService} from '../../../services/kai.service';
+import {Router} from '@angular/router';
+import {DatePipe} from '@angular/common';
+import {isEmpty, notEmpty} from '../../../@core/utils/data.utils';
+import {getAge} from '../../../@core/utils/date.utils';
+import {KAI_PAGES} from '../../../@core/constant/pages.constant';
+import {ExcelService} from '../../../services/excel.service';
 
 @Component({
     selector: 'ngx-invoice',
@@ -152,8 +152,8 @@ export class InvoiceComponent implements OnInit {
             status: this.selectedStatus.value,
             quantity: 0,
             price: 0,
-            position: PRODUCT_SOURCE.KAI,
-            source: PRODUCT_SOURCE.KAI,
+            position: PRODUCT_SOURCE.SHOP_JP,
+            source: PRODUCT_SOURCE.SHOP_JP,
         });
     }
 
@@ -188,7 +188,7 @@ export class InvoiceComponent implements OnInit {
         let totalMoney = 0;
         this.products.forEach((product) => {
             if (product.id !== -1) {
-            totalMoney += +product.quantity * +product.price;
+                totalMoney += +product.quantity * +product.price;
             }
         });
         return totalMoney;
@@ -205,14 +205,19 @@ export class InvoiceComponent implements OnInit {
     }
 
     onSubmit() {
+        let display_order = 1;
         this.invoice = {
             invoice_id: this.invoice_id,
             customer: this.customer,
-            products: this.products,
+            products: this.products.map(p => {
+                p.display_order = display_order;
+                display_order++;
+                return p;
+            }),
             sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
             total_money: this.totalMoney,
             quantity: this.getQuantity,
-            position: PRODUCT_SOURCE.KAI,
+            position: PRODUCT_SOURCE.SHOP_JP,
         };
         this.kaiService.purchasingInvoice(this.invoice).subscribe((purchasingInvoiceDetail) => {
             if (notEmpty(purchasingInvoiceDetail)) {
@@ -244,7 +249,7 @@ export class InvoiceComponent implements OnInit {
         this.products.splice(index, 0,
             {
                 name, imei, status, color, quantity, price,
-                position: PRODUCT_SOURCE.KAI, source: PRODUCT_SOURCE.KAI, product_group_id,
+                position: PRODUCT_SOURCE.SHOP_JP, source: PRODUCT_SOURCE.SHOP_JP, product_group_id,
             },
         );
     }
