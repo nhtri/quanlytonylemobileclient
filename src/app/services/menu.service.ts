@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { MobileMenuItem } from '../model/mobile-menu-item';
 import {
     ADMIN_MENU_ITEMS,
-    GENERAL_MENU_ITEMS, KAI_MENU_ITEMS,
+    GENERAL_MENU_ITEMS,
+    KAI_MENU_ITEMS,
     MENU_ITEMS,
     MENU_ITEMS_CTV,
     MENU_ITEMS_KHO,
@@ -30,7 +31,7 @@ export class MenuService {
         this.mainMenusvn = MENU_ITEMS_VN;
         this.mainMenuskho = MENU_ITEMS_KHO;
         this.kaiMenus = KAI_MENU_ITEMS;
-        this.kaiMenus = [];
+        // this.kaiMenus = [];
         this.adminMenus = ADMIN_MENU_ITEMS;
         this.generalMenus = GENERAL_MENU_ITEMS;
         this.congtacvienMenus = MENU_ITEMS_CTV;

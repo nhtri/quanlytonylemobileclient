@@ -14,7 +14,7 @@
                 <th>Màu sắc</th>
                 <th>Tình trạng</th>
                 <th>Số lượng</th>
-                <th>Giá tiền bán</th>
+                <th *ngIf="!isNormalUser" >Giá tiền bán</th>
             </tr>
             </thead>
             <tbody>
@@ -27,7 +27,7 @@
                 <td>{{product.status | productStatus}}</td>
                 <td><input type="number" [min]="1" [max]="product.init_quantity"
                            style="height: 22px; width: 60px; border-radius: 5px;" (change)="onChangeProductQuantity($event,product.id)" [value]="1"></td>
-                <td>{{product.price}}</td>
+                <td *ngIf="!isNormalUser" >{{product.price}}</td>
             </tr>
 
 

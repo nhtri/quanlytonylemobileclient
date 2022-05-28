@@ -365,10 +365,7 @@ export class DanhsachsanphamComponent implements OnInit {
       this.data = this.data.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
     }
     if (this.tinhtrangsp != "") {
-      this.data = this.data.filter(data => data.status.toLowerCase().includes(this.tinhtrangsp.toLowerCase()))
-    }
-    if (this.tinhtrangsp == "NEW") {
-      this.data = this.data.filter(data => data.status.toLowerCase() == this.tinhtrangsp.toLowerCase())
+      this.data = this.data.filter(data => data.status.toLowerCase() === this.tinhtrangsp.toLowerCase())
     }
     if (this.tensp == "" && this.imeisp == "" && this.mausacsp == "" && this.tinhtrangsp == "" && this.nhomsp == "") {
       this.data = this.datafilter
