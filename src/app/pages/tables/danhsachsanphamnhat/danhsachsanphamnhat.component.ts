@@ -46,7 +46,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
   datanhomsanphamselect = [
     { value: '', title: '' },
   ];
-
+  tongsoluongsanpham=0
 
   datamauselect = PRODUCT_COLORS.map(x => {
     return {
@@ -88,6 +88,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
       this.source.load(val);
       this.data = val
       val.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity)
         this.danhsachidsanphamfull.push(element.id)
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)

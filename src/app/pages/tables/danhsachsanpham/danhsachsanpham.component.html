@@ -1,6 +1,6 @@
 <nb-card>
   <nb-card-header>
-    Danh Sách Sản Phẩm 
+    Danh Sách Sản Phẩm
     <!-- <a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;">File Danh
       Sách Sản Phẩm Mẫu</a>
 
@@ -10,10 +10,11 @@
   </nb-card-header>
 
   <nb-card-body>
-
-    <a style="color: #2e61fa ;font-weight: 300; " (click)="exportexcel()"> Tải Danh
-      Sách Sản Phẩm</a>
-
+    <div style="display: flex;">
+      <div style="margin-right: 25px;">Tổng số lượng sản phẩm: {{tongsoluongsanpham}}</div>
+      <a style="color: #2e61fa ;font-weight: 300; " (click)="exportexcel()"> Tải Danh
+        Sách Sản Phẩm</a>
+    </div>
     <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
 
     <!-- <br /> -->
@@ -25,7 +26,7 @@
           <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;"
               routerLink="/pages/tables/bansanpham" [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
             <i class="fa fa-exchange-alt" style="font-size:16px;color:whitesmoke;" [routerLink]="transferProductPage"
-               [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
+              [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
           </th>
           <!-- <th>Id</th> -->
           <th>Nhóm sản phẩm</th>
@@ -36,7 +37,8 @@
       <th>Phiên bản</th> -->
           <th>Màu sắc</th>
           <th>Tình trạng</th>
-            <th style="cursor: pointer;" (click)="onSortData($event)" >Số lượng <nb-icon [icon]="orderIcon"></nb-icon></th>
+          <th style="cursor: pointer;" (click)="onSortData($event)">Số lượng <nb-icon [icon]="orderIcon"></nb-icon>
+          </th>
           <th *ngIf="role == 'admin'">Giá tiền</th>
 
           <!-- <th></th>
@@ -55,34 +57,41 @@
         </option>
 
       </select></td> -->
-      <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+        <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
         (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
       </td> -->
-      <td>
-      <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="nhomsp" >
-        <option *ngFor="let oneOption of datanhomsanphamselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
-      </select>
-    </td>
-        <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
-          (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+        <td>
+          <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()"
+            [(ngModel)]="nhomsp">
+            <option *ngFor="let oneOption of datanhomsanphamselect" [ngValue]="oneOption.value">{{oneOption.title}}
+            </option>
+          </select>
         </td>
-        <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
-          (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+        <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" (input)="filterdanhsachsanpham()"
+            [(ngModel)]="tensp">
+        </td>
+        <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" (input)="filterdanhsachsanpham()"
+            [(ngModel)]="imeisp">
         </td>
         <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
         </td> -->
         <td>
-        <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="mausacsp" >
-          <option *ngFor="let oneOption of datamauselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
-        </select></td>
+          <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()"
+            [(ngModel)]="mausacsp">
+            <option *ngFor="let oneOption of datamauselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+          </select>
+        </td>
         <td>
-        <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+          <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
         </td> -->
-        <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp" >
-          <option *ngFor="let oneOption of datatrangthaiselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
-        </select></td>
+          <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()"
+            [(ngModel)]="tinhtrangsp">
+            <option *ngFor="let oneOption of datatrangthaiselect" [ngValue]="oneOption.value">{{oneOption.title}}
+            </option>
+          </select>
+        </td>
         <!-- <td><select (change)="selectdungluong($event)"
         style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
         <option value="default">Dung lượng</option>

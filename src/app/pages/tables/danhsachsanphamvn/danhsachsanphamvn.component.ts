@@ -66,7 +66,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
 
   isAscendingOrder: boolean;
   orderIcon = 'arrow-downward-outline';
-
+  tongsoluongsanpham=0
   constructor(
       private service: NetworkserviceService,
       private kaiService: KaiService,
@@ -90,6 +90,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
       this.source.load(val);
       this.data =val
       val.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity)
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)
         if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {

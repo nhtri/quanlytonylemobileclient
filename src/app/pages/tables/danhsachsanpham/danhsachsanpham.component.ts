@@ -26,7 +26,7 @@ export class DanhsachsanphamComponent implements OnInit {
   danhsachidsanpham = []
   taomoisanpham = false
   role
-
+  tongsoluongsanpham = 0
 
   datanhomsanphamselect = [
     { value: '', title: '' },
@@ -99,6 +99,7 @@ export class DanhsachsanphamComponent implements OnInit {
       this.source.load(val);
       this.data = val
       val.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity)
         this.danhsachidsanphamfull.push(element.id)
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)
