@@ -8,6 +8,7 @@ import { DATE_CONSTANT, PRODUCT_SOURCE, PRODUCT_STORAGES } from '../../../@core/
 import { calculateProductSummary } from '../../../@core/utils/kai.utils';
 import { DatePipe } from '@angular/common';
 import { KAI_PAGES, SHOP_JP_PAGES, SHOP_VN_PAGES, SHOP_WAREHOUSE_PAGES } from '../../../@core/constant/pages.constant';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
     selector: 'ngx-transfer-products',
@@ -35,11 +36,15 @@ export class TransferProductsComponent implements OnInit {
     pageTitle = '';
     navigationPage = '';
 
+    isNormalUser: boolean;
+
     constructor(
         private kaiService: KaiService,
         private route: ActivatedRoute,
         private datePipe: DatePipe,
-        private router: Router) {
+        private router: Router,
+        private authService: AuthService,
+        ) {
     }
 
     ngOnInit(): void {
@@ -76,6 +81,8 @@ export class TransferProductsComponent implements OnInit {
                         this.data = listProducts;
                     });
             });
+
+        this.isNormalUser = this.authService.isNormalUser();
     }
 
     setupPage(position: PRODUCT_SOURCE) {

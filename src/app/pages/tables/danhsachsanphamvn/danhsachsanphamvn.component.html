@@ -27,8 +27,6 @@
   <tr>
     <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;" routerLink="/pages/tables/bansanpham"
         [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
-      <i class="fa fa-exchange-alt" style="font-size:16px;color:whitesmoke;" [routerLink]="transferProductPage"
-         [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
     </th>
     <!-- <th>Id</th> -->
     <th>Nhóm sản phẩm</th>
@@ -86,83 +84,7 @@
   <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp" >
     <option *ngFor="let oneOption of datatrangthaiselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
   </select></td>
-  <!-- <td><select (change)="selectdungluong($event)"
-  style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
-  <option value="default">Dung lượng</option>
-  <option *ngFor="let data of datadungluong" [value]="data.value">
-    {{data.title}}
-  </option>
 
-</select></td> -->
-
-  <!-- <td><select (change)="selectloaisanpham($event)"
-  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-  <option value="default">Loại sản phẩm</option>
-  <option *ngFor="let data of dataloaisanpham" [value]="data.value">
-    {{data.title}}
-  </option>
-
-</select></td> -->
-
-  <!-- <td><select (change)="selectphienban($event)"
-  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-  <option value="default">Phiên bản</option>
-  <option *ngFor="let data of dataphienban" [value]="data.value">
-    {{data.title}}
-  </option>
-
-</select></td> -->
-
-  <!-- <tr *ngIf="taomoisanpham==true">
-<td></td>
-<td></td>
-<td><select (change)="selecttaomoinhomsanpham($event.target.value)"
-    style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-    <option value="default">Nhóm sản phẩm</option>
-    <option *ngFor="let data of datanhomsanpham" [value]="data.value">
-      {{data.title}}
-    </option>
-
-  </select></td>
-
-<td><select (change)="selecttaomoitensanpham($event.target.value)"
-    style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-    <option value="default">Tên sản phẩm</option>
-    <option *ngFor="let data of datatensanpham" [value]="data.value">
-      {{data.title}}
-    </option>
-
-  </select></td>
-
-<td><select (change)="selecttaomoidungluong($event.target.value)"
-    style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
-    <option value="default">Dung lượng</option>
-    <option *ngFor="let data of datadungluong" [value]="data.value">
-      {{data.title}}
-    </option>
-
-  </select></td>
-
-<td><select (change)="selecttaomoiloaisanpham($event.target.value)" style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-  <option value="default">Loại sản phẩm</option>  
-  <option *ngFor="let data of dataloaisanpham" [value]="data.value">
-      {{data.title}}
-    </option>
-
-  </select></td>
-
-<td><select (change)="selecttaomoiphienban($event.target.value)"  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-  <option value="default">Phiên bản</option>  
-  <option *ngFor="let data of dataphienban" [value]="data.value">
-      {{data.title}}
-    </option>
-
-  </select></td>
-<td><input type="text" style="width: 120px;"  [(ngModel)]="dataimeitaomoi"></td>
-<td><i class="fa fa-check" style="font-size:18px;color:darkblue;" (click)="taosanphammoi()"></i></td>
-<td><i class="fa fa-times" style="font-size:18px;color:tomato;" (click)="canceltaomoi()"></i></td>
-
-</tr> -->
   <tr *ngFor="let sanpham of data">
     <td><input type="checkbox" (click)="select(sanpham.id)"></td>
     <!-- <td>{{sanpham.id}}</td> -->
@@ -170,7 +92,7 @@
     <td>{{sanpham.name}}</td>
     <td>{{sanpham.imei}}</td>
     <td>{{sanpham.color}}</td>
-    <td>{{sanpham.status}}</td>
+    <td>{{sanpham.status | productStatus}}</td>
     <td>{{sanpham.quantity}}</td>
     <td *ngIf="role == 'admin'">{{sanpham.price}}</td>
 

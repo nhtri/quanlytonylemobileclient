@@ -129,7 +129,7 @@ export class ProductStoragesComponent implements OnInit {
         this.kaiService.getProductGroups().subscribe((productGroups) => {
             this.settings.columns.group_name.filter.config.list = productGroups.map(pg => {
                 return {
-                    value: pg.id,
+                    value: pg.name,
                     title: pg.name,
                 };
             });
