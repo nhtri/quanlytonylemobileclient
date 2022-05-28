@@ -30,10 +30,10 @@
 
         <tr  *ngFor="let sanpham of datatongedit">
           <td>{{sanpham.ngaytao}}</td>
-          <td>{{sanpham.tienthu - sanpham.tienchi}}</td>
-          <td>{{sanpham.tienthu}}</td>
+          <td>{{(sanpham.tienthu - sanpham.tienchi) | productPrice}}</td>
+          <td>{{sanpham.tienthu | productPrice}}</td>
           <td>{{sanpham.mucdichthu}}</td>
-          <td>{{sanpham.tienchi}}</td>
+          <td>{{sanpham.tienchi | productPrice}}</td>
           <td>{{sanpham.mucdichchi}}</td>
 
         </tr>
@@ -43,10 +43,10 @@
 
         <tr  *ngFor="let sanpham of datatongedittheongay">
           <td>{{sanpham.ngaytao}}</td>
-          <td>{{sanpham.tienthu - sanpham.tienchi}}</td>
-          <td>{{sanpham.tienthu}}</td>
+          <td>{{(sanpham.tienthu - sanpham.tienchi) | productPrice}}</td>
+          <td>{{sanpham.tienthu | productPrice}}</td>
           <td>{{sanpham.mucdichthu}}</td>
-          <td>{{sanpham.tienchi}}</td>
+          <td>{{sanpham.tienchi | productPrice}}</td>
           <td>{{sanpham.mucdichchi}}</td>
 
         </tr>
@@ -55,11 +55,11 @@
     </table>
     <br />
     <div *ngIf="totalthutheothang == 0 && totalchitheothang == 0" style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng:
-      {{totalthutheongay - totalchitheongay}}</div>
+      {{(totalthutheongay - totalchitheongay) | productPrice}}</div>
 
-    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng: {{totalthutheothang - totalchitheothang}}</div>
+    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng: {{(totalthutheothang - totalchitheothang) | productPrice}}</div>
   </nb-card-body>
   <nb-card-footer>
-    <div style="color: blue; ">Tổng Tiền Mặt Hiện Có: {{totalthu - totalchi}}</div>
+    <div style="color: blue; ">Tổng Tiền Mặt Hiện Có: {{(totalthu - totalchi) | productPrice}}</div>
   </nb-card-footer>
 </nb-card>

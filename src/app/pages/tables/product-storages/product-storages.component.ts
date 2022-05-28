@@ -7,6 +7,7 @@ import {PositionTitlePipe} from '../../../@core/shared/pipes/position-title.pipe
 import {PRODUCT_COLORS, PRODUCT_STATUSES, PRODUCT_STORAGES} from '../../../@core/constant/common';
 import {ColorTitlePipe} from '../../../@core/shared/pipes/color-title.pipe';
 import {AuthService} from '../../../services/auth.service';
+import { ProductPricePipe } from '../../../@core/shared/pipes/product-price.pipe';
 
 @Component({
     selector: 'ngx-product-storages',
@@ -54,6 +55,9 @@ export class ProductStoragesComponent implements OnInit {
                 valuePrepareFunction: (cell, row) => {
                     return this.colorTitlePipe.transform(cell);
                 },
+                filterFunction(cell?: any, search?: string): boolean {
+                    return cell.trim().toUpperCase() === search.trim().toUpperCase();
+                },
             },
             status: {
                 filter: {
@@ -83,6 +87,9 @@ export class ProductStoragesComponent implements OnInit {
                 filter: false,
                 title: 'Giá Mua',
                 type: 'number',
+                valuePrepareFunction: (cell, row) => {
+                    return this.productPricePipe.transform(cell, row.source);
+                },
             },
             position: {
                 filter: {
@@ -106,6 +113,7 @@ export class ProductStoragesComponent implements OnInit {
         private productStatusPipe: ProductStatusPipe,
         private colorTitlePipe: ColorTitlePipe,
         private positionTitlePipe: PositionTitlePipe,
+        private productPricePipe: ProductPricePipe,
         private authService: AuthService,
     ) {
         this.settings.columns.position.filter.config.list = PRODUCT_STORAGES.map(x => {

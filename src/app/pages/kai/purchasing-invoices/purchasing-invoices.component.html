@@ -61,7 +61,7 @@
                     <td>{{rowData.customer.name_vietnamese}}</td>
                     <td>{{rowData.sale_date | date: dateFormat }}</td>
                     <td>{{rowData.quantity}}</td>
-                    <td>{{rowData.total_money}}</td>
+                    <td>{{rowData.total_money | productPrice}}</td>
                     <td style="text-align:center">
                         <button nbButton status="primary" (click)="onRowEditInit(rowData)">
                             <nb-icon icon="edit-outline"></nb-icon>

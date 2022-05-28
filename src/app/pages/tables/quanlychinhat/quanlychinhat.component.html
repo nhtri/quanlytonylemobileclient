@@ -59,7 +59,7 @@
                 <tr *ngFor="let sanpham of data">
                     <td>{{sanpham.id}}</td>
                     <td>{{sanpham.ngaytao| date: 'dd/MM/yyyy'}}</td>
-                    <td>{{sanpham.sotien}}</td>
+                    <td>{{sanpham.sotien | productPrice }}</td>
                     <td>{{sanpham.mucdich}}</td>
                     <!-- <td>{{sanpham.hinhthucthanhtoan}}</td> -->
                     <td *ngIf="sanpham.hinhthucthanhtoan == 'tienmat'">Tiền Mặt</td>
@@ -78,11 +78,11 @@
       
     </nb-card-body>
     <nb-card-footer>
-        <div style="color:#2e61fa">* Tiền mặt: {{tienmat}}</div>
-        <div style="color:#2e61fa">* Daibiki: {{daibiki}}</div>
-        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan}}</div>
+        <div style="color:#2e61fa">* Tiền mặt: {{tienmat | productPrice}}</div>
+        <div style="color:#2e61fa">* Daibiki: {{daibiki | productPrice}}</div>
+        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan | productPrice}}</div>
     </nb-card-footer>
     <nb-card-footer>
-        <div style="color:blue; font-weight: 600;">Tổng chi: {{totalmoney}}</div>
+        <div style="color:blue; font-weight: 600;">Tổng chi: {{totalmoney | productPrice}}</div>
     </nb-card-footer>
 </nb-card>

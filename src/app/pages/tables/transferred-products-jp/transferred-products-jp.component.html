@@ -16,7 +16,7 @@
                 <th>Màu</th>
                 <th>Tình Trạng</th>
                 <th>Số Lượng</th>
-                <th *ngIf="role=='admin'">Giá</th>
+                <th *ngIf="!isNormalUser">Giá</th>
                 <th>Kho Nguồn</th>
                 <th style="cursor: pointer;" (click)="onSortData($event)" >Ngày Chuyển <nb-icon [icon]="orderIcon"></nb-icon></th>
                 <th>Ngày Nhận</th>
@@ -40,7 +40,7 @@
                 <td style="width: 50px;" ></td>
                 <td style="width: 50px;" ></td>
                 <td></td>
-                <td></td>
+                <td *ngIf="!isNormalUser" ></td>
                 <td></td>
                 <td>
                     <input type="date"
@@ -59,7 +59,7 @@
                 <td>{{rowData.color}}</td>
                 <td>{{rowData.status | productStatus}}</td>
                 <td>{{rowData.quantity}}</td>
-                <td *ngIf="role=='admin'">{{rowData.price}}</td>
+                <td *ngIf="!isNormalUser" >{{rowData.price | productPrice}}</td>
                 <td>{{rowData.from_position | positionTitle}}</td>
                 <td>{{rowData.transfer_date | date: dateFormat}}</td>
                 <td>{{rowData.receive_date | date: dateFormat}}</td>

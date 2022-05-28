@@ -60,7 +60,7 @@
                 <td>{{rowData.color}}</td>
                 <td>{{rowData.status | productStatus}}</td>
                 <td>{{rowData.quantity}}</td>
-                <td *ngIf="role=='admin'">{{rowData.price}}</td>
+                <td *ngIf="role=='admin'">{{rowData.price | productPrice}}</td>
                 <td>{{rowData.from_position | positionTitle}}</td>
                 <td>{{rowData.transfer_date | date: dateFormat}}</td>
                 <td>{{rowData.receive_date | date: dateFormat}}</td>

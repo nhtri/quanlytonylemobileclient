@@ -4,6 +4,7 @@ import { KaiService } from '../../../services/kai.service';
 import { DatePipe } from '@angular/common';
 import { notEmpty } from '../../../@core/utils/data.utils';
 import { Product } from '../../../model/product';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
     selector: 'ngx-not-found-products-jp',
@@ -25,12 +26,15 @@ export class NotFoundProductsJpComponent implements OnInit {
 
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
-role
+
+    isNormalUser: boolean;
+
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
+        private authService: AuthService,
     ) {
-        this.role=localStorage.getItem("role")
+        this.isNormalUser = this.authService.isNormalUser();
     }
 
     ngOnInit() {
