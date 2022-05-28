@@ -1,6 +1,13 @@
 import { Injectable } from '@angular/core';
 import { MobileMenuItem } from '../model/mobile-menu-item';
-import { ADMIN_MENU_ITEMS, GENERAL_MENU_ITEMS, KAI_MENU_ITEMS, MENU_ITEMS, MENU_ITEMS_CTV, MENU_ITEMS_KHO, MENU_ITEMS_VN } from '../@core/constant/menus.constant';
+import {
+    ADMIN_MENU_ITEMS,
+    GENERAL_MENU_ITEMS, KAI_MENU_ITEMS,
+    MENU_ITEMS,
+    MENU_ITEMS_CTV,
+    MENU_ITEMS_KHO,
+    MENU_ITEMS_VN,
+} from '../@core/constant/menus.constant';
 import { AuthService } from './auth.service';
 
 @Injectable({
@@ -22,7 +29,7 @@ export class MenuService {
         this.mainMenus = MENU_ITEMS;
         this.mainMenusvn = MENU_ITEMS_VN;
         this.mainMenuskho = MENU_ITEMS_KHO;
-        // this.kaiMenus = KAI_MENU_ITEMS;
+        this.kaiMenus = KAI_MENU_ITEMS;
         this.kaiMenus = [];
         this.adminMenus = ADMIN_MENU_ITEMS;
         this.generalMenus = GENERAL_MENU_ITEMS;
@@ -38,7 +45,8 @@ export class MenuService {
 
     mainMenuItems(): MobileMenuItem[] {
         return this.mainMenus.map((menuItem) => {
-            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'cuahangnhat';;
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'cuahangnhat';
+            ;
 
             return menuItem;
         });
@@ -46,21 +54,24 @@ export class MenuService {
 
     mainMenuItemsvn(): MobileMenuItem[] {
         return this.mainMenusvn.map((menuItem) => {
-            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'cuahangvietnam';;
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'cuahangvietnam';
+            ;
             return menuItem;
         });
     }
 
     mainMenuItemskho(): MobileMenuItem[] {
         return this.mainMenuskho.map((menuItem) => {
-            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'kho';;
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'kho';
+            ;
             return menuItem;
         });
     }
 
     mainMenuItemsCTV(): MobileMenuItem[] {
         return this.congtacvienMenus.map((menuItem) => {
-            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'congtacvien';;
+            menuItem.hidden = localStorage.getItem('role') != 'admin' && localStorage.getItem('role') != 'congtacvien';
+            ;
             return menuItem;
         });
     }
