@@ -67,6 +67,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
 
+    checkedall=false
     constructor(
         private service: NetworkserviceService,
         private kaiService: KaiService,
@@ -93,30 +94,30 @@ export class DanhsachsanphamnhatComponent implements OnInit {
                 this.danhsachidsanphamfull.push(element.id);
                 // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
                 // this.data.push(element)
-                if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
-                    this.datanhomsanpham.push({'value': element.nhomsanpham, 'title': element.nhomsanpham});
-                    // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
-                }
+                // if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
+                //     this.datanhomsanpham.push({'value': element.nhomsanpham, 'title': element.nhomsanpham});
+                //     // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
+                // }
 
-                if (element.name != '' && element.name != null && !this.datatensanpham.some(val => val.value == element.name)) {
-                    this.datatensanpham.push({'value': element.name, 'title': element.name});
-                    this.datatensanpham = [...new Set(this.datatensanpham)];
-                }
+                // if (element.name != '' && element.name != null && !this.datatensanpham.some(val => val.value == element.name)) {
+                //     this.datatensanpham.push({'value': element.name, 'title': element.name});
+                //     this.datatensanpham = [...new Set(this.datatensanpham)];
+                // }
 
-                if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
-                    this.datadungluong.push({'value': element.dungluong, 'title': element.dungluong});
-                    // this.datadungluong = [...new Set(this.datadungluong)];
-                }
+                // if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
+                //     this.datadungluong.push({'value': element.dungluong, 'title': element.dungluong});
+                //     // this.datadungluong = [...new Set(this.datadungluong)];
+                // }
 
-                if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
-                    this.dataloaisanpham.push({'value': element.loaisanpham, 'title': element.loaisanpham});
-                    // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
-                }
+                // if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
+                //     this.dataloaisanpham.push({'value': element.loaisanpham, 'title': element.loaisanpham});
+                //     // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
+                // }
 
-                if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
-                    this.dataphienban.push({'value': element.phienban, 'title': element.phienban});
-                    // this.dataphienban = [...new Set(this.dataphienban)];
-                }
+                // if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
+                //     this.dataphienban.push({'value': element.phienban, 'title': element.phienban});
+                //     // this.dataphienban = [...new Set(this.dataphienban)];
+                // }
 
             });
             this.datafilter = this.data;
@@ -422,17 +423,18 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     }
 
     selectall(event) {
-        if (this.checked == false) {
-            this.checked = true;
-            this.danhsachidsanpham = this.danhsachidsanphamfull;
-            console.log('event', this.checked);
-            console.log('danhsachidsanpham', this.danhsachidsanpham);
-        } else {
-            this.checked = false;
-            this.danhsachidsanpham = [];
-            console.log('event', this.checked);
-            console.log('danhsachidsanpham', this.danhsachidsanpham);
-        }
+      this.danhsachidsanpham = this.danhsachidsanphamfull
+      console.log('event',event.target.value)
+      console.log('danhsachidsanpham',this.danhsachidsanpham)
+      if(this.checkedall==false){
+        this.checkedall=true
+        console.log('danhsachidsanpham',this.danhsachidsanpham)
+      }
+      else{
+        this.checkedall=false
+        this.danhsachidsanpham=[]
+        console.log('danhsachidsanpham',this.danhsachidsanpham)
+      }
 
     }
 }
