@@ -76,6 +76,8 @@ export class DanhsachsanphamComponent implements OnInit {
   transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
 
   danhsachidsanphamfull=[]
+
+  checkedall=false
   constructor(private service: NetworkserviceService,
     private kaiService: KaiService,
     private router: Router) {
@@ -384,5 +386,14 @@ export class DanhsachsanphamComponent implements OnInit {
     this.danhsachidsanpham = this.danhsachidsanphamfull
     console.log('event',event.target.value)
     console.log('danhsachidsanpham',this.danhsachidsanpham)
+    if(this.checkedall==false){
+      this.checkedall=true
+      console.log('danhsachidsanpham',this.danhsachidsanpham)
+    }
+    else{
+      this.checkedall=false
+      this.danhsachidsanpham=[]
+      console.log('danhsachidsanpham',this.danhsachidsanpham)
+    }
   }
 }

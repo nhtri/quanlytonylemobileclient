@@ -84,7 +84,7 @@
   </select></td>
 
   <tr *ngFor="let sanpham of data">
-    <td><input type="checkbox" (click)="select(sanpham.id)"></td>
+    <td><input type="checkbox" (click)="select(sanpham.id)" checked="{{checkedall ? 'checked' : ''}}"></td>
     <td>{{sanpham.group_name}}</td>
     <td>{{sanpham.name}}</td>
     <td>{{sanpham.imei}}</td>

@@ -35,7 +35,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
   dataselectphienban = ""
 
   datafilter = []
-
+  danhsachidsanphamfull = [];
 
   tensp = ""
   imeisp = ""
@@ -44,7 +44,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
   nhomsp = ""
   transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
 
-
+  checkedall=false
   datanhomsanphamselect = [
     {value: '', title: ''},
   ];
@@ -91,6 +91,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
       this.data =val
       val.forEach(element => {
         this.tongsoluongsanpham += parseInt(element.quantity)
+        this.danhsachidsanphamfull.push(element.id);
         // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
         // this.data.push(element)
         if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
@@ -316,4 +317,21 @@ export class DanhsachsanphamvnComponent implements OnInit {
     return output;
   }
   taosanpham(){}
+
+  selectall(event) {
+    this.danhsachidsanpham = this.danhsachidsanphamfull
+    console.log('event',event.target.value)
+    console.log('danhsachidsanpham',this.danhsachidsanpham)
+    if(this.checkedall==false){
+      this.checkedall=true
+      console.log('danhsachidsanpham',this.danhsachidsanpham)
+    }
+    else{
+      this.checkedall=false
+      this.danhsachidsanpham=[]
+      console.log('danhsachidsanpham',this.danhsachidsanpham)
+    }
+
+  }
+
 }
