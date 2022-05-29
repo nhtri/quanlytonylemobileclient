@@ -12,6 +12,7 @@ import { notEmpty } from '../../../@core/utils/data.utils';
 import { Product } from '../../../model/product';
 import { TransferringProductDto } from '../../../model/dto/transferring-product.dto';
 import * as XLSX from 'xlsx';
+import { AuthService } from '../../../services/auth.service';
 
 @Component({
     selector: 'ngx-outgoing-transfer-products-jp',
@@ -44,12 +45,15 @@ export class OutgoingTransferProductsJpComponent implements OnInit {
 
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
-role
+
+    isNormalUser: boolean;
+
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
+        private authService: AuthService,
     ) {
-        this.role = localStorage.getItem("role")
+        this.isNormalUser = this.authService.isNormalUser();
     }
 
     ngOnInit() {

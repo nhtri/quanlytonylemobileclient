@@ -80,30 +80,43 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                 ],
             },
             {
-            title: 'Quản Lý Mua Hàng',
-            icon: 'shopping-cart-outline',
-            // link: '/pages/tables/danhsachsanphamjp',
-            // home: true,
-            children: [
-                {
-                    title: 'Sản Phẩm',
-                    link: '/pages/tables/danhsachsanphamjp',
-                },
-                {
-                    title: 'Sản Phẩm Đã Bán',
-                    link: '/pages/tables/quanlydanhsachsanphamdabanjp',
-                },
-                {
-                    title: 'Danh Sách Đơn Hàng',
-                    link: '/pages/tables/quanlydanhsachdonhangjp',
-                },
-                {
-                    title: 'Quản Lý Đơn Thu Mua',
-                    link: KAI_PAGES.DATA_PURCHASING_INVOICES,
-                },
+                title: 'Quản Lý Thu Mua',
+                icon: 'shopping-cart-outline',
+                // link: '/pages/tables/danhsachsanphamjp',
+                // home: true,
+                children: [
+                    {
+                        title: 'Quản Lý Sản Phẩm',
+                        link: KAI_PAGES.DATA_DEVICES,
+                    },
+                    {
+                        title: 'Quản Lý Đơn Thu Mua',
+                        link: KAI_PAGES.DATA_PURCHASING_INVOICES,
+                    },
 
-            ],
-        },
+                ],
+            },
+
+            {
+                title: 'Quản Lý Bán Hàng',
+                icon: 'shopping-cart-outline',
+                // link: '/pages/tables/danhsachsanphamjp',
+                // home: true,
+                children: [
+                    {
+                        title: 'Sản Phẩm',
+                        link: '/pages/tables/danhsachsanphamjp',
+                    },
+                    {
+                        title: 'Sản Phẩm Đã Bán',
+                        link: '/pages/tables/quanlydanhsachsanphamdabanjp',
+                    },
+                    {
+                        title: 'Danh Sách Đơn Hàng',
+                        link: '/pages/tables/quanlydanhsachdonhangjp',
+                    },
+                ],
+            },
             {
                 title: 'Quản Lý Thu Chi',
                 icon: 'grid-outline',
@@ -127,7 +140,6 @@ export const MENU_ITEMS: MobileMenuItem[] = [
             {
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
-            
                 //  roles: [USER_ROLE.ADMIN],
                 hidden: localStorage.getItem('role') != 'admin',
                 children: [
@@ -349,7 +361,7 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                 title: 'Quản Lý Cấu Hình Máy',
                 icon: 'grid-outline',
                 // roles: [USER_ROLE.ADMIN],
-                 hidden: localStorage.getItem('role') != 'admin',
+                hidden: localStorage.getItem('role') != 'admin',
                 children: [
                     {
                         title: 'Quản Lý Nhóm Sản Phẩm',
@@ -407,21 +419,21 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
         ],
     }];
 
-    export const MENU_ITEMS_CTV: MobileMenuItem[] = [
-        {
-            title: 'Kho Hàng',
-            icon: 'shopping-cart-outline',
-            // group: true,
-            // },
-            // {
-            children: [
-                {
-                    title: 'Sản Phẩm Tồn Kho',
-                    icon: 'home-outline',
-                    link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
-                },
-            ],
-        }];
+export const MENU_ITEMS_CTV: MobileMenuItem[] = [
+    {
+        title: 'Kho Hàng',
+        icon: 'shopping-cart-outline',
+        // group: true,
+        // },
+        // {
+        children: [
+            {
+                title: 'Sản Phẩm Tồn Kho',
+                icon: 'home-outline',
+                link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
+            },
+        ],
+    }];
 
 export const ADMIN_MENU_ITEMS: MobileMenuItem[] = [
     {
