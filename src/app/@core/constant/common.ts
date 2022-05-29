@@ -72,6 +72,22 @@ export const enum TRANSFER_STATUS {
     CANCELED = 'CANCELED',
 }
 
+
+export const enum PAYMENT_METHOD {
+    CASH = 'CASH',
+    TRANSFER = 'TRANSFER',
+}
+
+export const enum BANK {
+    ORDINARY_DEPOSIT = 'ORDINARY_DEPOSIT',
+    CHECKS_DEPOSIT = 'CHECKS_DEPOSIT',
+}
+
+export const BANKS = [
+    {label: '普通預金', value: BANK.ORDINARY_DEPOSIT},
+    {label: '当座預金', value: BANK.CHECKS_DEPOSIT},
+];
+
 export const TRANSFER_STATUSES = [
     {label: 'Mới', value: TRANSFER_STATUS.NEW},
     {label: 'Đang Xữ Lý', value: TRANSFER_STATUS.PROCESSING},
@@ -79,6 +95,11 @@ export const TRANSFER_STATUSES = [
     {label: 'Thất Lạc', value: TRANSFER_STATUS.NOT_FOUND},
     {label: 'Đã Chuyển', value: TRANSFER_STATUS.TRANSFERRED},
     {label: 'Đã Hủy', value: TRANSFER_STATUS.TRANSFERRED},
+];
+
+export const PAYMENT_METHODS = [
+    {label: 'Tiền Mặt', value: PAYMENT_METHOD.CASH},
+    {label: 'Chuyển Khoản', value: PAYMENT_METHOD.TRANSFER},
 ];
 
 export const enum INVOICE_TYPE {

@@ -238,6 +238,10 @@ export class KaiService extends RestService {
         return this.getAll<OnSaleProduct[]>(`${SERVICE_RESOURCES.PRODUCTS}/on-sale/kai`);
     }
 
+    getShopJPOnSaleProducts(): Observable<OnSaleProduct[]> {
+        return this.getAll<OnSaleProduct[]>(`${SERVICE_RESOURCES.PRODUCTS}/on-sale/shop-jp`);
+    }
+
     searchProducts(searchProductDto: SearchProductDto): Observable<Product[]> {
         return this.post<Product[]>(`${SERVICE_RESOURCES.PRODUCTS}/search`, searchProductDto);
     }
