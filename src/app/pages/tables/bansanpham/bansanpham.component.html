@@ -86,7 +86,9 @@
           <th>Tình trạng</th>
           <th>Số lượng</th>
           <th *ngIf="role == 'admin'">Giá thu</th>
+          <th>Giá bán dự kiến</th>
           <th>Giá bán</th>
+          <th>Bảo hành</th>
           <th></th>
           <!-- <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
         </tr>
@@ -112,9 +114,20 @@
             <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
               style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham.id)" [value]="1"></td>
             <td *ngIf="role == 'admin'">{{sanpham.price}}</td>
+            <td>{{sanpham.estimated_price}}</td>
             <td><input type="text"
               style="height: 22px; width: 80px; border-radius: 5px;"(change)="nhapsotienban($event,sanpham.id)"></td>
-          <!-- <td>
+          
+          <td> <select name="baohanh" id="baohanh" (change)="changehinhthucbaohanh($event)"
+            style="height: 22px; border-radius: 5px; width: 80px; ">
+            <option value="default"></option>
+            <option value="15ngay">15 ngày</option>
+            <option value="1thang">1 tháng</option>
+            <option value="3thang">3 tháng</option>
+            <option value="6thang">6 tháng</option>
+            <option value="1nam">1 năm</option>
+          </select></td>
+              <!-- <td>
           
             <mat-form-field appearance="fill" class="mySelectForm">
               <mat-select [formControl]="toppings" multiple>

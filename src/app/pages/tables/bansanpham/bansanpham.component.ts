@@ -272,4 +272,9 @@ export class BansanphamComponent implements OnInit {
     console.log('this.datas', this.datas)
     this.tienhoadon = this.tongtienban.toString()
   }
+
+
+  changehinhthucbaohanh(event){
+
+  }
 }
