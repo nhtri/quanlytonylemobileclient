@@ -309,6 +309,13 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
         addable: true,
         // filter: false,
       },
+      estimated_price: {
+        title: 'Giá Bán Dự Kiến',
+        type: 'string',
+        editable: true,
+        addable: true,
+        // filter: false,
+      },
     },
 
     edit: {
@@ -382,6 +389,7 @@ onSaveConfirm(event) {
         'status':event['newData']['status'],
         'quantity' :event['newData']['quantity'],
        'price': event['newData']['price'],
+       'estimated_price': event['newData']['estimated_price'],
        'position' :'SHOP_JP',
         'source':'SHOP_JP',
         'product_group_id':event['newData']['product_group_id'],
@@ -441,6 +449,7 @@ window.location.reload()
           'status':event['newData']['status'],
           'quantity' :event['newData']['quantity'],
          'price': event['newData']['price'],
+         'estimated_price': event['newData']['estimated_price'],
          'position' :'SHOP_JP',
           'source':'SHOP_JP',
           'product_group_id':event['newData']['product_group_id'],
@@ -506,6 +515,7 @@ window.location.reload()
         'status': input[i]['Tình Trạng'],
         'quantity': input[i]['Số Lượng'],
         'price': input[i]['Giá Tiền'],
+        'estimated_price': input[i]['Giá Bán Dự Kiến'],
         'position': 'SHOP_JP',
         'source': 'SHOP_JP',
       });

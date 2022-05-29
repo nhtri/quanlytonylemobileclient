@@ -304,6 +304,13 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         addable: true,
         // filter: false,
       },
+      estimated_price: {
+        title: 'Giá Bán Dự Kiến',
+        type: 'string',
+        editable: true,
+        addable: true,
+        // filter: false,
+      },
     },
 
     edit: {
@@ -377,6 +384,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
           'status': event['newData']['status'],
           'quantity': event['newData']['quantity'],
           'price': event['newData']['price'],
+          'estimated_price': event['newData']['estimated_price'],
           'position': 'WAREHOUSE',
           'source': 'WAREHOUSE',
           'product_group_id': event['newData']['group_name'],
@@ -436,6 +444,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         'status': event['newData']['status'],
         'quantity': event['newData']['quantity'],
         'price': event['newData']['price'],
+        'estimated_price': event['newData']['estimated_price'],
         'position': 'WAREHOUSE',
         'source': 'WAREHOUSE',
         'product_group_id': event['newData']['group_name'],
@@ -501,6 +510,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         'status': input[i]['Tình Trạng'],
         'quantity': input[i]['Số Lượng'],
         'price': input[i]['Giá Tiền'],
+        'estimated_price': input[i]['Giá Bán Dự Kiến'],
         'position': 'WAREHOUSE',
         'source': 'WAREHOUSE',
       });
