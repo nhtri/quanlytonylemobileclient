@@ -310,10 +310,15 @@ export class InvoiceComponent implements OnInit {
     }
 
     saveAndExport() {
+        let display_order = 1;
         this.invoice = {
             invoice_id: this.invoice_id,
             customer: this.customer,
-            products: this.products,
+            products: this.products.map(p => {
+                p.display_order = display_order;
+                display_order++;
+                return p;
+            }),
             sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
             total_money: this.totalMoney,
             quantity: this.getQuantity,

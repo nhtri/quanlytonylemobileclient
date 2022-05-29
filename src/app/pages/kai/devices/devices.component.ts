@@ -37,7 +37,7 @@ export class DevicesComponent implements OnInit {
     }
 
     getDevices() {
-        this.kaiService.getKaiOnSaleProducts().subscribe(val => {
+        this.kaiService.getShopJPOnSaleProducts().subscribe(val => {
             this.originalData = val;
             this.data = JSON.parse(JSON.stringify(this.originalData));
             this.data.forEach(x => x['isSelected'] = false);
