@@ -299,6 +299,16 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
                 },
                 // filter: false,
             },
+            estimated_price: {
+                title: 'Giá Bán Dự Kiến',
+                type: 'string',
+                editable: true,
+                addable: true,
+                valuePrepareFunction: (cell, row) => {
+                    return this.productPricePipe.transform(cell);
+                },
+                // filter: false,
+            },
         },
 
         edit: {
@@ -326,6 +336,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
                     'status': event['newData']['status'],
                     'quantity': event['newData']['quantity'],
                     'price': event['newData']['price'],
+                    'estimated_price': event['newData']['estimated_price'],
                     'position': 'SHOP_VN',
                     'source': 'SHOP_VN',
                     'product_group_id': event['newData']['group_name'],
@@ -367,13 +378,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
 
     onCreateConfirm(event): void {
         console.log('Create Event In Console');
-        // if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
-        // el.tensanpham === (event['newData']['tensanpham']) &&
-        // el.dungluong === (event['newData']['dungluong']) &&
-        // el.mau === (event['newData']['mau']) &&
-        // el.loaisanpham === (event['newData']['loaisanpham']) &&
-        // el.phienban === (event['newData']['phienban'])
-        // )) {
+       
         console.log(event['newData']['imei']);
         this.service.sanphamtonkhovn(
             {
@@ -383,6 +388,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
                 'status': event['newData']['status'],
                 'quantity': event['newData']['quantity'],
                 'price': event['newData']['price'],
+                'estimated_price': event['newData']['estimated_price'],
                 'position': 'SHOP_VN',
                 'source': 'SHOP_VN',
                 'product_group_id': event['newData']['group_name'],
@@ -397,11 +403,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
 
                 });
         event.confirm.resolve();
-        // }
-        // else {
-        //   alert("Dữ liệu đã tồn tại")
-        //   event.confirm.reject();
-        // }
+     
 
     }
 
@@ -448,6 +450,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
                 'status': input[i]['Tình Trạng'],
                 'quantity': input[i]['Số Lượng'],
                 'price': input[i]['Giá Tiền'],
+                'estimated_price': input[i]['Giá Bán Dự Kiến'],
                 'position': 'SHOP_VN',
                 'source': 'SHOP_VN',
             });

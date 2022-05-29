@@ -298,6 +298,16 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
                 },
                 // filter: false,
             },
+            estimated_price: {
+              title: 'Giá Bán Dự Kiến',
+              type: 'string',
+              editable: true,
+              addable: true,
+              valuePrepareFunction: (cell, row) => {
+                  return this.productPricePipe.transform(cell);
+              },
+              // filter: false,
+          },
         },
 
         edit: {
@@ -312,50 +322,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
         },
     };
 
-//   onSaveConfirm(event) {
-//     if (window.confirm('Bạn có muốn thay đổi không?')) {
-//       this.service.updatesanpham(
-//         [
-//           event['newData']['nhomsanpham'],
-//           event['newData']['tensanpham'],
-//           event['newData']['dungluong'],
-//           event['newData']['loaisanpham'],
-//           event['newData']['phienban'],
-//           event['newData']['imei'],
-//           event['newData']['id'],
-//         ]
-//       )
-//         .subscribe(data => {
 
-//           console.log("POST Request is successful ", data);
-
-//           this.service.getsanphamtonkhokhohang().subscribe(val => {
-// this.dataedit=[]
-//             val.forEach(element => {
-//               this.arrayImei = (element['imei'].split(",")).filter(val=>val!='')
-//               // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
-
-//               element.soluong = this.arrayImei.length
-//               element.imei = element.imei.replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",").replace(",,",",")
-//               this.dataedit.push(element)
-//             });
-//             this.source.load(this.dataedit);
-//             this.data = val
-
-
-//           });
-
-
-//         },
-//           error => {
-//             console.log("Error", error);
-
-//           })
-//       event.confirm.resolve();
-//     } else {
-//       event.confirm.reject();
-//     }
-//   }
 
 
     onSaveConfirm(event) {
@@ -370,6 +337,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
                     'status': event['newData']['status'],
                     'quantity': event['newData']['quantity'],
                     'price': event['newData']['price'],
+                    'estimated_price': event['newData']['estimated_price'],
                     'position': 'SHOP_JP',
                     'source': 'SHOP_JP',
                     'product_group_id': event['newData']['product_group_id'],
@@ -411,13 +379,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
 
     onCreateConfirm(event): void {
         console.log('Create Event In Console');
-        // if (!this.data.some(el => el.nhomsanpham === (event['newData']['nhomsanpham']) &&
-        // el.tensanpham === (event['newData']['tensanpham']) &&
-        // el.dungluong === (event['newData']['dungluong']) &&
-        // el.mau === (event['newData']['mau']) &&
-        // el.loaisanpham === (event['newData']['loaisanpham']) &&
-        // el.phienban === (event['newData']['phienban'])
-        // )) {
+      
         console.log(event['newData']['imei']);
         this.service.sanphamtonkhojp(
             {
@@ -427,6 +389,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
                 'status': event['newData']['status'],
                 'quantity': event['newData']['quantity'],
                 'price': event['newData']['price'],
+                'estimated_price': event['newData']['estimated_price'],
                 'position': 'SHOP_JP',
                 'source': 'SHOP_JP',
                 'product_group_id': event['newData']['product_group_id'],
@@ -492,6 +455,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
                 'status': input[i]['Tình Trạng'],
                 'quantity': input[i]['Số Lượng'],
                 'price': input[i]['Giá Tiền'],
+                'estimated_price': input[i]['Giá Bán Dự Kiến'],
                 'position': 'SHOP_JP',
                 'source': 'SHOP_JP',
             });
