@@ -87,66 +87,7 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
       this.dataorigin = this.data
     });
 
-    // this.service.getnhomsanpham().subscribe(val => {
-    //   let data = val.map(val => val.nhomsanpham)
-    //   data.forEach(data => {
-    //     this.datanhomsanpham.push({ "value": data, "title": data })
-    //   });
-    //   console.log(this.datanhomsanpham)
-    //   // this.settings.columns.nhomsanpham.editor.config.list = this.datanhomsanpham
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.gettensanpham().subscribe(val => {
-    //   let data = val.map(val => val.tensanpham)
-    //   data.forEach(data => {
-    //     this.datatensanpham.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.tensanpham.editor.config.list = this.datatensanpham
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getdungluong().subscribe(val => {
-    //   let data = val.map(val => val.dungluong)
-    //   data.forEach(data => {
-    //     this.datadungluong.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.dungluong.editor.config.list = this.datadungluong
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getmau().subscribe(val => {
-    //   let data = val.map(val => val.mau)
-    //   data.forEach(data => {
-    //     this.datamau.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.mau.editor.config.list = this.datamau
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getloaisanpham().subscribe(val => {
-    //   let data = val.map(val => val.loaisanpham)
-    //   data.forEach(data => {
-    //     this.dataloaisanpham.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.loaisanpham.editor.config.list = this.dataloaisanpham
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
-
-    // this.service.getphienban().subscribe(val => {
-    //   let data = val.map(val => val.phienban)
-    //   data.forEach(data => {
-    //     this.dataphienban.push({ "value": data, "title": data })
-    //   });
-    //   // this.settings.columns.phienban.editor.config.list = this.dataphienban
-    //   // this.settings = Object.assign({}, this.settings);
-
-    // })
+    
 
   }
 

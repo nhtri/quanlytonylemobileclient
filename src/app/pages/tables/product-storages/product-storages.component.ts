@@ -91,6 +91,14 @@ export class ProductStoragesComponent implements OnInit {
                     return this.productPricePipe.transform(cell, row.source);
                 },
             },
+            estimated_price: {
+                filter: false,
+                title: 'Giá Bán Dự Kiến',
+                type: 'number',
+                valuePrepareFunction: (cell, row) => {
+                    return this.productPricePipe.transform(cell, row.source);
+                },
+            },
             position: {
                 filter: {
                     type: 'list',

@@ -20,6 +20,7 @@
                     <th>Tình Trạng</th>
                     <th>Số Lượng</th>
                     <th *ngIf="!isNormalUser">Giá</th>
+                    <th>Giá Bán Dự Kiến</th>
                     <th>Kho Đích</th>
                     <th style="cursor: pointer;" (click)="onSortData($event)" >Ngày Chuyển <nb-icon [icon]="orderIcon"></nb-icon></th>
                     <th>Trạng Thái</th>
@@ -43,6 +44,7 @@
                 <td style="width: 50px;" ></td>
                 <td style="width: 50px;" ></td>
                 <td *ngIf="!isNormalUser" ></td>
+                <td></td>
                 <td>
                     <select style="width: 85px;" class="rounded p-1" (change)="onSearchOutgoingProducts($event)" [(ngModel)]="outgoingTransferProductsFilter.source" >
                         <option [value]="''" >--All--</option>
@@ -73,7 +75,8 @@
                 <td>{{rowData.color}}</td>
                 <td>{{rowData.status | productStatus}}</td>
                 <td>{{rowData.quantity}}</td>
-                <td *ngIf="!isNormalUser">{{rowData.price | productPrice : rowData.to_position}}</td>
+                <td *ngIf="!isNormalUser">{{rowData.price | productPrice }}</td>
+                <td>{{rowData.estimated_price}}</td>
                 <td>{{rowData.to_position | positionTitle}}</td>
                 <td>{{rowData.transfer_date | date: dateFormat}}</td>
                 <td>{{rowData.transfer_status | outgoingTransferStatus}}</td>
