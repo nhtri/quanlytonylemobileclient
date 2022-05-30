@@ -339,7 +339,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
                     'estimated_price': event['newData']['estimated_price'],
                     'position': 'SHOP_VN',
                     'source': 'SHOP_VN',
-                    'product_group_id': event['newData']['group_name'],
+                    'product_group_id': event['newData']['product_group_id'],
                 },
             )
                 .subscribe(data => {
