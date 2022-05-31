@@ -118,7 +118,7 @@
             <td><input type="text"
               style="height: 22px; width: 80px; border-radius: 5px;"(change)="nhapsotienban($event,sanpham.id)"></td>
           
-          <td> <select name="baohanh" id="baohanh" (change)="changehinhthucbaohanh($event)"
+          <td> <select name="baohanh" id="baohanh" (change)="changehinhthucbaohanh($event,sanpham.id)"
             style="height: 22px; border-radius: 5px; width: 80px; ">
             <option value="default"></option>
             <option value="15ngay">15 ngày</option>

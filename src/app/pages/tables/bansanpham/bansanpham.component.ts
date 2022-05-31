@@ -177,7 +177,7 @@ export class BansanphamComponent implements OnInit {
           parseInt(element.price) * parseInt(element.quantity),
           date, this.hinhthucthanhtoan,
           this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-          , element.quantity, element.id
+          , element.quantity, element.id,element.thoihanbaohanh
         ]).subscribe(value => {
           console.log(value)
         })
@@ -274,7 +274,15 @@ export class BansanphamComponent implements OnInit {
   }
 
 
-  changehinhthucbaohanh(event){
-
+  changehinhthucbaohanh(event, id){
+    console.log(event.target.value, id)
+    this.datas.forEach(data => {
+      console.log('data.id', data.id)
+      if (data.id == id) {
+        data.thoihanbaohanh = event.target.value
+      }
+    }
+    )
+    console.log('this.datas', this.datas)
   }
 }
