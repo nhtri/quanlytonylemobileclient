@@ -23,6 +23,7 @@
     <th>Imei</th>
     <th *ngIf="role == 'admin'">Giá thu</th>
     <th>Giá bán</th>
+    <th>Thời gian bảo hành</th>
     <th>Ngày bán</th>
     </tr>
 </thead>
@@ -41,6 +42,7 @@
     <td>{{sanpham.imei}}</td>
     <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
     <td>{{sanpham.giaban}}</td>
+    <td>{{sanpham.thoihanbaohanh}}</td>
     <td>{{sanpham.ngayban}}</td>
     <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
         [queryParams]={id:[sanpham.id]}></i></td>
