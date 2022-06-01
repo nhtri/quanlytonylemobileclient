@@ -167,7 +167,7 @@
             </div>
             <div>
                 <div *ngFor="let product of products; let i = index">
-                    <div *ngIf="product.id != -1" id="product-item-{{i}}" >
+                    <div *ngIf="product.id != -1" id="product-item-{{i}}">
                         <div class=" row">
                             <div class=" col-md-6 pr-md-1 mt-2">
                                 <div class=" form-group">
@@ -183,8 +183,10 @@
                                     <label>Nhóm Sản Phẩm</label>
                                     <p-dropdown [styleClass]="'form-control'" [options]="product_groups"
                                                 (onChange)="onChangeProductGroup($event, i)"
-                                                [(ngModel)]="product.product_group_id" optionLabel="label" optionValue="value"
-                                                id="product_group_id{{i}}" name="product_group_id{{i}}" #product_group_id{{i}}="ngModel"
+                                                [(ngModel)]="product.product_group_id" optionLabel="label"
+                                                optionValue="value"
+                                                id="product_group_id{{i}}" name="product_group_id{{i}}"
+                                                #product_group_id{{i}}="ngModel"
                                                 required [ngModelOptions]="{standalone: true}">
                                     </p-dropdown>
                                 </div>
@@ -202,8 +204,10 @@
                             <div class="col-kai-half-5 col-md-2 pr-md-1">
                                 <div class="form-group">
                                     <label> Số imei </label>
-                                    <input class="form-control p-imei" autocomplete="off" placeholder="Số imei" [(ngModel)]="product.imei"
-                                           type="text" id="imei{{i}}" name="imei{{i}}" #imei{{i}}="ngModel" (keyup.enter)="gotoNextImei($event, i+1)"  />
+                                    <input class="form-control p-imei" autocomplete="off" placeholder="Số imei"
+                                           [(ngModel)]="product.imei"
+                                           type="text" id="imei{{i}}" name="imei{{i}}" #imei{{i}}="ngModel"
+                                           (keyup.enter)="gotoNextImei($event, i+1)" />
                                 </div>
                             </div>
                             <div class="col-kai-half-3 col-md-2 pr-md-1">
@@ -242,7 +246,7 @@
                                     <label> Số Lượng </label>
                                     <input class=" form-control" placeholder="Số Lượng" [(ngModel)]="product.quantity"
                                            type="number" id="quantity{{i}}" name="quantity{{i}}"
-                                           #quantity{{i}}="ngModel" (ngModelChange)="onChangeQuantity(product, i)"/>
+                                           #quantity{{i}}="ngModel" (ngModelChange)="onChangeQuantity(product, i)" />
                                 </div>
                             </div>
                             <div class=" col-md-2 pr-md-1">
@@ -250,7 +254,8 @@
                                     <label> Giá </label>
                                     <input class=" form-control" placeholder="Giá" [(ngModel)]="product.price"
                                            type="text" id="price{{i}}" name="price{{i}}" #price{{i}}="ngModel"
-                                           (keypress)="keyPressNumbers($event)" (ngModelChange)="onChangePrice(product, i)" />
+                                           (keypress)="keyPressNumbers($event)"
+                                           (ngModelChange)="onChangePrice(product, i)" />
                                 </div>
                             </div>
 
@@ -258,12 +263,14 @@
                                 <button pButton
                                         class="btn p-button-sm p-button-danger mr-2"
                                         type="button" (click)="removeProduct(i)">
-                                    <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon> Xóa
+                                    <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon>
+                                    Xóa
                                 </button>
                                 <button pButton
                                         class="btn p-button-sm p-button-success" W
                                         type="button" (click)="cloneProduct(i)">
-                                    <nb-icon class="mr-1" icon="copy-outline"></nb-icon> Clone
+                                    <nb-icon class="mr-1" icon="copy-outline"></nb-icon>
+                                    Clone
                                 </button>
                             </div>
                         </div>
@@ -275,7 +282,8 @@
 
                 <div class="col-md-12">
                     <button pButton class="btn p-button-sm p-button-info" type="button" (click)="addProduct()">
-                        <nb-icon class="mr-1" icon="plus-square-outline"></nb-icon> Thêm
+                        <nb-icon class="mr-1" icon="plus-square-outline"></nb-icon>
+                        Thêm
                     </button>
                 </div>
                 <div class="col-md-12 mt-3">
@@ -284,36 +292,99 @@
                 </div>
             </div>
             <div class="row">
+                <div class="col-md-12 col-lg-12 col-sm-12">
+                    <h5>Thông Tin Thanh Toán</h5>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-5 mb-3">
+                    <p-dropdown [styleClass]="'form-control'" [options]="paymentMethods"
+                                (onChange)="onChangePaymentMethod($event.value)"
+                                [(ngModel)]="invoice.payment_type" optionLabel="label" optionValue="value"
+                                required [ngModelOptions]="{standalone: true}" #paymentMethodValidate="ngModel">
+                    </p-dropdown>
+
+
+
+                </div>
+            </div>
+            <div *ngIf="invoice.payment_type === transferPaymentMethod" class="row mb-3">
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Mã Số Đơn</label>
+                        <input class=" form-control" placeholder="Mã Số Đơn" type="text"
+                               [(ngModel)]="paymentInfo.invoice_code" required id="invoice_code"
+                               name="invoice_code" #invoiceCodeValidate="ngModel" />
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Tên Ngân Hàng</label>
+                        <p-dropdown [styleClass]="'form-control'" [options]="banks"
+                                    [(ngModel)]="paymentInfo.bank_name" optionLabel="label" optionValue="value"
+                                    required [ngModelOptions]="{standalone: true}" #bankNameValidate="ngModel">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Tên Chi Nhánh</label>
+                        <input class=" form-control" placeholder="Tên Chi Nhánh" type="text"
+                               [(ngModel)]="paymentInfo.branch_name" required id="branch_name"
+                               name="branch_name" #branchNameValidate="ngModel" />
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3">
+                    <div class="form-group">
+                        <label>Số Tài Khoản</label>
+                        <input class=" form-control" placeholder="Số Tài Khoản" type="text"
+                               [(ngModel)]="paymentInfo.bank_id" required id="bank_id"
+                               name="bank_id" #bankIdValidate="ngModel" />
+                    </div>
+                </div>
+                <div class="col-md-3 col-lg-3 col-sm-3">
+                    <div class="form-group">
+                        <label>Tên Chủ TK</label>
+                        <input class=" form-control" placeholder="Tên Chủ Tài Khoản" type="text"
+                               [(ngModel)]="paymentInfo.account_name" required id="account_name"
+                               name="account_name" #accountNameValidate="ngModel" />
+                    </div>
+                </div>
+            </div>
+            <div class="row">
                 <div class="col-md-12">
                     <button pButton class="btn p-button-sm p-button-info" type="submit"
                             [disabled]="!createAppForm.valid || !selectedJobs || selectedJobs == null || !birthday">
-                        <nb-icon class="mr-1" icon="save-outline"></nb-icon> Lưu
+                        <nb-icon class="mr-1" icon="save-outline"></nb-icon>
+                        Lưu
                     </button>
                     <button pButton
                             class="btn p-button-sm p-button-danger ml-1"
                             type="button" (click)="cancel()">
-                        <nb-icon class="mr-1" icon="close-square-outline"></nb-icon> Hủy
+                        <nb-icon class="mr-1" icon="close-square-outline"></nb-icon>
+                        Hủy
                     </button>
                     <button *ngIf="editData.id"
                             pButton
                             class="btn p-button-sm p-button-danger ml-1"
                             type="button"
                             (click)="delete()">
-                        <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon> Xóa
+                        <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon>
+                        Xóa
                     </button>
                     <button *ngIf="editData.id"
                             pButton
                             class=" btn p-button-sm p-button-info ml-1"
                             type="button"
                             (click)="exportExcel()">
-                        <nb-icon class="mr-1" icon="download-outline"></nb-icon> Export
+                        <nb-icon class="mr-1" icon="download-outline"></nb-icon>
+                        Export
                     </button>
                     <button
                             pButton
                             class="btn p-button-sm p-button-success ml-1"
                             type="button"
                             (click)="saveAndExport()">
-                        <nb-icon class="mr-1" icon="cloud-download-outline"></nb-icon> Lưu và Export
+                        <nb-icon class="mr-1" icon="cloud-download-outline"></nb-icon>
+                        Lưu và Export
                     </button>
                 </div>
             </div>

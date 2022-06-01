@@ -74,8 +74,8 @@ export const enum TRANSFER_STATUS {
 
 
 export const enum PAYMENT_METHOD {
-    CASH = 'CASH',
-    TRANSFER = 'TRANSFER',
+    CASH = 'tienmat',
+    TRANSFER = 'chuyenkhoan',
 }
 
 export const enum BANK {
