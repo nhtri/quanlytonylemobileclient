@@ -1,23 +1,27 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import {
+    BANKS,
     DATE_CONSTANT,
+    PAYMENT_METHOD,
+    PAYMENT_METHODS,
     PEOPLE_JOBS,
     PRODUCT_COLORS,
     PRODUCT_SOURCE,
     PRODUCT_STATUSES,
     TODAY,
 } from '../../../@core/constant/common';
-import {Customer} from '../../../model/customer';
-import {PurchasingInvoiceDto} from '../../../model/dto/purchasing-invoice.dto';
-import {Product} from '../../../model/product';
-import {FormBuilder} from '@angular/forms';
-import {KaiService} from '../../../services/kai.service';
-import {Router} from '@angular/router';
-import {DatePipe} from '@angular/common';
-import {isEmpty, notEmpty} from '../../../@core/utils/data.utils';
-import {getAge} from '../../../@core/utils/date.utils';
-import {KAI_PAGES} from '../../../@core/constant/pages.constant';
-import {ExcelService} from '../../../services/excel.service';
+import { Customer } from '../../../model/customer';
+import { PurchasingInvoiceDto } from '../../../model/dto/purchasing-invoice.dto';
+import { Product } from '../../../model/product';
+import { FormBuilder } from '@angular/forms';
+import { KaiService } from '../../../services/kai.service';
+import { Router } from '@angular/router';
+import { DatePipe } from '@angular/common';
+import { isEmpty, notEmpty } from '../../../@core/utils/data.utils';
+import { getAge } from '../../../@core/utils/date.utils';
+import { KAI_PAGES } from '../../../@core/constant/pages.constant';
+import { ExcelService } from '../../../services/excel.service';
+import { InvoicePayment } from '../../../model/invoice-payment';
 
 @Component({
     selector: 'ngx-invoice',
@@ -34,6 +38,8 @@ export class InvoiceComponent implements OnInit {
         sale_date: null,
         total_money: 0,
         customer: null,
+        payment_type: PAYMENT_METHOD.CASH,
+        payment_detail: null,
     };
     customer: Customer = {
         address: '',
@@ -43,6 +49,14 @@ export class InvoiceComponent implements OnInit {
         name_japanese: '',
         name_vietnamese: '',
         phone: '',
+    };
+    paymentInfo: InvoicePayment = {
+        invoice_id: null,
+        account_name: null,
+        bank_id: null,
+        bank_name: null,
+        branch_name: null,
+        invoice_code: null,
     };
     selectedJobs = PEOPLE_JOBS[0].value;
     birthday: Date;
@@ -62,6 +76,11 @@ export class InvoiceComponent implements OnInit {
     invoice_id = 0;
 
     productColors = PRODUCT_COLORS;
+
+    paymentMethods = PAYMENT_METHODS;
+    transferPaymentMethod = PAYMENT_METHOD.TRANSFER;
+
+    banks = BANKS;
 
     PURCHASING_REPORT_NAME = 'InvoiceReport';
     CURRENT_DATE = TODAY;
@@ -97,6 +116,10 @@ export class InvoiceComponent implements OnInit {
                     if (isEmpty(this.selectedJobs)) {
                         this.selectedJobs = PEOPLE_JOBS[0].value;
                         this.customer.job = this.selectedJobs;
+                    }
+                    this.invoice.payment_type = invoiceDetail.payment_type;
+                    if (notEmpty(invoiceDetail.payment_detail)) {
+                        this.paymentInfo = invoiceDetail.payment_detail;
                     }
                 }
             });
@@ -207,6 +230,8 @@ export class InvoiceComponent implements OnInit {
 
     onSubmit() {
         let display_order = 1;
+        const {payment_type} = this.invoice;
+        const payment_detail = (payment_type === PAYMENT_METHOD.TRANSFER) ? this.paymentInfo : null;
         this.invoice = {
             invoice_id: this.invoice_id,
             customer: this.customer,
@@ -219,6 +244,9 @@ export class InvoiceComponent implements OnInit {
             total_money: this.totalMoney,
             quantity: this.getQuantity,
             position: PRODUCT_SOURCE.SHOP_JP,
+            payment_type,
+            payment_detail,
+            payment_create_date: this.datePipe.transform(new Date(), DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
         };
         this.kaiService.purchasingInvoice(this.invoice).subscribe((purchasingInvoiceDetail) => {
             if (notEmpty(purchasingInvoiceDetail)) {
@@ -226,6 +254,13 @@ export class InvoiceComponent implements OnInit {
                 this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
             }
         });
+    }
+
+    onChangePaymentMethod(selectedPaymentMethod) {
+        this.invoice.payment_type = selectedPaymentMethod;
+        if (selectedPaymentMethod.value === PAYMENT_METHOD.CASH) {
+            this.invoice.payment_detail = null;
+        }
     }
 
     onSelectCustomer(event) {
@@ -257,7 +292,7 @@ export class InvoiceComponent implements OnInit {
 
     cloneProduct(index) {
         const {name, imei, status, color, quantity, price, product_group_id} = this.products[index];
-        this.products.splice(index, 0,
+        this.products.splice(index + 1, 0,
             {
                 name, imei, status, color, quantity, price,
                 position: PRODUCT_SOURCE.SHOP_JP, source: PRODUCT_SOURCE.SHOP_JP, product_group_id,
@@ -311,6 +346,8 @@ export class InvoiceComponent implements OnInit {
 
     saveAndExport() {
         let display_order = 1;
+        const {payment_type} = this.invoice;
+        const payment_detail = (payment_type === PAYMENT_METHOD.TRANSFER) ? this.paymentInfo : null;
         this.invoice = {
             invoice_id: this.invoice_id,
             customer: this.customer,
@@ -322,6 +359,9 @@ export class InvoiceComponent implements OnInit {
             sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
             total_money: this.totalMoney,
             quantity: this.getQuantity,
+            payment_type,
+            payment_detail,
+            payment_create_date: this.datePipe.transform(new Date(), DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
         };
 
         this.kaiService.saveAndDownloadPurchasingInvoice(this.invoice).subscribe(bufferResponse => {
