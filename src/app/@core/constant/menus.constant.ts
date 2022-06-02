@@ -207,7 +207,7 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
         // },
         // {
         children: [{
-            title: 'Quản Lý Mua Hàng',
+            title: 'Quản Lý Bán Hàng',
             icon: 'shopping-cart-outline',
             // link: '/pages/tables/danhsachsanphamvn',
             // home: true,
@@ -317,7 +317,7 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
         // },
         // {
         children: [{
-            title: 'Quản Lý Mua Hàng',
+            title: 'Quản Lý Bán Hàng',
             icon: 'shopping-cart-outline',
             // link: '/pages/tables/danhsachsanpham',
             // home: true,
