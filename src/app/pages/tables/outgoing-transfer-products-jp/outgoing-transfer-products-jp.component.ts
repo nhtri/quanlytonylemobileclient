@@ -82,6 +82,7 @@ export class OutgoingTransferProductsJpComponent implements OnInit {
         this.isSelectAll = !this.isSelectAll;
         this.data.map((x) => x.isSelected = this.isSelectAll);
         if (this.isSelectAll) {
+            console.log('>>>> this.data 2: ', this.data);
             this.data.forEach(x => {
                 this.selectedProducts.push({
                     product_id: x.product_id,
@@ -204,6 +205,8 @@ export class OutgoingTransferProductsJpComponent implements OnInit {
                 return selectedProduct.product_id === x.product_id && selectedProduct.invoice_id === x.invoice_id;
             }) !== -1;
         });
+
+        console.log('>>>> this.data: ', this.data);
     }
 
     exportexcel() {

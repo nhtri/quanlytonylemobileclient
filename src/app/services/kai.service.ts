@@ -263,6 +263,10 @@ export class KaiService extends RestService {
         return this.update<any>(`${SERVICE_RESOURCES.TRANSFERRING}/receive`, receiveTransferProductDto);
     }
 
+    receiveTransferringProducts(receiveTransferProductDtos: ReceiveTransferProductDto[]): Observable<any> {
+        return this.post<any>(`${SERVICE_RESOURCES.TRANSFERRING}/receive`, receiveTransferProductDtos);
+    }
+
     lostProduct(invoice_id, product_id): Observable<OutgoingProduct[]> {
         return this.getAll<OutgoingProduct[]>(`${SERVICE_RESOURCES.TRANSFERRING}/lost/${invoice_id}/${product_id}`);
     }

@@ -1,6 +1,6 @@
 import { Customer } from './customer';
 import { Product } from './product';
-import { PAYMENT_METHOD } from '../@core/constant/common';
+import { PAYMENT_TYPE } from '../@core/constant/common';
 
 export interface Invoice {
   id: number;
@@ -8,7 +8,7 @@ export interface Invoice {
   sale_date: Date | string;
   quantity: number;
   total_money: number;
-  payment_type?: PAYMENT_METHOD;
+  payment_type?: PAYMENT_TYPE;
   created_at?: Date;
   updated_at?: Date;
   products?: Product[];

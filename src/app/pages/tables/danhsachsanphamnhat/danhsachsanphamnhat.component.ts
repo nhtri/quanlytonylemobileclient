@@ -48,7 +48,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
         {value: '', title: ''},
     ];
 
-    tongsoluongsanpham=0
+    tongsoluongsanpham = 0;
     datamauselect = PRODUCT_COLORS.map(x => {
         return {
             value: x.value.toString(),
@@ -93,7 +93,7 @@ export class DanhsachsanphamnhatComponent implements OnInit {
             this.source.load(val);
             this.data = val;
             val.forEach(element => {
-              this.tongsoluongsanpham += parseInt(element.quantity) 
+                this.tongsoluongsanpham += parseInt(element.quantity);
                 this.danhsachidsanphamfull.push(element.id);
                 // element.imei = element.imei.replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",").replace(",,", ",")
                 // this.data.push(element)
@@ -426,18 +426,13 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     }
 
     selectall(event) {
-      this.danhsachidsanpham = this.danhsachidsanphamfull
-      console.log('event',event.target.value)
-      console.log('danhsachidsanpham',this.danhsachidsanpham)
-      if(this.checkedall==false){
-        this.checkedall=true
-        console.log('danhsachidsanpham',this.danhsachidsanpham)
-      }
-      else{
-        this.checkedall=false
-        this.danhsachidsanpham=[]
-        console.log('danhsachidsanpham',this.danhsachidsanpham)
-      }
-
+        this.checkedall = !this.checkedall;
+        if (this.checkedall) {
+            this.data.forEach(x => {
+                this.danhsachidsanpham.push(x.id);
+            });
+        } else {
+            this.danhsachidsanpham = [];
+        }
     }
 }

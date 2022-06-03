@@ -73,19 +73,19 @@ export const enum TRANSFER_STATUS {
 }
 
 
-export const enum PAYMENT_METHOD {
+export const enum PAYMENT_TYPE {
     CASH = 'tienmat',
     TRANSFER = 'chuyenkhoan',
 }
 
-export const enum BANK {
+export const enum PAYMENT_METHOD {
     ORDINARY_DEPOSIT = 'ORDINARY_DEPOSIT',
     CHECKS_DEPOSIT = 'CHECKS_DEPOSIT',
 }
 
-export const BANKS = [
-    {label: '普通預金', value: BANK.ORDINARY_DEPOSIT},
-    {label: '当座預金', value: BANK.CHECKS_DEPOSIT},
+export const PAYMENT_METHODS = [
+    {label: '普通預金', value: PAYMENT_METHOD.ORDINARY_DEPOSIT},
+    {label: '当座預金', value: PAYMENT_METHOD.CHECKS_DEPOSIT},
 ];
 
 export const TRANSFER_STATUSES = [
@@ -97,9 +97,9 @@ export const TRANSFER_STATUSES = [
     {label: 'Đã Hủy', value: TRANSFER_STATUS.TRANSFERRED},
 ];
 
-export const PAYMENT_METHODS = [
-    {label: 'Tiền Mặt', value: PAYMENT_METHOD.CASH},
-    {label: 'Chuyển Khoản', value: PAYMENT_METHOD.TRANSFER},
+export const PAYMENT_TYPES = [
+    {label: 'Tiền Mặt', value: PAYMENT_TYPE.CASH},
+    {label: 'Chuyển Khoản', value: PAYMENT_TYPE.TRANSFER},
 ];
 
 export const enum INVOICE_TYPE {
