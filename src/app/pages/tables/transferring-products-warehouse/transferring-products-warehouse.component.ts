@@ -5,6 +5,8 @@ import { DatePipe } from '@angular/common';
 import { notEmpty } from '../../../@core/utils/data.utils';
 import { Product } from '../../../model/product';
 import * as XLSX from 'xlsx';
+import { ReceiveTransferProductDto } from '../../../model/dto/receive-transfer-product.dto';
+
 @Component({
     selector: 'ngx-transferring-products-warehouse',
     templateUrl: './transferring-products-warehouse.component.html',
@@ -25,12 +27,16 @@ export class TransferringProductsWarehouseComponent implements OnInit {
 
     isAscendingOrder: boolean;
     orderIcon = 'arrow-downward-outline';
-role
+    role: string;
+
+    selectedProducts: ReceiveTransferProductDto[] = [];
+    isSelectAll: boolean;
+
     constructor(
         private kaiService: KaiService,
         private datePipe: DatePipe,
     ) {
-        this.role = localStorage.getItem('role')
+        this.role = localStorage.getItem('role');
     }
 
     ngOnInit() {
@@ -41,6 +47,9 @@ role
         this.kaiService.getWarehouseTransferringProducts().subscribe(products => {
             this.originalData = products;
             this.data = products;
+            this.data.map((x) => x['isSelected'] = false);
+            this.isSelectAll = false;
+            this.selectedProducts = [];
         });
     }
 
@@ -73,6 +82,50 @@ role
             .subscribe((result) => {
                 this.getWarehouseTransferringProducts();
             });
+    }
+
+    onSelectAll(event) {
+        event.preventDefault();
+        this.isSelectAll = !this.isSelectAll;
+        this.data.map((x) => x.isSelected = this.isSelectAll);
+        if (this.isSelectAll) {
+            this.data.forEach(x => {
+                this.selectedProducts.push({
+                    product_id: x.product_id,
+                    invoice_id: x.invoice_id,
+                    quantity: x.quantity,
+                });
+            });
+        } else {
+            this.selectedProducts = [];
+        }
+    }
+
+    onSelectItem(event, rowData) {
+        const index = this.selectedProducts.findIndex((x) => {
+            return x.product_id === rowData.product_id && x.invoice_id === rowData.invoice_id;
+        });
+        if (index === -1) {
+            this.selectedProducts.push({
+                product_id: rowData.product_id,
+                invoice_id: rowData.invoice_id,
+                quantity: rowData.quantity,
+            });
+        } else {
+            this.selectedProducts.splice(index, 1);
+        }
+        this.data.find(
+            (item) => item.product_id === rowData.product_id && item.invoice_id === rowData.invoice_id,
+        ).isSelected = !rowData.isSelected;
+    }
+
+    onMultiTransferAccept(event) {
+        event.preventDefault();
+        if (notEmpty(this.selectedProducts) && this.selectedProducts.length > 0) {
+            this.kaiService.receiveTransferringProducts(this.selectedProducts).subscribe(r => {
+                this.getWarehouseTransferringProducts();
+            });
+        }
     }
 
     onSortData(event) {
@@ -124,12 +177,12 @@ role
     exportexcel() {
         let element = document.getElementById('excel-table');
         const ws: XLSX.WorkSheet = XLSX.utils.table_to_sheet(element);
-    
+
         /* generate workbook and add the worksheet */
         const wb: XLSX.WorkBook = XLSX.utils.book_new();
         XLSX.utils.book_append_sheet(wb, ws, 'Sheet1');
-    
+
         /* save to file */
         XLSX.writeFile(wb, this.fileName);
-      }
+    }
 }

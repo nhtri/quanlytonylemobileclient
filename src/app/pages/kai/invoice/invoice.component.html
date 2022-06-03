@@ -296,7 +296,7 @@
                     <h5>Thông Tin Thanh Toán</h5>
                 </div>
                 <div class="col-md-3 col-lg-3 col-sm-5 mb-3">
-                    <p-dropdown [styleClass]="'form-control'" [options]="paymentMethods"
+                    <p-dropdown [styleClass]="'form-control'" [options]="paymentTypes"
                                 (onChange)="onChangePaymentMethod($event.value)"
                                 [(ngModel)]="invoice.payment_type" optionLabel="label" optionValue="value"
                                 required [ngModelOptions]="{standalone: true}" #paymentMethodValidate="ngModel">
@@ -306,7 +306,7 @@
 
                 </div>
             </div>
-            <div *ngIf="invoice.payment_type === transferPaymentMethod" class="row mb-3">
+            <div *ngIf="invoice.payment_type === transferPaymentType" class="row mb-3">
                 <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
                         <label>Mã Số Đơn</label>
@@ -317,11 +317,19 @@
                 </div>
                 <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
-                        <label>Tên Ngân Hàng</label>
-                        <p-dropdown [styleClass]="'form-control'" [options]="banks"
-                                    [(ngModel)]="paymentInfo.bank_name" optionLabel="label" optionValue="value"
-                                    required [ngModelOptions]="{standalone: true}" #bankNameValidate="ngModel">
+                        <label>PT Thanh Toán</label>
+                        <p-dropdown [styleClass]="'form-control'" [options]="paymentMethods"
+                                    [(ngModel)]="paymentInfo.payment_method" optionLabel="label" optionValue="value"
+                                    required [ngModelOptions]="{standalone: true}" #paymentMethodValidate="ngModel">
                         </p-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Tên Ngân Hàng</label>
+                        <input class=" form-control" placeholder="Tên Ngân Hàng" type="text"
+                               [(ngModel)]="paymentInfo.bank_name" required id="bank_name"
+                               name="bank_name" #bankNameValidate="ngModel" />
                     </div>
                 </div>
                 <div class="col-md-2 col-lg-2 col-sm-2">
@@ -332,7 +340,7 @@
                                name="branch_name" #branchNameValidate="ngModel" />
                     </div>
                 </div>
-                <div class="col-md-3 col-lg-3 col-sm-3">
+                <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
                         <label>Số Tài Khoản</label>
                         <input class=" form-control" placeholder="Số Tài Khoản" type="text"
@@ -340,7 +348,7 @@
                                name="bank_id" #bankIdValidate="ngModel" />
                     </div>
                 </div>
-                <div class="col-md-3 col-lg-3 col-sm-3">
+                <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
                         <label>Tên Chủ TK</label>
                         <input class=" form-control" placeholder="Tên Chủ Tài Khoản" type="text"

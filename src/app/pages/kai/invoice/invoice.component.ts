@@ -1,9 +1,10 @@
 import { Component, ElementRef, OnInit } from '@angular/core';
 import {
-    BANKS,
     DATE_CONSTANT,
     PAYMENT_METHOD,
     PAYMENT_METHODS,
+    PAYMENT_TYPE,
+    PAYMENT_TYPES,
     PEOPLE_JOBS,
     PRODUCT_COLORS,
     PRODUCT_SOURCE,
@@ -38,7 +39,7 @@ export class InvoiceComponent implements OnInit {
         sale_date: null,
         total_money: 0,
         customer: null,
-        payment_type: PAYMENT_METHOD.CASH,
+        payment_type: PAYMENT_TYPE.CASH,
         payment_detail: null,
     };
     customer: Customer = {
@@ -57,6 +58,7 @@ export class InvoiceComponent implements OnInit {
         bank_name: null,
         branch_name: null,
         invoice_code: null,
+        payment_method: PAYMENT_METHOD.CHECKS_DEPOSIT,
     };
     selectedJobs = PEOPLE_JOBS[0].value;
     birthday: Date;
@@ -77,10 +79,10 @@ export class InvoiceComponent implements OnInit {
 
     productColors = PRODUCT_COLORS;
 
-    paymentMethods = PAYMENT_METHODS;
-    transferPaymentMethod = PAYMENT_METHOD.TRANSFER;
+    paymentTypes = PAYMENT_TYPES;
+    transferPaymentType = PAYMENT_TYPE.TRANSFER;
 
-    banks = BANKS;
+    paymentMethods = PAYMENT_METHODS;
 
     PURCHASING_REPORT_NAME = 'InvoiceReport';
     CURRENT_DATE = TODAY;
@@ -231,7 +233,7 @@ export class InvoiceComponent implements OnInit {
     onSubmit() {
         let display_order = 1;
         const {payment_type} = this.invoice;
-        const payment_detail = (payment_type === PAYMENT_METHOD.TRANSFER) ? this.paymentInfo : null;
+        const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
         this.invoice = {
             invoice_id: this.invoice_id,
             customer: this.customer,
@@ -258,7 +260,7 @@ export class InvoiceComponent implements OnInit {
 
     onChangePaymentMethod(selectedPaymentMethod) {
         this.invoice.payment_type = selectedPaymentMethod;
-        if (selectedPaymentMethod.value === PAYMENT_METHOD.CASH) {
+        if (selectedPaymentMethod.value === PAYMENT_TYPE.CASH) {
             this.invoice.payment_detail = null;
         }
     }
@@ -347,7 +349,7 @@ export class InvoiceComponent implements OnInit {
     saveAndExport() {
         let display_order = 1;
         const {payment_type} = this.invoice;
-        const payment_detail = (payment_type === PAYMENT_METHOD.TRANSFER) ? this.paymentInfo : null;
+        const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
         this.invoice = {
             invoice_id: this.invoice_id,
             customer: this.customer,
