@@ -65,7 +65,7 @@
   </nb-card-header>
 
   <nb-card-body>
-<!-- <div>Tổng số sản phẩm: {{tongsosanpham}}</div> -->
+    <!-- <div>Tổng số sản phẩm: {{tongsosanpham}}</div> -->
 
 
     <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
@@ -102,32 +102,33 @@
           <td>{{sanpham.color}}</td>
           <td>{{sanpham.status}}</td>
           <!-- <td> -->
-          
-            <!-- <div *ngFor="let data of sanpham[0].imei.split(',')">
+
+          <!-- <div *ngFor="let data of sanpham[0].imei.split(',')">
               <input *ngIf="data!=''" type="checkbox" value="{{data}}" (change)="checkCheckBoxvalue(
                 $event,sanpham[0].id,sanpham[0].nhomsanpham
               ,sanpham[0].tensanpham,sanpham[0].dungluong,
               sanpham[0].loaisanpham,sanpham[0].phienban)" style="margin-right: 10px;">{{data}}
             </div> -->
 
-         
-            <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
-              style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham.id)" [value]="1"></td>
-            <td *ngIf="role == 'admin'">{{sanpham.price}}</td>
-            <td>{{sanpham.estimated_price}}</td>
-            <td><input type="text"
-              style="height: 22px; width: 80px; border-radius: 5px;"(change)="nhapsotienban($event,sanpham.id)"></td>
-          
+
+          <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
+              style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham.id)"
+              [value]="1"></td>
+          <td *ngIf="role == 'admin'">{{sanpham.price}}</td>
+          <td>{{sanpham.estimated_price}}</td>
+          <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;"
+              [value]="sanpham.estimated_price" (change)="nhapsotienban($event,sanpham.id)"></td>
+
           <td> <select name="baohanh" id="baohanh" (change)="changehinhthucbaohanh($event,sanpham.id)"
-            style="height: 22px; border-radius: 5px; width: 80px; ">
-            <option value="default"></option>
-            <option value="15ngay">15 ngày</option>
-            <option value="1thang">1 tháng</option>
-            <option value="3thang">3 tháng</option>
-            <option value="6thang">6 tháng</option>
-            <option value="1nam">1 năm</option>
-          </select></td>
-              <!-- <td>
+              style="height: 22px; border-radius: 5px; width: 80px; ">
+              <option value="default"></option>
+              <option value="15ngay">15 ngày</option>
+              <option value="1thang">1 tháng</option>
+              <option value="3thang">3 tháng</option>
+              <option value="6thang">6 tháng</option>
+              <option value="1nam">1 năm</option>
+            </select></td>
+          <!-- <td>
           
             <mat-form-field appearance="fill" class="mySelectForm">
               <mat-select [formControl]="toppings" multiple>
@@ -135,17 +136,17 @@
               </mat-select>
               </mat-form-field>
           </td> -->
-        
+
           <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td>
 
-   
+
         </tr>
 
 
       </tbody>
     </table>
     <br>
-    <div>Hình thức thanh toán:
+    <!-- <div>Hình thức thanh toán:
       <select name="cars" id="cars" (change)="changehinhthucthanhtoan($event)"
         style="height: 22px; border-radius: 5px; width: 180px; margin-left: 10px;">
         <option value="default">Hình thức thanh toán</option>
@@ -165,14 +166,48 @@
         [(ngModel)]="tienkhachdua"></div>
     <br>
     <div *ngIf="hinhthucthanhtoan=='tienmat'">Tiền Thừa: <input type="text"
-        style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="tienthua"></div>
+        style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="tienthua"></div> -->
 
+    <div style="display: flex;">
+      <div style="margin-right: 15px; font-weight: 600;">Hình thức thanh toán: </div>
+      <select name="cars" id="cars" (change)="selecthinhthucthanhtoan($event)"
+        style="height: 22px; border-radius: 5px; width: 180px; margin-left: 10px;">
+        <option value="default">Hình thức thanh toán</option>
+        <option value="trahet">Trả hết</option>
+        <option value="datcoc">Đặt cọc</option>
+      </select>
+    </div>
+    <div>
+
+      <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tổng Tiền:
+        <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+          [(ngModel)]="tongtienban" disabled></div>
+      <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền Mặt:
+        <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+          [(ngModel)]="tienmat" (change)="thaydoisotienthanhtoan()"></div>
+      <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi: <input
+          type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="daikibi"
+          (change)="thaydoisotienthanhtoan()"></div>
+      <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Chuyển Khoản:
+        <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+          [(ngModel)]="chuyenkhoan" (change)="thaydoisotienthanhtoan()"></div>
+      <div *ngIf="hinhthucthanhtoan=='trahet'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền
+        Thừa: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+          [(ngModel)]="tienthua"></div>
+      <div *ngIf="hinhthucthanhtoan=='datcoc'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền Còn
+        Lại: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+          [(ngModel)]="tienconlai"></div>
+
+    </div>
     <br>
     <br>
     <div style="display: flex;">
       <button (click)="hoantat()"
         style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
         Hoàn Tất</button>
+      <button (click)="luutam()" *ngIf="hinhthucthanhtoan=='trahet'" 
+        style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #5efa2e;color: white;background-color: #7cf82a;font-weight: 300;">
+        Lưu Tạm</button>
       <button (click)="quayve()"
         style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #fab32e;color: white;background-color: #fcad80;font-weight: 300;">
         Hủy</button>

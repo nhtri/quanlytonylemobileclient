@@ -14,7 +14,7 @@ export class BansanphamComponent implements OnInit {
   imei = []
   id = []
   tienkhachdua = '0'
-  tienthua = '0'
+  tienthua = 0
   tienhoadon = '0'
   hinhthucthanhtoan = ""
   tongtienthu = 0
@@ -24,6 +24,10 @@ export class BansanphamComponent implements OnInit {
   role = ''
   vitri = ''
   tongsosanpham = 0
+  tienmat = 0
+  daikibi = 0
+  chuyenkhoan = 0
+  tienconlai = 0
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
@@ -60,7 +64,7 @@ export class BansanphamComponent implements OnInit {
           })
         });
         console.log('this.datas', this.datas)
-   
+
 
       })
 
@@ -102,22 +106,20 @@ export class BansanphamComponent implements OnInit {
     });
     this.tongtienthu = 0
     this.tongtienban = 0
+    this.tienmat = 0
     this.tienhoadon = this.tongtienban.toString()
-    this.tienkhachdua="0"
-    this.tienthua="0"
+    this.tienkhachdua = "0"
+    this.tienthua = 0
     this.hinhthucthanhtoan = "default"
   }
 
-  changesotien(event, id,) {
 
-
-
-  }
 
 
   changehinhthucthanhtoan(event) {
     this.tongtienthu = 0
     this.tongtienban = 0
+    this.tienmat = 0
     this.datas.forEach(e => {
       this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
       this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
@@ -125,14 +127,14 @@ export class BansanphamComponent implements OnInit {
     this.tienhoadon = this.tongtienban.toString()
     this.hinhthucthanhtoan = event.target.value
     console.log(this.hinhthucthanhtoan)
-
+this.tienmat = this.tongtienban
   }
 
   hoantat() {
     if (this.hinhthucthanhtoan == 'default' || this.hinhthucthanhtoan == "") {
       alert("Xin vui lòng chọn hình thức thanh toán !!!")
     }
-    else{
+    else {
       console.log('this.datas', this.datas)
       let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
       let today = new Date();
@@ -157,15 +159,15 @@ export class BansanphamComponent implements OnInit {
       // });
       // console.log('this.imeiduocchon', this.imeiduocchon)
       // this.imeiduocchon.forEach(element => {
-  
-  
-  
+
+
+
       //   this.service.getsanpham([element.id]).subscribe(value => {
       //     let newimei = value[0].imei.replace(element.imei, "")
       //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
       //   })
       let datasale = []
-  
+
       this.datas.forEach(element => {
         datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
         this.service.danhsachsanphamdaban(['', element.name,
@@ -177,13 +179,13 @@ export class BansanphamComponent implements OnInit {
           parseInt(element.price) * parseInt(element.quantity),
           date, this.hinhthucthanhtoan,
           this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-          , element.quantity, element.id,element.thoihanbaohanh
+          , element.quantity, element.id, element.thoihanbaohanh
         ]).subscribe(value => {
           console.log(value)
         })
       });
-  
-  
+
+
       this.service.forsale(
         {
           "quantity": soluongsanpham,
@@ -192,11 +194,11 @@ export class BansanphamComponent implements OnInit {
           "products": datasale
         }
       ).subscribe(val => { })
-  
-  
+
+
       this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon]).subscribe(value => {
+      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat,this.daikibi,this.chuyenkhoan,this.hinhthucthanhtoan]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
         if (this.vitri == "WAREHOUSE") {
@@ -213,7 +215,7 @@ export class BansanphamComponent implements OnInit {
         }
       })
     }
-   
+
 
 
 
@@ -224,9 +226,9 @@ export class BansanphamComponent implements OnInit {
 
   changetienkhachdua(event) {
 
-    this.tienkhachdua = '0'
-    this.tienkhachdua = event.target.value
-    this.tienthua = (parseFloat(this.tienkhachdua) - parseFloat(this.tienhoadon)).toString()
+    // this.tienkhachdua = '0'
+    // this.tienkhachdua = event.target.value
+    // this.tienthua = (parseFloat(this.tienkhachdua) - parseFloat(this.tienhoadon)).toString()
   }
 
 
@@ -249,6 +251,8 @@ export class BansanphamComponent implements OnInit {
       this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
     });
     this.tienhoadon = this.tongtienban.toString()
+    this.tienmat = this.tongtienban
+    this.tienconlai = this.tongtienban - this.chuyenkhoan - this.tienmat - this.daikibi
   }
 
   nhapsotienban(event, id) {
@@ -271,10 +275,11 @@ export class BansanphamComponent implements OnInit {
     });
     console.log('this.datas', this.datas)
     this.tienhoadon = this.tongtienban.toString()
+    this.tienmat=this.tongtienban
   }
 
 
-  changehinhthucbaohanh(event, id){
+  changehinhthucbaohanh(event, id) {
     console.log(event.target.value, id)
     this.datas.forEach(data => {
       console.log('data.id', data.id)
@@ -285,4 +290,16 @@ export class BansanphamComponent implements OnInit {
     )
     console.log('this.datas', this.datas)
   }
+
+
+
+  selecthinhthucthanhtoan(event){
+    this.hinhthucthanhtoan = event.target.value
+    console.log('this.hinhthucthanhtoan',this.hinhthucthanhtoan)
+  }
+
+  thaydoisotienthanhtoan(){
+    this.tienconlai =  this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
+    this.tienthua = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
+   }
 }

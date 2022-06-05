@@ -53,38 +53,39 @@ export class QuanlydanhsachsanphamdabanvnComponent implements OnInit {
 
     this.service.getdanhsachsanphamdabanquanlymobilevn().subscribe(value => {
       // this.source.load(val);
-      value.forEach(element => {
-        this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
-          element.madonhang = val[0].madonhang
-          this.data.push(element)
-          console.log('this.data', this.data)
+      this.data = value
+      // value.forEach(element => {
+      //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
+      //     element.madonhang = val[0].madonhang
+      //     this.data.push(element)
+      //     console.log('this.data', this.data)
 
-          if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
-            this.datanhomsanpham.push({ "value": element.nhomsanpham, "title": element.nhomsanpham })
-            // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
-          }
+      //     if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
+      //       this.datanhomsanpham.push({ "value": element.nhomsanpham, "title": element.nhomsanpham })
+      //       // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
+      //     }
 
-          if (element.tensanpham != '' && element.tensanpham != null && !this.datatensanpham.some(val => val.value == element.tensanpham)) {
-            this.datatensanpham.push({ "value": element.tensanpham, "title": element.tensanpham })
-            // this.datatensanpham = [...new Set(this.datatensanpham)];
-          }
+      //     if (element.tensanpham != '' && element.tensanpham != null && !this.datatensanpham.some(val => val.value == element.tensanpham)) {
+      //       this.datatensanpham.push({ "value": element.tensanpham, "title": element.tensanpham })
+      //       // this.datatensanpham = [...new Set(this.datatensanpham)];
+      //     }
 
-          if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
-            this.datadungluong.push({ "value": element.dungluong, "title": element.dungluong })
-            // this.datadungluong = [...new Set(this.datadungluong)];
-          }
+      //     if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
+      //       this.datadungluong.push({ "value": element.dungluong, "title": element.dungluong })
+      //       // this.datadungluong = [...new Set(this.datadungluong)];
+      //     }
 
-          if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
-            this.dataloaisanpham.push({ "value": element.loaisanpham, "title": element.loaisanpham })
-            // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
-          }
+      //     if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
+      //       this.dataloaisanpham.push({ "value": element.loaisanpham, "title": element.loaisanpham })
+      //       // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
+      //     }
 
-          if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
-            this.dataphienban.push({ "value": element.phienban, "title": element.phienban })
-            // this.dataphienban = [...new Set(this.dataphienban)];
-          }
-        });
-      });
+      //     if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
+      //       this.dataphienban.push({ "value": element.phienban, "title": element.phienban })
+      //       // this.dataphienban = [...new Set(this.dataphienban)];
+      //     }
+      //   });
+      // });
       this.datafilter = this.data
       this.dataorigin = this.data
     });
