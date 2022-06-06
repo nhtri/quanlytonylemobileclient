@@ -14,6 +14,9 @@ export class ChitietdonhangComponent implements OnInit {
 
   transactionkey
   location
+  tienmat = '0'
+  daikibi = '0'
+  chuyenkhoan = '0'
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
     this.role = localStorage.getItem('role')
     this.route.queryParams
@@ -30,8 +33,12 @@ export class ChitietdonhangComponent implements OnInit {
         this.service.getdanhsachdonhangquanlymobileid([this.madonhang]).subscribe(value => {
           this.transactionkey = value[0].transactionkey
           this.location = value[0].vitri
+          this.tienmat = value[0].tienmat
+          this.chuyenkhoan = value[0].chuyenkhoan
+          this.daikibi = value[0].daikibi
           this.service.getdanhsachsanphamdabanquanlymobiletransaction([value[0].transactionkey]).subscribe(data => {
             this.data = data
+          
             console.log('data', data)
           })
         })

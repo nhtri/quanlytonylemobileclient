@@ -117,6 +117,9 @@ import {
 import { ProductGroupsKaiComponent } from './product-groups-kai/product-groups-kai.component';
 import { ProductStoragesComponent } from './product-storages/product-storages.component';
 import { TransferProductsComponent } from './transfer-products/transfer-products.component';
+import { QuanlydanhsachdonhangchoComponent } from './quanlydanhsachdonhangcho/quanlydanhsachdonhangcho.component';
+import { QuanlydanhsachdonhangchovnComponent } from './quanlydanhsachdonhangchovn/quanlydanhsachdonhangchovn.component';
+import { QuanlydanhsachdonhangchonhatComponent } from './quanlydanhsachdonhangchonhat/quanlydanhsachdonhangchonhat.component';
 
 @NgModule({
     imports: [
@@ -210,6 +213,9 @@ import { TransferProductsComponent } from './transfer-products/transfer-products
         ProductGroupsKaiComponent,
         ProductStoragesComponent,
         TransferProductsComponent,
+        QuanlydanhsachdonhangchoComponent,
+        QuanlydanhsachdonhangchovnComponent,
+        QuanlydanhsachdonhangchonhatComponent,
     ],
 })
 export class TablesModule {

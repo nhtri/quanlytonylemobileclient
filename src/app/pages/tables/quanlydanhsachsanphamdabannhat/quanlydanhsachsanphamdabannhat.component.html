@@ -17,7 +17,7 @@
 
       <thead>
         <tr>
-          <th>Đơn hàng</th>
+          <!-- <th>Đơn hàng</th> -->
           <!-- <th>Nhóm sản phẩm</th> -->
           <th>Tên sản phẩm</th>
           <!-- <th>Dung lượng</th>
@@ -34,7 +34,7 @@
         </tr>
       </thead>
       <tbody>
-        <td></td>
+        <!-- <td></td> -->
         <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
         </td> -->
@@ -89,8 +89,8 @@
         <td><input type="date" style="margin-right: 5px;" [(ngModel)]="date1" (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()"> <i class="fa fa-refresh" style="font-size:18px ;margin-left: 15px;" (click)="refresh()"></i></td>
         
         <tr *ngFor="let sanpham of data">
-          <td><a routerLink="/pages/tables/chitietdonhang"
-              [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td>
+          <!-- <td><a routerLink="/pages/tables/chitietdonhang"
+              [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td> -->
           <!-- <td>{{sanpham.nhomsanpham}}</td> -->
           <td>{{sanpham.tensanpham}}</td>
           <!-- <td>{{sanpham.dungluong}}</td>
