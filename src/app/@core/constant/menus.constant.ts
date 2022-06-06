@@ -115,6 +115,10 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                         title: 'Danh Sách Đơn Hàng',
                         link: '/pages/tables/quanlydanhsachdonhangjp',
                     },
+                    {
+                        title: 'Danh Sách Đơn Hàng Chờ',
+                        link: '/pages/tables/quanlydanhsachdonhangchojp',
+                    },
                 ],
             },
             {
@@ -223,6 +227,10 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 {
                     title: 'Danh Sách Đơn Hàng',
                     link: '/pages/tables/quanlydanhsachdonhangvn',
+                },
+                {
+                    title: 'Danh Sách Đơn Hàng Chờ',
+                    link: '/pages/tables/quanlydanhsachdonhangchovn',
                 },
 
             ],
@@ -334,7 +342,10 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                     title: 'Danh Sách Đơn Hàng',
                     link: '/pages/tables/quanlydanhsachdonhang',
                 },
-
+                {
+                    title: 'Danh Sách Đơn Hàng Chờ',
+                    link: '/pages/tables/quanlydanhsachdonhangcho',
+                },
             ],
         },
             {
