@@ -56,6 +56,7 @@ export class BansanphamComponent implements OnInit {
                 // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
                 element["quantitytemp"] = element.quantity
                 element["quantity"] = 1
+                element["sotienban"] = element.estimated_price
                 this.datas.push(element)
 
               }
@@ -120,6 +121,7 @@ export class BansanphamComponent implements OnInit {
     this.tongtienthu = 0
     this.tongtienban = 0
     this.tienmat = 0
+    console.log("this.datas",this.datas)
     this.datas.forEach(e => {
       this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
       this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
@@ -127,7 +129,8 @@ export class BansanphamComponent implements OnInit {
     this.tienhoadon = this.tongtienban.toString()
     this.hinhthucthanhtoan = event.target.value
     console.log(this.hinhthucthanhtoan)
-this.tienmat = this.tongtienban
+    console.log("tongtienban", this.tongtienban)
+    this.tienmat = this.tongtienban
   }
 
   hoantat() {
@@ -169,20 +172,23 @@ this.tienmat = this.tongtienban
       let datasale = []
 
       this.datas.forEach(element => {
-        datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
-        this.service.danhsachsanphamdaban(['', element.name,
-          '',
-          '',
-          '',
-          element.imei,
-          transactionkey,
-          parseInt(element.price) * parseInt(element.quantity),
-          date, this.hinhthucthanhtoan,
-          this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-          , element.quantity, element.id, element.thoihanbaohanh
-        ]).subscribe(value => {
-          console.log(value)
-        })
+        if(element.sotienban != null){
+          datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
+          this.service.danhsachsanphamdaban(['', element.name,
+            '',
+            '',
+            '',
+            element.imei,
+            transactionkey,
+            parseInt(element.price) * parseInt(element.quantity),
+            date, this.hinhthucthanhtoan,
+            this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
+            , element.quantity, element.id, element.thoihanbaohanh
+          ]).subscribe(value => {
+            console.log(value)
+          })
+        }
+      
       });
 
 
@@ -198,7 +204,7 @@ this.tienmat = this.tongtienban
 
       this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat,this.daikibi,this.chuyenkhoan,this.hinhthucthanhtoan]).subscribe(value => {
+      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
         if (this.vitri == "WAREHOUSE") {
@@ -275,7 +281,7 @@ this.tienmat = this.tongtienban
     });
     console.log('this.datas', this.datas)
     this.tienhoadon = this.tongtienban.toString()
-    this.tienmat=this.tongtienban
+    this.tienmat = this.tongtienban
   }
 
 
@@ -293,13 +299,114 @@ this.tienmat = this.tongtienban
 
 
 
-  selecthinhthucthanhtoan(event){
+  selecthinhthucthanhtoan(event) {
     this.hinhthucthanhtoan = event.target.value
-    console.log('this.hinhthucthanhtoan',this.hinhthucthanhtoan)
+    console.log('this.hinhthucthanhtoan', this.hinhthucthanhtoan)
+
+
+    this.tongtienthu = 0
+    this.tongtienban = 0
+    this.tienmat = 0
+    this.datas.forEach(e => {
+      this.tongtienban += parseInt(e.quantity) * parseInt(e.estimated_price)
+      this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
+    });
+    this.tienhoadon = this.tongtienban.toString()
+    this.hinhthucthanhtoan = event.target.value
+    console.log(this.hinhthucthanhtoan)
+    console.log("tongtienban", this.tongtienban)
+    this.tienmat = this.tongtienban
   }
 
-  thaydoisotienthanhtoan(){
-    this.tienconlai =  this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
+  thaydoisotienthanhtoan() {
+    this.tienconlai = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
     this.tienthua = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
-   }
+  }
+
+  luutam() {
+    if (this.hinhthucthanhtoan == 'default' || this.hinhthucthanhtoan == "") {
+      alert("Xin vui lòng chọn hình thức thanh toán !!!")
+    }
+    else {
+      console.log('this.datas', this.datas)
+      let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
+      let today = new Date();
+      let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+      let danhsachimei = ""
+      let soluongsanpham = 0
+      this.datas.forEach(element => {
+        danhsachimei += element.imei + ','
+        soluongsanpham += parseInt(element.quantity)
+        this.vitri = element.position
+      });
+      // for (let i = 0; i < this.imeiduocchon.length; i++) {
+      //   for (let j = 0; j < this.giatiensanpham.length; j++) {
+      //     console.log("this.imeiduocchon[i]['id']", this.imeiduocchon[i]['id'])
+      //     if (this.imeiduocchon[i].id == this.giatiensanpham[j].id) {
+      //       this.imeiduocchon[i].giatien = this.giatiensanpham[j].giatien
+      //     }
+      //   }
+      // }
+      // this.imeiduocchon.forEach(element => {
+      //   danhsachimei = (element.imei).toString() + "," + danhsachimei.toString()
+      // });
+      // console.log('this.imeiduocchon', this.imeiduocchon)
+      // this.imeiduocchon.forEach(element => {
+
+
+
+      //   this.service.getsanpham([element.id]).subscribe(value => {
+      //     let newimei = value[0].imei.replace(element.imei, "")
+      //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
+      //   })
+      let datasale = []
+
+      this.datas.forEach(element => {
+        datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
+        this.service.danhsachsanphamdaban(['', element.name,
+          '',
+          '',
+          '',
+          element.imei,
+          transactionkey,
+          parseInt(element.price) * parseInt(element.quantity),
+          date, this.hinhthucthanhtoan,
+          this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
+          , element.quantity, element.id, element.thoihanbaohanh
+        ]).subscribe(value => {
+          console.log(value)
+        })
+      });
+
+
+      this.service.forsale(
+        {
+          "quantity": soluongsanpham,
+          "total_money": parseInt(this.tienhoadon),
+          "sale_date": date,
+          "products": datasale
+        }
+      ).subscribe(val => { })
+
+
+      this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
+      console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
+      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam"]).subscribe(value => {
+        console.log(value)
+        alert("Mua Hàng Thành Công")
+        if (this.vitri == "WAREHOUSE") {
+          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangcho')
+          console.log(this.vitri)
+        }
+        if (this.vitri == "SHOP_VN") {
+          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchovn')
+          console.log(this.vitri)
+        }
+        if (this.vitri == "SHOP_JP") {
+          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchojp')
+          console.log(this.vitri)
+        }
+      })
+    }
+  }
 }

@@ -242,7 +242,7 @@ export class NetworkserviceService {
     }
 
     updatetrangthaidonhang(data): Observable<any> {
-        const API = `https://salemobileserver.herokuapp.com/updatetrangthaidonhang`;
+        const API = `https://quanlytonylemobile.herokuapp.com/updatetrangthaidonhang`;
         return this.httpClient.put<any>(API, data, this.httpOptions);
     }
 

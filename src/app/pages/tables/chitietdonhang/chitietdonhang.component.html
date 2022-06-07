@@ -1,6 +1,6 @@
 <nb-card>
   <nb-card-header>
-    Chi Tiết Đơn Hàng 
+    Chi Tiết Đơn Hàng
 
   </nb-card-header>
 
@@ -8,59 +8,65 @@
 
 
 
-<table class="styled-table" id="excel-table">
+    <table class="styled-table" id="excel-table">
 
 
-<thead>
-  <tr>
-    <th>Đơn hàng</th>
-    <!-- <th>Nhóm sản phẩm</th> -->
-    <th>Tên sản phẩm</th>
-    <th>Số lượng</th>
-    <!-- <th>Dung lượng</th>
+      <thead>
+        <tr>
+          <th>Đơn hàng</th>
+          <!-- <th>Nhóm sản phẩm</th> -->
+          <th>Tên sản phẩm</th>
+          <th>Số lượng</th>
+          <!-- <th>Dung lượng</th>
     <th>Loại sản phẩm</th>
     <th>Phiên bản</th> -->
-    <th>Imei</th>
-    <th *ngIf="role == 'admin'">Giá thu</th>
-    <th>Giá bán</th>
-    <th>Thời gian bảo hành</th>
-    <th>Ngày bán</th>
-    </tr>
-</thead>
-<tbody>
- 
+          <th>Imei</th>
+          <th *ngIf="role == 'admin'">Giá thu</th>
+          <th>Giá bán</th>
+          <th>Thời gian bảo hành</th>
+          <th>Ngày bán</th>
+        </tr>
+      </thead>
+      <tbody>
 
 
-  <tr *ngFor="let sanpham of data">
-    <td>{{madonhang}}</td>
-    <!-- <td>{{sanpham.nhomsanpham}}</td> -->
-    <td>{{sanpham.tensanpham}}</td>
-    <!-- <td>{{sanpham.dungluong}}</td> -->
-    <!-- <td>{{sanpham.loaisanpham}}</td>
+
+        <tr *ngFor="let sanpham of data">
+          <td>{{madonhang}}</td>
+          <!-- <td>{{sanpham.nhomsanpham}}</td> -->
+          <td>{{sanpham.tensanpham}}</td>
+          <!-- <td>{{sanpham.dungluong}}</td> -->
+          <!-- <td>{{sanpham.loaisanpham}}</td>
     <td>{{sanpham.phienban}}</td> -->
-    <td>{{sanpham.soluong}}</td>
-    <td>{{sanpham.imei}}</td>
-    <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
-    <td>{{sanpham.giaban}}</td>
-    <td>{{sanpham.thoihanbaohanh}}</td>
-    <td>{{sanpham.ngayban}}</td>
-    <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
+          <td>{{sanpham.soluong}}</td>
+          <td>{{sanpham.imei}}</td>
+          <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
+          <td>{{sanpham.giaban}}</td>
+          <td>{{sanpham.thoihanbaohanh}}</td>
+          <td>{{sanpham.ngayban}}</td>
+          <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
         [queryParams]={id:[sanpham.id]}></i></td>
     <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
 
-  </tr>
+        </tr>
 
 
-</tbody>
-</table>
-<br/>
-<div>Thanh Toán Tiền Mặt: {{tienmat}}</div>
-<div>Thanh Toán Daikibi: {{daikibi}}</div>
-<div>Thanh Toán Chuyển Khoản: {{chuyenkhoan}}</div>
-<br/>
-</nb-card-body>
-<nb-card-footer>
-<button  style="height: 36px;width: 150px;border-radius: 5px;border-color: #fa2e2e;color: white;background-color:tomato;font-weight: 300;" (click)="huydonhang()">Hủy Đơn Hàng</button>
+      </tbody>
+    </table>
+    <br />
+    <div *ngIf="tienmat == '0' && daikibi =='0' && chuyenkhoan=='0'">Thanh Toán Tiền Mặt: {{tonggiatien}}</div>
+    <div>Thanh Toán Tiền Mặt: {{tienmat}}</div>
+    <div>Thanh Toán Daikibi: {{daikibi}}</div>
+    <div>Thanh Toán Chuyển Khoản: {{chuyenkhoan}}</div>
+    <br />
+  </nb-card-body>
+  <nb-card-footer>
+    <button *ngIf="duyetdon=='luutam'"
+    style="margin-right: 20px;height: 36px;width: 150px;border-radius: 5px;border-color: #532efa;color: white;background-color:rgb(89, 71, 255);font-weight: 300;"
+    (click)="duyetdonhang()">Duyệt Đơn Hàng</button>
+    <button
+      style=" height: 36px;width: 150px;border-radius: 5px;border-color: #fa2e2e;color: white;background-color:tomato;font-weight: 300;"
+      (click)="huydonhang()">Hủy Đơn Hàng</button>
 
-</nb-card-footer>
-</nb-card> 
+  </nb-card-footer>
+</nb-card>
