@@ -121,7 +121,7 @@ export class BansanphamComponent implements OnInit {
     this.tongtienthu = 0
     this.tongtienban = 0
     this.tienmat = 0
-    console.log("this.datas",this.datas)
+    console.log("this.datas", this.datas)
     this.datas.forEach(e => {
       this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
       this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
@@ -172,7 +172,7 @@ export class BansanphamComponent implements OnInit {
       let datasale = []
 
       this.datas.forEach(element => {
-        if(element.sotienban != null){
+        if (element.sotienban != null) {
           datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
           this.service.danhsachsanphamdaban(['', element.name,
             '',
@@ -188,7 +188,7 @@ export class BansanphamComponent implements OnInit {
             console.log(value)
           })
         }
-      
+
       });
 
 
@@ -201,34 +201,42 @@ export class BansanphamComponent implements OnInit {
         }
       ).subscribe(val => { })
 
-
-      this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
+      if (this.tienmat != 0) {
+        this.service.quanlythu([this.tienmat, date, transactionkey, "tienmat", this.vitri]).subscribe(val => { })
+      }
+      if (this.daikibi != 0) {
+        this.service.quanlythu([this.daikibi, date, transactionkey, "daibiki", this.vitri]).subscribe(val => { })
+      }
+      if (this.chuyenkhoan != 0) {
+        this.service.quanlythu([this.chuyenkhoan, date, transactionkey, "chuyenkhoan", this.vitri]).subscribe(val => { })
+      }
+      // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
       this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
-        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan=='trahet') {
+        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
           console.log(this.vitri)
         }
-        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan=='trahet') {
+        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'trahet') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
           console.log(this.vitri)
         }
-        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan=='trahet') {
+        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'trahet') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
           console.log(this.vitri)
         }
 
-        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan=='datcoc') {
+        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'datcoc') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcoc')
           console.log(this.vitri)
         }
-        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan=='datcoc') {
+        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'datcoc') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocvn')
           console.log(this.vitri)
         }
-        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan=='datcoc') {
+        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'datcoc') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocjp')
           console.log(this.vitri)
         }
@@ -401,8 +409,17 @@ export class BansanphamComponent implements OnInit {
         }
       ).subscribe(val => { })
 
+      if (this.tienmat != 0) {
+        this.service.quanlythu([this.tienmat, date, transactionkey, "tienmat", this.vitri]).subscribe(val => { })
+      }
+      if (this.daikibi != 0) {
+        this.service.quanlythu([this.daikibi, date, transactionkey, "daibiki", this.vitri]).subscribe(val => { })
+      }
+      if (this.chuyenkhoan != 0) {
+        this.service.quanlythu([this.chuyenkhoan, date, transactionkey, "chuyenkhoan", this.vitri]).subscribe(val => { })
+      }
 
-      this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
+      // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
       this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam"]).subscribe(value => {
         console.log(value)

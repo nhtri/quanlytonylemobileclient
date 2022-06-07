@@ -23,6 +23,7 @@ export class ChitietdonhangComponent implements OnInit {
   tonggiatien = '0'
   duyetdon = ''
   tiencanthanhtoan = 0
+  
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
     this.role = localStorage.getItem('role')
     this.route.queryParams
@@ -122,6 +123,21 @@ export class ChitietdonhangComponent implements OnInit {
   }
 
   hoantatthanhtoan() {
+
+    let today = new Date();
+    let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+
+
+    if (this.tienmatcanthanhtoan != '0') {
+      this.service.quanlythu([this.tienmatcanthanhtoan, date, this.transactionkey, "tienmat", this.location]).subscribe(val => { })
+    }
+    if (this.daikibicanthanhtoan != '0') {
+      this.service.quanlythu([this.daikibicanthanhtoan, date, this.transactionkey, "daibiki", this.location]).subscribe(val => { })
+    }
+    if (this.chuyenkhoancanthanhtoan != '0') {
+      this.service.quanlythu([this.chuyenkhoancanthanhtoan, date, this.transactionkey, "chuyenkhoan", this.location]).subscribe(val => { })
+    }
+
     this.service.updatetrangthaidonhangdatcoc([
       "trahet",
       parseInt(this.tienmat) + parseInt(this.tienmatcanthanhtoan),

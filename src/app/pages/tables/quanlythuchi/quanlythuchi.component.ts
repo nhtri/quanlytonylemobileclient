@@ -85,7 +85,7 @@ today
         }
       });
 
-      await new Promise(f => setTimeout(f, 5000));
+      await new Promise(f => setTimeout(f, 10000));
       const res1 = this.datathu.reduce((acc, curr) => {
         if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
         acc[curr.ngaytao].push(curr);
