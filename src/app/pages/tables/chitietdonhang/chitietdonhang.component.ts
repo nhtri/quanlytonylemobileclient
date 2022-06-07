@@ -114,4 +114,5 @@ export class ChitietdonhangComponent implements OnInit {
       }
     })
   }
+  hoantatthanhtoan(){}
 }

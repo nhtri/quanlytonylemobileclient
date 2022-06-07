@@ -120,6 +120,9 @@ import { TransferProductsComponent } from './transfer-products/transfer-products
 import { QuanlydanhsachdonhangchoComponent } from './quanlydanhsachdonhangcho/quanlydanhsachdonhangcho.component';
 import { QuanlydanhsachdonhangchovnComponent } from './quanlydanhsachdonhangchovn/quanlydanhsachdonhangchovn.component';
 import { QuanlydanhsachdonhangchonhatComponent } from './quanlydanhsachdonhangchonhat/quanlydanhsachdonhangchonhat.component';
+import { QuanlydanhsachdonhangdatcocComponent } from './quanlydanhsachdonhangdatcoc/quanlydanhsachdonhangdatcoc.component';
+import { QuanlydanhsachdonhangdatcocnhatComponent } from './quanlydanhsachdonhangdatcocnhat/quanlydanhsachdonhangdatcocnhat.component';
+import { QuanlydanhsachdonhangdatcocvnComponent } from './quanlydanhsachdonhangdatcocvn/quanlydanhsachdonhangdatcocvn.component';
 
 @NgModule({
     imports: [
@@ -216,6 +219,9 @@ import { QuanlydanhsachdonhangchonhatComponent } from './quanlydanhsachdonhangch
         QuanlydanhsachdonhangchoComponent,
         QuanlydanhsachdonhangchovnComponent,
         QuanlydanhsachdonhangchonhatComponent,
+        QuanlydanhsachdonhangdatcocComponent,
+        QuanlydanhsachdonhangdatcocnhatComponent,
+        QuanlydanhsachdonhangdatcocvnComponent,
     ],
 })
 export class TablesModule {

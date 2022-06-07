@@ -60,6 +60,13 @@
     <div>Thanh Toán Chuyển Khoản: {{chuyenkhoan}}</div>
     <br />
   </nb-card-body>
+  <nb-card-footer *ngIf="duyetdon=='datcoc'">
+   
+    <button
+      style=" height: 36px;width: 150px;border-radius: 5px;border-color: #fa2e2e;color: white;background-color:tomato;font-weight: 300;"
+      (click)="hoantatthanhtoan()">Hoàn Tất Thanh Toán</button>
+
+  </nb-card-footer>
   <nb-card-footer>
     <button *ngIf="duyetdon=='luutam'"
     style="margin-right: 20px;height: 36px;width: 150px;border-radius: 5px;border-color: #532efa;color: white;background-color:rgb(89, 71, 255);font-weight: 300;"

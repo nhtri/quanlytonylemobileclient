@@ -113,6 +113,9 @@ import { TransferProductsComponent } from './transfer-products/transfer-products
 import { QuanlydanhsachdonhangchoComponent } from './quanlydanhsachdonhangcho/quanlydanhsachdonhangcho.component';
 import { QuanlydanhsachdonhangchovnComponent } from './quanlydanhsachdonhangchovn/quanlydanhsachdonhangchovn.component';
 import { QuanlydanhsachdonhangchonhatComponent } from './quanlydanhsachdonhangchonhat/quanlydanhsachdonhangchonhat.component';
+import { QuanlydanhsachdonhangdatcocComponent } from './quanlydanhsachdonhangdatcoc/quanlydanhsachdonhangdatcoc.component';
+import { QuanlydanhsachdonhangdatcocvnComponent } from './quanlydanhsachdonhangdatcocvn/quanlydanhsachdonhangdatcocvn.component';
+import { QuanlydanhsachdonhangdatcocnhatComponent } from './quanlydanhsachdonhangdatcocnhat/quanlydanhsachdonhangdatcocnhat.component';
 
 const routes: Routes = [{
     path: '',
@@ -237,6 +240,18 @@ const routes: Routes = [{
         {
             path: 'quanlydanhsachdonhangchojp',
             component: QuanlydanhsachdonhangchonhatComponent,
+        },
+        {
+            path: 'quanlydanhsachdonhangdatcoc',
+            component: QuanlydanhsachdonhangdatcocComponent,
+        },
+        {
+            path: 'quanlydanhsachdonhangdatcocvn',
+            component: QuanlydanhsachdonhangdatcocvnComponent,
+        },
+        {
+            path: 'quanlydanhsachdonhangdatcocjp',
+            component: QuanlydanhsachdonhangdatcocnhatComponent,
         },
         {
             path: 'dungluong',
