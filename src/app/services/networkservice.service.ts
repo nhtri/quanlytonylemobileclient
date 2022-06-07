@@ -246,6 +246,11 @@ export class NetworkserviceService {
         return this.httpClient.put<any>(API, data, this.httpOptions);
     }
 
+    updatetrangthaidonhangdatcoc(data): Observable<any> {
+        const API = `https://quanlytonylemobile.herokuapp.com/updatetrangthaidonhangdatcoc`;
+        return this.httpClient.put<any>(API, data, this.httpOptions);
+    }
+
     updatequanlymaynguoimua(data): Observable<any> {
         const API = `https://salemobileserver.herokuapp.com/updatequanlymaynguoimua`;
         return this.httpClient.put<any>(API, data, this.httpOptions);

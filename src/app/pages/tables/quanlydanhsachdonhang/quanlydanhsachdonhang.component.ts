@@ -33,7 +33,7 @@ export class QuanlydanhsachdonhangComponent implements OnInit {
   constructor(private service: NetworkserviceService, private router: Router) {
 this.role = localStorage.getItem('role')
     this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
-this.data =value.filter(v=>v.hinhthucthanhtoan!="luutam" && v.hinhthucthanhtoan!="datcoc")
+this.data =value.filter(v=>v.trangthaidonhang!="luutam" && v.trangthaidonhang!="datcoc")
     });
 
 

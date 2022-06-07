@@ -61,16 +61,27 @@
     <br />
   </nb-card-body>
   <nb-card-footer *ngIf="duyetdon=='datcoc'">
-   
-    <button
-      style=" height: 36px;width: 150px;border-radius: 5px;border-color: #fa2e2e;color: white;background-color:tomato;font-weight: 300;"
-      (click)="hoantatthanhtoan()">Hoàn Tất Thanh Toán</button>
+    
+    <div style="font-weight: 600">Số Tiền Cần Thanh Toán: {{tiencanthanhtoan}}</div>
+    <div  style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền Mặt:
+      <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+        [(ngModel)]="tienmatcanthanhtoan" (change)="thaydoisotienthanhtoan()"></div>
+    <div  style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi: <input
+        type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="daikibicanthanhtoan"
+        (change)="thaydoisotienthanhtoan()"></div>
+    <div style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Chuyển Khoản:
+      <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+        [(ngModel)]="chuyenkhoancanthanhtoan" (change)="thaydoisotienthanhtoan()"></div>
+ 
 
   </nb-card-footer>
   <nb-card-footer>
     <button *ngIf="duyetdon=='luutam'"
     style="margin-right: 20px;height: 36px;width: 150px;border-radius: 5px;border-color: #532efa;color: white;background-color:rgb(89, 71, 255);font-weight: 300;"
     (click)="duyetdonhang()">Duyệt Đơn Hàng</button>
+    <button *ngIf="duyetdon=='datcoc'"
+    style="margin-right: 20px;height: 36px;width: 180px;border-radius: 5px;border-color: #532efa;color: white;background-color:rgb(89, 71, 255);font-weight: 300;"
+    (click)="hoantatthanhtoan()">Hoàn Tất Thanh Toán</button>
     <button
       style=" height: 36px;width: 150px;border-radius: 5px;border-color: #fa2e2e;color: white;background-color:tomato;font-weight: 300;"
       (click)="huydonhang()">Hủy Đơn Hàng</button>

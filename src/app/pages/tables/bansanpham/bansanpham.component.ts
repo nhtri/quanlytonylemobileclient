@@ -207,16 +207,29 @@ export class BansanphamComponent implements OnInit {
       this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
-        if (this.vitri == "WAREHOUSE") {
+        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan=='trahet') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
           console.log(this.vitri)
         }
-        if (this.vitri == "SHOP_VN") {
+        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan=='trahet') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
           console.log(this.vitri)
         }
-        if (this.vitri == "SHOP_JP") {
+        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan=='trahet') {
           this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+          console.log(this.vitri)
+        }
+
+        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan=='datcoc') {
+          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcoc')
+          console.log(this.vitri)
+        }
+        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan=='datcoc') {
+          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocvn')
+          console.log(this.vitri)
+        }
+        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan=='datcoc') {
+          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocjp')
           console.log(this.vitri)
         }
       })

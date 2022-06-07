@@ -17,8 +17,12 @@ export class ChitietdonhangComponent implements OnInit {
   tienmat = '0'
   daikibi = '0'
   chuyenkhoan = '0'
+  tienmatcanthanhtoan = '0'
+  daikibicanthanhtoan = '0'
+  chuyenkhoancanthanhtoan = '0'
   tonggiatien = '0'
-  duyetdon=''
+  duyetdon = ''
+  tiencanthanhtoan = 0
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
     this.role = localStorage.getItem('role')
     this.route.queryParams
@@ -48,6 +52,8 @@ export class ChitietdonhangComponent implements OnInit {
           }
 
           this.tonggiatien = value[0].giatienban
+          this.tiencanthanhtoan = parseInt(this.tonggiatien) - parseInt(this.tienmat)- parseInt(this.chuyenkhoan)- parseInt(this.daikibi)
+          this.tienmatcanthanhtoan = this.tiencanthanhtoan.toString()
           this.service.getdanhsachsanphamdabanquanlymobiletransaction([value[0].transactionkey]).subscribe(data => {
             this.data = data
 
@@ -98,8 +104,8 @@ export class ChitietdonhangComponent implements OnInit {
     }
   }
 
-  duyetdonhang(){
-    this.service.updatetrangthaidonhang(["trahet",this.madonhang]).subscribe(val=>{
+  duyetdonhang() {
+    this.service.updatetrangthaidonhang(["trahet", this.madonhang]).subscribe(val => {
       if (this.location == "WAREHOUSE") {
         this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
         console.log(this.location)
@@ -114,5 +120,31 @@ export class ChitietdonhangComponent implements OnInit {
       }
     })
   }
-  hoantatthanhtoan(){}
+
+  hoantatthanhtoan() {
+    this.service.updatetrangthaidonhangdatcoc([
+      "trahet",
+      parseInt(this.tienmat) + parseInt(this.tienmatcanthanhtoan),
+      parseInt(this.daikibi) + parseInt(this.daikibicanthanhtoan),
+      parseInt(this.chuyenkhoan) + parseInt(this.chuyenkhoancanthanhtoan),
+      this.madonhang
+    
+    
+    ]).subscribe(val => {
+      if (this.location == "WAREHOUSE") {
+        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+        console.log(this.location)
+      }
+      if (this.location == "SHOP_VN") {
+        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+        console.log(this.location)
+      }
+      if (this.location == "SHOP_JP") {
+        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+        console.log(this.location)
+      }
+    })
+   }
+
+  thaydoisotienthanhtoan() { }
 }
