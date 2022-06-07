@@ -119,6 +119,10 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                         title: 'Danh Sách Đơn Hàng Chờ',
                         link: '/pages/tables/quanlydanhsachdonhangchojp',
                     },
+                    {
+                        title: 'Danh Sách Đơn Đặt Cọc',
+                        link: '/pages/tables/quanlydanhsachdonhangdatcocjp',
+                    },
                 ],
             },
             {
@@ -232,7 +236,10 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                     title: 'Danh Sách Đơn Hàng Chờ',
                     link: '/pages/tables/quanlydanhsachdonhangchovn',
                 },
-
+                {
+                    title: 'Danh Sách Đơn Đặt Cọc',
+                    link: '/pages/tables/quanlydanhsachdonhangdatcocvn',
+                },
             ],
         },
             {
@@ -345,6 +352,10 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                 {
                     title: 'Danh Sách Đơn Hàng Chờ',
                     link: '/pages/tables/quanlydanhsachdonhangcho',
+                },
+                {
+                    title: 'Danh Sách Đơn Đặt Cọc',
+                    link: '/pages/tables/quanlydanhsachdonhangdatcoc',
                 },
             ],
         },
