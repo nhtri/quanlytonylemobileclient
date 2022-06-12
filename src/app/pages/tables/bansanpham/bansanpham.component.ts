@@ -58,7 +58,7 @@ export class BansanphamComponent implements OnInit {
                 element["quantity"] = 1
                 element["sotienban"] = element.estimated_price
                 this.datas.push(element)
-
+                this.tienmat = element.estimated_price
               }
             });
 
