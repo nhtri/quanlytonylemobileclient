@@ -12,7 +12,7 @@ export class QuanlydanhsachdonhangnhatComponent implements OnInit {
 
   fileName = 'DanhSachSanPham.xlsx';
   source: LocalDataSource = new LocalDataSource();
-  data=[]
+  data = []
   datadungluong = []
   datanhomsanpham = []
   datatensanpham = []
@@ -29,11 +29,18 @@ export class QuanlydanhsachdonhangnhatComponent implements OnInit {
   dataloaisanphamtaomoi = ""
   dataphienbantaomoi = ""
   dataimeitaomoi = ""
-role
+  role
+
+
+  date1 = ""
+  date2 = ""
+  daterange = []
+  datatemp = []
+
   constructor(private service: NetworkserviceService, private router: Router) {
-this.role = localStorage.getItem('role')
+    this.role = localStorage.getItem('role')
     this.service.getdanhsachdonhangquanlymobilejp().subscribe(value => {
-this.data =value.filter(v=>v.trangthaidonhang!="luutam" && v.trangthaidonhang!="datcoc")
+      this.data = value.filter(v => v.trangthaidonhang != "luutam" && v.trangthaidonhang != "datcoc")
     });
 
 
@@ -150,4 +157,64 @@ this.data =value.filter(v=>v.trangthaidonhang!="luutam" && v.trangthaidonhang!="
       })
   }
 
+
+  change1() {
+    if (this.date2 == "") {
+      this.data = []
+      console.log(this.date1, this.date2)
+      this.datatemp.forEach(element => {
+        console.log('element.ngayban', element.ngayban)
+        if (this.date1 == element.ngayban) {
+          this.data.push(element)
+        }
+      });
+    }
+    if (this.date2 != "") {
+      this.data = []
+      this.daterange = []
+      console.log(this.date1, this.date2)
+      var currentDate = new Date(this.date1);
+      while (currentDate <= new Date(this.date2)) {
+        this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+        currentDate.setDate(currentDate.getDate() + 1)
+      }
+
+      this.datatemp.forEach(element1 => {
+        console.log('element.ngayban', element1.ngayban)
+        this.daterange.forEach(element2 => {
+          if (element2 == element1.ngayban) {
+            this.data.push(element1)
+          }
+        });
+
+      });
+      console.log(this.daterange)
+    }
+
+  }
+  change2() {
+    this.data = []
+    this.daterange = []
+    console.log(this.date1, this.date2)
+    var currentDate = new Date(this.date1);
+    while (currentDate <= new Date(this.date2)) {
+      this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+      currentDate.setDate(currentDate.getDate() + 1)
+    }
+
+    this.datatemp.forEach(element1 => {
+      console.log('element.ngayban', element1.ngayban)
+      this.daterange.forEach(element2 => {
+        if (element2 == element1.ngayban) {
+          this.data.push(element1)
+        }
+      });
+
+    });
+    console.log(this.daterange)
+
+  }
+  refresh() {
+    window.location.reload()
+  }
 }
