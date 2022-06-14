@@ -33,7 +33,7 @@ export class QuanlydanhsachdonhangdatcocnhatComponent implements OnInit {
 
   constructor(private service: NetworkserviceService, private router: Router) {
 this.role = localStorage.getItem('role')
-    this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
+    this.service.getdanhsachdonhangquanlymobilejp().subscribe(value => {
 this.data =value.filter(v=>v.trangthaidonhang=="datcoc")
     });
 
@@ -66,14 +66,14 @@ this.data =value.filter(v=>v.trangthaidonhang=="datcoc")
   delete(value) {
     console.log(value)
     if (window.confirm('Bạn có chắc muốn xóa không ????')) {
-      this.service.deletesanphamtonkho(
+      this.service.deletesanphamtonkhojp(
         [
           value
         ]
       )
         .subscribe(data => {
 
-          this.service.getsanphamtonkhokhohang().subscribe(val => {
+          this.service.getsanphamtonkhojp().subscribe(val => {
             // this.source.load(val);
             this.data = val
           });
@@ -139,7 +139,7 @@ this.data =value.filter(v=>v.trangthaidonhang=="datcoc")
       this.dataimeitaomoi
     ]).subscribe(data => {
       this.taomoisanpham = false
-      this.service.getsanphamtonkhokhohang().subscribe(val => {
+      this.service.getsanphamtonkhojp().subscribe(val => {
         // this.source.load(val);
         this.data = val
       });

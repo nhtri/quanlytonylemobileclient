@@ -290,6 +290,7 @@ export class BansanphamComponent implements OnInit {
         data.sotienban = event.target.value
       }
       console.log('data.quantity', data.quantity)
+      console.log('data', data)
     }
 
     )
@@ -329,7 +330,7 @@ export class BansanphamComponent implements OnInit {
     this.tongtienban = 0
     this.tienmat = 0
     this.datas.forEach(e => {
-      this.tongtienban += parseInt(e.quantity) * parseInt(e.estimated_price)
+      this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
       this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
     });
     this.tienhoadon = this.tongtienban.toString()

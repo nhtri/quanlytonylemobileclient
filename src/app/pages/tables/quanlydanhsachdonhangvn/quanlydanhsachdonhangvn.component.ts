@@ -42,6 +42,7 @@ export class QuanlydanhsachdonhangvnComponent implements OnInit {
     this.role = localStorage.getItem('role')
     this.service.getdanhsachdonhangquanlymobilevn().subscribe(value => {
       this.data = value.filter(v => v.trangthaidonhang != "luutam" && v.trangthaidonhang != "datcoc")
+      this.datatemp = this.data
     });
 
 
@@ -80,7 +81,7 @@ export class QuanlydanhsachdonhangvnComponent implements OnInit {
       )
         .subscribe(data => {
 
-          this.service.getsanphamtonkhokhohang().subscribe(val => {
+          this.service.getsanphamtonkhovn().subscribe(val => {
             // this.source.load(val);
             this.data = val
           });
@@ -146,7 +147,7 @@ export class QuanlydanhsachdonhangvnComponent implements OnInit {
       this.dataimeitaomoi
     ]).subscribe(data => {
       this.taomoisanpham = false
-      this.service.getsanphamtonkhokhohang().subscribe(val => {
+      this.service.getsanphamtonkhovn().subscribe(val => {
         // this.source.load(val);
         this.data = val
       });
@@ -191,7 +192,7 @@ export class QuanlydanhsachdonhangvnComponent implements OnInit {
       });
       console.log(this.daterange)
     }
-
+   
   }
   change2() {
     this.data = []
@@ -213,9 +214,9 @@ export class QuanlydanhsachdonhangvnComponent implements OnInit {
 
     });
     console.log(this.daterange)
-
+  
   }
-  refresh() {
+  refresh(){
     window.location.reload()
   }
 }

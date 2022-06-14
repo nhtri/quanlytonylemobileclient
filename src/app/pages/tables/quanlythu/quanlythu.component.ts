@@ -28,12 +28,29 @@ export class QuanlythuComponent implements OnInit {
         if (element.mucdich.includes('dh')) {
           this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
             element.mucdich = 'Mã ĐH: ' + data[0].madonhang
-            this.data.push(element)
+            // this.data.push(element)
             this.datatemp.push(element)
+            let today = new Date();
+            let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+            this.date1 = date
+            // this.datatemp.forEach(element => {
+            //  console.log(element.ngaytao,this.date1)
+              if(data.ngayban==this.date1){
+                this.data.push(element)
+              }
+            // });
           })
         }
         else {
-          this.data.push(element)
+          let today = new Date();
+          let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+          this.date1 = date
+          // this.datatemp.forEach(element => {
+          //  console.log(element.ngaytao,this.date1)
+            if(element.ngaytao==this.date1){
+              this.data.push(element)
+            }
+          // this.data.push(element)
           this.datatemp.push(element)
         }
 
@@ -53,7 +70,7 @@ export class QuanlythuComponent implements OnInit {
         }
       });
 
-
+   
     });
 
 
@@ -68,6 +85,9 @@ export class QuanlythuComponent implements OnInit {
 
   ngOnInit(): void {
     this.date = new Date().getFullYear() + '-' + (new Date().getMonth() + 1).toString().padStart(2, '0') + '-' + new Date().getDate().toString().padStart(2, '0')
+  
+   
+  
   }
 
   selecthinhthucthanhtoan(event) {

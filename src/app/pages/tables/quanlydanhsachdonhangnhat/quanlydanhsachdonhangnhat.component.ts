@@ -41,6 +41,7 @@ export class QuanlydanhsachdonhangnhatComponent implements OnInit {
     this.role = localStorage.getItem('role')
     this.service.getdanhsachdonhangquanlymobilejp().subscribe(value => {
       this.data = value.filter(v => v.trangthaidonhang != "luutam" && v.trangthaidonhang != "datcoc")
+      this.datatemp = this.data
     });
 
 
