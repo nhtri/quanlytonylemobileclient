@@ -28,6 +28,7 @@ export class BansanphamComponent implements OnInit {
   daikibi = 0
   chuyenkhoan = 0
   tienconlai = 0
+  hoantattoggle = true
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
@@ -83,35 +84,38 @@ export class BansanphamComponent implements OnInit {
   }
 
   delete(value) {
-    console.log('delete', value)
-
-    this.datas = []
-    console.log(this.id)
-    this.id = this.id.filter(val => val != value)
-    console.log('this.id.filter(val=>val!==value)', this.id)
-    this.id.forEach(element => {
-      this.service.getsanpham([element]).subscribe(value => {
-        // this.datas.push(value.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
-
-
-        value.forEach(element => {
-          if (element.position == this.position) {
-            // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
-            element["quantitytemp"] = element.quantity
-            element["quantity"] = 1
-            this.datas.push(element)
-
-          }
-        });
-      })
+    console.log('delete', value, this.datas)
+    this.datas = this.datas.filter((obj) => {
+      return obj.id == value;
     });
-    this.tongtienthu = 0
-    this.tongtienban = 0
-    this.tienmat = 0
-    this.tienhoadon = this.tongtienban.toString()
-    this.tienkhachdua = "0"
-    this.tienthua = 0
-    this.hinhthucthanhtoan = "default"
+    console.log('this.datas',this.datas)
+    // this.datas = []
+    // console.log(this.id)
+    // this.id = this.id.filter(val => val != value)
+    // console.log('this.id.filter(val=>val!==value)', this.id)
+    // this.id.forEach(element => {
+    //   this.service.getsanpham([element]).subscribe(value => {
+    //     // this.datas.push(value.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
+
+
+    //     value.forEach(element => {
+    //       if (element.position == this.position) {
+    //         // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
+    //         element["quantitytemp"] = element.quantity
+    //         element["quantity"] = 1
+    //         this.datas.push(element)
+
+    //       }
+    //     });
+    //   })
+    // });
+    // this.tongtienthu = 0
+    // this.tongtienban = 0
+    // this.tienmat = 0
+    // this.tienhoadon = this.tongtienban.toString()
+    // this.tienkhachdua = "0"
+    // this.tienthua = 0
+    // this.hinhthucthanhtoan = "default"
   }
 
 
@@ -134,6 +138,7 @@ export class BansanphamComponent implements OnInit {
   }
 
   hoantat() {
+    this.hoantattoggle = false
     if (this.hinhthucthanhtoan == 'default' || this.hinhthucthanhtoan == "") {
       alert("Xin vui lòng chọn hình thức thanh toán !!!")
     }

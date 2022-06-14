@@ -202,7 +202,7 @@
     <br>
     <br>
     <div style="display: flex;">
-      <button (click)="hoantat()"
+      <button [disabled]="!hoantattoggle" (click)="hoantat()"
         style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
         Hoàn Tất</button>
       <button (click)="luutam()" *ngIf="hinhthucthanhtoan=='trahet'" 

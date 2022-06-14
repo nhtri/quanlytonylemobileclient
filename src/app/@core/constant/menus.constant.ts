@@ -204,6 +204,11 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                 icon: 'home-outline',
                 link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
             },
+            {
+                title: 'Quản Lý Khách Hàng',
+                icon: 'home-outline',
+                link: '/pages/tables/quanlykhachhangjp',
+            },
         ],
     }];
 
@@ -321,6 +326,11 @@ export const MENU_ITEMS_VN: MobileMenuItem[] = [
                 icon: 'home-outline',
                 link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
             },
+            {
+                title: 'Quản Lý Khách Hàng',
+                icon: 'home-outline',
+                link: '/pages/tables/quanlykhachhangvn',
+            },
         ],
     }];
 
@@ -437,6 +447,11 @@ export const MENU_ITEMS_KHO: MobileMenuItem[] = [
                 title: 'Sản Phẩm Tồn Kho',
                 icon: 'home-outline',
                 link: GENERAL_PAGES.DATA_PRODUCT_STORAGE,
+            },
+            {
+                title: 'Quản Lý Khách Hàng',
+                icon: 'home-outline',
+                link: '/pages/tables/quanlykhachhang',
             },
         ],
     }];
