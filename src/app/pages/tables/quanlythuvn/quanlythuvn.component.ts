@@ -30,51 +30,85 @@ export class QuanlythuvnComponent implements OnInit {
             element.mucdich = 'Mã ĐH: ' + data[0].madonhang
             // this.data.push(element)
             this.datatemp.push(element)
-            let today = new Date();
-            let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
-            this.date1 = date
+            // let today = new Date();
+            // let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+            // this.date1 = date
             // this.datatemp.forEach(element => {
             //  console.log(element.ngaytao,this.date1)
-              if(data.ngayban==this.date1){
-                this.data.push(element)
-              }
+
             // });
           })
         }
         else {
-
           let today = new Date();
           let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
           this.date1 = date
           // this.datatemp.forEach(element => {
           //  console.log(element.ngaytao,this.date1)
-            if(element.ngaytao==this.date1){
-              this.data.push(element)
-            }
+
           // this.data.push(element)
           this.datatemp.push(element)
         }
 
       });
+      console.log('this.datatemp', this.datatemp)
 
-      val.forEach(element => {
-        this.totalmoney += parseInt(element.sotien)
+      console.log(this.date1, 'this.data', this.datatemp)
 
-        if (element.hinhthucthanhtoan == 'tienmat') {
-          this.tienmat += parseInt(element.sotien)
-        }
-        if (element.hinhthucthanhtoan == 'daibiki') {
-          this.daibiki += parseInt(element.sotien)
-        }
-        if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-          this.chuyenkhoan += parseInt(element.sotien)
-        }
-      });
 
 
     });
 
+    this.service.getquanlythuvn().subscribe(val => {
+      let today = new Date();
+      let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+      this.date1 = date
+      val.forEach(element => {
+        if (element.ngaytao == this.date1) {
+          if (element.mucdich.includes('dh')) {
+            this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
+              element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+              this.data.push(element)
 
+            })
+          }
+          else {
+
+
+            this.data.push(element)
+
+          }
+          // element.forEach(element => {
+          //   this.totalmoney += parseInt(element.sotien)
+
+          //   if (element.hinhthucthanhtoan == 'tienmat') {
+          //     this.tienmat += parseInt(element.sotien)
+          //   }
+          //   if (element.hinhthucthanhtoan == 'daibiki') {
+          //     this.daibiki += parseInt(element.sotien)
+          //   }
+          //   if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+          //     this.chuyenkhoan += parseInt(element.sotien)
+          //   }
+          // });
+
+          this.totalmoney += parseInt(element.sotien)
+
+          if (element.hinhthucthanhtoan == 'tienmat') {
+            this.tienmat += parseInt(element.sotien)
+          }
+          if (element.hinhthucthanhtoan == 'daibiki') {
+            this.daibiki += parseInt(element.sotien)
+          }
+          if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+            this.chuyenkhoan += parseInt(element.sotien)
+          }
+        }
+      });
+
+
+
+    });
   }
 
   fileName = "DanhSachThu"
@@ -152,7 +186,7 @@ export class QuanlythuvnComponent implements OnInit {
 
 
   }
-  edit(id, ngaytao, sotien, mucdich,hinhthuc) {
+  edit(id, ngaytao, sotien, mucdich, hinhthuc) {
     this.date = ngaytao
     this.sotien = sotien
     this.mucdich = mucdich
@@ -453,7 +487,7 @@ export class QuanlythuvnComponent implements OnInit {
 
   }
 
-  refresh(){
+  refresh() {
     window.location.reload()
   }
 }

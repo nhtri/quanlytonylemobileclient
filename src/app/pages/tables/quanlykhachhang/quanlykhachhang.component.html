@@ -1,1 +1,11 @@
-<p>quanlykhachhang works!</p>
+<nb-card>
+    <nb-card-header>
+      Quản Lý Khách Hàng
+    </nb-card-header>
+  
+    <nb-card-body>
+      <ng2-smart-table [settings]="settings" [source]="source" (createConfirm)="onCreateConfirm($event)" 
+      (userRowSelect)="onUserRowSelect($event)" (deleteConfirm)="onDeleteConfirm($event)" (editConfirm)="onSaveConfirm($event)">
+      </ng2-smart-table>
+    </nb-card-body>
+  </nb-card>

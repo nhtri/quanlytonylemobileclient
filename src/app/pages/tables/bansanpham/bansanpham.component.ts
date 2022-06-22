@@ -29,6 +29,8 @@ export class BansanphamComponent implements OnInit {
   chuyenkhoan = 0
   tienconlai = 0
   hoantattoggle = true
+  danhsachkhachhang
+  thongtinkhachhang = "khachle"
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
@@ -66,7 +68,24 @@ export class BansanphamComponent implements OnInit {
           })
         });
         console.log('this.datas', this.datas)
-
+        if (this.position == "WAREHOUSE") {
+          this.service.getkhachhang().subscribe(value => {
+            this.danhsachkhachhang = value
+            console.log("this.danhsachkhachhang", this.danhsachkhachhang)
+          })
+        }
+        if (this.position == "SHOP_JP") {
+          this.service.getkhachhangnhat().subscribe(value => {
+            this.danhsachkhachhang = value
+            console.log("this.danhsachkhachhang", this.danhsachkhachhang)
+          })
+        }
+        if (this.position == "SHOP_VN") {
+          this.service.getkhachhangvn().subscribe(value => {
+            this.danhsachkhachhang = value
+            console.log("this.danhsachkhachhang", this.danhsachkhachhang)
+          })
+        }
 
       })
 
@@ -88,7 +107,7 @@ export class BansanphamComponent implements OnInit {
     this.datas = this.datas.filter((obj) => {
       return obj.id == value;
     });
-    console.log('this.datas',this.datas)
+    console.log('this.datas', this.datas)
     // this.datas = []
     // console.log(this.id)
     // this.id = this.id.filter(val => val != value)
@@ -139,10 +158,12 @@ export class BansanphamComponent implements OnInit {
 
   hoantat() {
     this.hoantattoggle = false
+    console.log("this.hoantattoggle", this.hoantattoggle)
     if (this.hinhthucthanhtoan == 'default' || this.hinhthucthanhtoan == "") {
       alert("Xin vui lòng chọn hình thức thanh toán !!!")
     }
     else {
+      alert("Đang thực hiện quá trình thanh toán !!!")
       console.log('this.datas', this.datas)
       let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
       let today = new Date();
@@ -188,7 +209,7 @@ export class BansanphamComponent implements OnInit {
             parseInt(element.price) * parseInt(element.quantity),
             date, this.hinhthucthanhtoan,
             this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-            , element.quantity, element.id, element.thoihanbaohanh
+            , element.quantity, element.id, element.thoihanbaohanh, this.thongtinkhachhang
           ]).subscribe(value => {
             console.log(value)
           })
@@ -217,7 +238,7 @@ export class BansanphamComponent implements OnInit {
       }
       // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan]).subscribe(value => {
+      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan,this.thongtinkhachhang]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
         if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
@@ -399,7 +420,7 @@ export class BansanphamComponent implements OnInit {
           parseInt(element.price) * parseInt(element.quantity),
           date, this.hinhthucthanhtoan,
           this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-          , element.quantity, element.id, element.thoihanbaohanh
+          , element.quantity, element.id, element.thoihanbaohanh, this.thongtinkhachhang
         ]).subscribe(value => {
           console.log(value)
         })
@@ -444,5 +465,10 @@ export class BansanphamComponent implements OnInit {
         }
       })
     }
+  }
+
+  seleckhachhang(event){
+
+    console.log(event.target.value)
   }
 }

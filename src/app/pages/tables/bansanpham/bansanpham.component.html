@@ -169,6 +169,17 @@
         style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="tienthua"></div> -->
 
     <div style="display: flex;">
+      <div style="margin-right: 15px; font-weight: 600;">Khách Hàng: </div>
+      <select name="cars" id="cars" (change)="seleckhachhang($event)"
+        style="height: 22px; border-radius: 5px; width: 180px; margin-left: 10px;">
+        <option value="khachle">Khách Lẻ</option>
+        <option *ngFor="let khachle of danhsachkhachhang" [value]="khachle.ten">
+          {{khachle.ten}}
+        </option>
+      </select>
+    </div>
+<br>
+    <div style="display: flex;">
       <div style="margin-right: 15px; font-weight: 600;">Hình thức thanh toán: </div>
       <select name="cars" id="cars" (change)="selecthinhthucthanhtoan($event)"
         style="height: 22px; border-radius: 5px; width: 180px; margin-left: 10px;">
@@ -181,20 +192,25 @@
 
       <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tổng Tiền:
         <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
-          [(ngModel)]="tongtienban" disabled></div>
+          [(ngModel)]="tongtienban" disabled>
+      </div>
       <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền Mặt:
         <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
-          [(ngModel)]="tienmat" (change)="thaydoisotienthanhtoan()"></div>
-      <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi: <input
-          type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="daikibi"
-          (change)="thaydoisotienthanhtoan()"></div>
+          [(ngModel)]="tienmat" (change)="thaydoisotienthanhtoan()">
+      </div>
+      <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi:
+        <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+          [(ngModel)]="daikibi" (change)="thaydoisotienthanhtoan()">
+      </div>
       <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Chuyển Khoản:
         <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
-          [(ngModel)]="chuyenkhoan" (change)="thaydoisotienthanhtoan()"></div>
+          [(ngModel)]="chuyenkhoan" (change)="thaydoisotienthanhtoan()">
+      </div>
       <div *ngIf="hinhthucthanhtoan=='trahet'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền
         Thừa: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
           [(ngModel)]="tienthua"></div>
-      <div *ngIf="hinhthucthanhtoan=='datcoc'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền Còn
+      <div *ngIf="hinhthucthanhtoan=='datcoc'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền
+        Còn
         Lại: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
           [(ngModel)]="tienconlai"></div>
 
@@ -202,10 +218,10 @@
     <br>
     <br>
     <div style="display: flex;">
-      <button [disabled]="!hoantattoggle" (click)="hoantat()"
+      <button [disabled]="!hoantattoggle" (click)="hoantat()" (dblclick)="hoantat()"
         style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
         Hoàn Tất</button>
-      <button (click)="luutam()" *ngIf="hinhthucthanhtoan=='trahet'" 
+      <button (click)="luutam()" *ngIf="hinhthucthanhtoan=='trahet'"
         style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #5efa2e;color: white;background-color: #7cf82a;font-weight: 300;">
         Lưu Tạm</button>
       <button (click)="quayve()"
