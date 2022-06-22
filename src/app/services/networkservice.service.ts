@@ -92,6 +92,31 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(userAPI, data, this.httpOptions);
     }
 
+    khachhang(data): Observable<any> {
+        const userAPI = `https://quanlytonylemobile.herokuapp.com/khachhang`;
+        return this.httpClient.post<any>(userAPI, data, this.httpOptions);
+    }
+
+    deletekhachhang(data): Observable<any> {
+        const userAPI = `https://quanlytonylemobile.herokuapp.com/deletekhachhang`;
+        return this.httpClient.post<any>(userAPI, data, this.httpOptions);
+    }
+
+    getkhachhang() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getkhachhang';
+        return this.httpClient.get<any>(get);
+    }
+
+    getkhachhangvn() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getkhachhangvn';
+        return this.httpClient.get<any>(get);
+    }
+
+    getkhachhangnhat() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getkhachhangnhat';
+        return this.httpClient.get<any>(get);
+    }
+
     deletedanhsachdonhang(data): Observable<any> {
         const userAPI = `https://salemobileserver.herokuapp.com/deletedanhsachdonhang`;
         return this.httpClient.post<any>(userAPI, data, this.httpOptions);
