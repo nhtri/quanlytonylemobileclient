@@ -228,6 +228,10 @@
         style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #fab32e;color: white;background-color: #fcad80;font-weight: 300;">
         Hủy</button>
 
+        <button [disabled]="!hoantattoggle" (click)="hoantatvaxuathoadon()" (dblclick)="hoantatvaxuathoadon()"
+        style="margin-left: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
+        Hoàn Tất và Xuất Hóa Đơn</button>
+
     </div>
   </nb-card-body>
 </nb-card>

@@ -1,1 +1,116 @@
-<p>danhsachsanphamkhachhangdamua works!</p>
+<nb-card>
+    <nb-card-header>
+      Danh Sách Sản Phẩm Đã Mua<a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;" (click)="exportexcel()">
+        Tải Danh Sách Sản Phẩm Đã Mua</a>
+  
+    </nb-card-header>
+  
+    <nb-card-body>
+  
+  
+  
+      <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
+  
+      <!-- <br /> -->
+      <table class="styled-table" id="excel-table">
+  
+  
+        <thead>
+          <tr>
+            <!-- <th>Đơn hàng</th> -->
+            <!-- <th>Nhóm sản phẩm</th> -->
+            <th>Tên sản phẩm</th>
+            <!-- <th>Dung lượng</th>
+            <th>Loại sản phẩm</th>
+            <th>Phiên bản</th> -->
+            <th>Imei</th>
+            <th *ngIf="role == 'admin'">Giá thu</th>
+            <th>Giá tiền bán</th>
+            <th>Số Lượng</th>
+            <th>Thời gian bảo hành</th>
+            <th>Ngày bán</th>
+            <!-- <th></th>
+        <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
+          </tr>
+        </thead>
+        <tbody>
+          <!-- <td></td> -->
+          <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+            (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
+          </td> -->
+          <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+            (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
+          </td>
+          <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+            (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+          </td>
+  <!-- 
+          <td><select (change)="selecttensanpham($event)"
+              style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+              <option value="default">Tên sản phẩm</option>
+              <option *ngFor="let data of datatensanpham" [value]="data.value">
+                {{data.title}}
+              </option>
+  
+            </select></td> -->
+  
+          <!-- <td><select (change)="selectdungluong($event)"
+              style="height: 28px;width: 100px;border-radius: 5px;border-color: #809ffc;">
+              <option value="default">Dung lượng</option>
+              <option *ngFor="let data of datadungluong" [value]="data.value">
+                {{data.title}}
+              </option>
+  
+            </select></td> -->
+  
+          <!-- <td><select (change)="selectloaisanpham($event)"
+              style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+              <option value="default">Loại sản phẩm</option>
+              <option *ngFor="let data of dataloaisanpham" [value]="data.value">
+                {{data.title}}
+              </option>
+  
+            </select></td> -->
+  
+          <!-- <td><select (change)="selectphienban($event)"
+              style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+              <option value="default">Phiên bản</option>
+              <option *ngFor="let data of dataphienban" [value]="data.value">
+                {{data.title}}
+              </option>
+  
+            </select></td> -->
+           
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td><input type="date" style="margin-right: 5px;" [(ngModel)]="date1" (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()"> <i class="fa fa-refresh" style="font-size:18px ;margin-left: 15px;" (click)="refresh()"></i></td>
+          
+          <tr *ngFor="let sanpham of data">
+            <!-- <td><a routerLink="/pages/tables/chitietdonhang"
+                [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td> -->
+            <!-- <td>{{sanpham.nhomsanpham}}</td> -->
+            <td>{{sanpham.tensanpham}}</td>
+            <!-- <td>{{sanpham.dungluong}}</td>
+            <td>{{sanpham.loaisanpham}}</td>
+            <td>{{sanpham.phienban}}</td> -->
+            <td>{{sanpham.imei}}</td>
+            <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice}}</td>
+            <td>{{sanpham.giaban | productPrice}}</td>
+            <td>{{sanpham.soluong}}</td>
+            <td>{{sanpham.thoihanbaohanh}}</td>
+            <td>{{sanpham.ngayban| date: 'dd/MM/yyyy'}}</td>
+            <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
+            [queryParams]={id:[sanpham.id]}></i></td>
+        <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
+  
+          </tr>
+  
+  
+        </tbody>
+      </table>
+  
+    </nb-card-body>
+  </nb-card>
+  

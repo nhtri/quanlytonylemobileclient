@@ -468,7 +468,9 @@ export class BansanphamComponent implements OnInit {
   }
 
   seleckhachhang(event){
-
+this.thongtinkhachhang = event.target.value
     console.log(event.target.value)
   }
+
+  hoantatvaxuathoadon(){}
 }

@@ -159,6 +159,6 @@ export class QuanlykhachhangComponent implements OnInit {
 
   onUserRowSelect(event) {
     console.log(event.data["sodienthoai"])
-    this.router.navigate(['/pages/tables/danhsachsanphamkhachhangdamua',{state:{ sodienthoai: event.data["sodienthoai"] }}]);
+    this.router.navigate(['/pages/tables/danhsachsanphamkhachhangdamua'],{state:{ ten: event.data["ten"] }});
   }
 }
