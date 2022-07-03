@@ -426,6 +426,11 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(getsanpham, data, this.httpOptions);
     }
 
+    getsanphamemei(data) {
+        const getsanpham = 'https://quanlytonylemobile.herokuapp.com/getsanphamemei';
+        return this.httpClient.post<any>(getsanpham, data, this.httpOptions);
+    }
+
     taodanhsachdonhang(data): Observable<any> {
         const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/taodanhsachdonhang`;
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);

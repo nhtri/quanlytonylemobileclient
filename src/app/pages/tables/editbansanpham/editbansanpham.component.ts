@@ -35,6 +35,7 @@ export class EditbansanphamComponent implements OnInit {
   hinhthucthanhtoanmodel
   thoihanbaohanhmodel
   transactionkey
+  imeisanphamthem
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
@@ -56,26 +57,26 @@ export class EditbansanphamComponent implements OnInit {
         console.log('this.id', this.id)
         console.log('this.position', this.position)
         this.id.forEach(element => {
-          this.service.getdanhsachdonhangvasanphamquanlymobileid([this.position[0],element]).subscribe(value => {
+          this.service.getdanhsachdonhangvasanphamquanlymobileid([this.position[0], element]).subscribe(value => {
             console.log('value', value)
             value.forEach(element => {
               // if (element.position == this.position) {
-                // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
-                element["quantitytemp"] = element.quantity
-                element["quantity"] = 1
-                element["sotienban"] = element.estimated_price
-                console.log('element',element)
-                this.datas.push(element)
-                this.tienmat = element.estimated_price
-                this.tenkhachhang = element.tenkhachhang
-                this.hinhthucthanhtoanmodel = element.hinhthucthanhtoan
-                this.thoihanbaohanhmodel = element.thoihanbaohanh
-                this.hinhthucthanhtoan = element.hinhthucthanhtoan
-                this.transactionkey = element.transactionkey
-                this.tienmat = element.tienmat
-                this.tongtienban = element.giatienban
-                this.daikibi = element.daikibi
-                this.chuyenkhoan = element.chuyenkhoan
+              // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
+              element["quantitytemp"] = element.quantity
+              element["quantity"] = 1
+              element["sotienban"] = element.estimated_price
+              console.log('element', element)
+              this.datas.push(element)
+              this.tienmat = element.estimated_price
+              this.tenkhachhang = element.tenkhachhang
+              this.hinhthucthanhtoanmodel = element.hinhthucthanhtoan
+              this.thoihanbaohanhmodel = element.thoihanbaohanh
+              this.hinhthucthanhtoan = element.hinhthucthanhtoan
+              this.transactionkey = element.transactionkey
+              this.tienmat = element.tienmat
+              this.tongtienban = element.giatienban
+              this.daikibi = element.daikibi
+              this.chuyenkhoan = element.chuyenkhoan
               // }
             });
 
@@ -113,40 +114,40 @@ export class EditbansanphamComponent implements OnInit {
   onClick() { }
 
   quayve() {
-      if (window.confirm('Bạn có chắc muốn xóa không ????')) {
-        this.datas.forEach(element => {
-          this.service.getsoluongsanphamhientaidangco([element.productid, element.vitri]).subscribe(d => {
-            console.log('d', d)
-            console.log('parseInt(d[0].quantity) ', parseInt(d[0].quantity))
-            console.log('parseInt(element.quantity)', parseInt(element.quantity))
-  
-            this.service.updatesoluongsanphamhuy([parseInt(d[0].quantity) + parseInt(element.soluong), element.productid, element.vitri]).subscribe(val => {
-              this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
-                va => {
-                  this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t => {
-                    this.service.deletequanlythutransactionkey([this.transactionkey]).subscribe(c => {
-                      if (this.position == "WAREHOUSE") {
-                        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
-                        console.log(this.position)
-                      }
-                      if (this.position == "SHOP_VN") {
-                        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
-                        console.log(this.position)
-                      }
-                      if (this.position == "SHOP_JP") {
-                        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
-                        console.log(this.position)
-                      }
-  
-                    })
+    if (window.confirm('Bạn có chắc muốn xóa không ????')) {
+      this.datas.forEach(element => {
+        this.service.getsoluongsanphamhientaidangco([element.productid, element.vitri]).subscribe(d => {
+          console.log('d', d)
+          console.log('parseInt(d[0].quantity) ', parseInt(d[0].quantity))
+          console.log('parseInt(element.quantity)', parseInt(element.quantity))
+
+          this.service.updatesoluongsanphamhuy([parseInt(d[0].quantity) + parseInt(element.soluong), element.productid, element.vitri]).subscribe(val => {
+            this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
+              va => {
+                this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t => {
+                  this.service.deletequanlythutransactionkey([this.transactionkey]).subscribe(c => {
+                    if (this.position == "WAREHOUSE") {
+                      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+                      console.log(this.position)
+                    }
+                    if (this.position == "SHOP_VN") {
+                      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+                      console.log(this.position)
+                    }
+                    if (this.position == "SHOP_JP") {
+                      this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+                      console.log(this.position)
+                    }
+
                   })
-                }
-              )
-  
-            })
+                })
+              }
+            )
+
           })
-        });
-      }
+        })
+      });
+    }
   }
 
   delete(value) {
@@ -155,7 +156,7 @@ export class EditbansanphamComponent implements OnInit {
       return obj.id == value;
     });
     console.log('this.datas', this.datas)
-    
+
   }
 
 
@@ -259,7 +260,7 @@ export class EditbansanphamComponent implements OnInit {
       }
       // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan,this.thongtinkhachhang]).subscribe(value => {
+      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan, this.thongtinkhachhang]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
         if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
@@ -330,9 +331,12 @@ export class EditbansanphamComponent implements OnInit {
   }
 
   nhapsotienban(event, id) {
+    this.tongtienban = 0
+    this.tongtienthu = 0
     console.log(event.target.value, id)
     this.datas.forEach(data => {
       console.log('data.id', data.id)
+      data.sotienban = data.giaban
       if (data.id == id) {
         data.sotienban = event.target.value
       }
@@ -342,13 +346,12 @@ export class EditbansanphamComponent implements OnInit {
 
     )
 
-    this.tongtienban = 0
-    this.tongtienthu = 0
+
     this.datas.forEach(e => {
       this.tongtienban += (parseInt(e.quantity) * parseInt(e.sotienban))
       this.tongtienthu += (parseInt(e.quantity) * parseInt(e.price))
     });
-    console.log('this.datas', this.datas)
+    console.log('this.datas', this.datas, "this.tongtienban", this.tongtienban)
     this.tienhoadon = this.tongtienban.toString()
     this.tienmat = this.tongtienban
   }
@@ -388,12 +391,12 @@ export class EditbansanphamComponent implements OnInit {
   }
 
   thaydoisotienthanhtoan() {
-    console.log("this.tienmat",this.tienmat)
+    console.log("this.tienmat", this.tienmat)
     this.tienconlai = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
-    
-    console.log("this.tienconlai",this.tienconlai)
+
+    console.log("this.tienconlai", this.tienconlai)
     this.tienthua = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
-    console.log("this.tienthua",this.tienthua)
+    console.log("this.tienthua", this.tienthua)
   }
 
   luutam() {
@@ -412,7 +415,7 @@ export class EditbansanphamComponent implements OnInit {
         soluongsanpham += parseInt(element.quantity)
         this.vitri = element.position
       });
-      
+
       let datasale = []
 
       this.datas.forEach(element => {
@@ -454,7 +457,7 @@ export class EditbansanphamComponent implements OnInit {
 
       // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam",this.thongtinkhachhang]).subscribe(value => {
+      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam", this.thongtinkhachhang]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
         if (this.vitri == "WAREHOUSE") {
@@ -473,11 +476,35 @@ export class EditbansanphamComponent implements OnInit {
     }
   }
 
-  seleckhachhang(event){
-this.thongtinkhachhang = event.target.value
+  seleckhachhang(event) {
+    this.thongtinkhachhang = event.target.value
     console.log(event.target.value)
-    console.log('tenkhachhang',this.tenkhachhang)
+    console.log('tenkhachhang', this.tenkhachhang)
   }
 
-  hoantatvaxuathoadon(){}
+  hoantatvaxuathoadon() { }
+
+  themsanpham() {
+    this.service.getsanphamemei([this.imeisanphamthem]).subscribe(value => {
+      console.log('value value', value)
+      this.datas.push(value[0])
+      this.datas[this.datas.length - 1].giaban = this.datas[this.datas.length - 1].estimated_price
+      this.datas[this.datas.length - 1].sotienban = this.datas[this.datas.length - 1].giaban
+      this.tongtienthu = 0
+      this.tongtienban = 0
+      this.tienmat = 0
+      console.log('datas datas', this.datas)
+      this.datas.forEach(e => {
+        e.sotienban = e.giaban
+        this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
+        this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
+      });
+      this.tienhoadon = this.tongtienban.toString()
+
+      console.log(this.hinhthucthanhtoan)
+      console.log("tongtienban", this.tongtienban)
+      this.tienmat = this.tongtienban
+    })
+
+  }
 }
