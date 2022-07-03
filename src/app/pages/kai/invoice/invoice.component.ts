@@ -87,6 +87,8 @@ export class InvoiceComponent implements OnInit {
     PURCHASING_REPORT_NAME = 'InvoiceReport';
     CURRENT_DATE = TODAY;
 
+    onsaving=false
+
     constructor(private formBuilder: FormBuilder,
                 private elementRef: ElementRef,
                 private kaiService: KaiService,
@@ -231,6 +233,8 @@ export class InvoiceComponent implements OnInit {
     }
 
     onSubmit() {
+        alert("Đang thực hiện quá trình thu mua !!!")
+        this.onsaving = true
         let display_order = 1;
         const {payment_type} = this.invoice;
         const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
@@ -347,6 +351,8 @@ export class InvoiceComponent implements OnInit {
     }
 
     saveAndExport() {
+        alert("Đang thực hiện quá trình thu mua !!!")
+        this.onsaving = true
         let display_order = 1;
         const {payment_type} = this.invoice;
         const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;

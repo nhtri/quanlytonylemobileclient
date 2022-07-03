@@ -91,74 +91,74 @@ export class QuanlykhachhangComponent implements OnInit {
   onCreateConfirm(event): void {
     console.log("Create Event In Console")
     console.log(event['newData']['sodienthoai']);
-    if (!this.data.some(el => el.chip === (event['newData']['sodienthoai']))) {
-      this.service.khachhang(
-        [
-          event['newData']['ten'],
-          event['newData']['tuoi'],
-          event['newData']['sodienthoai'],
-          event['newData']['diachi'],
-          'kho'
-        ]
-      )
-        .subscribe(data => {
+    // if (!this.data.some(el => el.sodienthoai === (event['newData']['sodienthoai']))) {
+    this.service.khachhang(
+      [
+        event['newData']['ten'],
+        event['newData']['tuoi'],
+        event['newData']['sodienthoai'],
+        event['newData']['diachi'],
+        'kho'
+      ]
+    )
+      .subscribe(data => {
 
-          console.log("POST Request is successful ", data);
-        },
-          error => {
-            console.log("Error", error);
+        console.log("POST Request is successful ", data);
+      },
+        error => {
+          console.log("Error", error);
 
-          })
-      event.confirm.resolve();
-    }
-    else {
-      alert("Dữ liệu đã tồn tại")
-      event.confirm.reject();
-    }
+        })
+    event.confirm.resolve();
+  // }
+  // else {
+  //   alert("Dữ liệu đã tồn tại")
+  //   event.confirm.reject();
+  // }
 
+}
+
+onSaveConfirm(event) {
+  if (window.confirm('Bạn có muốn thay đổi không?')) {
+    this.service.deletekhachhang(
+      [
+        event['data']['sodienthoai']
+      ]
+    )
+      .subscribe(data => {
+
+        this.service.khachhang(
+          [
+            event['newData']['ten'],
+            event['newData']['tuoi'],
+            event['newData']['sodienthoai'],
+            event['newData']['diachi'],
+            'kho'
+          ]
+        )
+          .subscribe(data => {
+
+            console.log("POST Request is successful ", data);
+          },
+            error => {
+              console.log("Error", error);
+
+            })
+
+        console.log("POST Request is successful ", data);
+      },
+        error => {
+          console.log("Error", error);
+
+        })
+    event.confirm.resolve();
+  } else {
+    event.confirm.reject();
   }
+}
 
-  onSaveConfirm(event) {
-    if (window.confirm('Bạn có muốn thay đổi không?')) {
-      this.service.deletekhachhang(
-        [
-          event['data']['sodienthoai']
-        ]
-      )
-        .subscribe(data => {
-
-          this.service.khachhang(
-            [
-              event['newData']['ten'],
-              event['newData']['tuoi'],
-              event['newData']['sodienthoai'],
-              event['newData']['diachi'],
-              'kho'
-            ]
-          )
-            .subscribe(data => {
-
-              console.log("POST Request is successful ", data);
-            },
-              error => {
-                console.log("Error", error);
-
-              })
-
-          console.log("POST Request is successful ", data);
-        },
-          error => {
-            console.log("Error", error);
-
-          })
-      event.confirm.resolve();
-    } else {
-      event.confirm.reject();
-    }
-  }
-
-  onUserRowSelect(event) {
-    console.log(event.data["sodienthoai"])
-    this.router.navigate(['/pages/tables/danhsachsanphamkhachhangdamua'],{state:{ ten: event.data["ten"] }});
-  }
+onUserRowSelect(event) {
+  console.log(event.data["sodienthoai"])
+  this.router.navigate(['/pages/tables/danhsachsanphamkhachhangdamua'], { state: { ten: event.data["ten"] } });
+}
 }

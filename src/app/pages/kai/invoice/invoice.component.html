@@ -360,7 +360,7 @@
             <div class="row">
                 <div class="col-md-12">
                     <button pButton class="btn p-button-sm p-button-info" type="submit"
-                            [disabled]="!createAppForm.valid || !selectedJobs || selectedJobs == null || !birthday">
+                            [disabled]="!createAppForm.valid || !selectedJobs || selectedJobs == null || !birthday || onsaving">
                         <nb-icon class="mr-1" icon="save-outline"></nb-icon>
                         Lưu
                     </button>
@@ -390,7 +390,10 @@
                             pButton
                             class="btn p-button-sm p-button-success ml-1"
                             type="button"
-                            (click)="saveAndExport()">
+                            (click)="saveAndExport()"
+                            (dblclick)="saveAndExport()"
+                            [disabled]="onsaving"
+                            >
                         <nb-icon class="mr-1" icon="cloud-download-outline"></nb-icon>
                         Lưu và Export
                     </button>

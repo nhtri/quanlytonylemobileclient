@@ -367,8 +367,12 @@ export class BansanphamComponent implements OnInit {
   }
 
   thaydoisotienthanhtoan() {
+    console.log("this.tienmat",this.tienmat)
     this.tienconlai = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
+    
+    console.log("this.tienconlai",this.tienconlai)
     this.tienthua = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
+    console.log("this.tienthua",this.tienthua)
   }
 
   luutam() {
@@ -387,26 +391,7 @@ export class BansanphamComponent implements OnInit {
         soluongsanpham += parseInt(element.quantity)
         this.vitri = element.position
       });
-      // for (let i = 0; i < this.imeiduocchon.length; i++) {
-      //   for (let j = 0; j < this.giatiensanpham.length; j++) {
-      //     console.log("this.imeiduocchon[i]['id']", this.imeiduocchon[i]['id'])
-      //     if (this.imeiduocchon[i].id == this.giatiensanpham[j].id) {
-      //       this.imeiduocchon[i].giatien = this.giatiensanpham[j].giatien
-      //     }
-      //   }
-      // }
-      // this.imeiduocchon.forEach(element => {
-      //   danhsachimei = (element.imei).toString() + "," + danhsachimei.toString()
-      // });
-      // console.log('this.imeiduocchon', this.imeiduocchon)
-      // this.imeiduocchon.forEach(element => {
-
-
-
-      //   this.service.getsanpham([element.id]).subscribe(value => {
-      //     let newimei = value[0].imei.replace(element.imei, "")
-      //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
-      //   })
+      
       let datasale = []
 
       this.datas.forEach(element => {
@@ -448,7 +433,7 @@ export class BansanphamComponent implements OnInit {
 
       // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam"]).subscribe(value => {
+      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam",this.thongtinkhachhang]).subscribe(value => {
         console.log(value)
         alert("Mua Hàng Thành Công")
         if (this.vitri == "WAREHOUSE") {

@@ -29,7 +29,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
             title: x.label,
         };
     });
-
+    status = false
     constructor(
         private service: NetworkserviceService,
         private productStatusPipe: ProductStatusPipe,
@@ -40,19 +40,20 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         this.role = localStorage.getItem('role');
         this.service.getsanphamtonkhokhohang().subscribe(val => {
 
-            val.forEach(element => {
-                this.arrayImei = (element['imei'].split(',')).filter(val => val != '');
-                // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
+            // val.forEach(element => {
+            //     this.arrayImei = (element['imei'].split(',')).filter(val => val != '');
+            //     // element.map(obj => ({ ...obj, soluong: this.arrayImei.length }))
 
-                // element.soluong = this.arrayImei.length
-                element.imei = element.imei.replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
-                    .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
-                    .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
-                    .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
-                    .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
-                    .replace(',,', ',').replace(',,', ',');
-                this.dataedit.push(element);
-            });
+            //     // element.soluong = this.arrayImei.length
+            //     element.imei = element.imei.replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
+            //         .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
+            //         .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
+            //         .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
+            //         .replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',').replace(',,', ',')
+            //         .replace(',,', ',').replace(',,', ',');
+            //     this.dataedit.push(element);
+            // });
+            this.dataedit = val
             this.source.load(this.dataedit);
             this.data = val;
 
@@ -64,8 +65,8 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
             let data = val;
             let datanhomsanphamfilter = [];
             data.forEach(data => {
-                this.datanhomsanpham.push({'value': data.id, 'title': data.name});
-                datanhomsanphamfilter.push({'value': data.name, 'title': data.name});
+                this.datanhomsanpham.push({ 'value': data.id, 'title': data.name });
+                datanhomsanphamfilter.push({ 'value': data.name, 'title': data.name });
                 console.log('datanhomsanphamfilter', datanhomsanphamfilter, 'datanhomsanpham', this.datanhomsanpham);
             });
             console.log(this.datanhomsanpham);
@@ -116,7 +117,10 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         },
 
 
-        pager: false,
+        pager: {
+            display: true,
+            perPage: 40,
+        },
         columns: {
             // id: {
             //   title: 'ID',
@@ -250,15 +254,15 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
                 // filter: false,
             },
             estimated_price: {
-              title: 'Giá Bán Dự Kiến',
-              type: 'string',
-              editable: true,
-              addable: true,
-              valuePrepareFunction: (cell, row) => {
-                  return this.productPricePipe.transform(cell);
-              },
-              // filter: false,
-          },
+                title: 'Giá Bán Dự Kiến',
+                type: 'string',
+                editable: true,
+                addable: true,
+                valuePrepareFunction: (cell, row) => {
+                    return this.productPricePipe.transform(cell);
+                },
+                // filter: false,
+            },
         },
 
         edit: {
@@ -273,7 +277,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         },
     };
 
-    
+
 
 
     onSaveConfirm(event) {
@@ -295,9 +299,9 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
                 },
             )
                 .subscribe(data => {
-                        window.location.reload();
-                        console.log('POST Request is successful ', data);
-                    },
+                    window.location.reload();
+                    console.log('POST Request is successful ', data);
+                },
                     error => {
                         console.log('Error', error);
 
@@ -316,8 +320,8 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
             )
                 .subscribe(data => {
 
-                        console.log('POST Request is successful ', data);
-                    },
+                    console.log('POST Request is successful ', data);
+                },
                     error => {
                         console.log('Error', error);
 
@@ -330,32 +334,63 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
 
     onCreateConfirm(event): void {
         console.log('Create Event In Console');
+        this.data.forEach(element => {
+            if (element.imei == event['newData']['imei'] && element.price != event['newData']['price']) {
+                this.service.createsanphamtonkhokhohang(
+                    {
+                        'imei': event['newData']['imei'],
+                        'name': event['newData']['name'],
+                        'color': event['newData']['color'],
+                        'status': event['newData']['status'],
+                        'quantity': event['newData']['quantity'],
+                        'price': event['newData']['price'],
+                        'estimated_price': event['newData']['estimated_price'],
+                        'position': 'WAREHOUSE',
+                        'source': 'WAREHOUSE',
+                        'product_group_id': event['newData']['group_name'],
+                    },
+                )
+                    .subscribe(data => {
+                        window.location.reload();
+                        console.log('POST Request is successful ', data);
+                    },
+                        error => {
+                            console.log('Error', error);
 
-        console.log(event['newData']['imei']);
-        this.service.sanphamtonkhokhohang(
-            {
-                'imei': event['newData']['imei'],
-                'name': event['newData']['name'],
-                'color': event['newData']['color'],
-                'status': event['newData']['status'],
-                'quantity': event['newData']['quantity'],
-                'price': event['newData']['price'],
-                'estimated_price': event['newData']['estimated_price'],
-                'position': 'WAREHOUSE',
-                'source': 'WAREHOUSE',
-                'product_group_id': event['newData']['group_name'],
-            },
-        )
-            .subscribe(data => {
+                        });
+                event.confirm.resolve();
+                this.status = true
+            }
+
+        })
+        if (this.status == false) {
+            console.log("tri test")
+            this.service.sanphamtonkhokhohang(
+                {
+                    'imei': event['newData']['imei'],
+                    'name': event['newData']['name'],
+                    'color': event['newData']['color'],
+                    'status': event['newData']['status'],
+                    'quantity': event['newData']['quantity'],
+                    'price': event['newData']['price'],
+                    'estimated_price': event['newData']['estimated_price'],
+                    'position': 'WAREHOUSE',
+                    'source': 'WAREHOUSE',
+                    'product_group_id': event['newData']['group_name'],
+                },
+            )
+                .subscribe(data => {
                     window.location.reload();
                     console.log('POST Request is successful ', data);
                 },
-                error => {
-                    console.log('Error', error);
+                    error => {
+                        console.log('Error', error);
 
-                });
-        event.confirm.resolve();
-  
+                    });
+            event.confirm.resolve();
+        }
+
+
 
     }
 
@@ -372,7 +407,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
                 // const file = ev.target.files[0];
                 reader.onload = (event) => {
                     const data = reader.result;
-                    workBook = xlsx.read(data, {type: 'binary'});
+                    workBook = xlsx.read(data, { type: 'binary' });
                     jsonData = workBook.SheetNames.reduce((initial, name) => {
                         const sheet = workBook.Sheets[name];
                         initial[name] = xlsx.utils.sheet_to_json(sheet);
@@ -439,8 +474,8 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
                 element,
             )
                 .subscribe(data => {
-                        console.log('POST Request is successful ', data);
-                    },
+                    console.log('POST Request is successful ', data);
+                },
                     error => {
                         console.log('Error', error);
 
@@ -448,8 +483,8 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         });
 
         setTimeout(() => {
-                window.location.reload();
-            },
+            window.location.reload();
+        },
             10000);
     }
 }

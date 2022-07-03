@@ -572,6 +572,21 @@ export class NetworkserviceService {
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
     }
 
+    createsanphamtonkhokhohang(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/createproducts`;
+        return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
+    createsanphamtonkhovn(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/createproducts`;
+        return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
+    createsanphamtonkhojp(data): Observable<any> {
+        const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/createproducts`;
+        return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);
+    }
+
 
     editsanphamtonkhokhohang(data): Observable<any> {
         const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/products`;

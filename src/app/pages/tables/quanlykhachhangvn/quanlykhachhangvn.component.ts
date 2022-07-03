@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 
@@ -11,7 +12,7 @@ export class QuanlykhachhangvnComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
   data
-  constructor(private service: NetworkserviceService) {
+  constructor(private service: NetworkserviceService, private router: Router) {
 
     this.service.getkhachhangvn().subscribe(val => {
       this.source.load(val);
@@ -90,7 +91,7 @@ export class QuanlykhachhangvnComponent implements OnInit {
   onCreateConfirm(event): void {
     console.log("Create Event In Console")
     console.log(event['newData']['sodienthoai']);
-    if (!this.data.some(el => el.chip === (event['newData']['sodienthoai']))) {
+    // if (!this.data.some(el => el.sodienthoai === (event['newData']['sodienthoai']))) {
       this.service.khachhang(
         [
           event['newData']['ten'],
@@ -109,11 +110,11 @@ export class QuanlykhachhangvnComponent implements OnInit {
 
           })
       event.confirm.resolve();
-    }
-    else {
-      alert("Dữ liệu đã tồn tại")
-      event.confirm.reject();
-    }
+    // }
+    // else {
+    //   alert("Dữ liệu đã tồn tại")
+    //   event.confirm.reject();
+    // }
 
   }
 
@@ -154,5 +155,10 @@ export class QuanlykhachhangvnComponent implements OnInit {
     } else {
       event.confirm.reject();
     }
+  }
+
+  onUserRowSelect(event) {
+    console.log(event.data["sodienthoai"])
+    this.router.navigate(['/pages/tables/danhsachsanphamkhachhangdamua'],{state:{ ten: event.data["ten"] }});
   }
 }
