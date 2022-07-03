@@ -35,8 +35,8 @@
         <tr *ngFor="let sanpham of data">
           <!-- <td ><a routerLink="/pages/tables/chitietdonhang"
         [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td> -->
-          <td><a routerLink="/pages/tables/bansanpham"
-              [queryParams]={id:[danhsachidsanpham],position:[position]}>{{sanpham.madonhang}}</a></td>
+          <td><a routerLink="/pages/tables/editbansanpham"
+              [queryParams]={id:[sanpham.madonhang],position:[position]}>{{sanpham.madonhang}}</a></td>
           <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice}}</td>
           <td>{{sanpham.giatienban | productPrice }}</td>
 

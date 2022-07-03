@@ -31,10 +31,12 @@ export class QuanlydanhsachdonhangchoComponent implements OnInit {
   dataimeitaomoi = ""
   role
 
+  position
   constructor(private service: NetworkserviceService, private router: Router) {
 this.role = localStorage.getItem('role')
     this.service.getdanhsachdonhangquanlymobile().subscribe(value => {
  this.data =value.filter(v=>v.trangthaidonhang=="luutam")
+ this.position=value[0].vitri
 console.log('value',value)
     });
 
@@ -91,20 +93,20 @@ console.log('value',value)
     this.router.navigate(["/pages/tables/sanpham", value]);
   }
 
-  select(value) {
-    if (this.danhsachidsanpham.length == 0) {
-      this.danhsachidsanpham.push(value)
-    }
-    else {
-      if (this.danhsachidsanpham.includes(value)) {
-        this.danhsachidsanpham = this.danhsachidsanpham.filter(item => item !== value);
-      }
-      else {
-        this.danhsachidsanpham.push(value)
-      }
-    }
-    console.log(this.danhsachidsanpham)
-  }
+  // select(value) {
+  //   if (this.danhsachidsanpham.length == 0) {
+  //     this.danhsachidsanpham.push(value)
+  //   }
+  //   else {
+  //     if (this.danhsachidsanpham.includes(value)) {
+  //       this.danhsachidsanpham = this.danhsachidsanpham.filter(item => item !== value);
+  //     }
+  //     else {
+  //       this.danhsachidsanpham.push(value)
+  //     }
+  //   }
+  //   console.log(this.danhsachidsanpham)
+  // }
 
 
   taomoi() {

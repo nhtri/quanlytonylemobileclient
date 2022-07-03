@@ -120,6 +120,7 @@ import { QuanlykhachhangvnComponent } from './quanlykhachhangvn/quanlykhachhangv
 import { QuanlykhachhangComponent } from './quanlykhachhang/quanlykhachhang.component';
 import { QuanlykhachhangnhatComponent } from './quanlykhachhangnhat/quanlykhachhangnhat.component';
 import { DanhsachsanphamkhachhangdamuaComponent } from './danhsachsanphamkhachhangdamua/danhsachsanphamkhachhangdamua.component';
+import { EditbansanphamComponent } from './editbansanpham/editbansanpham.component';
 
 const routes: Routes = [{
     path: '',
@@ -280,6 +281,10 @@ const routes: Routes = [{
         {
             path: 'bansanpham',
             component: BansanphamComponent,
+        },
+        {
+            path: 'editbansanpham',
+            component: EditbansanphamComponent,
         },
         {
             path: 'danhsachsanphamkhachhangdamua',

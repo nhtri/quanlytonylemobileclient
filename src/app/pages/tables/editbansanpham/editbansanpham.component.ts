@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 
 @Component({
-  selector: 'ngx-bansanpham',
-  templateUrl: './bansanpham.component.html',
-  styleUrls: ['./bansanpham.component.scss']
+  selector: 'ngx-editbansanpham',
+  templateUrl: './editbansanpham.component.html',
+  styleUrls: ['./editbansanpham.component.scss']
 })
-export class BansanphamComponent implements OnInit {
+export class EditbansanphamComponent implements OnInit {
+
   position
   datas = []
   imei = []
@@ -31,6 +31,10 @@ export class BansanphamComponent implements OnInit {
   hoantattoggle = true
   danhsachkhachhang
   thongtinkhachhang = "khachle"
+  tenkhachhang
+  hinhthucthanhtoanmodel
+  thoihanbaohanhmodel
+  transactionkey
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
@@ -52,17 +56,27 @@ export class BansanphamComponent implements OnInit {
         console.log('this.id', this.id)
         console.log('this.position', this.position)
         this.id.forEach(element => {
-          this.service.getsanpham([element]).subscribe(value => {
+          this.service.getdanhsachdonhangvasanphamquanlymobileid([this.position[0],element]).subscribe(value => {
             console.log('value', value)
             value.forEach(element => {
-              if (element.position == this.position) {
+              // if (element.position == this.position) {
                 // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
                 element["quantitytemp"] = element.quantity
                 element["quantity"] = 1
                 element["sotienban"] = element.estimated_price
+                console.log('element',element)
                 this.datas.push(element)
                 this.tienmat = element.estimated_price
-              }
+                this.tenkhachhang = element.tenkhachhang
+                this.hinhthucthanhtoanmodel = element.hinhthucthanhtoan
+                this.thoihanbaohanhmodel = element.thoihanbaohanh
+                this.hinhthucthanhtoan = element.hinhthucthanhtoan
+                this.transactionkey = element.transactionkey
+                this.tienmat = element.tienmat
+                this.tongtienban = element.giatienban
+                this.daikibi = element.daikibi
+                this.chuyenkhoan = element.chuyenkhoan
+              // }
             });
 
           })
@@ -99,7 +113,40 @@ export class BansanphamComponent implements OnInit {
   onClick() { }
 
   quayve() {
-    this.router.navigateByUrl("/pages/tables/danhsachsanpham")
+      if (window.confirm('Bạn có chắc muốn xóa không ????')) {
+        this.datas.forEach(element => {
+          this.service.getsoluongsanphamhientaidangco([element.productid, element.vitri]).subscribe(d => {
+            console.log('d', d)
+            console.log('parseInt(d[0].quantity) ', parseInt(d[0].quantity))
+            console.log('parseInt(element.quantity)', parseInt(element.quantity))
+  
+            this.service.updatesoluongsanphamhuy([parseInt(d[0].quantity) + parseInt(element.soluong), element.productid, element.vitri]).subscribe(val => {
+              this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
+                va => {
+                  this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t => {
+                    this.service.deletequanlythutransactionkey([this.transactionkey]).subscribe(c => {
+                      if (this.position == "WAREHOUSE") {
+                        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+                        console.log(this.position)
+                      }
+                      if (this.position == "SHOP_VN") {
+                        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+                        console.log(this.position)
+                      }
+                      if (this.position == "SHOP_JP") {
+                        this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+                        console.log(this.position)
+                      }
+  
+                    })
+                  })
+                }
+              )
+  
+            })
+          })
+        });
+      }
   }
 
   delete(value) {
@@ -429,6 +476,7 @@ export class BansanphamComponent implements OnInit {
   seleckhachhang(event){
 this.thongtinkhachhang = event.target.value
     console.log(event.target.value)
+    console.log('tenkhachhang',this.tenkhachhang)
   }
 
   hoantatvaxuathoadon(){}
