@@ -30,10 +30,12 @@ export class QuanlydanhsachdonhangchovnComponent implements OnInit {
   dataphienbantaomoi = ""
   dataimeitaomoi = ""
   role
+  position
   constructor(private service: NetworkserviceService, private router: Router) {
     this.role = localStorage.getItem('role')
     this.service.getdanhsachdonhangquanlymobilevn().subscribe(value => {
       this.data = value.filter(v=>v.trangthaidonhang=="luutam")
+      this.position=value[0].vitri
     });
 
 

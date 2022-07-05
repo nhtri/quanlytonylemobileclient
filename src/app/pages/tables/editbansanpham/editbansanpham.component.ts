@@ -153,7 +153,7 @@ export class EditbansanphamComponent implements OnInit {
   delete(value) {
     console.log('delete', value, this.datas)
     this.datas = this.datas.filter((obj) => {
-      return obj.id == value;
+      return obj.id != value;
     });
     console.log('this.datas', this.datas)
 
@@ -179,6 +179,12 @@ export class EditbansanphamComponent implements OnInit {
   }
 
   hoantat() {
+
+
+
+
+
+
     this.hoantattoggle = false
     console.log("this.hoantattoggle", this.hoantattoggle)
     if (this.hinhthucthanhtoan == 'default' || this.hinhthucthanhtoan == "") {
@@ -186,6 +192,43 @@ export class EditbansanphamComponent implements OnInit {
     }
     else {
       alert("Đang thực hiện quá trình thanh toán !!!")
+
+
+
+      // **********************************
+      
+      this.datas.forEach(element => {
+        this.service.getsoluongsanphamhientaidangco([element.productid, element.vitri]).subscribe( d => {
+          console.log('d', d)
+          console.log('parseInt(d[0].quantity) ', parseInt(d[0].quantity))
+          console.log('parseInt(element.quantity)', parseInt(element.quantity))
+
+          this.service.updatesoluongsanphamhuy([parseInt(d[0].quantity) + parseInt(element.soluong), element.productid, element.vitri]).subscribe(val => {
+            this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
+              va => {
+                this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t => {
+                  this.service.deletequanlythutransactionkey([this.transactionkey]).subscribe(c => {
+                   
+                 
+
+
+
+                  })
+                })
+              }
+            )
+
+          })
+        })
+      });
+
+
+
+      // ***********************************
+
+     
+
+
       console.log('this.datas', this.datas)
       let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
       let today = new Date();
@@ -197,26 +240,11 @@ export class EditbansanphamComponent implements OnInit {
         soluongsanpham += parseInt(element.quantity)
         this.vitri = element.position
       });
-      // for (let i = 0; i < this.imeiduocchon.length; i++) {
-      //   for (let j = 0; j < this.giatiensanpham.length; j++) {
-      //     console.log("this.imeiduocchon[i]['id']", this.imeiduocchon[i]['id'])
-      //     if (this.imeiduocchon[i].id == this.giatiensanpham[j].id) {
-      //       this.imeiduocchon[i].giatien = this.giatiensanpham[j].giatien
-      //     }
-      //   }
-      // }
-      // this.imeiduocchon.forEach(element => {
-      //   danhsachimei = (element.imei).toString() + "," + danhsachimei.toString()
-      // });
-      // console.log('this.imeiduocchon', this.imeiduocchon)
-      // this.imeiduocchon.forEach(element => {
+      
 
 
 
-      //   this.service.getsanpham([element.id]).subscribe(value => {
-      //     let newimei = value[0].imei.replace(element.imei, "")
-      //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
-      //   })
+      
       let datasale = []
 
       this.datas.forEach(element => {
@@ -336,7 +364,7 @@ export class EditbansanphamComponent implements OnInit {
     console.log(event.target.value, id)
     this.datas.forEach(data => {
       console.log('data.id', data.id)
-      data.sotienban = data.giaban
+      // data.sotienban = data.giaban
       if (data.id == id) {
         data.sotienban = event.target.value
       }
@@ -346,6 +374,7 @@ export class EditbansanphamComponent implements OnInit {
 
     )
 
+    console.log("datas",this.datas)
 
     this.datas.forEach(e => {
       this.tongtienban += (parseInt(e.quantity) * parseInt(e.sotienban))
@@ -405,6 +434,42 @@ export class EditbansanphamComponent implements OnInit {
     }
     else {
       console.log('this.datas', this.datas)
+
+
+      // **********************************
+      
+      this.datas.forEach(element => {
+        this.service.getsoluongsanphamhientaidangco([element.productid, element.vitri]).subscribe( d => {
+          console.log('d', d)
+          console.log('parseInt(d[0].quantity) ', parseInt(d[0].quantity))
+          console.log('parseInt(element.quantity)', parseInt(element.quantity))
+
+          this.service.updatesoluongsanphamhuy([parseInt(d[0].quantity) + parseInt(element.soluong), element.productid, element.vitri]).subscribe(val => {
+            this.service.deletedanhsachdonhangsaukhihuy([this.transactionkey]).subscribe(
+              va => {
+                this.service.deletedanhsachsanphamdabansaukhihuy([this.transactionkey]).subscribe(t => {
+                  this.service.deletequanlythutransactionkey([this.transactionkey]).subscribe(c => {
+                   
+                 
+
+
+
+                  })
+                })
+              }
+            )
+
+          })
+        })
+      });
+
+
+
+      // ***********************************
+
+
+
+
       let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
       let today = new Date();
       let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
@@ -495,7 +560,7 @@ export class EditbansanphamComponent implements OnInit {
       this.tienmat = 0
       console.log('datas datas', this.datas)
       this.datas.forEach(e => {
-        e.sotienban = e.giaban
+        // e.sotienban = e.giaban
         this.tongtienban += parseInt(e.quantity) * parseInt(e.sotienban)
         this.tongtienthu += parseInt(e.quantity) * parseInt(e.price)
       });

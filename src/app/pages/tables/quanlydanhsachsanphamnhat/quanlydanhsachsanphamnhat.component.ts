@@ -384,36 +384,36 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
     onCreateConfirm(event): void {
         console.log('Create Event In Console');
         console.log(event['newData']['imei']);
-        this.data.forEach(element => {
-            if (element.imei == event['newData']['imei'] && element.price != event['newData']['price']) {
-                this.service.createsanphamtonkhojp(
-                    {
-                        'imei': event['newData']['imei'],
-                        'name': event['newData']['name'],
-                        'color': event['newData']['color'],
-                        'status': event['newData']['status'],
-                        'quantity': event['newData']['quantity'],
-                        'price': event['newData']['price'],
-                        'estimated_price': event['newData']['estimated_price'],
-                        'position': 'WAREHOUSE',
-                        'source': 'WAREHOUSE',
-                        'product_group_id': event['newData']['group_name'],
-                    },
-                )
-                    .subscribe(data => {
-                        window.location.reload();
-                        console.log('POST Request is successful ', data);
-                    },
-                        error => {
-                            console.log('Error', error);
+        // this.data.forEach(element => {
+        //     if (element.imei == event['newData']['imei'] && element.price != event['newData']['price']) {
+        //         this.service.createsanphamtonkhojp(
+        //             {
+        //                 'imei': event['newData']['imei'],
+        //                 'name': event['newData']['name'],
+        //                 'color': event['newData']['color'],
+        //                 'status': event['newData']['status'],
+        //                 'quantity': event['newData']['quantity'],
+        //                 'price': event['newData']['price'],
+        //                 'estimated_price': event['newData']['estimated_price'],
+        //                 'position': 'WAREHOUSE',
+        //                 'source': 'WAREHOUSE',
+        //                 'product_group_id': event['newData']['group_name'],
+        //             },
+        //         )
+        //             .subscribe(data => {
+        //                 window.location.reload();
+        //                 console.log('POST Request is successful ', data);
+        //             },
+        //                 error => {
+        //                     console.log('Error', error);
 
-                        });
-                event.confirm.resolve();
-                this.status = true
-            }
+        //                 });
+        //         event.confirm.resolve();
+        //         this.status = true
+        //     }
 
-        })
-        if (this.status == false) {
+        // })
+        // if (this.status == false) {
             this.service.sanphamtonkhojp(
                 {
                     'imei': event['newData']['imei'],
@@ -442,7 +442,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
             //   alert("Dữ liệu đã tồn tại")
             //   event.confirm.reject();
             // }
-        }
+        // }
     }
 
     uploadExcel(e) {

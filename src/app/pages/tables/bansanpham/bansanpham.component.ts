@@ -105,7 +105,7 @@ export class BansanphamComponent implements OnInit {
   delete(value) {
     console.log('delete', value, this.datas)
     this.datas = this.datas.filter((obj) => {
-      return obj.id == value;
+      return obj.id != value;
     });
     console.log('this.datas', this.datas)
     
