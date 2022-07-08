@@ -137,110 +137,115 @@ export class BansanphamComponent implements OnInit {
       alert("Xin vui lòng chọn hình thức thanh toán !!!")
     }
     else {
-      alert("Đang thực hiện quá trình thanh toán !!!")
-      console.log('this.datas', this.datas)
-      let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
-      let today = new Date();
-      let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
-      let danhsachimei = ""
-      let soluongsanpham = 0
-      this.datas.forEach(element => {
-        danhsachimei += element.imei + ','
-        soluongsanpham += parseInt(element.quantity)
-        this.vitri = element.position
-      });
-      // for (let i = 0; i < this.imeiduocchon.length; i++) {
-      //   for (let j = 0; j < this.giatiensanpham.length; j++) {
-      //     console.log("this.imeiduocchon[i]['id']", this.imeiduocchon[i]['id'])
-      //     if (this.imeiduocchon[i].id == this.giatiensanpham[j].id) {
-      //       this.imeiduocchon[i].giatien = this.giatiensanpham[j].giatien
-      //     }
-      //   }
-      // }
-      // this.imeiduocchon.forEach(element => {
-      //   danhsachimei = (element.imei).toString() + "," + danhsachimei.toString()
-      // });
-      // console.log('this.imeiduocchon', this.imeiduocchon)
-      // this.imeiduocchon.forEach(element => {
-
-
-
-      //   this.service.getsanpham([element.id]).subscribe(value => {
-      //     let newimei = value[0].imei.replace(element.imei, "")
-      //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
-      //   })
-      let datasale = []
-
-      this.datas.forEach(element => {
-        if (element.sotienban != null) {
-          datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
-          this.service.danhsachsanphamdaban(['', element.name,
-            '',
-            '',
-            '',
-            element.imei,
-            transactionkey,
-            parseInt(element.price) * parseInt(element.quantity),
-            date, this.hinhthucthanhtoan,
-            this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-            , element.quantity, element.id, element.thoihanbaohanh, this.thongtinkhachhang
-          ]).subscribe(value => {
-            console.log(value)
-          })
-        }
-
-      });
-
-
-      this.service.forsale(
-        {
-          "quantity": soluongsanpham,
-          "total_money": parseInt(this.tienhoadon),
-          "sale_date": date,
-          "products": datasale
-        }
-      ).subscribe(val => { })
-
-      if (this.tienmat != 0) {
-        this.service.quanlythu([this.tienmat, date, transactionkey, "tienmat", this.vitri]).subscribe(val => { })
+      if(this.tienthua<0){
+        alert("Xin vui lòng thanh toán đầy đủ số tiền !!!")
       }
-      if (this.daikibi != 0) {
-        this.service.quanlythu([this.daikibi, date, transactionkey, "daibiki", this.vitri]).subscribe(val => { })
+      else{
+        alert("Đang thực hiện quá trình thanh toán !!!")
+        console.log('this.datas', this.datas)
+        let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+        let danhsachimei = ""
+        let soluongsanpham = 0
+        this.datas.forEach(element => {
+          danhsachimei += element.imei + ','
+          soluongsanpham += parseInt(element.quantity)
+          this.vitri = element.position
+        });
+        // for (let i = 0; i < this.imeiduocchon.length; i++) {
+        //   for (let j = 0; j < this.giatiensanpham.length; j++) {
+        //     console.log("this.imeiduocchon[i]['id']", this.imeiduocchon[i]['id'])
+        //     if (this.imeiduocchon[i].id == this.giatiensanpham[j].id) {
+        //       this.imeiduocchon[i].giatien = this.giatiensanpham[j].giatien
+        //     }
+        //   }
+        // }
+        // this.imeiduocchon.forEach(element => {
+        //   danhsachimei = (element.imei).toString() + "," + danhsachimei.toString()
+        // });
+        // console.log('this.imeiduocchon', this.imeiduocchon)
+        // this.imeiduocchon.forEach(element => {
+  
+  
+  
+        //   this.service.getsanpham([element.id]).subscribe(value => {
+        //     let newimei = value[0].imei.replace(element.imei, "")
+        //     this.service.updateimeisanphamtonkho([newimei, element.id]).subscribe(value => { })
+        //   })
+        let datasale = []
+  
+        this.datas.forEach(element => {
+          if (element.sotienban != null) {
+            datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
+            this.service.danhsachsanphamdaban(['', element.name,
+              '',
+              '',
+              '',
+              element.imei,
+              transactionkey,
+              parseInt(element.price) * parseInt(element.quantity),
+              date, this.hinhthucthanhtoan,
+              this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
+              , element.quantity, element.id, element.thoihanbaohanh, this.thongtinkhachhang
+            ]).subscribe(value => {
+              console.log(value)
+            })
+          }
+  
+        });
+  
+  
+        this.service.forsale(
+          {
+            "quantity": soluongsanpham,
+            "total_money": parseInt(this.tienhoadon),
+            "sale_date": date,
+            "products": datasale
+          }
+        ).subscribe(val => { })
+  
+        if (this.tienmat != 0) {
+          this.service.quanlythu([this.tienmat, date, transactionkey, "tienmat", this.vitri]).subscribe(val => { })
+        }
+        if (this.daikibi != 0) {
+          this.service.quanlythu([this.daikibi, date, transactionkey, "daibiki", this.vitri]).subscribe(val => { })
+        }
+        if (this.chuyenkhoan != 0) {
+          this.service.quanlythu([this.chuyenkhoan, date, transactionkey, "chuyenkhoan", this.vitri]).subscribe(val => { })
+        }
+        // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
+        console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
+        this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan,this.thongtinkhachhang]).subscribe(value => {
+          console.log(value)
+          alert("Mua Hàng Thành Công")
+          if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+            console.log(this.vitri)
+          }
+          if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'trahet') {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+            console.log(this.vitri)
+          }
+          if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'trahet') {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+            console.log(this.vitri)
+          }
+  
+          if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'datcoc') {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcoc')
+            console.log(this.vitri)
+          }
+          if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'datcoc') {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocvn')
+            console.log(this.vitri)
+          }
+          if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'datcoc') {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocjp')
+            console.log(this.vitri)
+          }
+        })
       }
-      if (this.chuyenkhoan != 0) {
-        this.service.quanlythu([this.chuyenkhoan, date, transactionkey, "chuyenkhoan", this.vitri]).subscribe(val => { })
-      }
-      // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
-      console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan,this.thongtinkhachhang]).subscribe(value => {
-        console.log(value)
-        alert("Mua Hàng Thành Công")
-        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
-          console.log(this.vitri)
-        }
-        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'trahet') {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
-          console.log(this.vitri)
-        }
-        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'trahet') {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
-          console.log(this.vitri)
-        }
-
-        if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'datcoc') {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcoc')
-          console.log(this.vitri)
-        }
-        if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'datcoc') {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocvn')
-          console.log(this.vitri)
-        }
-        if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'datcoc') {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocjp')
-          console.log(this.vitri)
-        }
-      })
     }
 
 
@@ -342,10 +347,14 @@ export class BansanphamComponent implements OnInit {
 
   thaydoisotienthanhtoan() {
     console.log("this.tienmat",this.tienmat)
+    console.log("this.tienmat",this.daikibi)
+    if(this.tienmat.toString() == ''){this.tienmat=0}
+    if(this.daikibi.toString() == ''){this.tienmat=0}
+    if(this.chuyenkhoan.toString() == ''){this.tienmat=0}
     this.tienconlai = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
     
     console.log("this.tienconlai",this.tienconlai)
-    this.tienthua = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
+    this.tienthua = -(this.tongtienban - this.tienmat  - this.daikibi - this.chuyenkhoan)
     console.log("this.tienthua",this.tienthua)
   }
 
@@ -354,75 +363,81 @@ export class BansanphamComponent implements OnInit {
       alert("Xin vui lòng chọn hình thức thanh toán !!!")
     }
     else {
-      console.log('this.datas', this.datas)
-      let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
-      let today = new Date();
-      let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
-      let danhsachimei = ""
-      let soluongsanpham = 0
-      this.datas.forEach(element => {
-        danhsachimei += element.imei + ','
-        soluongsanpham += parseInt(element.quantity)
-        this.vitri = element.position
-      });
-      
-      let datasale = []
-
-      this.datas.forEach(element => {
-        datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
-        this.service.danhsachsanphamdaban(['', element.name,
-          '',
-          '',
-          '',
-          element.imei,
-          transactionkey,
-          parseInt(element.price) * parseInt(element.quantity),
-          date, this.hinhthucthanhtoan,
-          this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
-          , element.quantity, element.id, element.thoihanbaohanh, this.thongtinkhachhang
-        ]).subscribe(value => {
+      if(this.tienthua<0){
+        alert("Xin vui lòng thanh toán đầy đủ số tiền !!!")
+      }
+      else{
+        console.log('this.datas', this.datas)
+        let transactionkey = Date.now().toString() + 'dh' + Math.floor(Math.random() * 100000000).toString()
+        let today = new Date();
+        let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+        let danhsachimei = ""
+        let soluongsanpham = 0
+        this.datas.forEach(element => {
+          danhsachimei += element.imei + ','
+          soluongsanpham += parseInt(element.quantity)
+          this.vitri = element.position
+        });
+        
+        let datasale = []
+  
+        this.datas.forEach(element => {
+          datasale.push({ "id": element.id, "quantity": element.quantity, "price": parseInt(element.sotienban), "position": this.vitri })
+          this.service.danhsachsanphamdaban(['', element.name,
+            '',
+            '',
+            '',
+            element.imei,
+            transactionkey,
+            parseInt(element.price) * parseInt(element.quantity),
+            date, this.hinhthucthanhtoan,
+            this.vitri, parseInt(element.sotienban) * parseInt(element.quantity)
+            , element.quantity, element.id, element.thoihanbaohanh, this.thongtinkhachhang
+          ]).subscribe(value => {
+            console.log(value)
+          })
+        });
+  
+  
+        this.service.forsale(
+          {
+            "quantity": soluongsanpham,
+            "total_money": parseInt(this.tienhoadon),
+            "sale_date": date,
+            "products": datasale
+          }
+        ).subscribe(val => { })
+  
+        if (this.tienmat != 0) {
+          this.service.quanlythu([this.tienmat, date, transactionkey, "tienmat", this.vitri]).subscribe(val => { })
+        }
+        if (this.daikibi != 0) {
+          this.service.quanlythu([this.daikibi, date, transactionkey, "daibiki", this.vitri]).subscribe(val => { })
+        }
+        if (this.chuyenkhoan != 0) {
+          this.service.quanlythu([this.chuyenkhoan, date, transactionkey, "chuyenkhoan", this.vitri]).subscribe(val => { })
+        }
+  
+        // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
+        console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
+        this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam",this.thongtinkhachhang]).subscribe(value => {
           console.log(value)
+          alert("Mua Hàng Thành Công")
+          if (this.vitri == "WAREHOUSE") {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangcho')
+            console.log(this.vitri)
+          }
+          if (this.vitri == "SHOP_VN") {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchovn')
+            console.log(this.vitri)
+          }
+          if (this.vitri == "SHOP_JP") {
+            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchojp')
+            console.log(this.vitri)
+          }
         })
-      });
-
-
-      this.service.forsale(
-        {
-          "quantity": soluongsanpham,
-          "total_money": parseInt(this.tienhoadon),
-          "sale_date": date,
-          "products": datasale
-        }
-      ).subscribe(val => { })
-
-      if (this.tienmat != 0) {
-        this.service.quanlythu([this.tienmat, date, transactionkey, "tienmat", this.vitri]).subscribe(val => { })
       }
-      if (this.daikibi != 0) {
-        this.service.quanlythu([this.daikibi, date, transactionkey, "daibiki", this.vitri]).subscribe(val => { })
-      }
-      if (this.chuyenkhoan != 0) {
-        this.service.quanlythu([this.chuyenkhoan, date, transactionkey, "chuyenkhoan", this.vitri]).subscribe(val => { })
-      }
-
-      // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
-      console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam",this.thongtinkhachhang]).subscribe(value => {
-        console.log(value)
-        alert("Mua Hàng Thành Công")
-        if (this.vitri == "WAREHOUSE") {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangcho')
-          console.log(this.vitri)
-        }
-        if (this.vitri == "SHOP_VN") {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchovn')
-          console.log(this.vitri)
-        }
-        if (this.vitri == "SHOP_JP") {
-          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchojp')
-          console.log(this.vitri)
-        }
-      })
+      
     }
   }
 
