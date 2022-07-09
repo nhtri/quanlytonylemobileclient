@@ -370,17 +370,17 @@
                         <nb-icon class="mr-1" icon="close-square-outline"></nb-icon>
                         Hủy
                     </button>
-                    <button *ngIf="editData.id"
+                    <button *ngIf="editData.invoice_id"
                             pButton
-                            class="btn p-button-sm p-button-danger ml-1"
+                            class="btn p-button-sm p-button-secondary ml-1"
                             type="button"
-                            (click)="delete()">
-                        <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon>
-                        Xóa
+                            (click)="lockInvoice()">
+                        <nb-icon class="mr-1" icon="lock-outline"></nb-icon>
+                        Khóa
                     </button>
-                    <button *ngIf="editData.id"
+                    <button *ngIf="editData.invoice_id"
                             pButton
-                            class=" btn p-button-sm p-button-info ml-1"
+                            class="btn p-button-sm p-button-info ml-1"
                             type="button"
                             (click)="exportExcel()">
                         <nb-icon class="mr-1" icon="download-outline"></nb-icon>

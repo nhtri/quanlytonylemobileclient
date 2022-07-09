@@ -107,6 +107,7 @@ export class InvoiceComponent implements OnInit {
             });
         });
         this.editData = window.history.state;
+        console.log('>>> this.editData: ', this.editData);
         this.sale_date = new Date();
         if (this.editData.invoice_id) {
             this.kaiService.getPurchasingInvoiceDetail(this.editData.invoice_id).subscribe((invoiceDetail) => {
@@ -339,6 +340,12 @@ export class InvoiceComponent implements OnInit {
         const isCancel = confirm(`Bạn có chắc chắn muốn hủy thay đổi không?`);
         if (isCancel) {
             this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
+        }
+    }
+
+    lockInvoice() {
+        if (notEmpty(this.invoice_id) && this.invoice_id > 0) {
+            console.log('>>> Lock the invoice: ', this.invoice_id);
         }
     }
 
