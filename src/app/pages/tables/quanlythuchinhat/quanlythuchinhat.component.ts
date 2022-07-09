@@ -72,7 +72,11 @@ export class QuanlythuchinhatComponent implements OnInit {
       console.log(val)
       val.forEach(element => {
         if (element.hinhthucthanhtoan == "tienmat") {
-          this.totalthu += parseInt(element.sotien)
+          if (element.sotien == '') {
+            element.sotien = 0
+          }
+          this.totalthu += Number(element.sotien)
+          console.log('totalthu', this.totalthu)
           if (element.mucdich.includes('dh')) {
             this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
               element.mucdich = 'Mã ĐH: ' + data[0].madonhang
@@ -122,15 +126,15 @@ export class QuanlythuchinhatComponent implements OnInit {
 
 
 
-
+console.log('totalthu', this.totalthu)
 
 
 
       this.service.getquanlychijp().subscribe(val => {
 
         console.log(val)
-        this.datachi = val.filter(val=>val.hinhthucthanhtoan=="tienmat")
-        this.datatempchi = val.filter(val=>val.hinhthucthanhtoan=="tienmat")
+        this.datachi = val.filter(val => val.hinhthucthanhtoan == "tienmat")
+        this.datatempchi = val.filter(val => val.hinhthucthanhtoan == "tienmat")
 
         const res = this.datachi.reduce((acc, curr) => {
           if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
@@ -140,8 +144,10 @@ export class QuanlythuchinhatComponent implements OnInit {
         console.log('res', res)
 
         this.datachi.forEach(element => {
-
-          this.totalchi += parseInt(element.sotien)
+          if (element.sotien == '') {
+            element.sotien = 0
+          }
+          this.totalchi += Number(element.sotien)
           this.daterange.push(element.ngaytao)
           if (res[element.ngaytao].length > 1) {
             let tienchi = 0
@@ -152,11 +158,11 @@ export class QuanlythuchinhatComponent implements OnInit {
               mucdich = mucdich + ',' + element.mucdich
               hinhthucthanhtoan = element.hinhthucthanhtoan
             });
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': tienchi, 'mucdich': mucdich, 'hinhthucthanhtoan':hinhthucthanhtoan })
+            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': tienchi, 'mucdich': mucdich, 'hinhthucthanhtoan': hinhthucthanhtoan })
 
           }
           else {
-            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': element.sotien, 'mucdich': element.mucdich, 'hinhthucthanhtoan':element.hinhthucthanhtoan  })
+            this.datachiedit.push({ 'ngaytao': element.ngaytao, 'tienchi': element.sotien, 'mucdich': element.mucdich, 'hinhthucthanhtoan': element.hinhthucthanhtoan })
           }
 
         });
@@ -250,7 +256,7 @@ export class QuanlythuchinhatComponent implements OnInit {
           }
         });
         this.date1 = date
-        this.today =date
+        this.today = date
       });
 
 
@@ -353,7 +359,7 @@ export class QuanlythuchinhatComponent implements OnInit {
     });
   }
 
-  refresh(){
+  refresh() {
     window.location.reload()
   }
 }

@@ -71,7 +71,7 @@ export class QuanlythuchivnComponent implements OnInit {
       console.log(val)
       val.forEach(element => {
         if (element.hinhthucthanhtoan == "tienmat") {
-          this.totalthu += parseInt(element.sotien)
+          this.totalthu += Number(element.sotien)
           if (element.mucdich.includes('dh')) {
             this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
               element.mucdich = 'Mã ĐH: ' + data[0].madonhang
@@ -140,7 +140,7 @@ export class QuanlythuchivnComponent implements OnInit {
 
         this.datachi.forEach(element => {
 
-          this.totalchi += parseInt(element.sotien)
+          this.totalchi += Number(element.sotien)
           this.daterange.push(element.ngaytao)
           if (res[element.ngaytao].length > 1) {
             let tienchi = 0
