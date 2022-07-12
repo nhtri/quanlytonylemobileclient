@@ -249,7 +249,7 @@ export class BansanphamComponent implements OnInit {
     }
 
 
-
+    this.hoantattoggle = true
 
 
 
