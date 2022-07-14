@@ -76,6 +76,7 @@ export class InvoiceComponent implements OnInit {
     sale_date: Date;
     customer_id = null;
     invoice_id = 0;
+    isLocked: boolean = false;
 
     productColors = PRODUCT_COLORS;
 
@@ -107,7 +108,6 @@ export class InvoiceComponent implements OnInit {
             });
         });
         this.editData = window.history.state;
-        console.log('>>> this.editData: ', this.editData);
         this.sale_date = new Date();
         if (this.editData.invoice_id) {
             this.kaiService.getPurchasingInvoiceDetail(this.editData.invoice_id).subscribe((invoiceDetail) => {
@@ -118,6 +118,7 @@ export class InvoiceComponent implements OnInit {
                     this.customer = invoiceDetail.customer;
                     this.birthday = new Date(this.customer.birthday);
                     this.sale_date = new Date(invoiceDetail.sale_date);
+                    this.isLocked = notEmpty(invoiceDetail.locked) ? invoiceDetail.locked : false;
                     if (isEmpty(this.selectedJobs)) {
                         this.selectedJobs = PEOPLE_JOBS[0].value;
                         this.customer.job = this.selectedJobs;
@@ -345,7 +346,17 @@ export class InvoiceComponent implements OnInit {
 
     lockInvoice() {
         if (notEmpty(this.invoice_id) && this.invoice_id > 0) {
-            console.log('>>> Lock the invoice: ', this.invoice_id);
+            this.kaiService.lockPurchasingInvoice(this.invoice_id).subscribe((result) => {
+                this.isLocked = result.locked ?? false;
+            });
+        }
+    }
+
+    unlockInvoice() {
+        if (notEmpty(this.invoice_id) && this.invoice_id > 0) {
+            this.kaiService.unlockPurchasingInvoice(this.invoice_id).subscribe((result) => {
+                this.isLocked = result.locked ?? false;
+            });
         }
     }
 

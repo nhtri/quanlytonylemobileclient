@@ -100,6 +100,14 @@ export class KaiService extends RestService {
         return this.post<Invoice[]>(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/search`, purchasingInvoiceSearchParams);
     }
 
+    lockPurchasingInvoice(invoiceId: number): Observable<any> {
+        return this.getAll<any>(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/lock/${invoiceId}`);
+    }
+
+    unlockPurchasingInvoice(invoiceId: number): Observable<any> {
+        return this.getAll<any>(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/unlock/${invoiceId}`);
+    }
+
     // Create For Sale Invoice
     createForSaleInvoice(forSaleInvoiceData: ForSaleInvoiceDto): Observable<InvoiceDetail> {
         return this.create(`${SERVICE_RESOURCES.FOR_SALE_INVOICES}`, forSaleInvoiceData);
