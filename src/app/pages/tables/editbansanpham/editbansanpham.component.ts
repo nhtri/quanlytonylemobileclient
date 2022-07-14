@@ -163,7 +163,7 @@ export class EditbansanphamComponent implements OnInit {
     //   return obj.id == value;
     // });
     // this.sanphamremove.push(ob)
-    this.datasnew = this.datas.filter((obj) => {
+    this.datasnew = this.datasnew.filter((obj) => {
       return obj.id != value;
     });
     console.log('this.datasnew', this.datasnew)
@@ -174,7 +174,7 @@ export class EditbansanphamComponent implements OnInit {
 
     console.log("datas", this.datas)
 
-    this.datas.forEach(e => {
+    this.datasnew.forEach(e => {
       this.tongtienban += (parseInt(e.soluong) * parseInt(e.giaban))
       this.tongtienthu += parseInt(e.giatien)
     });
@@ -403,10 +403,11 @@ export class EditbansanphamComponent implements OnInit {
   }
 
   nhapsotienban(event, id) {
+    if (event.target.value == '') { event.target.value = 0 }
     this.tongtienban = 0
     this.tongtienthu = 0
     console.log(event.target.value, id)
-    this.datas.forEach(data => {
+    this.datasnew.forEach(data => {
       console.log('data.id', data.id)
       // data.sotienban = data.giaban
       if (data.id == id) {
@@ -467,8 +468,8 @@ export class EditbansanphamComponent implements OnInit {
     console.log("this.tienmat", this.tienmat)
     console.log("this.tienmat", this.daikibi)
     if (this.tienmat.toString() == '') { this.tienmat = 0 }
-    if (this.daikibi.toString() == '') { this.tienmat = 0 }
-    if (this.chuyenkhoan.toString() == '') { this.tienmat = 0 }
+    if (this.daikibi.toString() == '') { this.daikibi = 0 }
+    if (this.chuyenkhoan.toString() == '') { this.chuyenkhoan = 0 }
     this.tienconlai = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
 
     console.log("this.tienconlai", this.tienconlai)
@@ -560,7 +561,7 @@ export class EditbansanphamComponent implements OnInit {
                       }
                       // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
                       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-                      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan, this.thongtinkhachhang]).subscribe(value => {
+                      this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam", this.thongtinkhachhang]).subscribe(value => {
                         console.log(value)
                         alert("Mua Hàng Thành Công")
                         if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {

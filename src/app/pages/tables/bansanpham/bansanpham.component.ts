@@ -289,6 +289,7 @@ export class BansanphamComponent implements OnInit {
 
   nhapsotienban(event, id) {
     console.log(event.target.value, id)
+    if(event.target.value==''){event.target.value=0}
     this.datas.forEach(data => {
       console.log('data.id', data.id)
       if (data.id == id) {
@@ -349,8 +350,8 @@ export class BansanphamComponent implements OnInit {
     console.log("this.tienmat",this.tienmat)
     console.log("this.tienmat",this.daikibi)
     if(this.tienmat.toString() == ''){this.tienmat=0}
-    if(this.daikibi.toString() == ''){this.tienmat=0}
-    if(this.chuyenkhoan.toString() == ''){this.tienmat=0}
+    if(this.daikibi.toString() == ''){this.daikibi=0}
+    if(this.chuyenkhoan.toString() == ''){this.chuyenkhoan=0}
     this.tienconlai = this.tongtienban - this.tienmat - this.daikibi - this.chuyenkhoan
     
     console.log("this.tienconlai",this.tienconlai)
