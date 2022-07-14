@@ -76,6 +76,7 @@ export class InvoiceComponent implements OnInit {
     sale_date: Date;
     customer_id = null;
     invoice_id = 0;
+    isLocked: boolean = false;
 
     productColors = PRODUCT_COLORS;
 
@@ -107,7 +108,6 @@ export class InvoiceComponent implements OnInit {
             });
         });
         this.editData = window.history.state;
-        console.log('>>> this.editData: ', this.editData);
         this.sale_date = new Date();
         if (this.editData.invoice_id) {
             this.kaiService.getPurchasingInvoiceDetail(this.editData.invoice_id).subscribe((invoiceDetail) => {
@@ -118,6 +118,7 @@ export class InvoiceComponent implements OnInit {
                     this.customer = invoiceDetail.customer;
                     this.birthday = new Date(this.customer.birthday);
                     this.sale_date = new Date(invoiceDetail.sale_date);
+                    this.isLocked = notEmpty(invoiceDetail.locked) ? invoiceDetail.locked : false;
                     if (isEmpty(this.selectedJobs)) {
                         this.selectedJobs = PEOPLE_JOBS[0].value;
                         this.customer.job = this.selectedJobs;
@@ -234,33 +235,37 @@ export class InvoiceComponent implements OnInit {
     }
 
     onSubmit() {
-        alert("Đang thực hiện quá trình thu mua !!!")
-        this.onsaving = true
-        let display_order = 1;
-        const {payment_type} = this.invoice;
-        const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
-        this.invoice = {
-            invoice_id: this.invoice_id,
-            customer: this.customer,
-            products: this.products.map(p => {
-                p.display_order = display_order;
-                display_order++;
-                return p;
-            }),
-            sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
-            total_money: this.totalMoney,
-            quantity: this.getQuantity,
-            position: PRODUCT_SOURCE.SHOP_JP,
-            payment_type,
-            payment_detail,
-            payment_create_date: this.datePipe.transform(new Date(), DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
-        };
-        this.kaiService.purchasingInvoice(this.invoice).subscribe((purchasingInvoiceDetail) => {
-            if (notEmpty(purchasingInvoiceDetail)) {
-                alert(`Lưu Thành Công`);
-                this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
-            }
-        });
+        if (this.isLocked) {
+            this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
+        } else {
+            alert("Đang thực hiện quá trình thu mua !!!")
+            this.onsaving = true
+            let display_order = 1;
+            const {payment_type} = this.invoice;
+            const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
+            this.invoice = {
+                invoice_id: this.invoice_id,
+                customer: this.customer,
+                products: this.products.map(p => {
+                    p.display_order = display_order;
+                    display_order++;
+                    return p;
+                }),
+                sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
+                total_money: this.totalMoney,
+                quantity: this.getQuantity,
+                position: PRODUCT_SOURCE.SHOP_JP,
+                payment_type,
+                payment_detail,
+                payment_create_date: this.datePipe.transform(new Date(), DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
+            };
+            this.kaiService.purchasingInvoice(this.invoice).subscribe((purchasingInvoiceDetail) => {
+                if (notEmpty(purchasingInvoiceDetail)) {
+                    alert(`Lưu Thành Công`);
+                    this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
+                }
+            });
+        }
     }
 
     onChangePaymentMethod(selectedPaymentMethod) {
@@ -345,7 +350,17 @@ export class InvoiceComponent implements OnInit {
 
     lockInvoice() {
         if (notEmpty(this.invoice_id) && this.invoice_id > 0) {
-            console.log('>>> Lock the invoice: ', this.invoice_id);
+            this.kaiService.lockPurchasingInvoice(this.invoice_id).subscribe((result) => {
+                this.isLocked = result.locked ?? false;
+            });
+        }
+    }
+
+    unlockInvoice() {
+        if (notEmpty(this.invoice_id) && this.invoice_id > 0) {
+            this.kaiService.unlockPurchasingInvoice(this.invoice_id).subscribe((result) => {
+                this.isLocked = result.locked ?? false;
+            });
         }
     }
 
@@ -358,31 +373,35 @@ export class InvoiceComponent implements OnInit {
     }
 
     saveAndExport() {
-        alert("Đang thực hiện quá trình thu mua !!!")
-        this.onsaving = true
-        let display_order = 1;
-        const {payment_type} = this.invoice;
-        const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
-        this.invoice = {
-            invoice_id: this.invoice_id,
-            customer: this.customer,
-            products: this.products.map(p => {
-                p.display_order = display_order;
-                display_order++;
-                return p;
-            }),
-            sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
-            total_money: this.totalMoney,
-            quantity: this.getQuantity,
-            payment_type,
-            payment_detail,
-            payment_create_date: this.datePipe.transform(new Date(), DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
-        };
-
-        this.kaiService.saveAndDownloadPurchasingInvoice(this.invoice).subscribe(bufferResponse => {
-            this.excelService.saveAsExcelFile(bufferResponse, this.PURCHASING_REPORT_NAME);
-            alert(`Lưu Thành Công`);
+        if (this.isLocked) {
             this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
-        });
+        } else {
+            alert("Đang thực hiện quá trình thu mua !!!")
+            this.onsaving = true
+            let display_order = 1;
+            const {payment_type} = this.invoice;
+            const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
+            this.invoice = {
+                invoice_id: this.invoice_id,
+                customer: this.customer,
+                products: this.products.map(p => {
+                    p.display_order = display_order;
+                    display_order++;
+                    return p;
+                }),
+                sale_date: this.datePipe.transform(this.sale_date, DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
+                total_money: this.totalMoney,
+                quantity: this.getQuantity,
+                payment_type,
+                payment_detail,
+                payment_create_date: this.datePipe.transform(new Date(), DATE_CONSTANT.TECHNICAL_DATE_FORMAT),
+            };
+
+            this.kaiService.saveAndDownloadPurchasingInvoice(this.invoice).subscribe(bufferResponse => {
+                this.excelService.saveAsExcelFile(bufferResponse, this.PURCHASING_REPORT_NAME);
+                alert(`Lưu Thành Công`);
+                this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
+            });
+        }
     }
 }

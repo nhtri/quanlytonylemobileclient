@@ -370,13 +370,21 @@
                         <nb-icon class="mr-1" icon="close-square-outline"></nb-icon>
                         Hủy
                     </button>
-                    <button *ngIf="editData.invoice_id"
+                    <button *ngIf="editData.invoice_id && !isLocked"
                             pButton
                             class="btn p-button-sm p-button-secondary ml-1"
                             type="button"
                             (click)="lockInvoice()">
                         <nb-icon class="mr-1" icon="lock-outline"></nb-icon>
                         Khóa
+                    </button>
+                    <button *ngIf="editData.invoice_id && isLocked"
+                            pButton
+                            class="btn p-button-sm p-button-info ml-1"
+                            type="button"
+                            (click)="unlockInvoice()">
+                        <nb-icon class="mr-1" icon="lock-outline"></nb-icon>
+                        Mở Khóa
                     </button>
                     <button *ngIf="editData.invoice_id"
                             pButton
