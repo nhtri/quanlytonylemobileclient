@@ -17,7 +17,7 @@
 
       <thead>
         <tr>
-          <!-- <th>Đơn hàng</th> -->
+          <th>Đơn hàng</th>
           <!-- <th>Nhóm sản phẩm</th> -->
           <th>Tên sản phẩm</th>
           <!-- <th>Dung lượng</th>
@@ -27,6 +27,7 @@
           <th *ngIf="role == 'admin'">Giá thu</th>
           <th>Giá bán</th>
           <th>Số Lượng</th>
+          <th>Trạng Thái</th>
           <th>Thời gian bảo hành</th>
           <th>Ngày bán</th>
           <!-- <th></th>
@@ -34,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <!-- <td></td> -->
+        <td></td>
         <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
           (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
         </td> -->
@@ -86,20 +87,23 @@
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td><input type="date" style="margin-right: 5px;" [(ngModel)]="date1" (change)="change1()">-<input type="date" style="margin-left: 5px;" [(ngModel)]="date2" (change)="change2()"> <i class="fa fa-refresh" style="font-size:18px ;margin-left: 15px;" (click)="refresh()"></i></td>
         
         <tr *ngFor="let sanpham of data">
-          <!-- <td><a routerLink="/pages/tables/chitietdonhang"
-              [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td> -->
-          <!-- <td>{{sanpham.nhomsanpham}}</td> -->
+          <td><a routerLink="/pages/tables/chitietdonhang"
+              [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td> 
+            
+          <!-- <td>{{sanpham.nhomsanpham}}</td>
           <td>{{sanpham.tensanpham}}</td>
-          <!-- <td>{{sanpham.dungluong}}</td>
+           <td>{{sanpham.dungluong}}</td>
           <td>{{sanpham.loaisanpham}}</td>
           <td>{{sanpham.phienban}}</td> -->
           <td>{{sanpham.imei}}</td>
           <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice}}</td>
           <td>{{sanpham.giaban | productPrice}}</td>
           <td>{{sanpham.soluong}}</td>
+          <td>{{sanpham.status}}</td>
           <td>{{sanpham.thoihanbaohanh}}</td>
           <td>{{sanpham.ngayban| date: 'dd/MM/yyyy'}}</td>
           <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"

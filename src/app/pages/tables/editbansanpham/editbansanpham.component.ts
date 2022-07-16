@@ -75,6 +75,7 @@ export class EditbansanphamComponent implements OnInit {
               this.transactionkey = element.transactionkey
               this.tienmat = element.tienmat
               this.tongtienban = element.giatienban
+              this.tongtienthu += parseInt(element.giatien)
               this.daikibi = element.daikibi
               this.chuyenkhoan = element.chuyenkhoan
               this.vitri = element.vitri
@@ -82,7 +83,8 @@ export class EditbansanphamComponent implements OnInit {
             });
 
 
-
+            console.log("this.tongtienthu ", this.tongtienthu)
+            console.log("this.tongtienban ", this.tongtienban)
 
 
           })
@@ -106,6 +108,8 @@ export class EditbansanphamComponent implements OnInit {
             console.log("this.danhsachkhachhang", this.danhsachkhachhang)
           })
         }
+
+
 
 
 
@@ -305,7 +309,7 @@ export class EditbansanphamComponent implements OnInit {
                         }
                         // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
                         console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
-                        this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan, this.thongtinkhachhang]).subscribe(value => {
+                        this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tongtienban, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan, this.thongtinkhachhang]).subscribe(value => {
                           console.log(value)
                           alert("Mua Hàng Thành Công")
                           if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
