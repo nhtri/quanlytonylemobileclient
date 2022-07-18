@@ -15,7 +15,7 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
 
     datadaxuly;
     role;
-
+    soluongsanpham=0
 
     datamau = PRODUCT_COLORS.map(x => {
         return {
@@ -45,7 +45,9 @@ export class QuanlydanhsachsanphamvnComponent implements OnInit {
             this.source.load(this.dataedit);
             this.data = val;
 
-
+            this.data.forEach(element => {
+                this.soluongsanpham += element.quantity
+            });
         });
 
         this.service.getproductgroups().subscribe(val => {

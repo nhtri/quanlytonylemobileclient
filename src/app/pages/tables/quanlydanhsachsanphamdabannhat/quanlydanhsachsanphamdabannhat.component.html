@@ -93,9 +93,9 @@
         <tr *ngFor="let sanpham of data">
           <td><a routerLink="/pages/tables/chitietdonhang"
               [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td> 
-            
+              <td>{{sanpham.tensanpham}}</td>
           <!-- <td>{{sanpham.nhomsanpham}}</td>
-          <td>{{sanpham.tensanpham}}</td>
+     
            <td>{{sanpham.dungluong}}</td>
           <td>{{sanpham.loaisanpham}}</td>
           <td>{{sanpham.phienban}}</td> -->

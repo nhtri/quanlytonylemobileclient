@@ -55,9 +55,9 @@
                     <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
                             style="height: 22px; width: 60px; border-radius: 5px;"
                             (change)="thaydoisoluong($event,sanpham.id)" [value]="sanpham.soluong"></td>
-                    <td *ngIf="role == 'admin'">{{sanpham.giatien/sanpham.soluong}}</td>
+                    <td *ngIf="role == 'admin'">{{sanpham.giathu}}</td>
                     <!-- <td *ngIf="role == 'admin' && sanpham.price!=null">{{sanpham.price}}</td> -->
-                    <td>{{sanpham.estimated_price}}</td>
+                    <td>{{sanpham.estimated_price || number}}</td>
                     <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;"
                             [value]="sanpham.giaban" (change)="nhapsotienban($event,sanpham.id)"></td>
 

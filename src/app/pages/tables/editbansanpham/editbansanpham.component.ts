@@ -64,11 +64,14 @@ export class EditbansanphamComponent implements OnInit {
             value.forEach(element => {
 
               element.giaban = element.giaban / element.soluong
+              element.giathu = element.giatien
+
               console.log('element', element)
               this.datasnew.push(element)
               this.datas.push(element)
               this.tienmat = element.estimated_price
               this.tenkhachhang = element.tenkhachhang
+              this.thongtinkhachhang = element.tenkhachhang
               this.hinhthucthanhtoanmodel = element.hinhthucthanhtoan
               this.thoihanbaohanhmodel = element.thoihanbaohanh
               this.hinhthucthanhtoan = element.hinhthucthanhtoan
@@ -112,7 +115,7 @@ export class EditbansanphamComponent implements OnInit {
 
 
 
-
+;
       })
 
   }
@@ -567,17 +570,17 @@ export class EditbansanphamComponent implements OnInit {
                       console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
                       this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon, this.tienmat, this.daikibi, this.chuyenkhoan, "luutam", this.thongtinkhachhang]).subscribe(value => {
                         console.log(value)
-                        alert("Mua Hàng Thành Công")
+                        alert("Lưu đơn hàng thành công")
                         if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
-                          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
+                          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangcho')
                           console.log(this.vitri)
                         }
                         if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'trahet') {
-                          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
+                          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchovn')
                           console.log(this.vitri)
                         }
                         if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'trahet') {
-                          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
+                          this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangchojp')
                           console.log(this.vitri)
                         }
 
@@ -626,33 +629,47 @@ export class EditbansanphamComponent implements OnInit {
   hoantatvaxuathoadon() { }
 
   themsanpham() {
-    this.service.getsanphamemei([this.imeisanphamthem]).subscribe(value => {
-      console.log('value value', value)
-      this.datasnew.push(value[0])
-      this.datasnew[this.datasnew.length - 1].giaban = value[0].estimated_price
-      this.datasnew[this.datasnew.length - 1].sotienban = value[0].estimated_price
-      this.datasnew[this.datasnew.length - 1].giatien = value[0].price
-      this.datasnew[this.datasnew.length - 1].quantitytemp = value[0].quantity
-      this.datasnew[this.datasnew.length - 1].quantity = 1
-      this.datasnew[this.datasnew.length - 1].soluong = 1
-      this.datasnew[this.datasnew.length - 1].vitri = value[0].position
-      this.datasnew[this.datasnew.length - 1].productid = value[0].id
-      this.datasnew[this.datasnew.length - 1].soluong = value[0].quantity
-      this.tongtienthu = 0
-      this.tongtienban = 0
-      this.tienmat = 0
-      console.log('datas datas', this.datasnew)
-      this.datasnew.forEach(e => {
-        console.log("e.giaban", e.giaban, "e.soluong", e.soluong)
-        this.tongtienban += parseInt(e.soluong) * parseInt(e.giaban)
-        this.tongtienthu += parseInt(e.giatien)
-      });
-      this.tienhoadon = this.tongtienban.toString()
+    let dupimei = false
 
-      console.log(this.hinhthucthanhtoan)
-      console.log("tongtienban", this.tongtienban)
-      this.tienmat = this.tongtienban
-    })
+    this.datasnew.forEach(element => {
+      if (element.imei == this.imeisanphamthem) {
+        element.soluong = parseInt(element.soluong) + 1
+        dupimei = true
+      }
+    });
 
+    if (!dupimei) {
+
+
+      this.service.getsanphamemei([this.imeisanphamthem]).subscribe(value => {
+        console.log('value value', value)
+        this.datasnew.push(value[0])
+        this.datasnew[this.datasnew.length - 1].giaban = value[0].estimated_price
+        this.datasnew[this.datasnew.length - 1].sotienban = value[0].estimated_price
+        this.datasnew[this.datasnew.length - 1].giatien = value[0].price
+        this.datasnew[this.datasnew.length - 1].quantitytemp = value[0].quantity
+        this.datasnew[this.datasnew.length - 1].quantity = 1
+        this.datasnew[this.datasnew.length - 1].soluong = 1
+        this.datasnew[this.datasnew.length - 1].vitri = value[0].position
+        this.datasnew[this.datasnew.length - 1].productid = value[0].id
+        this.datasnew[this.datasnew.length - 1].soluong = value[0].quantity
+        this.datasnew[this.datasnew.length - 1].giathu = value[0].price
+        this.tongtienthu = 0
+        this.tongtienban = 0
+        this.tienmat = 0
+        console.log('datas datas', this.datasnew)
+        this.datasnew.forEach(e => {
+          console.log("e.giaban", e.giaban, "e.soluong", e.soluong)
+          this.tongtienban += parseInt(e.soluong) * parseInt(e.giaban)
+          this.tongtienthu += parseInt(e.giatien)
+        });
+        this.tienhoadon = this.tongtienban.toString()
+
+        console.log(this.hinhthucthanhtoan)
+        console.log("tongtienban", this.tongtienban)
+        this.tienmat = this.tongtienban
+      })
+
+    }
   }
 }
