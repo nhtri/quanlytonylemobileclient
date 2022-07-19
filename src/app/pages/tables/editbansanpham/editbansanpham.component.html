@@ -7,13 +7,12 @@
         <!-- <div>Tổng số sản phẩm: {{tongsosanpham}}</div> -->
         <br>
         <div style="display: flex">
-        <input type="text"
-            style="height: 32px; width: 180px; border-radius: 5px; margin-right: 15px;" [(ngModel)]="imeisanphamthem"
-          >
-          <button  (click)="themsanpham()" (dblclick)="themsanpham()"
+            <input type="text" style="height: 32px; width: 180px; border-radius: 5px; margin-right: 15px;"
+                [(ngModel)]="imeisanphamthem">
+            <button (click)="themsanpham()" (dblclick)="themsanpham()"
                 style="margin-right: 15px; height: 32px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
                 Thêm Sản Phẩm</button>
-            </div>
+        </div>
         <br>
 
         <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
@@ -27,12 +26,13 @@
                     <!-- <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;" routerLink="/pages/tables/bansanpham"
           [queryParams]={id:[danhsachidsanpham]}></i>
       </th> -->
+                    <th>Số lượng</th>
                     <th>Id</th>
                     <th>Tên sản phẩm</th>
                     <th>Imei</th>
                     <th>Màu sắc</th>
                     <th>Tình trạng</th>
-                    <th>Số lượng</th>
+                    <!-- <th>Số lượng</th> -->
                     <th *ngIf="role == 'admin'">Giá thu</th>
                     <th>Giá bán dự kiến</th>
                     <th>Giá bán</th>
@@ -44,6 +44,9 @@
             <tbody>
 
                 <tr *ngFor="let sanpham of datasnew">
+                    <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
+                            style="height: 22px; width: 60px; border-radius: 5px;"
+                            (change)="thaydoisoluong($event,sanpham.id)" [value]="sanpham.soluong"></td>
                     <td>{{sanpham.id}}</td>
                     <td>{{sanpham.name}}</td>
                     <td>{{sanpham.imei}}</td>
@@ -52,9 +55,9 @@
 
 
 
-                    <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
+                    <!-- <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
                             style="height: 22px; width: 60px; border-radius: 5px;"
-                            (change)="thaydoisoluong($event,sanpham.id)" [value]="sanpham.soluong"></td>
+                            (change)="thaydoisoluong($event,sanpham.id)" [value]="sanpham.soluong"></td> -->
                     <td *ngIf="role == 'admin'">{{sanpham.giathu}}</td>
                     <!-- <td *ngIf="role == 'admin' && sanpham.price!=null">{{sanpham.price}}</td> -->
                     <td>{{sanpham.estimated_price || number}}</td>
