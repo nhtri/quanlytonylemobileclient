@@ -247,6 +247,50 @@ export class ThongkeComponent implements OnInit {
           this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
           console.log("this.tongloinhuan", this.tongloinhuan)
         });
+
+
+
+
+
+        // _____________________________________
+
+        if (this.date2 == "") {
+          this.data = []
+          console.log(this.date1, this.date2)
+          console.log('this.datatemp', this.datatemp)
+          this.datatemp.forEach(element => {
+            console.log('element.ngaytao', element.ngayban)
+            if (this.date1 == element.ngayban) {
+              this.data.push(element)
+              console.log('this.data', this.data)
+            }
+          });
+        }
+        if (this.date2 != "") {
+          this.data = []
+          this.daterange = []
+          console.log(this.date1, this.date2)
+          var currentDate = new Date(this.date1);
+          while (currentDate <= new Date(this.date2)) {
+            this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+            currentDate.setDate(currentDate.getDate() + 1)
+          }
+    
+          this.datatemp.forEach(element1 => {
+            console.log('element.ngaytao', element1.ngayban)
+            this.daterange.forEach(element2 => {
+              if (element2 == element1.ngayban) {
+                this.data.push(element1)
+              }
+            });
+    
+          });}
+          console.log(this.daterange)
+          this.tongloinhuantheothang = 0
+          this.data.forEach(element => {
+            this.tongloinhuantheothang += (parseInt(element.giatienban) - parseInt(element.giatien))
+            console.log("this.tongloinhuan", this.tongloinhuan)
+          });
       });
 
     }
@@ -264,6 +308,49 @@ export class ThongkeComponent implements OnInit {
           this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
           console.log("this.tongloinhuan", this.tongloinhuan)
         });
+
+
+
+
+        // _______________________________________
+
+        if (this.date2 == "") {
+          this.data = []
+          console.log(this.date1, this.date2)
+          console.log('this.datatemp', this.datatemp)
+          this.datatemp.forEach(element => {
+            console.log('element.ngaytao', element.ngayban)
+            if (this.date1 == element.ngayban) {
+              this.data.push(element)
+              console.log('this.data', this.data)
+            }
+          });
+        }
+        if (this.date2 != "") {
+          this.data = []
+          this.daterange = []
+          console.log(this.date1, this.date2)
+          var currentDate = new Date(this.date1);
+          while (currentDate <= new Date(this.date2)) {
+            this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+            currentDate.setDate(currentDate.getDate() + 1)
+          }
+    
+          this.datatemp.forEach(element1 => {
+            console.log('element.ngaytao', element1.ngayban)
+            this.daterange.forEach(element2 => {
+              if (element2 == element1.ngayban) {
+                this.data.push(element1)
+              }
+            });
+    
+          });}
+          console.log(this.daterange)
+          this.tongloinhuantheothang = 0
+          this.data.forEach(element => {
+            this.tongloinhuantheothang += (parseInt(element.giatienban) - parseInt(element.giatien))
+            console.log("this.tongloinhuan", this.tongloinhuan)
+          });
       });
 
     }
@@ -278,9 +365,56 @@ export class ThongkeComponent implements OnInit {
           this.tongloinhuan += (parseInt(element.giatienban) - parseInt(element.giatien))
           console.log("this.tongloinhuan", this.tongloinhuan)
         });
+
+
+        // ___________________________________________
+
+
+        if (this.date2 == "") {
+          this.data = []
+          console.log(this.date1, this.date2)
+          console.log('this.datatemp', this.datatemp)
+          this.datatemp.forEach(element => {
+            console.log('element.ngaytao', element.ngayban)
+            if (this.date1 == element.ngayban) {
+              this.data.push(element)
+              console.log('this.data', this.data)
+            }
+          });
+        }
+        if (this.date2 != "") {
+          this.data = []
+          this.daterange = []
+          console.log(this.date1, this.date2)
+          var currentDate = new Date(this.date1);
+          while (currentDate <= new Date(this.date2)) {
+            this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
+            currentDate.setDate(currentDate.getDate() + 1)
+          }
+    
+          this.datatemp.forEach(element1 => {
+            console.log('element.ngaytao', element1.ngayban)
+            this.daterange.forEach(element2 => {
+              if (element2 == element1.ngayban) {
+                this.data.push(element1)
+              }
+            });
+    
+          });}
+          console.log(this.daterange)
+          this.tongloinhuantheothang = 0
+          this.data.forEach(element => {
+            this.tongloinhuantheothang += (parseInt(element.giatienban) - parseInt(element.giatien))
+            console.log("this.tongloinhuan", this.tongloinhuan)
+          });
       });
 
     }
+
+
+
+
+    
   }
 
 

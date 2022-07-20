@@ -30,6 +30,7 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
         };
     });
     status = false
+    soluongsanpham = 0
     constructor(
         private service: NetworkserviceService,
         private productStatusPipe: ProductStatusPipe,
@@ -56,7 +57,9 @@ export class QuanlydanhsachsanphamComponent implements OnInit {
             this.dataedit = val
             this.source.load(this.dataedit);
             this.data = val;
-
+            this.data.forEach(element => {
+                this.soluongsanpham += element.quantity
+            });
 
         });
 

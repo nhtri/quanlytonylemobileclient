@@ -57,9 +57,9 @@
           <!-- <td>{{sanpham.danhsachimei}}</td> -->
           <td>{{sanpham.soluongmay}}</td>
           <td>{{sanpham.ngayban}}</td>
-          <td *ngIf="sanpham.hinhthucthanhtoan == 'tienmat'">Tiền Mặt</td>
-          <td *ngIf="sanpham.hinhthucthanhtoan == 'daibiki'">Daibiki</td>
-          <td *ngIf="sanpham.hinhthucthanhtoan == 'chuyenkhoan'">Chuyển Khoản</td>
+          <td *ngIf="sanpham.tienmat != '0' && sanpham.tienmat != '' && sanpham.tienmat != null">Tiền Mặt</td>
+          <td *ngIf="sanpham.daikibi != '0' && sanpham.daikibi != '' && sanpham.daikibi != null">Daibiki</td>
+          <td *ngIf="sanpham.chuyenkhoan != '0'  && sanpham.chuyenkhoan != '' && sanpham.chuyenkhoan != null">Chuyển Khoản</td>
           <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
         [queryParams]={id:[sanpham.id]}></i></td>
     <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
