@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+import { PRODUCT_SOURCE } from '../../../@core/constant/common';
+import { notEmpty } from '../../../@core/utils/data.utils';
+import { KaiService } from '../../../services/kai.service';
+import { ExcelService } from '../../../services/excel.service';
 
 @Component({
   selector: 'ngx-editbansanpham',
@@ -38,7 +42,12 @@ export class EditbansanphamComponent implements OnInit {
   transactionkey
   imeisanphamthem
   sanphamremove = []
-  constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
+
+  SELLING_REPORT_NAME = 'xuat_ban';
+
+  constructor(private kaiService: KaiService,
+              private excelService: ExcelService,
+              private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
       .subscribe(params => {
@@ -214,7 +223,7 @@ export class EditbansanphamComponent implements OnInit {
     this.tienmat = this.tongtienban
   }
 
-  hoantat() {
+  hoantat(isExport = false) {
 
 
 
@@ -315,31 +324,7 @@ export class EditbansanphamComponent implements OnInit {
                         this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tongtienban, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan, this.thongtinkhachhang]).subscribe(value => {
                           console.log(value)
                           alert("Mua Hàng Thành Công")
-                          if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'trahet') {
-                            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhang')
-                            console.log(this.vitri)
-                          }
-                          if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'trahet') {
-                            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangvn')
-                            console.log(this.vitri)
-                          }
-                          if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'trahet') {
-                            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangjp')
-                            console.log(this.vitri)
-                          }
-
-                          if (this.vitri == "WAREHOUSE" && this.hinhthucthanhtoan == 'datcoc') {
-                            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcoc')
-                            console.log(this.vitri)
-                          }
-                          if (this.vitri == "SHOP_VN" && this.hinhthucthanhtoan == 'datcoc') {
-                            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocvn')
-                            console.log(this.vitri)
-                          }
-                          if (this.vitri == "SHOP_JP" && this.hinhthucthanhtoan == 'datcoc') {
-                            this.router.navigateByUrl('/pages/tables/quanlydanhsachdonhangdatcocjp')
-                            console.log(this.vitri)
-                          }
+                          this.backToPage(this.vitri, this.hinhthucthanhtoan);
                         })
                       }
 
@@ -354,6 +339,18 @@ export class EditbansanphamComponent implements OnInit {
             })
           })
 
+        }
+
+
+        if (isExport) {
+          this.kaiService.downloadSellingInvoiceReport({
+            invoice_id: this.id[0],
+            position: this.vitri,
+          }).subscribe(bufferResponse => {
+            this.excelService.saveAsExcelFile(
+                bufferResponse, this.SELLING_REPORT_NAME,
+            );
+          });
         }
 
 
@@ -375,6 +372,26 @@ export class EditbansanphamComponent implements OnInit {
 
 
 
+  }
+
+
+  backToPage(position = PRODUCT_SOURCE.SHOP_JP.toString(), paymentType = 'trahet') {
+    let navigateUrl = '/pages/tables/quanlydanhsachdonhang';
+    switch (position) {
+      case PRODUCT_SOURCE.SHOP_JP:
+        navigateUrl = `${navigateUrl}${paymentType === 'datcoc' ? 'datcoc' : ''}jp`;
+        break;
+      case PRODUCT_SOURCE.SHOP_VN:
+        navigateUrl = `${navigateUrl}${paymentType === 'datcoc' ? 'datcoc' : ''}vn`;
+        break;
+      case PRODUCT_SOURCE.WAREHOUSE:
+      default:
+        // Do nothing
+        break;
+    }
+    if (notEmpty(navigateUrl)) {
+      this.router.navigateByUrl(navigateUrl).then((r) => r);
+    }
   }
 
   changetienkhachdua(event) {

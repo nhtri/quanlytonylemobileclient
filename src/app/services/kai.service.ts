@@ -82,6 +82,15 @@ export class KaiService extends RestService {
 
     }
 
+    downloadSellingInvoiceReport(sellingReportRequestDto) {
+        return this.http.post(this.requestUrl(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/selling/report`),
+            sellingReportRequestDto,
+            {
+                responseType: 'arraybuffer',
+            });
+
+    }
+
     saveAndDownloadPurchasingInvoice(purchasingInvoiceDto: PurchasingInvoiceDto) {
         return this.http.post(
             this.requestUrl(`${SERVICE_RESOURCES.PURCHASING_INVOICES}/save-and-report`),
