@@ -118,8 +118,8 @@
           <!-- <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
               style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham.id)"
               [value]="1"></td> -->
-          <td *ngIf="role == 'admin'">{{sanpham.price|number}}</td>
-          <td>{{sanpham.estimated_price|number}}</td>
+          <td *ngIf="role == 'admin'">{{sanpham.price|productPrice : position}}</td>
+          <td>{{sanpham.estimated_price|productPrice : position}}</td>
           <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;"
               [value]="sanpham.estimated_price" (change)="nhapsotienban($event,sanpham.id)"></td>
 

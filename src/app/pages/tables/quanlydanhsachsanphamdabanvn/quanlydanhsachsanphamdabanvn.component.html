@@ -107,8 +107,8 @@
           <td>{{sanpham.loaisanpham}}</td>
           <td>{{sanpham.phienban}}</td> -->
           <td>{{sanpham.imei}}</td>
-          <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice}}</td>
-          <td>{{sanpham.giaban | productPrice}}</td>
+          <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice : shopSource}}</td>
+          <td>{{sanpham.giaban | productPrice : shopSource}}</td>
           <td>{{sanpham.soluong}}</td>
           <td>{{sanpham.status}}</td>
           <td>{{sanpham.thoihanbaohanh}}</td>

@@ -97,7 +97,7 @@
     <td>{{sanpham.color}}</td>
     <td>{{sanpham.status | productStatus}}</td>
     <td>{{sanpham.quantity}}</td>
-    <td *ngIf="role == 'admin'">{{sanpham.price | productPrice }}</td>
+    <td *ngIf="role == 'admin'">{{sanpham.price | productPrice : shopSource}}</td>
     <td>{{sanpham.estimated_price| productPrice: shopSource}}</td>
     <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
     [queryParams]={id:[sanpham.id]}></i></td>
