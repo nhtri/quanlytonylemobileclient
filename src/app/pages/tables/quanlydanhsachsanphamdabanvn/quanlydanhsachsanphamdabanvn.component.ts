@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
+import {PRODUCT_SOURCE} from '../../../@core/constant/common';
 
 @Component({
   selector: 'ngx-quanlydanhsachsanphamdabanvn',
@@ -49,6 +50,8 @@ export class QuanlydanhsachsanphamdabanvnComponent implements OnInit {
   nhomsp=""
   tensp=""
   imeisp=""
+
+  shopSource = PRODUCT_SOURCE.SHOP_VN;
   constructor(private service: NetworkserviceService, private router: Router) {
 
     this.service.getdanhsachsanphamdabanquanlymobilevn().subscribe(value => {

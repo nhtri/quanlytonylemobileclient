@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+import {PRODUCT_SOURCE} from '../../../@core/constant/common';
+import {notEmpty} from '../../../@core/utils/data.utils';
 
 @Component({
   selector: 'ngx-chitietdonhang',
@@ -22,7 +24,9 @@ export class ChitietdonhangComponent implements OnInit {
   chuyenkhoancanthanhtoan = '0'
   tonggiatien = '0'
   duyetdon = ''
-  tiencanthanhtoan = 0
+  tiencanthanhtoan = 0;
+
+  shopSource = PRODUCT_SOURCE.SHOP_JP;
   
   constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
     this.role = localStorage.getItem('role')
@@ -30,11 +34,15 @@ export class ChitietdonhangComponent implements OnInit {
       .subscribe(params => {
         console.log("params.id[0]", params.id[0])
         console.log("params.id", params.id)
+        console.log('>>>params: ', params);
         if (params.id.length == 1) {
           this.madonhang = params.id[0]
         }
         else {
           this.madonhang = params.id
+        }
+        if (notEmpty(params.possition)) {
+          this.shopSource = params.position[0] ?? PRODUCT_SOURCE.SHOP_JP;
         }
         // this.madonhang = params.id[0]
         this.service.getdanhsachdonhangquanlymobileid([this.madonhang]).subscribe(value => {

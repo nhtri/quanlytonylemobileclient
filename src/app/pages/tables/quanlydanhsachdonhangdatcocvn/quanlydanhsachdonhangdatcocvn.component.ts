@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
+import {PRODUCT_SOURCE} from '../../../@core/constant/common';
 @Component({
   selector: 'ngx-quanlydanhsachdonhangdatcocvn',
   templateUrl: './quanlydanhsachdonhangdatcocvn.component.html',
@@ -22,7 +23,7 @@ export class QuanlydanhsachdonhangdatcocvnComponent implements OnInit {
   danhsachidsanpham = []
   taomoisanpham = false
 
-
+  shopSource = PRODUCT_SOURCE.SHOP_VN;
   datanhomsanphamtaomoi = ""
   datatensanphamtaomoi = ""
   datadungluongtaomoi = ""
