@@ -92,16 +92,16 @@ export class QuanlythuComponent implements OnInit {
           //   }
           // });
 
-          this.totalmoney += parseInt(element.sotien)
+          this.totalmoney += Number(element.sotien)
 
           if (element.hinhthucthanhtoan == 'tienmat') {
-            this.tienmat += parseInt(element.sotien)
+            this.tienmat += Number(element.sotien)
           }
           if (element.hinhthucthanhtoan == 'daibiki') {
-            this.daibiki += parseInt(element.sotien)
+            this.daibiki += Number(element.sotien)
           }
           if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-            this.chuyenkhoan += parseInt(element.sotien)
+            this.chuyenkhoan += Number(element.sotien)
           }
         }
       });

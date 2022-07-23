@@ -25,6 +25,9 @@ export class QuanlythunhatComponent implements OnInit {
     this.service.getquanlythujp().subscribe(val => {
       console.log(val)
       val.forEach(element => {
+        if(element.sotien == null){
+          element.sotien = '0'
+        }
         // this.totalmoney += parseInt(element.sotien)
         if (element.mucdich.includes('dh')) {
           this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
@@ -93,16 +96,16 @@ export class QuanlythunhatComponent implements OnInit {
           //   }
           // });
 
-          this.totalmoney += parseInt(element.sotien)
+          this.totalmoney += Number(element.sotien)
 
           if (element.hinhthucthanhtoan == 'tienmat') {
-            this.tienmat += parseInt(element.sotien)
+            this.tienmat += Number(element.sotien)
           }
           if (element.hinhthucthanhtoan == 'daibiki') {
-            this.daibiki += parseInt(element.sotien)
+            this.daibiki += Number(element.sotien)
           }
           if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-            this.chuyenkhoan += parseInt(element.sotien)
+            this.chuyenkhoan += Number(element.sotien)
           }
         }
       });
