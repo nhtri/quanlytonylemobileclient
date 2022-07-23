@@ -37,6 +37,8 @@ export class BansanphamComponent implements OnInit {
 
     SELLING_REPORT_NAME = 'xuat_ban';
 
+    amount
+
     constructor(
         private service: NetworkserviceService,
         private kaiService: KaiService,
