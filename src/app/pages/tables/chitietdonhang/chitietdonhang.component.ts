@@ -41,8 +41,8 @@ export class ChitietdonhangComponent implements OnInit {
         else {
           this.madonhang = params.id
         }
-        if (notEmpty(params.possition)) {
-          this.shopSource = params.position[0] ?? PRODUCT_SOURCE.SHOP_JP;
+        if (notEmpty(params.position)) {
+          this.shopSource = params.position ?? PRODUCT_SOURCE.SHOP_JP;
         }
         // this.madonhang = params.id[0]
         this.service.getdanhsachdonhangquanlymobileid([this.madonhang]).subscribe(value => {

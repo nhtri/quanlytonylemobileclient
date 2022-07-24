@@ -5,6 +5,7 @@ import { PRODUCT_SOURCE } from '../../../@core/constant/common';
 import { notEmpty } from '../../../@core/utils/data.utils';
 import { KaiService } from '../../../services/kai.service';
 import { ExcelService } from '../../../services/excel.service';
+import { CurrencyMaskService } from '../../../@core/shared/directives/currency-mask/currency-mask.service';
 
 @Component({
     selector: 'ngx-bansanpham',
@@ -37,10 +38,13 @@ export class BansanphamComponent implements OnInit {
 
     SELLING_REPORT_NAME = 'xuat_ban';
 
+    shopSource;
+
     constructor(
         private service: NetworkserviceService,
         private kaiService: KaiService,
         private excelService: ExcelService,
+        private currencyMaskService: CurrencyMaskService,
         private route: ActivatedRoute,
         private router: Router,
     ) {
@@ -59,6 +63,7 @@ export class BansanphamComponent implements OnInit {
                 } else {
                     this.position = params.position.split(',');
                 }
+                this.shopSource = (this.position[0] ?? 'SHOP_JP') as unknown as PRODUCT_SOURCE;
                 console.log('this.id', this.id);
                 console.log('this.position', this.position);
                 this.id.forEach(element => {
@@ -324,7 +329,7 @@ export class BansanphamComponent implements OnInit {
         this.datas.forEach(data => {
                 console.log('data.id', data.id);
                 if (data.id == id) {
-                    data.sotienban = event.target.value;
+                    data.sotienban = this.currencyMaskService.parse(event.target.value, false);
                 }
                 console.log('data.quantity', data.quantity);
                 console.log('data', data);
