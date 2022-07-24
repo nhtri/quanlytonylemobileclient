@@ -41,8 +41,8 @@
     <td>{{sanpham.phienban}}</td> -->
           <td>{{sanpham.soluong}}</td>
           <td>{{sanpham.imei}}</td>
-          <td *ngIf="role == 'admin'">{{sanpham.giatien}}</td>
-          <td>{{sanpham.giaban}}</td>
+          <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice: shopSource}}</td>
+          <td>{{sanpham.giaban | productPrice: shopSource}}</td>
           <td>{{sanpham.thoihanbaohanh}}</td>
           <td>{{sanpham.ngayban}}</td>
           <td>{{sanpham.tenkhachhang}}</td>
@@ -57,22 +57,22 @@
     </table>
     <br />
     <div *ngIf="tienmat == '0' && daikibi =='0' && chuyenkhoan=='0'">Thanh Toán Tiền Mặt: {{tonggiatien}}</div>
-    <div>Thanh Toán Tiền Mặt: {{tienmat}}</div>
-    <div>Thanh Toán Daikibi: {{daikibi}}</div>
-    <div>Thanh Toán Chuyển Khoản: {{chuyenkhoan}}</div>
+    <div>Thanh Toán Tiền Mặt: {{tienmat | productPrice: shopSource }}</div>
+    <div>Thanh Toán Daikibi: {{daikibi | productPrice: shopSource }}</div>
+    <div>Thanh Toán Chuyển Khoản: {{chuyenkhoan | productPrice: shopSource }}</div>
     <br />
   </nb-card-body>
   <nb-card-footer *ngIf="duyetdon=='datcoc'">
     
-    <div style="font-weight: 600">Số Tiền Cần Thanh Toán: {{tiencanthanhtoan}}</div>
+    <div style="font-weight: 600">Số Tiền Cần Thanh Toán: {{tiencanthanhtoan | productPrice: shopSource }}</div>
     <div  style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền Mặt:
-      <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+      <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
         [(ngModel)]="tienmatcanthanhtoan" (change)="thaydoisotienthanhtoan()"></div>
-    <div  style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi: <input
+    <div  style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi: <input ngxCurrencyMask [shopSource]="shopSource"
         type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" [(ngModel)]="daikibicanthanhtoan"
         (change)="thaydoisotienthanhtoan()"></div>
     <div style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Chuyển Khoản:
-      <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+      <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
         [(ngModel)]="chuyenkhoancanthanhtoan" (change)="thaydoisotienthanhtoan()"></div>
  
 

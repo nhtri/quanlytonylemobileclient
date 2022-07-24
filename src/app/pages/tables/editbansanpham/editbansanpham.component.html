@@ -60,11 +60,11 @@
                     <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
                             style="height: 22px; width: 60px; border-radius: 5px;"
                             (change)="thaydoisoluong($event,sanpham.id)" [value]="sanpham.soluong"></td>
-                    <td *ngIf="role == 'admin'">{{sanpham.giathu}}</td>
+                    <td *ngIf="role == 'admin'">{{sanpham.giathu | productPrice: shopSource}}</td>
                     <!-- <td *ngIf="role == 'admin' && sanpham.price!=null">{{sanpham.price}}</td> -->
-                    <td>{{sanpham.estimated_price || number}}</td>
-                    <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;"
-                            [value]="sanpham.giaban" (change)="nhapsotienban($event,sanpham.id)"></td>
+                    <td>{{sanpham.estimated_price | productPrice: shopSource}}</td>
+                    <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
+                               [(ngModel)]="sanpham.giaban" (change)="nhapsotienban($event,sanpham.id)"></td>
 
                     <td> <select name="baohanh" id="baohanh" (change)="changehinhthucbaohanh($event,sanpham.id)"
                             style="height: 22px; border-radius: 5px; width: 80px; "
@@ -114,30 +114,30 @@
 
             <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tổng
                 Tiền:
-                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="tongtienban" disabled>
             </div>
             <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Tiền Mặt:
-                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="tienmat" (change)="thaydoisotienthanhtoan()">
             </div>
             <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi:
-                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="daikibi" (change)="thaydoisotienthanhtoan()">
             </div>
             <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Chuyển
                 Khoản:
-                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="chuyenkhoan" (change)="thaydoisotienthanhtoan()">
             </div>
             <div *ngIf="hinhthucthanhtoan=='trahet'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">
                 Tiền
-                Thừa: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+                Thừa: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="tienthua" disabled></div>
             <div *ngIf="hinhthucthanhtoan=='datcoc'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">
                 Tiền
                 Còn
-                Lại: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;"
+                Lại: <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="tienconlai"></div>
 
         </div>
