@@ -509,11 +509,26 @@ export class NetworkserviceService {
         const get = 'https://quanlytonylemobile.herokuapp.com/getquanlythujp';
         return this.httpClient.get<any>(get);
     }
+
     getquanlythuvn() {
         const get = 'https://quanlytonylemobile.herokuapp.com/getquanlythuvn';
         return this.httpClient.get<any>(get);
     }
 
+    getsotienthubangtienmat() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getsotienthubangtienmat';
+        return this.httpClient.get<any>(get);
+    }
+
+    getsotienthubangtienmatvn() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getsotienthubangtienmatvn';
+        return this.httpClient.get<any>(get);
+    }
+
+    getsotienthubangtienmatnhat() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getsotienthubangtienmatnhat';
+        return this.httpClient.get<any>(get);
+    }
     quanlythu(data): Observable<any> {
         const quanlymayAPI = `https://quanlytonylemobile.herokuapp.com/quanlythu`;
         return this.httpClient.post<any>(quanlymayAPI, data, this.httpOptions);

@@ -40,6 +40,8 @@ export class BansanphamComponent implements OnInit {
 
     shopSource;
 
+    amount
+
     constructor(
         private service: NetworkserviceService,
         private kaiService: KaiService,

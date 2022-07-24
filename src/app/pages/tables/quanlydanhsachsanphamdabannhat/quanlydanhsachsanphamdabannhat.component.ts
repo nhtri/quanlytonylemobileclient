@@ -51,6 +51,7 @@ export class QuanlydanhsachsanphamdabannhatComponent implements OnInit {
 
     this.service.getdanhsachsanphamdabanquanlymobilejp().subscribe(value => {
       this.data = value
+      console.log(value)
       // this.source.load(val);
       // value.forEach(element => {
       //   // this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {

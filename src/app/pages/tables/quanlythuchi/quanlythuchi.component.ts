@@ -69,23 +69,38 @@ today
       this.datathu = []
       // this.sotien = "", this.date = "", this.mucdich = "", this.id = ""
       console.log(val)
-      val.forEach(element => {
-        if (element.hinhthucthanhtoan == "tienmat") {
-          this.totalthu += parseInt(element.sotien)
-          if (element.mucdich.includes('dh')) {
-            this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
-              element.mucdich = 'Mã ĐH: ' + data[0].madonhang
-              this.datathu.push(element)
-            })
-          }
-          else {
-            this.datathu.push(element)
-          }
+      // val.forEach(element => {
+      //   if (element.hinhthucthanhtoan == "tienmat") {
+      //     this.totalthu += parseInt(element.sotien)
+      //     if (element.mucdich.includes('dh')) {
+      //       this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
+      //         element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+      //         this.datathu.push(element)
+      //       })
+      //     }
+      //     else {
+      //       this.datathu.push(element)
+      //     }
 
-        }
-      });
+      //   }
+      // });
+      this.service.getsotienthubangtienmat().subscribe(val=>{
+        val.forEach(element => {
+          if(element.madonhang !=null){
+            element.mucdich = "Mã ĐH "+element.madonhang
+          }
+          if(element.sotien ==null){
+            element.sotien = '0'
+          }
+          this.datathu.push(element)
+          this.totalthu += Number(element.sotien)
+        });
+      }
+        
 
-      await new Promise(f => setTimeout(f, 10000));
+      )
+      console.log('this.datathu',this.datathu)
+      await new Promise(f => setTimeout(f, 5000));
       const res1 = this.datathu.reduce((acc, curr) => {
         if (!acc[curr.ngaytao]) acc[curr.ngaytao] = []; //If this type wasn't previously stored
         acc[curr.ngaytao].push(curr);

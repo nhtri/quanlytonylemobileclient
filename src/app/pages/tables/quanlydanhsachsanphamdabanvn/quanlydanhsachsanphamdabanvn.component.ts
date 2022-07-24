@@ -56,6 +56,7 @@ export class QuanlydanhsachsanphamdabanvnComponent implements OnInit {
 
     this.service.getdanhsachsanphamdabanquanlymobilevn().subscribe(value => {
       // this.source.load(val);
+      console.log(value)
       this.data = value
       // value.forEach(element => {
       //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
