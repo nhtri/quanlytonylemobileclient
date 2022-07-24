@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NetworkserviceService } from '../../../services/networkservice.service';
-import { PRODUCT_SOURCE } from '../../../@core/constant/common';
-import { notEmpty } from '../../../@core/utils/data.utils';
-import { KaiService } from '../../../services/kai.service';
-import { ExcelService } from '../../../services/excel.service';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {NetworkserviceService} from '../../../services/networkservice.service';
+import {PRODUCT_SOURCE} from '../../../@core/constant/common';
+import {notEmpty} from '../../../@core/utils/data.utils';
+import {KaiService} from '../../../services/kai.service';
+import {ExcelService} from '../../../services/excel.service';
+import {CurrencyMaskService} from '../../../@core/shared/directives/currency-mask/currency-mask.service';
 
 @Component({
   selector: 'ngx-editbansanpham',
@@ -45,9 +46,13 @@ export class EditbansanphamComponent implements OnInit {
 
   SELLING_REPORT_NAME = 'xuat_ban';
 
+  shopSource;
+
   constructor(private kaiService: KaiService,
               private excelService: ExcelService,
-              private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
+              private service: NetworkserviceService,
+              private currencyMaskService: CurrencyMaskService,
+              private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
       .subscribe(params => {
@@ -65,6 +70,7 @@ export class EditbansanphamComponent implements OnInit {
         else {
           this.position = params.position.split(",")
         }
+        this.shopSource = (this.position[0] ?? 'SHOP_JP') as unknown as PRODUCT_SOURCE;
         console.log('this.id', this.id)
         console.log('this.position', this.position)
         this.id.forEach(element => {
@@ -435,7 +441,7 @@ export class EditbansanphamComponent implements OnInit {
       console.log('data.id', data.id)
       // data.sotienban = data.giaban
       if (data.id == id) {
-        data.giaban = event.target.value
+        data.giaban = this.currencyMaskService.parse(event.target.value, false);
       }
       console.log('data.quantity', data.quantity)
       console.log('data', data)
