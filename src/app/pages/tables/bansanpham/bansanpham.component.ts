@@ -152,7 +152,7 @@ export class BansanphamComponent implements OnInit {
         if (this.hinhthucthanhtoan == 'default' || this.hinhthucthanhtoan == '') {
             alert('Xin vui lòng chọn hình thức thanh toán !!!');
         } else {
-            if (this.tienthua < 0) {
+            if (this.tienthua < 0 && this.hinhthucthanhtoan == 'trahet') {
                 alert('Xin vui lòng thanh toán đầy đủ số tiền !!!');
             } else {
                 alert('Đang thực hiện quá trình thanh toán !!!');

@@ -243,7 +243,7 @@ export class EditbansanphamComponent implements OnInit {
     }
     else {
 
-      if (this.tienthua < 0) {
+      if (this.tienthua < 0 && this.hinhthucthanhtoan == 'trahet') {
         alert("Xin vui lòng thanh toán đầy đủ số tiền !!!")
       }
       else {
