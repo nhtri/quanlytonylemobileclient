@@ -121,7 +121,11 @@
                 <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="tienmat" (change)="thaydoisotienthanhtoan()">
             </div>
-            <div *ngIf="hinhthucthanhtoan!=''" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daikibi:
+            <div *ngIf="hinhthucthanhtoan!='' && position!='SHOP_VN'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Daibiki:
+                <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
+                    [(ngModel)]="daikibi" (change)="thaydoisotienthanhtoan()">
+            </div>
+            <div *ngIf="hinhthucthanhtoan!='' && position=='SHOP_VN'" style="font-weight: 600;margin-bottom: 10px; margin-top: 10px;">Ship Cod:
                 <input type="text" style="margin-left: 10px; height: 22px; width: 120px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                     [(ngModel)]="daikibi" (change)="thaydoisotienthanhtoan()">
             </div>

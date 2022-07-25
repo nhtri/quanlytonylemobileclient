@@ -8,6 +8,7 @@
 
             <thead>
             <tr>
+                <th>STT</th>
                 <th>Nhóm SP</th>
                 <th>Tên sản phẩm</th>
                 <th>Imei</th>
@@ -19,7 +20,8 @@
             </thead>
             <tbody>
 
-            <tr *ngFor="let product of data">
+            <tr *ngFor="let product of data, let i = index">
+                <td>{{i+1}}</td>
                 <td>{{product.group_name}}</td>
                 <td>{{product.name}}</td>
                 <td>{{product.imei}}</td>

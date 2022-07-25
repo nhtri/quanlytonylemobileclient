@@ -50,7 +50,7 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
   constructor(private service: NetworkserviceService, private router: Router) {
 
     this.service.getdanhsachsanphamdabanquanlymobile200().subscribe(value => {
-      this.data = value
+      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
       // this.source.load(val);
       // value.forEach(element => {
       //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
@@ -90,7 +90,7 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
 
 
     this.service.getdanhsachsanphamdabanquanlymobile().subscribe(value => {
-      this.data = value
+      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
       // this.source.load(val);
       // value.forEach(element => {
       //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {

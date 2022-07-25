@@ -50,7 +50,7 @@ export class QuanlydanhsachsanphamdabannhatComponent implements OnInit {
   constructor(private service: NetworkserviceService, private router: Router) {
 
     this.service.getdanhsachsanphamdabanquanlymobilejp200().subscribe(value => {
-      this.data = value
+      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
       console.log(value)
       // this.source.load(val);
       // value.forEach(element => {
@@ -90,7 +90,7 @@ export class QuanlydanhsachsanphamdabannhatComponent implements OnInit {
     });
 
     this.service.getdanhsachsanphamdabanquanlymobilejp().subscribe(value => {
-      this.data = value
+      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
       console.log(value)
       // this.source.load(val);
       // value.forEach(element => {

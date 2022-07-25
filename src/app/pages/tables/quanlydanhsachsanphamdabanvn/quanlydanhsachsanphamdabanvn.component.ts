@@ -58,7 +58,7 @@ export class QuanlydanhsachsanphamdabanvnComponent implements OnInit {
     this.service.getdanhsachsanphamdabanquanlymobilevn200().subscribe(value => {
       // this.source.load(val);
       console.log(value)
-      this.data = value
+      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
       // value.forEach(element => {
       //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
       //     element.madonhang = val[0].madonhang
@@ -99,7 +99,7 @@ export class QuanlydanhsachsanphamdabanvnComponent implements OnInit {
     this.service.getdanhsachsanphamdabanquanlymobilevn().subscribe(value => {
       // this.source.load(val);
       console.log(value)
-      this.data = value
+      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
       // value.forEach(element => {
       //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
       //     element.madonhang = val[0].madonhang
