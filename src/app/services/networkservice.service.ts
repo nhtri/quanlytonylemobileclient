@@ -287,13 +287,28 @@ export class NetworkserviceService {
         return this.httpClient.get<any>(get);
     }
 
+    getdanhsachsanphamdabanquanlymobile200() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobile200';
+        return this.httpClient.get<any>(get);
+    }
+
     getdanhsachsanphamdabanquanlymobilejp() {
         const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobilejp';
         return this.httpClient.get<any>(get);
     }
 
+    getdanhsachsanphamdabanquanlymobilejp200() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobilejp200';
+        return this.httpClient.get<any>(get);
+    }
+
     getdanhsachsanphamdabanquanlymobilevn() {
         const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobilevn';
+        return this.httpClient.get<any>(get);
+    }
+
+    getdanhsachsanphamdabanquanlymobilevn200() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobilevn200';
         return this.httpClient.get<any>(get);
     }
 
