@@ -281,6 +281,16 @@ export class NetworkserviceService {
         return this.httpClient.put<any>(API, data, this.httpOptions);
     }
 
+    getdanhsachsanphamdabanquanlymobileall() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobileall';
+        return this.httpClient.get<any>(get);
+    }
+
+    getdanhsachsanphamdabanquanlymobileall200() {
+        const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobileall200';
+        return this.httpClient.get<any>(get);
+    }
+
     // quanlytonylemobile
     getdanhsachsanphamdabanquanlymobile() {
         const get = 'https://quanlytonylemobile.herokuapp.com/getdanhsachsanphamdabanquanlymobile';
