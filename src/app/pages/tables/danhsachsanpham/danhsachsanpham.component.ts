@@ -29,7 +29,7 @@ export class DanhsachsanphamComponent implements OnInit {
     tongsoluongsanpham = 0;
 
     datanhomsanphamselect = [
-        {value: '', title: ''},
+        { value: '', title: '' },
     ];
 
 
@@ -80,12 +80,12 @@ export class DanhsachsanphamComponent implements OnInit {
     checkedall = false;
 
     constructor(private service: NetworkserviceService,
-                private kaiService: KaiService,
-                private router: Router) {
+        private kaiService: KaiService,
+        private router: Router) {
 
 
-        this.datamauselect.unshift({value: '', title: ''});
-        this.datatrangthaiselect.unshift({value: '', title: ''});
+        this.datamauselect.unshift({ value: '', title: '' });
+        this.datatrangthaiselect.unshift({ value: '', title: '' });
 
         this.kaiService.getProductGroups().subscribe((productGroups) => {
             this.datanhomsanphamselect = productGroups.map(x => {
@@ -94,11 +94,13 @@ export class DanhsachsanphamComponent implements OnInit {
                     title: x.name,
                 };
             });
-            this.datanhomsanphamselect.unshift({value: '', title: ''});
+            this.datanhomsanphamselect.unshift({ value: '', title: '' });
         });
 
 
         this.service.getsanphamtonkhokhohang().subscribe(val => {
+            val = val.map(obj => ({ ...obj, checked: false }))
+            console.log('val', val)
             this.source.load(val);
             this.data = val;
             val.forEach(element => {
@@ -112,22 +114,22 @@ export class DanhsachsanphamComponent implements OnInit {
                 // }
 
                 if (element.name != '' && element.name != null && !this.datatensanpham.some(val => val.value == element.name)) {
-                    this.datatensanpham.push({'value': element.name, 'title': element.name});
+                    this.datatensanpham.push({ 'value': element.name, 'title': element.name });
                     // this.datatensanpham = [...new Set(this.datatensanpham)];
                 }
 
                 if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
-                    this.datadungluong.push({'value': element.dungluong, 'title': element.dungluong});
+                    this.datadungluong.push({ 'value': element.dungluong, 'title': element.dungluong });
                     // this.datadungluong = [...new Set(this.datadungluong)];
                 }
 
                 if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
-                    this.dataloaisanpham.push({'value': element.loaisanpham, 'title': element.loaisanpham});
+                    this.dataloaisanpham.push({ 'value': element.loaisanpham, 'title': element.loaisanpham });
                     // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
                 }
 
                 if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
-                    this.dataphienban.push({'value': element.phienban, 'title': element.phienban});
+                    this.dataphienban.push({ 'value': element.phienban, 'title': element.phienban });
                     // this.dataphienban = [...new Set(this.dataphienban)];
                 }
 
@@ -204,12 +206,12 @@ export class DanhsachsanphamComponent implements OnInit {
             )
                 .subscribe(data => {
 
-                        this.service.getsanphamtonkhokhohang().subscribe(val => {
-                            // this.source.load(val);
-                            this.data = val;
-                        });
-                        console.log('POST Request is successful ', data);
-                    },
+                    this.service.getsanphamtonkhokhohang().subscribe(val => {
+                        // this.source.load(val);
+                        this.data = val;
+                    });
+                    console.log('POST Request is successful ', data);
+                },
                     error => {
                         console.log('Error', error);
 
@@ -387,5 +389,21 @@ export class DanhsachsanphamComponent implements OnInit {
         } else {
             this.danhsachidsanpham = [];
         }
+    }
+
+    onEnter() {
+      
+        let temp = this.data
+        console.log('aaaaaaaaa',this.imeisp,temp)
+        if (temp.length > 0) {
+            this.data.forEach(element => {
+                if(element.id == temp[0].id){
+                    element.checked = true
+                    this.danhsachidsanpham.push(element.id)
+                     this.imeisp=''
+                }
+            });
+        }
+       
     }
 }

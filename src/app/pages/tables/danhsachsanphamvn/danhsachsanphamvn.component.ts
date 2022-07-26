@@ -337,4 +337,21 @@ export class DanhsachsanphamvnComponent implements OnInit {
 
   }
 
+
+  onEnter() {
+      
+    let temp = this.data
+    console.log('aaaaaaaaa',this.imeisp,temp)
+    if (temp.length > 0) {
+        this.data.forEach(element => {
+            if(element.id == temp[0].id){
+                element.checked = true
+                this.danhsachidsanpham.push(element.id)
+                 this.imeisp=''
+            }
+        });
+    }
+   
+}
+
 }

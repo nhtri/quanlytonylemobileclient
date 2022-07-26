@@ -1,113 +1,116 @@
 <nb-card>
   <nb-card-header>
-    Danh Sách Sản Phẩm 
+    Danh Sách Sản Phẩm
     <!-- <a style="color: #2e61fa ;font-weight: 300; margin-left: 80px;">File Danh
       Sách Sản Phẩm Mẫu</a>
 
       <input style="margin-left: 20px;" type="file" id="file" (change)="uploadExcel($event)">
-      <button (click)="taosanpham()" style="margin-left: 5px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">Thêm Sản Phẩm</button>
- -->
+      <button (click)="taosanpham()" style="margin-left: 5px; height: 36px;width: 150px;border-radius: 5px;border-color: #2e61fa;color: white;background-color: #809ffc;font-weight: 300;">Thêm Sản Phẩm</button> -->
 
   </nb-card-header>
 
   <nb-card-body>
-
     <div style="display: flex;">
       <div style="margin-right: 25px;">Tổng số lượng sản phẩm: {{tongsoluongsanpham}}</div>
       <a style="color: #2e61fa ;font-weight: 300; " (click)="exportexcel()"> Tải Danh
         Sách Sản Phẩm</a>
     </div>
+    <!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
+
+    <!-- <br /> -->
+    <table class="styled-table" id="excel-table">
 
 
+      <thead>
+        <tr>
+          <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;"
+              routerLink="/pages/tables/bansanpham" [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
+            <i class="fa fa-exchange-alt" style="font-size:16px;color:whitesmoke;" [routerLink]="transferProductPage"
+              [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
+          </th>
+          <!-- <th>Id</th> -->
+          <th>Nhóm sản phẩm</th>
+          <th>Tên sản phẩm</th>
+          <th>Imei</th>
+          <!-- <th>Dung lượng</th>
+      <th>Loại sản phẩm</th>
+      <th>Phiên bản</th> -->
+          <th>Màu sắc</th>
+          <th>Tình trạng</th>
+          <th style="cursor: pointer;" (click)="onSortData($event)">Số lượng <nb-icon [icon]="orderIcon"></nb-icon>
+          </th>
+          <th *ngIf="role == 'admin'">Giá thu</th>
+          <th>Giá bán dự kiến</th>
+          <!-- <th></th>
+      <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
+        </tr>
+      </thead>
+      <tbody>
+        <!-- <td></td> -->
+        <td><input type="checkbox" (click)="selectall($event)"></td>
+        <!-- <td></td>
+    <td><select (change)="selectnhomsanpham($event)"
+        style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
+        <option value="default">Nhóm sản phẩm</option>
+        <option *ngFor="let data of datanhomsanpham" [value]="data.value">
+          {{data.title}}
+        </option>
 
-<!-- <a style="color: #2e61fa ;font-weight: 300;" (click)="exportexcel()"> Tải Danh Sách Sản Phẩm</a> -->
-
-<!-- <br /> -->
-<table class="styled-table" id="excel-table">
-
-
-<thead>
-  <tr>
-    <th><i class="fa fa-shopping-cart" style="font-size:16px;color:whitesmoke;" routerLink="/pages/tables/bansanpham"
-        [queryParams]={id:[danhsachidsanpham],position:[position]}></i>
-    </th>
-    <!-- <th>Id</th> -->
-    <th>Nhóm sản phẩm</th>
-    <th>Tên sản phẩm</th>
-    <th>Imei</th>
-    <!-- <th>Dung lượng</th>
-    <th>Loại sản phẩm</th>
-    <th>Phiên bản</th> -->
-    <th>Màu sắc</th>
-    <th>Tình trạng</th>
-    <th style="cursor: pointer;" (click)="onSortData($event)" >Số lượng <nb-icon [icon]="orderIcon"></nb-icon></th>
-    <th *ngIf="role == 'admin'">Giá thu</th>
-    <th>Giá bán dự kiến</th>
-    <!-- <th></th>
-    <th><i class="fa fa-plus" style="font-size:18px;color:whitesmoke;" (click)="taomoi()"></i></th> -->
-  </tr>
-</thead>
-<tbody>
-  <!-- <td></td> -->
-  <td></td>
-  <!-- <td></td>
-<td><select (change)="selectnhomsanpham($event)"
-  style="height: 28px;width: 110px;border-radius: 5px;border-color: #809ffc;">
-  <option value="default">Nhóm sản phẩm</option>
-  <option *ngFor="let data of datanhomsanpham" [value]="data.value">
-    {{data.title}}
-  </option>
-
-</select></td> -->
-<!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
-  (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
-</td> -->
-<td>
-<select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="nhomsp" >
-  <option *ngFor="let oneOption of datanhomsanphamselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
-</select>
-</td>
-  <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
-    (input)="filterdanhsachsanpham()"  [(ngModel)]="tensp">
-  </td>
-  <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" 
-    (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
-  </td>
-  <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
-    (input)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
-  </td> -->
-  <td>
-  <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="mausacsp" >
-    <option *ngFor="let oneOption of datamauselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
-  </select></td>
-  <td>
-  <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
-    (input)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp">
-  </td> -->
-  <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()" [(ngModel)]="tinhtrangsp" >
-    <option *ngFor="let oneOption of datatrangthaiselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
-  </select></td>
-
-  <tr *ngFor="let sanpham of data">
-    <td><input type="checkbox" (click)="select(sanpham.id)" checked="{{checkedall ? 'checked' : ''}}"></td>
-    <!-- <td>{{sanpham.id}}</td> -->
-    <td>{{sanpham.group_name}}</td>
-    <td>{{sanpham.name}}</td>
-    <td>{{sanpham.imei}}</td>
-    <td>{{sanpham.color}}</td>
-    <td>{{sanpham.status | productStatus}}</td>
-    <td>{{sanpham.quantity}}</td>
-    <td *ngIf="role == 'admin'">{{sanpham.price | productPrice : shopSource}}</td>
-    <td>{{sanpham.estimated_price| productPrice: shopSource}}</td>
-    <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
-    [queryParams]={id:[sanpham.id]}></i></td>
-<td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
-
-  </tr>
+      </select></td> -->
+        <!-- <td><input type="text" style="height: 20px; width: 120px; border-radius: 5px;" 
+        (input)="filterdanhsachsanpham()"  [(ngModel)]="nhomsp">
+      </td> -->
+        <td>
+          <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()"
+            [(ngModel)]="nhomsp">
+            <option *ngFor="let oneOption of datanhomsanphamselect" [ngValue]="oneOption.value">{{oneOption.title}}
+            </option>
+          </select>
+        </td>
+        <td><input type="text" style="height: 24px; width: 120px; border-radius: 5px;" (input)="filterdanhsachsanpham()"
+            [(ngModel)]="tensp">
+        </td>
+        <td><input (keydown.enter)="onEnter()" type="text" style="height: 24px; width: 120px; border-radius: 5px;"
+            (input)="filterdanhsachsanpham()" [(ngModel)]="imeisp">
+        </td>
+        <!-- <td><input type="text" style="height: 20px; width: 80px; border-radius: 5px;" 
+          (input)="filterdanhsachsanpham()" [(ngModel)]="mausacsp">
+        </td> -->
+        <td>
+          <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()"
+            [(ngModel)]="mausacsp">
+            <option *ngFor="let oneOption of datamauselect" [ngValue]="oneOption.value">{{oneOption.title}}</option>
+          </select>
+        </td>
+        <td>
+          <select style="width: 120px; height: 24px; border-radius: 5px; " (change)="filterdanhsachsanpham()"
+            [(ngModel)]="tinhtrangsp">
+            <option *ngFor="let oneOption of datatrangthaiselect" [ngValue]="oneOption.value">{{oneOption.title}}
+            </option>
+          </select>
+        </td>
+        <tr *ngFor="let sanpham of data">
+  
+            <td><input type="checkbox" (click)="select(sanpham.id)" checked="{{checkedall ? 'checked' : ''}}"
+                [checked]="sanpham.checked"></td>
+            <!-- <td>{{sanpham.id}}</td> -->
+            <td [style.background-color]="sanpham.checked ? '#A3EBB1':''">{{sanpham.group_name}}</td>
+            <td  [style.background-color]="sanpham.checked ? '#A3EBB1':''">{{sanpham.name}}</td>
+            <td [style.background-color]="sanpham.checked ? '#A3EBB1':''">{{sanpham.imei}}</td>
+            <td [style.background-color]="sanpham.checked ? '#A3EBB1':''">{{sanpham.color}}</td>
+            <td [style.background-color]="sanpham.checked ? '#A3EBB1':''">{{sanpham.status | productStatus}}</td>
+            <td [style.background-color]="sanpham.checked ? '#A3EBB1':''">{{sanpham.quantity}}</td>
+            <td [style.background-color]="sanpham.checked ? '#A3EBB1':''" *ngIf="role == 'admin'">{{sanpham.price | productPrice}}</td>
+            <td [style.background-color]="sanpham.checked ? '#A3EBB1':''">{{sanpham.estimated_price| productPrice: shopSource}}</td>
+            <!-- <td><i class="fa fa-edit" style="font-size:18px;color:darkblue;" routerLink="/pages/tables/sanpham"
+          [queryParams]={id:[sanpham.id]}></i></td>
+      <td><i class="fa fa-trash" style="font-size:18px;color:tomato;" (click)="delete(sanpham.id)"></i></td> -->
+          
+        </tr>
 
 
-</tbody>
-</table>
+      </tbody>
+    </table>
 
-</nb-card-body>
-</nb-card> 
+  </nb-card-body>
+</nb-card>
