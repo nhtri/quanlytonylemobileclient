@@ -4,7 +4,7 @@ import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
 import { GENERAL_PAGES } from '../../../@core/constant/pages.constant';
-import {PRODUCT_COLORS, PRODUCT_SOURCE, PRODUCT_STATUSES} from '../../../@core/constant/common';
+import { PRODUCT_COLORS, PRODUCT_SOURCE, PRODUCT_STATUSES } from '../../../@core/constant/common';
 import { KaiService } from '../../../services/kai.service';
 @Component({
   selector: 'ngx-danhsachsanphamvn',
@@ -44,9 +44,9 @@ export class DanhsachsanphamvnComponent implements OnInit {
   nhomsp = ""
   transferProductPage = GENERAL_PAGES.TRANSFER_PRODUCTS;
 
-  checkedall=false
+  checkedall = false
   datanhomsanphamselect = [
-    {value: '', title: ''},
+    { value: '', title: '' },
   ];
 
 
@@ -66,17 +66,17 @@ export class DanhsachsanphamvnComponent implements OnInit {
 
   isAscendingOrder: boolean;
   orderIcon = 'arrow-downward-outline';
-  tongsoluongsanpham=0
+  tongsoluongsanpham = 0
 
   shopSource = PRODUCT_SOURCE.SHOP_VN;
 
   constructor(
-      private service: NetworkserviceService,
-      private kaiService: KaiService,
-      private router: Router) {
+    private service: NetworkserviceService,
+    private kaiService: KaiService,
+    private router: Router) {
 
-    this.datamauselect.unshift({value: '', title: ''});
-    this.datatrangthaiselect.unshift({value: '', title: ''});
+    this.datamauselect.unshift({ value: '', title: '' });
+    this.datatrangthaiselect.unshift({ value: '', title: '' });
 
     this.kaiService.getProductGroups().subscribe((productGroups) => {
       this.datanhomsanphamselect = productGroups.map(x => {
@@ -85,13 +85,13 @@ export class DanhsachsanphamvnComponent implements OnInit {
           title: x.name,
         };
       });
-      this.datanhomsanphamselect.unshift({value: '', title: ''});
+      this.datanhomsanphamselect.unshift({ value: '', title: '' });
     });
 
 
     this.service.getsanphamtonkhovn().subscribe(val => {
       this.source.load(val);
-      this.data =val
+      this.data = val
       val.forEach(element => {
         this.tongsoluongsanpham += parseInt(element.quantity)
         this.danhsachidsanphamfull.push(element.id);
@@ -104,7 +104,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
 
         if (element.name != '' && element.name != null && !this.datatensanpham.some(val => val.value == element.name)) {
           this.datatensanpham.push({ "value": element.name, "title": element.name })
-           this.datatensanpham = [...new Set(this.datatensanpham)];
+          this.datatensanpham = [...new Set(this.datatensanpham)];
         }
 
         if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
@@ -126,7 +126,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
       this.datafilter = this.data
     });
 
-  
+
 
   }
 
@@ -134,7 +134,7 @@ export class DanhsachsanphamvnComponent implements OnInit {
 
   ngOnInit(): void {
     this.role = localStorage.getItem('role')
-    if (this.role != 'cuahangvietnam' && this.role!='admin') {
+    if (this.role != 'cuahangvietnam' && this.role != 'admin') {
       this.router.navigateByUrl('/pages/tables/login')
     }
 
@@ -235,8 +235,8 @@ export class DanhsachsanphamvnComponent implements OnInit {
     this.taomoisanpham = false
   }
 
-  
- 
+
+
 
   filterdanhsachsanpham() {
     this.data = this.datafilter
@@ -253,9 +253,9 @@ export class DanhsachsanphamvnComponent implements OnInit {
       this.data = this.data.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
     }
     if (this.tinhtrangsp != "") {
-        this.data = this.data.filter(data => data.status.toUpperCase() === this.tinhtrangsp.toUpperCase())
+      this.data = this.data.filter(data => data.status.toUpperCase() === this.tinhtrangsp.toUpperCase())
     }
-    if(this.tensp==""&&this.imeisp==""&&this.mausacsp==""&&this.tinhtrangsp==""&&this.nhomsp == ""){
+    if (this.tensp == "" && this.imeisp == "" && this.mausacsp == "" && this.tinhtrangsp == "" && this.nhomsp == "") {
       this.data = this.datafilter
     }
   }
@@ -319,39 +319,44 @@ export class DanhsachsanphamvnComponent implements OnInit {
     }
     return output;
   }
-  taosanpham(){}
+  taosanpham() { }
 
   selectall(event) {
     this.danhsachidsanpham = this.danhsachidsanphamfull
-    console.log('event',event.target.value)
-    console.log('danhsachidsanpham',this.danhsachidsanpham)
-    if(this.checkedall==false){
-      this.checkedall=true
-      console.log('danhsachidsanpham',this.danhsachidsanpham)
+    console.log('event', event.target.value)
+    console.log('danhsachidsanpham', this.danhsachidsanpham)
+    if (this.checkedall == false) {
+      this.checkedall = true
+      console.log('danhsachidsanpham', this.danhsachidsanpham)
     }
-    else{
-      this.checkedall=false
-      this.danhsachidsanpham=[]
-      console.log('danhsachidsanpham',this.danhsachidsanpham)
+    else {
+      this.checkedall = false
+      this.danhsachidsanpham = []
+      console.log('danhsachidsanpham', this.danhsachidsanpham)
     }
 
   }
 
 
   onEnter() {
-      
     let temp = this.data
-    console.log('aaaaaaaaa',this.imeisp,temp)
+    console.log('aaaaaaaaa', this.imeisp, temp, this.danhsachidsanpham)
     if (temp.length > 0) {
-        this.data.forEach(element => {
-            if(element.id == temp[0].id){
-                element.checked = true
-                this.danhsachidsanpham.push(element.id)
-                 this.imeisp=''
-            }
-        });
+      this.data.forEach(element => {
+        if (element.id == temp[0].id) {
+          element.checked = true
+          if (!this.danhsachidsanpham.includes(element.id)) {
+            this.danhsachidsanpham.push(element.id)
+            console.log('aaaaaaaaa', this.imeisp, temp, this.danhsachidsanpham)
+            
+            this.data = this.datafilter;
+          }
+
+        }
+      });
     }
-   
-}
+    this.imeisp = ''
+
+  }
 
 }

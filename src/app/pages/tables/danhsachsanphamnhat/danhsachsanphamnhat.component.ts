@@ -439,16 +439,22 @@ export class DanhsachsanphamnhatComponent implements OnInit {
     onEnter() {
       
         let temp = this.data
-        console.log('aaaaaaaaa',this.imeisp,temp)
+        console.log('aaaaaaaaa',this.imeisp,temp, this.danhsachidsanpham)
         if (temp.length > 0) {
             this.data.forEach(element => {
                 if(element.id == temp[0].id){
                     element.checked = true
-                    this.danhsachidsanpham.push(element.id)
-                     this.imeisp=''
+                    if(!this.danhsachidsanpham.includes(element.id)){
+                        this.danhsachidsanpham.push(element.id)
+                        console.log('aaaaaaaaa',this.imeisp,temp, this.danhsachidsanpham)
+                        
+                        this.data = this.datafilter;
+                    }
+                   
                 }
             });
         }
+        this.imeisp=''
        
     }
 }
