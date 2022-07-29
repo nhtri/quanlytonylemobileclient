@@ -649,8 +649,6 @@ export class EditbansanphamComponent implements OnInit {
     console.log('tenkhachhang', this.tenkhachhang)
   }
 
-  hoantatvaxuathoadon() { }
-
   themsanpham() {
     let dupimei = false
 

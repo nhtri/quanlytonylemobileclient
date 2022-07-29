@@ -495,7 +495,4 @@ export class BansanphamComponent implements OnInit {
         this.thongtinkhachhang = event.target.value;
         console.log(event.target.value);
     }
-
-    hoantatvaxuathoadon() {
-    }
 }
