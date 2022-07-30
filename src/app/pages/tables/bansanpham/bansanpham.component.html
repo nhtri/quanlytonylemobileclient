@@ -117,8 +117,8 @@
           <td><input type="number" [min]="1" [max]="sanpham.quantitytemp"
               style="height: 22px; width: 60px; border-radius: 5px;" (change)="thaydoisoluong($event,sanpham.id)"
               [value]="1"></td>
-          <td *ngIf="role == 'admin'">{{sanpham.price|productPrice : position}}</td>
-          <td>{{sanpham.estimated_price|productPrice : position}}</td>
+          <td *ngIf="role == 'admin'">{{sanpham.price|productPrice : shopSource}}</td>
+          <td>{{sanpham.estimated_price|productPrice : shopSource}}</td>
           <td><input type="text" style="height: 22px; width: 80px; border-radius: 5px;" ngxCurrencyMask [shopSource]="shopSource"
                      [(ngModel)]="sanpham.estimated_price" (change)="nhapsotienban($event,sanpham.id)"  ></td>
 
@@ -235,7 +235,7 @@
         style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #fab32e;color: white;background-color: #fcad80;font-weight: 300;">
         Hủy</button>
 
-      <button [disabled]="!hoantattoggle" (click)="hoantatvaxuathoadon()" (dblclick)="hoantatvaxuathoadon()"
+      <button [disabled]="!hoantattoggle" (click)="hoantat(true)" (dblclick)="hoantat(true)"
         style="margin-left: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
         Hoàn Tất và Xuất Hóa Đơn</button>
 
