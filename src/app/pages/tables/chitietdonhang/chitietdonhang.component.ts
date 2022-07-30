@@ -3,6 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import {PRODUCT_SOURCE} from '../../../@core/constant/common';
 import {notEmpty} from '../../../@core/utils/data.utils';
+import { KaiService } from '../../../services/kai.service';
+import { ExcelService } from '../../../services/excel.service';
 
 @Component({
   selector: 'ngx-chitietdonhang',
@@ -27,8 +29,13 @@ export class ChitietdonhangComponent implements OnInit {
   tiencanthanhtoan = 0;
 
   shopSource = PRODUCT_SOURCE.SHOP_JP;
+  SELLING_REPORT_NAME = 'xuat_ban';
   
-  constructor(private service: NetworkserviceService, private route: ActivatedRoute, private router: Router) {
+  constructor(
+      private service: NetworkserviceService,
+              private kaiService: KaiService,
+              private excelService: ExcelService,
+              private route: ActivatedRoute, private router: Router) {
     this.role = localStorage.getItem('role')
     this.route.queryParams
       .subscribe(params => {
@@ -171,4 +178,15 @@ export class ChitietdonhangComponent implements OnInit {
    }
 
   thaydoisotienthanhtoan() { }
+
+  exportExcel() {
+    this.kaiService.downloadSellingInvoiceReport({
+      invoice_id: this.madonhang,
+      position: this.shopSource,
+    }).subscribe(bufferResponse => {
+      this.excelService.saveAsExcelFile(
+          bufferResponse, this.SELLING_REPORT_NAME,
+      );
+    });
+  }
 }
