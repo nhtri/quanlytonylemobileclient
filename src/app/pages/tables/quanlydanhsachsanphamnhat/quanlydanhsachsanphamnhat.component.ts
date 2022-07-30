@@ -386,6 +386,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
     onCreateConfirm(event): void {
         console.log('Create Event In Console');
         console.log(event['newData']['imei']);
+        console.log(event['newData']['product_group_id']);
         // this.data.forEach(element => {
         //     if (element.imei == event['newData']['imei'] && element.price != event['newData']['price']) {
         //         this.service.createsanphamtonkhojp(
@@ -427,7 +428,7 @@ export class QuanlydanhsachsanphamnhatComponent implements OnInit {
                     'estimated_price': event['newData']['estimated_price'],
                     'position': 'SHOP_JP',
                     'source': 'SHOP_JP',
-                    'product_group_id': event['newData']['product_group_id'],
+                    'product_group_id': event['newData']['group_name'],
                 },
             )
                 .subscribe(data => {
