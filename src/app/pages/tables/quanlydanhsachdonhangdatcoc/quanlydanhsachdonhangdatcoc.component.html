@@ -33,7 +33,7 @@
   
     <tr *ngFor="let sanpham of data">
       <td ><a routerLink="/pages/tables/chitietdonhang"
-        [queryParams]={id:[sanpham.madonhang]}>{{sanpham.madonhang}}</a></td>
+        [queryParams]={id:[sanpham.madonhang],position:shopSource}>{{sanpham.madonhang}}</a></td>
       <td *ngIf="role == 'admin'">{{sanpham.giatien | productPrice}}</td>
       <td>{{sanpham.giatienban | productPrice }}</td>
      

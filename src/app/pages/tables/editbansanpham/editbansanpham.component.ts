@@ -70,7 +70,7 @@ export class EditbansanphamComponent implements OnInit {
         else {
           this.position = params.position.split(",")
         }
-        this.shopSource = (this.position[0] ?? 'SHOP_JP') as unknown as PRODUCT_SOURCE;
+        this.shopSource = (this.position[0] ?? 'SHOP_VN') as unknown as PRODUCT_SOURCE;
         console.log('this.id', this.id)
         console.log('this.position', this.position)
         this.id.forEach(element => {

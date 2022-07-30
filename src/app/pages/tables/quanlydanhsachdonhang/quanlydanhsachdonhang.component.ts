@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
 import * as XLSX from 'xlsx';
+import { PRODUCT_SOURCE } from '../../../@core/constant/common';
 @Component({
   selector: 'ngx-quanlydanhsachdonhang',
   templateUrl: './quanlydanhsachdonhang.component.html',
@@ -33,6 +34,7 @@ export class QuanlydanhsachdonhangComponent implements OnInit {
   date2 = ""
   daterange = []
   datatemp = []
+  shopSource = PRODUCT_SOURCE.WAREHOUSE;
 
   constructor(private service: NetworkserviceService, private router: Router) {
 this.role = localStorage.getItem('role')
