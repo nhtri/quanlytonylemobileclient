@@ -328,8 +328,19 @@ export class EditbansanphamComponent implements OnInit {
                         // this.service.quanlythu([this.tienhoadon, date, transactionkey, this.hinhthucthanhtoan, this.vitri]).subscribe(val => { })
                         console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
                         this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tongtienban, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan, this.thongtinkhachhang]).subscribe(value => {
-                          console.log(value)
-                          alert("Mua Hàng Thành Công")
+                          console.log(value);
+                          const {madonhang} = value;
+                          if (isExport) {
+                            this.kaiService.downloadSellingInvoiceReport({
+                              invoice_id: madonhang,
+                              position: this.vitri,
+                            }).subscribe(bufferResponse => {
+                              this.excelService.saveAsExcelFile(
+                                  bufferResponse, this.SELLING_REPORT_NAME,
+                              );
+                            });
+                          }
+                          alert("Mua Hàng Thành Công");
                           this.backToPage(this.vitri, this.hinhthucthanhtoan);
                         })
                       }
@@ -346,21 +357,6 @@ export class EditbansanphamComponent implements OnInit {
           })
 
         }
-
-
-        if (isExport) {
-          this.kaiService.downloadSellingInvoiceReport({
-            invoice_id: this.id[0],
-            position: this.vitri,
-          }).subscribe(bufferResponse => {
-            this.excelService.saveAsExcelFile(
-                bufferResponse, this.SELLING_REPORT_NAME,
-            );
-          });
-        }
-
-
-
 
       }
 
