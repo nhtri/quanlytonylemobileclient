@@ -121,6 +121,7 @@ import { QuanlykhachhangComponent } from './quanlykhachhang/quanlykhachhang.comp
 import { QuanlykhachhangnhatComponent } from './quanlykhachhangnhat/quanlykhachhangnhat.component';
 import { DanhsachsanphamkhachhangdamuaComponent } from './danhsachsanphamkhachhangdamua/danhsachsanphamkhachhangdamua.component';
 import { EditbansanphamComponent } from './editbansanpham/editbansanpham.component';
+import { QuanlythongtinmaythumuaComponent } from './quanlythongtinmaythumua/quanlythongtinmaythumua.component';
 
 const routes: Routes = [{
     path: '',
@@ -209,6 +210,10 @@ const routes: Routes = [{
         {
             path: 'quanlykhachhangvn',
             component: QuanlykhachhangvnComponent,
+        },
+        {
+            path: 'quanlythongtinmaythumua',
+            component: QuanlythongtinmaythumuaComponent,
         },
         {
             path: 'quanlykhachhang',
