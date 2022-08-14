@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { LocalDataSource } from 'ng2-smart-table';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+import { ColorTitlePipe } from '../../../@core/shared/pipes/color-title.pipe';
+import { PRODUCT_COLORS, PRODUCT_STATUSES } from '../../../@core/constant/common';
+import { ProductStatusPipe } from '../../../@core/shared/pipes/product-status.pipe';
 
 @Component({
   selector: 'ngx-quanlythongtinmaythumua',
@@ -12,12 +15,56 @@ export class QuanlythongtinmaythumuaComponent implements OnInit {
 
   source: LocalDataSource = new LocalDataSource();
   data
-  constructor(private service: NetworkserviceService, private router: Router) {
+  datamau = PRODUCT_COLORS.map(x => {
+    return {
+      value: x.value,
+      title: x.label,
+    };
+  });
+  datatrangthai = PRODUCT_STATUSES.map(x => {
+    return {
+      value: x.value,
+      title: x.label,
+    };
+  });
+
+  datanhomsanpham = [];
+  constructor(private service: NetworkserviceService, private router: Router,
+    private colorTitlePipe: ColorTitlePipe,
+    private productStatusPipe: ProductStatusPipe,
+  ) {
+
+    this.service.getproductgroups().subscribe(val => {
+      // let data = val.map(val => val.name)
+      let data = val;
+      let datanhomsanphamfilter = [];
+      data.forEach(data => {
+          this.datanhomsanpham.push({ 'value': data.name, 'title': data.name });
+          datanhomsanphamfilter.push({ 'value': data.name, 'title': data.name });
+          console.log('datanhomsanphamfilter', datanhomsanphamfilter, 'datanhomsanpham', this.datanhomsanpham);
+      });
+      console.log(this.datanhomsanpham);
+      this.settings.columns.nhomsanpham.editor.config.list = this.datanhomsanpham;
+      this.settings.columns.nhomsanpham.filter.config.list = datanhomsanphamfilter;
+      this.settings = Object.assign({}, this.settings);
+
+  });
 
     this.service.getthongtinmaythumua().subscribe(val => {
       this.source.load(val);
       this.data = val
+
+
+      this.settings.columns.mau.editor.config.list = this.datamau;
+      this.settings.columns.mau.filter.config.list = this.datamau;
+      this.settings = Object.assign({}, this.settings);
+
+      this.settings.columns.trangthai.editor.config.list = this.datatrangthai;
+      this.settings.columns.trangthai.filter.config.list = this.datatrangthai;
+      this.settings = Object.assign({}, this.settings);
     });
+
+
 
 
   }
@@ -39,7 +86,20 @@ export class QuanlythongtinmaythumuaComponent implements OnInit {
       },
       nhomsanpham: {
         title: 'Nhóm Sản Phẩm',
-        type: 'string',
+        editor: {
+            type: 'list',
+            config: {
+                selectText: 'Select',
+                list: [],
+            },
+        },
+        filter: {
+            type: 'list',
+            config: {
+                selectText: 'Select',
+                list: [],
+            },
+        },
       },
       tenmay: {
         title: 'Tên Máy',
@@ -47,11 +107,49 @@ export class QuanlythongtinmaythumuaComponent implements OnInit {
       },
       trangthai: {
         title: 'Trạng Thái',
-        type: 'string',
+        editor: {
+            type: 'list',
+            config: {
+                selectText: 'Select',
+                list: [],
+            },
+        },
+        filter: {
+            type: 'list',
+            config: {
+                selectText: 'Select',
+                list: [],
+            },
+        },
+        valuePrepareFunction: (cell, row) => {
+            return this.productStatusPipe.transform(cell);
+        },
+        filterFunction(cell?: any, search?: string): boolean {
+            return cell.trim().toUpperCase() === search.trim().toUpperCase();
+        },
       },
       mau: {
         title: 'Màu',
-        type: 'string',
+        editor: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: [],
+          },
+        },
+        filter: {
+          type: 'list',
+          config: {
+            selectText: 'Select',
+            list: [],
+          },
+        },
+        valuePrepareFunction: (cell, row) => {
+          return this.colorTitlePipe.transform(cell);
+        },
+        filterFunction(cell?: any, search?: string): boolean {
+          return cell.trim().toUpperCase() === search.trim().toUpperCase();
+        },
       },
       gia: {
         title: 'Giá',
@@ -104,25 +202,25 @@ export class QuanlythongtinmaythumuaComponent implements OnInit {
   onCreateConfirm(event): void {
     console.log("Create Event In Console")
     // if (!this.data.some(el => el.sodienthoai === (event['newData']['sodienthoai']))) {
-      this.service.thongtinmaythumua(
-        [
-          event['newData']['jpcode'],
-          event['newData']['nhomsanpham'],
-          event['newData']['tenmay'],
-          event['newData']['trangthai'],
-          event['newData']['mau'],
-          event['newData']['gia'],
-        ]
-      )
-        .subscribe(data => {
+    this.service.thongtinmaythumua(
+      [
+        event['newData']['jpcode'],
+        event['newData']['nhomsanpham'],
+        event['newData']['tenmay'],
+        event['newData']['trangthai'],
+        event['newData']['mau'],
+        event['newData']['gia'],
+      ]
+    )
+      .subscribe(data => {
 
-          console.log("POST Request is successful ", data);
-        },
-          error => {
-            console.log("Error", error);
+        console.log("POST Request is successful ", data);
+      },
+        error => {
+          console.log("Error", error);
 
-          })
-      event.confirm.resolve();
+        })
+    event.confirm.resolve();
     // }
     // else {
     //   alert("Dữ liệu đã tồn tại")

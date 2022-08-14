@@ -24,6 +24,7 @@ import { KAI_PAGES } from '../../../@core/constant/pages.constant';
 import { ExcelService } from '../../../services/excel.service';
 import { InvoicePayment } from '../../../model/invoice-payment';
 import { NetworkserviceService } from '../../../services/networkservice.service';
+import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 
 @Component({
     selector: 'ngx-invoice',
@@ -31,7 +32,10 @@ import { NetworkserviceService } from '../../../services/networkservice.service'
     styleUrls: ['./invoice.component.scss'],
 })
 export class InvoiceComponent implements OnInit {
-
+    displaySuggestModalThongTinMayThuMua = false
+    jpcodengmodel=''
+    datathongtinthumuamaysuggests
+    currentIndex
     invoice: PurchasingInvoiceDto = {
         invoice_id: 0,
         position: undefined,
@@ -411,8 +415,28 @@ export class InvoiceComponent implements OnInit {
         }
     }
 
-    onChangeJPCode(event, i) {
-        console.log(event, i)
-        this.products[i].name = event.data
+    // onChangeJPCode(event, i) {
+    //     console.log(event.target.value, i)
+    //     this.products[i].name = event.data
+    // }
+
+    onEnter(event,i){
+        this.currentIndex = i
+        console.log('event.target.value',event.target.value,i)
+        console.log('jpcodengmodel',this.jpcodengmodel)
+        this.displaySuggestModalThongTinMayThuMua = true
+        this.datathongtinthumuamaysuggests = this.datathongtinthumuamay.filter(data => data.jpcode.toLowerCase().includes(event.target.value.toLowerCase()))
     }
+
+    onRowSelect(data){
+        console.log(data)
+        this.products[this.currentIndex].product_group_id = data.data.nhomsanpham
+        this.products[this.currentIndex].name = data.data.tenmay
+        this.products[this.currentIndex].status = data.data.trangthai
+        this.products[this.currentIndex].color = data.data.mau
+        this.products[this.currentIndex].price = data.data.gia
+        this.displaySuggestModalThongTinMayThuMua = false
+    }
+
+    onRowUnselect(){}
 }

@@ -2,17 +2,17 @@
     <nb-card-header>ĐƠN THU MUA</nb-card-header>
     <nb-card-body>
         <form #createAppForm="ngForm" (keydown.enter)="$event.preventDefault()" (ngSubmit)="onSubmit()"
-              autocomplete="true" novalidate>
+            autocomplete="true" novalidate>
             <div class=" row">
                 <div class=" col-md-6 pr-md-1">
                     <div class=" form-group">
                         <label> Tên Tiếng Việt </label> <label style="color: #ec250d;"> *</label>
                         <input class=" form-control" placeholder="Tên Tiếng Việt" type="text"
-                               [(ngModel)]="customer.name_vietnamese" required id="name_vietnamese"
-                               name="name_vietnamese" #nameVietnameseValidate="ngModel" />
+                            [(ngModel)]="customer.name_vietnamese" required id="name_vietnamese" name="name_vietnamese"
+                            #nameVietnameseValidate="ngModel" />
 
                         <div
-                                *ngIf="nameVietnameseValidate.invalid && (nameVietnameseValidate.dirty || nameVietnameseValidate.touched)">
+                            *ngIf="nameVietnameseValidate.invalid && (nameVietnameseValidate.dirty || nameVietnameseValidate.touched)">
                             <label style="color: #ec250d;"> Tên Tiếng Việt is required.</label>
                         </div>
                     </div>
@@ -24,10 +24,10 @@
                     <div class=" form-group">
                         <label> Tên Tiếng Nhật </label> <label style="color: #ec250d;"> *</label>
                         <input class=" form-control" placeholder="Tên Tiếng Nhật" type="text"
-                               [(ngModel)]="customer.name_japanese" required id="name_japanese"
-                               name="name_japanese" #nameJapaneseValidate="ngModel" />
+                            [(ngModel)]="customer.name_japanese" required id="name_japanese" name="name_japanese"
+                            #nameJapaneseValidate="ngModel" />
                         <div
-                                *ngIf="nameJapaneseValidate.invalid && (nameJapaneseValidate.dirty || nameJapaneseValidate.touched)">
+                            *ngIf="nameJapaneseValidate.invalid && (nameJapaneseValidate.dirty || nameJapaneseValidate.touched)">
                             <label style="color: #ec250d;"> Tên Tiếng Nhật is required.</label>
                         </div>
                     </div>
@@ -37,40 +37,21 @@
                 <div class=" col-md-6 pr-md-1">
                     <div class="form-group">
                         <label> Ngày Sinh</label> <label style="color: #ec250d;"> * &nbsp;</label>
-                        <p-calendar
-                                [styleClass]="'my-calendar birthday-calendar'"
-                                placeholder="Ngày Sinh"
-                                [(ngModel)]="birthday"
-                                (ngModelChange)="onChangeBirthday()"
-                                [ngModelOptions]="{standalone: true}"
-                                [monthNavigator]="true"
-                                [yearNavigator]="true"
-                                [maxDate]="CURRENT_DATE"
-                                dateFormat="dd-mm-yy"
-                                #birthdayValidate="ngModel"
-                        >
+                        <p-calendar [styleClass]="'my-calendar birthday-calendar'" placeholder="Ngày Sinh"
+                            [(ngModel)]="birthday" (ngModelChange)="onChangeBirthday()"
+                            [ngModelOptions]="{standalone: true}" [monthNavigator]="true" [yearNavigator]="true"
+                            [maxDate]="CURRENT_DATE" dateFormat="dd-mm-yy" #birthdayValidate="ngModel">
                         </p-calendar>
                         <i *ngIf="displaySpinner" class="pi pi-spin pi-spinner"
-                           style="font-size: 2rem; color: blue;"></i>
+                            style="font-size: 2rem; color: blue;"></i>
                         <div *ngIf="birthdayValidate.invalid && (birthdayValidate.dirty || birthdayValidate.touched)">
                             <label style="color: #ec250d;"> Ngày Sinh is required.</label>
                         </div>
-                        <p-dialog
-                                header="Gợi Ý Khách Hàng"
-                                [(visible)]="displaySuggestModal"
-                                [modal]="true"
-                                [style]="{width: '50vw'}"
-                                [baseZIndex]="10000"
-                                [draggable]="false"
-                                [resizable]="false">
-                            <p-table
-                                    [value]="suggestCustomers"
-                                    [(selection)]="selectedCustomer"
-                                    selectionMode="single"
-                                    dataKey="vin"
-                                    (onRowSelect)="onSelectCustomer($event)"
-                                    (onRowUnselect)="onUnSelectCustomer($event)"
-                            >
+                        <p-dialog header="Gợi Ý Khách Hàng" [(visible)]="displaySuggestModal" [modal]="true"
+                            [style]="{width: '50vw'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+                            <p-table [value]="suggestCustomers" [(selection)]="selectedCustomer" selectionMode="single"
+                                dataKey="vin" (onRowSelect)="onSelectCustomer($event)"
+                                (onRowUnselect)="onUnSelectCustomer($event)">
                                 <ng-template pTemplate="header">
                                     <tr>
                                         <th>Tên Tiếng Việt</th>
@@ -99,8 +80,8 @@
                 <div class=" col-md-6 pr-md-1">
                     <div class=" form-group">
                         <label> Tuổi</label> <label style="color: #ec250d;"> *</label>
-                        <input class=" form-control" placeholder="Tuổi" type="text" [(ngModel)]="customer.age"
-                               disabled id="age" name="age" #age="ngModel" />
+                        <input class=" form-control" placeholder="Tuổi" type="text" [(ngModel)]="customer.age" disabled
+                            id="age" name="age" #age="ngModel" />
 
                     </div>
                 </div>
@@ -109,11 +90,9 @@
                 <div class=" col-md-6 pr-md-1">
                     <div class=" form-group">
                         <label> Địa Chỉ</label> <label style="color: #ec250d;"> *</label>
-                        <input class=" form-control" placeholder="Địa Chỉ" type="text"
-                               [(ngModel)]="customer.address" required id="address" name="address"
-                               #addressValidate="ngModel" />
-                        <div
-                                *ngIf="addressValidate.invalid && (addressValidate.dirty || addressValidate.touched)">
+                        <input class=" form-control" placeholder="Địa Chỉ" type="text" [(ngModel)]="customer.address"
+                            required id="address" name="address" #addressValidate="ngModel" />
+                        <div *ngIf="addressValidate.invalid && (addressValidate.dirty || addressValidate.touched)">
                             <label style="color: #ec250d;"> Địa Chỉ is required.</label>
                         </div>
                     </div>
@@ -124,10 +103,9 @@
                     <div class=" form-group">
                         <label> Số Điện Thoại</label> <label style="color: #ec250d;"> *</label>
                         <input class=" form-control" placeholder="Số Điện Thoại" type="text"
-                               [(ngModel)]="customer.phone" required id="phone" name="phone" #phoneValidate="ngModel"
-                               (keypress)="keyPressNumbers($event)" />
-                        <div
-                                *ngIf="phoneValidate.invalid && (phoneValidate.dirty || phoneValidate.touched)">
+                            [(ngModel)]="customer.phone" required id="phone" name="phone" #phoneValidate="ngModel"
+                            (keypress)="keyPressNumbers($event)" />
+                        <div *ngIf="phoneValidate.invalid && (phoneValidate.dirty || phoneValidate.touched)">
                             <label style="color: #ec250d;"> Số Điện Thoại is required.</label>
                         </div>
                     </div>
@@ -137,9 +115,9 @@
                 <div class=" col-md-6 pr-md-1">
                     <div class=" form-group">
                         <label> Nghề Nghiệp</label> <label style="color: #ec250d;"> *&nbsp;&nbsp;</label>
-                        <p-dropdown [options]="jobs" (onChange)="onChangeJob($event.value)"
-                                    [(ngModel)]="selectedJobs" optionLabel="label" optionValue="value" required
-                                    [ngModelOptions]="{standalone: true}" #jobValidate="ngModel">
+                        <p-dropdown [options]="jobs" (onChange)="onChangeJob($event.value)" [(ngModel)]="selectedJobs"
+                            optionLabel="label" optionValue="value" required [ngModelOptions]="{standalone: true}"
+                            #jobValidate="ngModel">
                         </p-dropdown>
                         <br />
                     </div>
@@ -149,17 +127,9 @@
                 <div class=" col-md-6 pr-md-1">
                     <div class=" form-group">
                         <label> Ngày Bán</label> <label style="color: #ec250d;"> *&nbsp;&nbsp;</label>
-                        <p-calendar
-                                [styleClass]="'birthday-calendar'"
-                                placeholder="Ngày Bán"
-                                [(ngModel)]="sale_date"
-                                [ngModelOptions]="{standalone: true}"
-                                [monthNavigator]="true"
-                                [yearNavigator]="true"
-                                dateFormat="dd-mm-yy"
-                                #birthdayValidate="ngModel"
-                                [maxDate]="CURRENT_DATE"
-                        >
+                        <p-calendar [styleClass]="'birthday-calendar'" placeholder="Ngày Bán" [(ngModel)]="sale_date"
+                            [ngModelOptions]="{standalone: true}" [monthNavigator]="true" [yearNavigator]="true"
+                            dateFormat="dd-mm-yy" #birthdayValidate="ngModel" [maxDate]="CURRENT_DATE">
                         </p-calendar>
                         <br />
                     </div>
@@ -172,7 +142,7 @@
                             <div class=" col-md-6 pr-md-1 mt-2">
                                 <div class=" form-group">
                                     <label> Thông tin máy {{i + 1}}</label> <label style="color: #ec250d;">
-                                    *&nbsp;</label>
+                                        *&nbsp;</label>
                                 </div>
                             </div>
                         </div>
@@ -180,25 +150,47 @@
                             <div class=" col-md-3 pr-md-1">
                                 <div class=" form-group">
                                     <label> JP CODE </label>
-                                    <input class=" form-control" placeholder="JPCODE" 
-                                           type="text" id="jpcode{{i}}" name="jpcode{{i}}"
-                                           (input)="onChangeJPCode($event, i)"
-                                          />
+                                    <input class=" form-control" placeholder="JPCODE" type="text" id="jpcode{{i}}"
+                                        name="jpcode{{i}}" 
+                                        (keydown.enter)="onEnter($event,i)" />
                                 </div>
                             </div>
                         </div>
-
+                        <p-dialog header="Gợi Ý Thông Tin Máy Thu Mua" [(visible)]="displaySuggestModalThongTinMayThuMua" [modal]="true"
+                            [style]="{width: '50vw', color:'blue'}" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+                            <p-table selectionMode="single"  (onRowUnselect)="onRowUnselect($event)" 
+                            dataKey="vin"  [value]="datathongtinthumuamaysuggests" (onRowSelect)="onRowSelect($event)" [(selection)]="datathongtinthumuamaysuggest">
+                                <ng-template pTemplate="header">
+                                    <tr>
+                                        <th>JP Code</th>
+                                        <th>Nhóm SP</th>
+                                        <th>Tên Máy</th>
+                                        <th>Trạng Thái</th>
+                                        <th>Màu</th>
+                                        <th>Giá</th>
+                                    </tr>
+                                </ng-template>
+                                <ng-template pTemplate="body" let-customer>
+                                    <tr [pSelectableRow]="customer" >
+                                        <td>{{customer.jpcode}}</td>
+                                        <td>{{customer.nhomsanpham}}</td>
+                                        <td>{{customer.tenmay}}</td>
+                                        <td>{{customer.trangthai}}</td>
+                                        <td>{{customer.mau}}</td>
+                                        <td>{{customer.gia}}</td>
+                                    </tr>
+                                </ng-template>
+                            </p-table>
+                        </p-dialog>
                         <div class="row">
                             <div class=" col-md-3 col-lg-3">
                                 <div class="form-group">
                                     <label>Nhóm Sản Phẩm</label>
                                     <p-dropdown [styleClass]="'form-control'" [options]="product_groups"
-                                                (onChange)="onChangeProductGroup($event, i)"
-                                                [(ngModel)]="product.product_group_id" optionLabel="label"
-                                                optionValue="value"
-                                                id="product_group_id{{i}}" name="product_group_id{{i}}"
-                                                #product_group_id{{i}}="ngModel"
-                                                required [ngModelOptions]="{standalone: true}">
+                                        (onChange)="onChangeProductGroup($event, i)"
+                                        [(ngModel)]="product.product_group_id" optionLabel="label" optionValue="value"
+                                        id="product_group_id{{i}}" name="product_group_id{{i}}"
+                                        #product_group_id{{i}}="ngModel" required [ngModelOptions]="{standalone: true}">
                                     </p-dropdown>
                                 </div>
                             </div>
@@ -208,27 +200,25 @@
                                 <div class=" form-group">
                                     <label> Tên máy </label>
                                     <input class=" form-control" placeholder="Tên máy" [(ngModel)]="product.name"
-                                           type="text" id="NameMobile{{i}}" name="NameMobile{{i}}"
-                                           #NameMobile{{i}}="ngModel" />
+                                        type="text" id="NameMobile{{i}}" name="NameMobile{{i}}"
+                                        #NameMobile{{i}}="ngModel" />
                                 </div>
                             </div>
                             <div class="col-kai-half-5 col-md-2 pr-md-1">
                                 <div class="form-group">
                                     <label> Số imei </label>
                                     <input class="form-control p-imei" autocomplete="off" placeholder="Số imei"
-                                           [(ngModel)]="product.imei"
-                                           type="text" id="imei{{i}}" name="imei{{i}}" #imei{{i}}="ngModel"
-                                           (keyup.enter)="gotoNextImei($event, i+1)" />
+                                        [(ngModel)]="product.imei" type="text" id="imei{{i}}" name="imei{{i}}"
+                                        #imei{{i}}="ngModel" (keyup.enter)="gotoNextImei($event, i+1)" />
                                 </div>
                             </div>
                             <div class="col-kai-half-3 col-md-2 pr-md-1">
                                 <div class=" form-group">
                                     <label> Trạng thái &nbsp;</label>
                                     <p-dropdown [styleClass]="'form-control'" [options]="status"
-                                                (onChange)="onChangeStatus($event, i)"
-                                                [(ngModel)]="product.status" optionLabel="label" optionValue="value"
-                                                id="status{{i}}" name="status{{i}}" #status{{i}}="ngModel"
-                                                required [ngModelOptions]="{standalone: true}">
+                                        (onChange)="onChangeStatus($event, i)" [(ngModel)]="product.status"
+                                        optionLabel="label" optionValue="value" id="status{{i}}" name="status{{i}}"
+                                        #status{{i}}="ngModel" required [ngModelOptions]="{standalone: true}">
                                     </p-dropdown>
                                 </div>
                             </div>
@@ -236,15 +226,14 @@
                                 <div class=" form-group">
                                     <label> Màu </label>
                                     <p-dropdown [styleClass]="'form-control'" [options]="productColors"
-                                                (onChange)="onChangeColor($event, i)"
-                                                [(ngModel)]="product.color" optionLabel="label" optionValue="value"
-                                                id="color{{i}}" name="color{{i}}" #color{{i}}="ngModel"
-                                                required [ngModelOptions]="{standalone: true}">
+                                        (onChange)="onChangeColor($event, i)" [(ngModel)]="product.color"
+                                        optionLabel="label" optionValue="value" id="color{{i}}" name="color{{i}}"
+                                        #color{{i}}="ngModel" required [ngModelOptions]="{standalone: true}">
                                         <ng-template let-color pTemplate="item">
                                             <div class="country-item">
                                                 <div>
                                                     <span class="color-box" *ngFor="let c of color.code.split(',')"
-                                                          style="background-color:{{c}}">&nbsp;</span>
+                                                        style="background-color:{{c}}">&nbsp;</span>
                                                     {{color.label}}
                                                 </div>
                                             </div>
@@ -256,30 +245,28 @@
                                 <div class=" form-group">
                                     <label> Số Lượng </label>
                                     <input class=" form-control" placeholder="Số Lượng" [(ngModel)]="product.quantity"
-                                           type="number" id="quantity{{i}}" name="quantity{{i}}"
-                                           #quantity{{i}}="ngModel" (ngModelChange)="onChangeQuantity(product, i)" />
+                                        type="number" id="quantity{{i}}" name="quantity{{i}}" #quantity{{i}}="ngModel"
+                                        (ngModelChange)="onChangeQuantity(product, i)" />
                                 </div>
                             </div>
                             <div class=" col-md-2 pr-md-1">
                                 <div class=" form-group">
                                     <label> Giá </label>
                                     <input class=" form-control" placeholder="Giá" [(ngModel)]="product.price"
-                                           type="text" id="price{{i}}" name="price{{i}}" #price{{i}}="ngModel"
-                                           (keypress)="keyPressNumbers($event)"
-                                           (ngModelChange)="onChangePrice(product, i)" />
+                                        type="text" id="price{{i}}" name="price{{i}}" #price{{i}}="ngModel"
+                                        (keypress)="keyPressNumbers($event)"
+                                        (ngModelChange)="onChangePrice(product, i)" />
                                 </div>
                             </div>
 
                             <div class="col-md-12 col-lg-12 mb-2">
-                                <button pButton
-                                        class="btn p-button-sm p-button-danger mr-2"
-                                        type="button" (click)="removeProduct(i)">
+                                <button pButton class="btn p-button-sm p-button-danger mr-2" type="button"
+                                    (click)="removeProduct(i)">
                                     <nb-icon class="mr-1" icon="trash-2-outline"></nb-icon>
                                     Xóa
                                 </button>
-                                <button pButton
-                                        class="btn p-button-sm p-button-success" W
-                                        type="button" (click)="cloneProduct(i)">
+                                <button pButton class="btn p-button-sm p-button-success" W type="button"
+                                    (click)="cloneProduct(i)">
                                     <nb-icon class="mr-1" icon="copy-outline"></nb-icon>
                                     Clone
                                 </button>
@@ -308,9 +295,9 @@
                 </div>
                 <div class="col-md-3 col-lg-3 col-sm-5 mb-3">
                     <p-dropdown [styleClass]="'form-control'" [options]="paymentTypes"
-                                (onChange)="onChangePaymentMethod($event.value)"
-                                [(ngModel)]="invoice.payment_type" optionLabel="label" optionValue="value"
-                                required [ngModelOptions]="{standalone: true}" #paymentMethodValidate="ngModel">
+                        (onChange)="onChangePaymentMethod($event.value)" [(ngModel)]="invoice.payment_type"
+                        optionLabel="label" optionValue="value" required [ngModelOptions]="{standalone: true}"
+                        #paymentMethodValidate="ngModel">
                     </p-dropdown>
 
 
@@ -322,16 +309,16 @@
                     <div class="form-group">
                         <label>Mã Số Đơn</label>
                         <input class=" form-control" placeholder="Mã Số Đơn" type="text"
-                               [(ngModel)]="paymentInfo.invoice_code" required id="invoice_code"
-                               name="invoice_code" #invoiceCodeValidate="ngModel" />
+                            [(ngModel)]="paymentInfo.invoice_code" required id="invoice_code" name="invoice_code"
+                            #invoiceCodeValidate="ngModel" />
                     </div>
                 </div>
                 <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
                         <label>PT Thanh Toán</label>
                         <p-dropdown [styleClass]="'form-control'" [options]="paymentMethods"
-                                    [(ngModel)]="paymentInfo.payment_method" optionLabel="label" optionValue="value"
-                                    required [ngModelOptions]="{standalone: true}" #paymentMethodValidate="ngModel">
+                            [(ngModel)]="paymentInfo.payment_method" optionLabel="label" optionValue="value" required
+                            [ngModelOptions]="{standalone: true}" #paymentMethodValidate="ngModel">
                         </p-dropdown>
                     </div>
                 </div>
@@ -339,80 +326,63 @@
                     <div class="form-group">
                         <label>Tên Ngân Hàng</label>
                         <input class=" form-control" placeholder="Tên Ngân Hàng" type="text"
-                               [(ngModel)]="paymentInfo.bank_name" required id="bank_name"
-                               name="bank_name" #bankNameValidate="ngModel" />
+                            [(ngModel)]="paymentInfo.bank_name" required id="bank_name" name="bank_name"
+                            #bankNameValidate="ngModel" />
                     </div>
                 </div>
                 <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
                         <label>Tên Chi Nhánh</label>
                         <input class=" form-control" placeholder="Tên Chi Nhánh" type="text"
-                               [(ngModel)]="paymentInfo.branch_name" required id="branch_name"
-                               name="branch_name" #branchNameValidate="ngModel" />
+                            [(ngModel)]="paymentInfo.branch_name" required id="branch_name" name="branch_name"
+                            #branchNameValidate="ngModel" />
                     </div>
                 </div>
                 <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
                         <label>Số Tài Khoản</label>
                         <input class=" form-control" placeholder="Số Tài Khoản" type="text"
-                               [(ngModel)]="paymentInfo.bank_id" required id="bank_id"
-                               name="bank_id" #bankIdValidate="ngModel" />
+                            [(ngModel)]="paymentInfo.bank_id" required id="bank_id" name="bank_id"
+                            #bankIdValidate="ngModel" />
                     </div>
                 </div>
                 <div class="col-md-2 col-lg-2 col-sm-2">
                     <div class="form-group">
                         <label>Tên Chủ TK</label>
                         <input class=" form-control" placeholder="Tên Chủ Tài Khoản" type="text"
-                               [(ngModel)]="paymentInfo.account_name" required id="account_name"
-                               name="account_name" #accountNameValidate="ngModel" />
+                            [(ngModel)]="paymentInfo.account_name" required id="account_name" name="account_name"
+                            #accountNameValidate="ngModel" />
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <button pButton class="btn p-button-sm p-button-info" type="submit"
-                            [disabled]="!createAppForm.valid || !selectedJobs || selectedJobs == null || !birthday || onsaving">
+                        [disabled]="!createAppForm.valid || !selectedJobs || selectedJobs == null || !birthday || onsaving">
                         <nb-icon class="mr-1" icon="save-outline"></nb-icon>
                         Lưu
                     </button>
-                    <button pButton
-                            class="btn p-button-sm p-button-danger ml-1"
-                            type="button" (click)="cancel()">
+                    <button pButton class="btn p-button-sm p-button-danger ml-1" type="button" (click)="cancel()">
                         <nb-icon class="mr-1" icon="close-square-outline"></nb-icon>
                         Hủy
                     </button>
-                    <button *ngIf="editData.invoice_id && !isLocked"
-                            pButton
-                            class="btn p-button-sm p-button-secondary ml-1"
-                            type="button"
-                            (click)="lockInvoice()">
+                    <button *ngIf="editData.invoice_id && !isLocked" pButton
+                        class="btn p-button-sm p-button-secondary ml-1" type="button" (click)="lockInvoice()">
                         <nb-icon class="mr-1" icon="lock-outline"></nb-icon>
                         Khóa
                     </button>
-                    <button *ngIf="editData.invoice_id && isLocked"
-                            pButton
-                            class="btn p-button-sm p-button-info ml-1"
-                            type="button"
-                            (click)="unlockInvoice()">
+                    <button *ngIf="editData.invoice_id && isLocked" pButton class="btn p-button-sm p-button-info ml-1"
+                        type="button" (click)="unlockInvoice()">
                         <nb-icon class="mr-1" icon="lock-outline"></nb-icon>
                         Mở Khóa
                     </button>
-                    <button *ngIf="editData.invoice_id"
-                            pButton
-                            class="btn p-button-sm p-button-info ml-1"
-                            type="button"
-                            (click)="exportExcel()">
+                    <button *ngIf="editData.invoice_id" pButton class="btn p-button-sm p-button-info ml-1" type="button"
+                        (click)="exportExcel()">
                         <nb-icon class="mr-1" icon="download-outline"></nb-icon>
                         Export
                     </button>
-                    <button
-                            pButton
-                            class="btn p-button-sm p-button-success ml-1"
-                            type="button"
-                            (click)="saveAndExport()"
-                            (dblclick)="saveAndExport()"
-                            [disabled]="onsaving"
-                            >
+                    <button pButton class="btn p-button-sm p-button-success ml-1" type="button"
+                        (click)="saveAndExport()" (dblclick)="saveAndExport()" [disabled]="onsaving">
                         <nb-icon class="mr-1" icon="cloud-download-outline"></nb-icon>
                         Lưu và Export
                     </button>
