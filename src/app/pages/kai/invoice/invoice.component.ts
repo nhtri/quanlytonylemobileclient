@@ -23,6 +23,7 @@ import { getAge } from '../../../@core/utils/date.utils';
 import { KAI_PAGES } from '../../../@core/constant/pages.constant';
 import { ExcelService } from '../../../services/excel.service';
 import { InvoicePayment } from '../../../model/invoice-payment';
+import { NetworkserviceService } from '../../../services/networkservice.service';
 
 @Component({
     selector: 'ngx-invoice',
@@ -88,14 +89,19 @@ export class InvoiceComponent implements OnInit {
     PURCHASING_REPORT_NAME = 'InvoiceReport';
     CURRENT_DATE = TODAY;
 
-    onsaving=false
-
+    onsaving = false
+    datathongtinthumuamay
     constructor(private formBuilder: FormBuilder,
-                private elementRef: ElementRef,
-                private kaiService: KaiService,
-                private excelService: ExcelService,
-                private router: Router,
-                public datePipe: DatePipe) {
+        private elementRef: ElementRef,
+        private kaiService: KaiService,
+        private excelService: ExcelService,
+        private router: Router,
+        public datePipe: DatePipe,
+        private service: NetworkserviceService) {
+        this.service.getthongtinmaythumua().subscribe(val => {
+
+            this.datathongtinthumuamay = val
+        });
     }
 
     ngOnInit() {
@@ -159,7 +165,7 @@ export class InvoiceComponent implements OnInit {
             this.displaySpinner = true;
             this.kaiService.searchCustomer({
                 search_type: 'BIRTHDAY',
-                query: {birthday: this.customer.birthday},
+                query: { birthday: this.customer.birthday },
             })
                 .subscribe(customers => {
                     if (notEmpty(customers)) {
@@ -191,7 +197,7 @@ export class InvoiceComponent implements OnInit {
         if (item !== null) {
             this.customer = item;
             this.customer.birthday = this.datePipe.transform(item.birthday, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
-            this.invoice.customer = {id: this.customer.id} as Customer;
+            this.invoice.customer = { id: this.customer.id } as Customer;
             const job = this.jobs.find(x => x.value === this.customer.job);
             if (job) {
                 this.selectedJobs = job.value;
@@ -206,7 +212,7 @@ export class InvoiceComponent implements OnInit {
             this.selectedJobs = PEOPLE_JOBS[0].value;
             this.customer.job = this.selectedJobs;
             this.customer.phone = null;
-            this.invoice.customer = {id: 0} as Customer;
+            this.invoice.customer = { id: 0 } as Customer;
         }
     }
 
@@ -241,7 +247,7 @@ export class InvoiceComponent implements OnInit {
             alert("Đang thực hiện quá trình thu mua !!!")
             this.onsaving = true
             let display_order = 1;
-            const {payment_type} = this.invoice;
+            const { payment_type } = this.invoice;
             const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
             this.invoice = {
                 invoice_id: this.invoice_id,
@@ -303,7 +309,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     cloneProduct(index) {
-        const {name, imei, status, color, quantity, price, product_group_id} = this.products[index];
+        const { name, imei, status, color, quantity, price, product_group_id } = this.products[index];
         this.products.splice(index + 1, 0,
             {
                 name, imei, status, color, quantity, price,
@@ -379,7 +385,7 @@ export class InvoiceComponent implements OnInit {
             alert("Đang thực hiện quá trình thu mua !!!")
             this.onsaving = true
             let display_order = 1;
-            const {payment_type} = this.invoice;
+            const { payment_type } = this.invoice;
             const payment_detail = (payment_type === PAYMENT_TYPE.TRANSFER) ? this.paymentInfo : null;
             this.invoice = {
                 invoice_id: this.invoice_id,
@@ -403,5 +409,10 @@ export class InvoiceComponent implements OnInit {
                 this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
             });
         }
+    }
+
+    onChangeJPCode(event, i) {
+        console.log(event, i)
+        this.products[i].name = event.data
     }
 }

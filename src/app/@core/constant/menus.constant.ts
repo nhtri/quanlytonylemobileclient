@@ -86,14 +86,17 @@ export const MENU_ITEMS: MobileMenuItem[] = [
                 // home: true,
                 children: [
                     {
+                        title: 'Quản Lý Thông Tin Máy',
+                        link: '/pages/tables/quanlythongtinmaythumua',
+                    },
+                    {
                         title: 'Quản Lý Sản Phẩm',
                         link: KAI_PAGES.DATA_DEVICES,
                     },
                     {
                         title: 'Quản Lý Đơn Thu Mua',
                         link: KAI_PAGES.DATA_PURCHASING_INVOICES,
-                    },
-
+                    }, 
                 ],
             },
 
