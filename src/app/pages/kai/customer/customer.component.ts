@@ -19,6 +19,7 @@ import { KAI_PAGES } from '../../../@core/constant/pages.constant';
     templateUrl: './customer.component.html',
     styleUrls: ['./customer.component.scss'],
 })
+
 export class CustomerComponent implements OnInit {
 
     birthdayYearRange = DEFAULT_BIRTHDAY_YEAR_RANGE;
@@ -31,22 +32,38 @@ export class CustomerComponent implements OnInit {
         job: PEOPLE_JOBS[0].value,
         age: 0,
         address: null,
+        payment_method: null,
+        bank_name: null,
+        branch_name: null,
+        bank_id: null,
+        account_name: null
+
     };
     jobs = PEOPLE_JOBS;
     selectedJob: JOB_TYPE = PEOPLE_JOBS[0].value;
+    selectedpayment_method 
     birthday: Date;
+
+ payment_method=[
+        {label:'当座預金',value:'当座預金'},
+        {label:'普通預金',value:'普通預金'}
+    ]
 
     TODAY = TODAY;
 
     constructor(private formBuilder: FormBuilder,
-                private kaiService: KaiService,
-                private router: Router,
-                public datePipe: DatePipe,
+        private kaiService: KaiService,
+        private router: Router,
+        public datePipe: DatePipe,
     ) {
     }
 
     getData() {
-        const {id, name_vietnamese, name_japanese, birthday, age, address, phone, job} = this.editData;
+        const { id, name_vietnamese, name_japanese, birthday, age, address, phone, job, payment_method,
+            bank_name,
+            branch_name,
+            bank_id,
+            account_name } = this.editData;
         this.customer = {
             id,
             name_vietnamese,
@@ -56,6 +73,11 @@ export class CustomerComponent implements OnInit {
             address,
             phone,
             job,
+            payment_method,
+            bank_name,
+            branch_name,
+            bank_id,
+            account_name
         };
         this.birthday = parseDate(this.customer.birthday.toString());
         const customerJob = this.jobs.find(j => j.value === this.customer.job);
@@ -65,14 +87,20 @@ export class CustomerComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.selectedpayment_method= this.payment_method[0].value;
         this.editData = window.history.state;
         if (this.editData.id) {
             this.getData();
         }
+      
     }
 
     onChangeJob(event) {
         this.customer.job = this.selectedJob;
+    }
+
+    onChangePayment(event){
+        this.selectedpayment_method = event.target.value
     }
 
     birthdayChange() {
@@ -91,17 +119,17 @@ export class CustomerComponent implements OnInit {
         this.customer.birthday = this.datePipe.transform(this.birthday, DATE_CONSTANT.TECHNICAL_DATE_FORMAT);
         if (this.customer.id) {
             this.kaiService.updateCustomer(this.customer).subscribe(x => {
-                    alert('Lưu Thành Công');
-                    this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
-                },
+                alert('Lưu Thành Công');
+                this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
+            },
                 error => {
                     throw error;
                 });
         } else {
             this.kaiService.createCustomer(this.customer).subscribe(x => {
-                    alert('Lưu Thành Công');
-                    this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
-                },
+                alert('Lưu Thành Công');
+                this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
+            },
                 error => {
                     throw error;
                 });

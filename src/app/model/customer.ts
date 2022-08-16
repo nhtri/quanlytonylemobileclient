@@ -11,4 +11,9 @@ export interface Customer {
   job: JOB_TYPE;
   created_at?: Date;
   updated_at?: Date;
+  payment_method: string;
+  bank_name: string;
+  branch_name: string;
+  bank_id: string;
+  account_name: string;
 }

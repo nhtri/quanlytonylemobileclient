@@ -104,6 +104,49 @@
                     </div>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>PT Thanh Toán</label>
+                        <p-dropdown [styleClass]="'form-control'" [options]="payment_method" (onChange)="onChangePayment($event)"
+                            [(ngModel)]="customer.payment_method" optionLabel="label" optionValue="value" required
+                            [ngModelOptions]="{standalone: true}" #paymentMethodValidate="ngModel">
+                        </p-dropdown>
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Tên Ngân Hàng</label>
+                        <input class=" form-control" placeholder="Tên Ngân Hàng" type="text"
+                            [(ngModel)]="customer.bank_name" required id="bank_name" name="bank_name"
+                            #bankNameValidate="ngModel" />
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Tên Chi Nhánh</label>
+                        <input class=" form-control" placeholder="Tên Chi Nhánh" type="text"
+                            [(ngModel)]="customer.branch_name" required id="branch_name" name="branch_name"
+                            #branchNameValidate="ngModel" />
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Số Tài Khoản</label>
+                        <input class=" form-control" placeholder="Số Tài Khoản" type="text"
+                            [(ngModel)]="customer.bank_id" required id="bank_id" name="bank_id"
+                            #bankIdValidate="ngModel" />
+                    </div>
+                </div>
+                <div class="col-md-2 col-lg-2 col-sm-2">
+                    <div class="form-group">
+                        <label>Tên Chủ TK</label>
+                        <input class=" form-control" placeholder="Tên Chủ Tài Khoản" type="text"
+                            [(ngModel)]="customer.account_name" required id="account_name" name="account_name"
+                            #accountNameValidate="ngModel" />
+                    </div>
+                </div>
+            </div>
             <div class="card-footer">
                 <button pButton class="btn p-button-sm p-button-info" type="submit"
                         [disabled]="!createAppForm.valid || !selectedJob || selectedJob == null || !birthday">
