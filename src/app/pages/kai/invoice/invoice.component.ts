@@ -33,7 +33,7 @@ import { FindValueSubscriber } from 'rxjs/internal/operators/find';
 })
 export class InvoiceComponent implements OnInit {
     displaySuggestModalThongTinMayThuMua = false
-    jpcodengmodel=''
+    jpcodengmodel = ''
     datathongtinthumuamaysuggests
     currentIndex
     invoice: PurchasingInvoiceDto = {
@@ -121,9 +121,9 @@ export class InvoiceComponent implements OnInit {
                     label: pg.name,
                 };
             });
-            console.log('this.product_groups',this.product_groups)
+            console.log('this.product_groups', this.product_groups)
         });
-        
+
         this.editData = window.history.state;
         this.sale_date = new Date();
         if (this.editData.invoice_id) {
@@ -297,9 +297,14 @@ export class InvoiceComponent implements OnInit {
         this.displaySuggestModal = false;
         this.paymentInfo.bank_id = this.customer.bank_id;
         this.paymentInfo.bank_name = this.customer.bank_name;
-        this.paymentInfo.branch_name = this.customer.bank_name;
+        this.paymentInfo.branch_name = this.customer.branch_name;
         this.paymentInfo.account_name = this.customer.account_name;
-
+        if (this.customer.payment_method == "当座預金") {
+            this.paymentInfo.payment_method = PAYMENT_METHOD.CHECKS_DEPOSIT
+        }
+        if (this.customer.payment_method == "普通預金") {
+            this.paymentInfo.payment_method = PAYMENT_METHOD.ORDINARY_DEPOSIT
+        }
     }
 
     onUnSelectCustomer(event) {
@@ -432,20 +437,37 @@ export class InvoiceComponent implements OnInit {
     //     this.products[i].name = event.data
     // }
 
-    onEnter(event,i){
+    onEnter(event, i) {
         this.currentIndex = i
-        console.log('event.target.value',event.target.value,i)
-        console.log('jpcodengmodel',this.jpcodengmodel)
-        this.displaySuggestModalThongTinMayThuMua = true
+        console.log('event.target.value', event.target.value, i)
+        console.log('jpcodengmodel', this.jpcodengmodel)
         this.datathongtinthumuamaysuggests = this.datathongtinthumuamay.filter(data => data.jpcode.toLowerCase().includes(event.target.value.toLowerCase()))
+        if (this.datathongtinthumuamaysuggests.length > 1) {
+            this.displaySuggestModalThongTinMayThuMua = true
+        }
+        else if (this.datathongtinthumuamaysuggests.length == 1) {
+            console.log('datathongtinthumuamaysuggests', this.datathongtinthumuamaysuggests)
+            this.product_groups.forEach(element => {
+                if (element.label == this.datathongtinthumuamaysuggests[0].nhomsanpham) {
+                    this.datathongtinthumuamaysuggests[0].nhomsanpham = element.value
+                }
+            });
+            // this.products[this.currentIndex].product_group_id = data.data.nhomsanpham
+            this.products[this.currentIndex].product_group_id = this.datathongtinthumuamaysuggests[0].nhomsanpham
+            this.products[this.currentIndex].name = this.datathongtinthumuamaysuggests[0].tenmay
+            this.products[this.currentIndex].status = this.datathongtinthumuamaysuggests[0].trangthai
+            this.products[this.currentIndex].color = this.datathongtinthumuamaysuggests[0].mau
+            this.products[this.currentIndex].price = this.datathongtinthumuamaysuggests[0].gia
+        }
+
     }
 
-    onRowSelect(data){
+    onRowSelect(data) {
         console.log(data)
         this.product_groups.forEach(element => {
-            if(element.label == data.data.nhomsanpham){
+            if (element.label == data.data.nhomsanpham) {
                 data.data.nhomsanpham = element.value
-            } 
+            }
         });
         // this.products[this.currentIndex].product_group_id = data.data.nhomsanpham
         this.products[this.currentIndex].product_group_id = data.data.nhomsanpham
@@ -456,5 +478,5 @@ export class InvoiceComponent implements OnInit {
         this.displaySuggestModalThongTinMayThuMua = false
     }
 
-    onRowUnselect(){}
+    onRowUnselect() { }
 }
