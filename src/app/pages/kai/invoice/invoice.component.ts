@@ -100,6 +100,7 @@ export class InvoiceComponent implements OnInit {
 
     onsaving = false
     datathongtinthumuamay
+    productbeforedit
     constructor(private formBuilder: FormBuilder,
         private elementRef: ElementRef,
         private kaiService: KaiService,
@@ -114,6 +115,7 @@ export class InvoiceComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('this.editData.', this.editData);
         this.kaiService.getProductGroups().subscribe((groups) => {
             this.product_groups = groups.map(pg => {
                 return {
@@ -130,6 +132,8 @@ export class InvoiceComponent implements OnInit {
             this.kaiService.getPurchasingInvoiceDetail(this.editData.invoice_id).subscribe((invoiceDetail) => {
                 if (notEmpty(invoiceDetail)) {
                     this.products = invoiceDetail.products;
+                    this.productbeforedit = invoiceDetail.products
+                    console.log('this.products', this.products)
                     this.customer_id = invoiceDetail.customer.id;
                     this.invoice_id = invoiceDetail.invoice_id;
                     this.customer = invoiceDetail.customer;
@@ -252,9 +256,34 @@ export class InvoiceComponent implements OnInit {
     }
 
     onSubmit() {
+        console.log('this.editData.', this.editData);
+        // let sanphamcotrongkho
+        // if (this.editData !=undefined) {
+        //     this.products.forEach(product => {
+        //         this.service.getsoluongsanphamhientaidangco([product.id, product.position]).subscribe(response => {
+        //             sanphamcotrongkho.push(response)
+        //             console.log('sanphamcotrongkho', sanphamcotrongkho);
+        //         }
+
+        //         )
+        //     });
+        // }
         if (this.isLocked) {
             this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
         } else {
+            if (this.editData.invoice_id) {
+                console.log('undefined')
+                this.productbeforedit.forEach(productbeforedit => {
+                    this.service.getsoluongsanphamhientaidangco([productbeforedit.id, productbeforedit.position]).subscribe(response => {
+                 
+                console.log('soluongsanpham',response)
+                console.log('product.quantity',productbeforedit.quantity)
+                console.log('response[0].quantity)-product.quantity',response[0].quantity-productbeforedit.quantity)
+                this.service.updatesoluongsanphamhuy([parseInt(response[0].quantity)-productbeforedit.quantity,productbeforedit.id,productbeforedit.position]).subscribe()
+                    })
+                   
+                });
+            }
             alert("Đang thực hiện quá trình thu mua !!!")
             this.onsaving = true
             let display_order = 1;
