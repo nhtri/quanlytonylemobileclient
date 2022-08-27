@@ -1,11 +1,11 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {NetworkserviceService} from '../../../services/networkservice.service';
-import {PRODUCT_SOURCE} from '../../../@core/constant/common';
-import {notEmpty} from '../../../@core/utils/data.utils';
-import {KaiService} from '../../../services/kai.service';
-import {ExcelService} from '../../../services/excel.service';
-import {CurrencyMaskService} from '../../../@core/shared/directives/currency-mask/currency-mask.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NetworkserviceService } from '../../../services/networkservice.service';
+import { PRODUCT_SOURCE } from '../../../@core/constant/common';
+import { notEmpty } from '../../../@core/utils/data.utils';
+import { KaiService } from '../../../services/kai.service';
+import { ExcelService } from '../../../services/excel.service';
+import { CurrencyMaskService } from '../../../@core/shared/directives/currency-mask/currency-mask.service';
 
 @Component({
   selector: 'ngx-editbansanpham',
@@ -49,10 +49,10 @@ export class EditbansanphamComponent implements OnInit {
   shopSource;
 
   constructor(private kaiService: KaiService,
-              private excelService: ExcelService,
-              private service: NetworkserviceService,
-              private currencyMaskService: CurrencyMaskService,
-              private route: ActivatedRoute, private router: Router) {
+    private excelService: ExcelService,
+    private service: NetworkserviceService,
+    private currencyMaskService: CurrencyMaskService,
+    private route: ActivatedRoute, private router: Router) {
 
     this.route.queryParams
       .subscribe(params => {
@@ -130,7 +130,7 @@ export class EditbansanphamComponent implements OnInit {
 
 
 
-;
+        ;
       })
 
   }
@@ -329,14 +329,14 @@ export class EditbansanphamComponent implements OnInit {
                         console.log('data danhsachdonhang', date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tienhoadon)
                         this.service.taodanhsachdonhang([date, this.tongtienthu, transactionkey, soluongsanpham, danhsachimei.substring(0, danhsachimei.length - 1), this.vitri, this.hinhthucthanhtoan, this.tongtienban, this.tienmat, this.daikibi, this.chuyenkhoan, this.hinhthucthanhtoan, this.thongtinkhachhang]).subscribe(value => {
                           console.log(value);
-                          const {madonhang} = value;
+                          const { madonhang } = value;
                           if (isExport) {
                             this.kaiService.downloadSellingInvoiceReport({
                               invoice_id: madonhang,
                               position: this.vitri,
                             }).subscribe(bufferResponse => {
                               this.excelService.saveAsExcelFile(
-                                  bufferResponse, this.SELLING_REPORT_NAME,
+                                bufferResponse, this.SELLING_REPORT_NAME,
                               );
                             });
                           }
@@ -659,32 +659,37 @@ export class EditbansanphamComponent implements OnInit {
 
 
       this.service.getsanphamemei([this.imeisanphamthem]).subscribe(value => {
-        console.log('value value', value)
-        this.datasnew.push(value[0])
-        this.datasnew[this.datasnew.length - 1].giaban = value[0].estimated_price
-        this.datasnew[this.datasnew.length - 1].sotienban = value[0].estimated_price
-        this.datasnew[this.datasnew.length - 1].giatien = value[0].price
-        this.datasnew[this.datasnew.length - 1].quantitytemp = value[0].quantity
-        this.datasnew[this.datasnew.length - 1].quantity = 1
-        this.datasnew[this.datasnew.length - 1].soluong = 1
-        this.datasnew[this.datasnew.length - 1].vitri = value[0].position
-        this.datasnew[this.datasnew.length - 1].productid = value[0].id
-        this.datasnew[this.datasnew.length - 1].soluong = value[0].quantity
-        this.datasnew[this.datasnew.length - 1].giathu = value[0].price
-        this.tongtienthu = 0
-        this.tongtienban = 0
-        this.tienmat = 0
-        console.log('datas datas', this.datasnew)
-        this.datasnew.forEach(e => {
-          console.log("e.giaban", e.giaban, "e.soluong", e.soluong)
-          this.tongtienban += parseInt(e.soluong) * parseInt(e.giaban)
-          this.tongtienthu += parseInt(e.giatien)
-        });
-        this.tienhoadon = this.tongtienban.toString()
+        if (value.length > 0) {
+          console.log('value value', value)
+          this.datasnew.push(value[0])
+          this.datasnew[this.datasnew.length - 1].giaban = value[0].estimated_price
+          this.datasnew[this.datasnew.length - 1].sotienban = value[0].estimated_price
+          this.datasnew[this.datasnew.length - 1].giatien = value[0].price
+          this.datasnew[this.datasnew.length - 1].quantitytemp = value[0].quantity
+          this.datasnew[this.datasnew.length - 1].quantity = 1
+          this.datasnew[this.datasnew.length - 1].soluong = 1
+          this.datasnew[this.datasnew.length - 1].vitri = value[0].position
+          this.datasnew[this.datasnew.length - 1].productid = value[0].id
+          this.datasnew[this.datasnew.length - 1].soluong = value[0].quantity
+          this.datasnew[this.datasnew.length - 1].giathu = value[0].price
+          this.tongtienthu = 0
+          this.tongtienban = 0
+          this.tienmat = 0
+          console.log('datas datas', this.datasnew)
+          this.datasnew.forEach(e => {
+            console.log("e.giaban", e.giaban, "e.soluong", e.soluong)
+            this.tongtienban += parseInt(e.soluong) * parseInt(e.giaban)
+            this.tongtienthu += parseInt(e.giatien)
+          });
+          this.tienhoadon = this.tongtienban.toString()
 
-        console.log(this.hinhthucthanhtoan)
-        console.log("tongtienban", this.tongtienban)
-        this.tienmat = this.tongtienban
+          console.log(this.hinhthucthanhtoan)
+          console.log("tongtienban", this.tongtienban)
+          this.tienmat = this.tongtienban
+        }
+        else{
+          alert("Số IMEI này không tồn taị")
+        }
       })
 
     }
