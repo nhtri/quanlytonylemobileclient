@@ -41,12 +41,12 @@ export class CustomerComponent implements OnInit {
     };
     jobs = PEOPLE_JOBS;
     selectedJob: JOB_TYPE = PEOPLE_JOBS[0].value;
-    selectedpayment_method 
+    selectedpayment_method
     birthday: Date;
 
- payment_method=[
-        {label:'当座預金',value:'当座預金'},
-        {label:'普通預金',value:'普通預金'}
+    payment_method = [
+        { label: '当座預金', value: '当座預金' },
+        { label: '普通預金', value: '普通預金' }
     ]
 
     TODAY = TODAY;
@@ -87,19 +87,19 @@ export class CustomerComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.selectedpayment_method= this.payment_method[0].value;
+        this.selectedpayment_method = this.payment_method[0].value;
         this.editData = window.history.state;
         if (this.editData.id) {
             this.getData();
         }
-      
+
     }
 
     onChangeJob(event) {
         this.customer.job = this.selectedJob;
     }
 
-    onChangePayment(event){
+    onChangePayment(event) {
         this.selectedpayment_method = event.target.value
     }
 
@@ -126,13 +126,18 @@ export class CustomerComponent implements OnInit {
                     throw error;
                 });
         } else {
-            this.kaiService.createCustomer(this.customer).subscribe(x => {
-                alert('Lưu Thành Công');
-                this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
-            },
-                error => {
-                    throw error;
-                });
+            if (this.customer.bank_name != null && this.customer.account_name != null && this.customer.branch_name != null) {
+                this.kaiService.createCustomer(this.customer).subscribe(x => {
+                    alert('Lưu Thành Công');
+                    this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
+                },
+                    error => {
+                        throw error;
+                    });
+            }
+            else {
+                alert("Vui lòng điền đầy đủ thông tin Tên Ngân Hàng, Tên Chi Nhánh và Tên Chủ Tài Khoản")
+            }
         }
 
     }
