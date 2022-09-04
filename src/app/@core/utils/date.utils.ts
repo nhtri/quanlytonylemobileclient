@@ -14,9 +14,9 @@ export const getAge = (date: Date) => {
     let age = CURRENT_YEAR - date.getFullYear();
     const currentDate = new Date();
     if (
-        (date.getMonth() < currentDate.getMonth())
+        (date.getMonth() > currentDate.getMonth())
         ||
-        (date.getMonth() === currentDate.getMonth() && date.getDate() < currentDate.getDate())
+        (date.getMonth() === currentDate.getMonth() && date.getDate() > currentDate.getDate())
     ) {
         age = age - 1;
     }

@@ -242,10 +242,10 @@
                             </div>
                             <div class="col-kai-half-5 col-md-2 pr-md-1">
                                 <div class="form-group">
-                                    <label> Số imei </label>
+                                    <label> Số imei </label><label style="color: #ec250d;"> *&nbsp;&nbsp;</label>
                                     <input class="form-control p-imei" autocomplete="off" placeholder="Số imei"
                                         [(ngModel)]="product.imei" type="text" id="imei{{i}}" name="imei{{i}}"
-                                        #imei{{i}}="ngModel" (keyup.enter)="gotoNextImei($event, i+1)" />
+                                        required id="imei" #imei{{i}}="ngModel" (keyup.enter)="gotoNextImei($event, i+1)" />
                                 </div>
                             </div>
                             <div class="col-kai-half-3 col-md-2 pr-md-1">
