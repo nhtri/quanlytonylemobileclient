@@ -126,7 +126,7 @@ export class CustomerComponent implements OnInit {
                     throw error;
                 });
         } else {
-            if (this.customer.bank_name != null && this.customer.account_name != null && this.customer.branch_name != null) {
+            // if (this.customer.bank_name != null && this.customer.account_name != null && this.customer.branch_name != null) {
                 this.kaiService.createCustomer(this.customer).subscribe(x => {
                     alert('Lưu Thành Công');
                     this.router.navigateByUrl(KAI_PAGES.DATA_CUSTOMERS).then(r => r);
@@ -134,10 +134,10 @@ export class CustomerComponent implements OnInit {
                     error => {
                         throw error;
                     });
-            }
-            else {
-                alert("Vui lòng điền đầy đủ thông tin Tên Ngân Hàng, Tên Chi Nhánh và Tên Chủ Tài Khoản")
-            }
+            // }
+            // else {
+            //     alert("Vui lòng điền đầy đủ thông tin Tên Ngân Hàng, Tên Chi Nhánh và Tên Chủ Tài Khoản")
+            // }
         }
 
     }

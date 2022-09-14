@@ -345,7 +345,7 @@
                     <div class="form-group">
                         <label>Mã Số Đơn</label>
                         <input class=" form-control" placeholder="Mã Số Đơn" type="text"
-                            [(ngModel)]="paymentInfo.invoice_code" required id="invoice_code" name="invoice_code"
+                            [(ngModel)]="paymentInfo.invoice_code"  id="invoice_code" name="invoice_code"
                             #invoiceCodeValidate="ngModel" />
                     </div>
                 </div>
@@ -362,7 +362,7 @@
                     <div class="form-group">
                         <label>Tên Ngân Hàng</label>
                         <input class=" form-control" placeholder="Tên Ngân Hàng" type="text"
-                            [(ngModel)]="paymentInfo.bank_name" required id="bank_name" name="bank_name"
+                            [(ngModel)]="paymentInfo.bank_name"  id="bank_name" name="bank_name"
                             #bankNameValidate="ngModel" />
                     </div>
                 </div>
@@ -370,7 +370,7 @@
                     <div class="form-group">
                         <label>Tên Chi Nhánh</label>
                         <input class=" form-control" placeholder="Tên Chi Nhánh" type="text"
-                            [(ngModel)]="paymentInfo.branch_name" required id="branch_name" name="branch_name"
+                            [(ngModel)]="paymentInfo.branch_name"  id="branch_name" name="branch_name"
                             #branchNameValidate="ngModel" />
                     </div>
                 </div>
@@ -378,7 +378,7 @@
                     <div class="form-group">
                         <label>Số Tài Khoản</label>
                         <input class=" form-control" placeholder="Số Tài Khoản" type="text"
-                            [(ngModel)]="paymentInfo.bank_id" required id="bank_id" name="bank_id"
+                            [(ngModel)]="paymentInfo.bank_id"  id="bank_id" name="bank_id"
                             #bankIdValidate="ngModel" />
                     </div>
                 </div>
@@ -386,7 +386,7 @@
                     <div class="form-group">
                         <label>Tên Chủ TK</label>
                         <input class=" form-control" placeholder="Tên Chủ Tài Khoản" type="text"
-                            [(ngModel)]="paymentInfo.account_name" required id="account_name" name="account_name"
+                            [(ngModel)]="paymentInfo.account_name"  id="account_name" name="account_name"
                             #accountNameValidate="ngModel" />
                     </div>
                 </div>
@@ -418,7 +418,7 @@
                         Export
                     </button>
                     <button pButton class="btn p-button-sm p-button-success ml-1" type="button"
-                        (click)="saveAndExport()" (dblclick)="saveAndExport()" [disabled]="onsaving">
+                        (click)="saveAndExport()" (dblclick)="saveAndExport()" [disabled]="!createAppForm.valid || !selectedJobs || selectedJobs == null || !birthday || onsaving">
                         <nb-icon class="mr-1" icon="cloud-download-outline"></nb-icon>
                         Lưu và Export
                     </button>

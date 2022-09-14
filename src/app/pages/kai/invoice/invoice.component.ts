@@ -373,6 +373,11 @@ export class InvoiceComponent implements OnInit {
                         };
                         this.kaiService.purchasingInvoice(this.invoice).subscribe((purchasingInvoiceDetail) => {
                             if (notEmpty(purchasingInvoiceDetail)) {
+                                if (notEmpty(this.invoice_id) && this.invoice_id > 0) {
+                                    this.kaiService.lockPurchasingInvoice(this.invoice_id).subscribe((result) => {
+                                        this.isLocked = result.locked ?? false;
+                                    });
+                                }
                                 alert(`Lưu Thành Công`);
                                 this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
                             }
@@ -461,7 +466,8 @@ export class InvoiceComponent implements OnInit {
     }
 
     cloneProduct(index) {
-        const { name, imei, status, color, quantity, price, product_group_id } = this.products[index];
+        // const { name, imei, status, color, quantity, price, product_group_id } = this.products[index];
+        const { name, imei, status, color, quantity, price, product_group_id } = Object.assign({}, this.products[index])
         this.products.splice(index + 1, 0,
             {
                 name, imei, status, color, quantity, price,
@@ -562,6 +568,11 @@ export class InvoiceComponent implements OnInit {
 
                         this.kaiService.saveAndDownloadPurchasingInvoice(this.invoice).subscribe(bufferResponse => {
                             this.excelService.saveAsExcelFile(bufferResponse, this.PURCHASING_REPORT_NAME);
+                            if (notEmpty(this.invoice_id) && this.invoice_id > 0) {
+                                this.kaiService.lockPurchasingInvoice(this.invoice_id).subscribe((result) => {
+                                    this.isLocked = result.locked ?? false;
+                                });
+                            }
                             alert(`Lưu Thành Công`);
                             this.router.navigate([KAI_PAGES.DATA_PURCHASING_INVOICES]).then(r => r);
                         });
