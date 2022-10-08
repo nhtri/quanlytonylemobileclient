@@ -151,10 +151,10 @@
             <button [disabled]="!hoantattoggle" (click)="hoantat()" (dblclick)="hoantat()"
                 style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #862efa;color: white;background-color: #595cf5;font-weight: 300;">
                 Hoàn Tất</button>
-            <button (click)="luutam()" *ngIf="hinhthucthanhtoan=='trahet'"
+            <button [disabled]="!luutamtoggle"  (click)="luutam()" *ngIf="hinhthucthanhtoan=='trahet'" (dblclick)="luutam()"
                 style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #5efa2e;color: white;background-color: #7cf82a;font-weight: 300;">
                 Lưu Tạm</button>
-            <button (click)="quayve()"
+            <button (click)="quayve()" (dblclick)="quayve()"
                 style="margin-right: 15px; height: 36px;width: 150px;border-radius: 5px;border-color: #fab32e;color: white;background-color: #fcad80;font-weight: 300;">
                 Hủy</button>
 

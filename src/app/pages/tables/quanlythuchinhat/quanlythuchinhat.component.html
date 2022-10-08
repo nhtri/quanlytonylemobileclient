@@ -5,6 +5,15 @@
 
   </nb-card-header>
 
+  <nb-card-header>
+    <div *ngIf="totalthutheothang == 0 && totalchitheothang == 0" style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng:
+      {{(totalthutheongay - totalchitheongay) | productPrice}}</div>
+
+    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng: {{(totalthutheothang - totalchitheothang) | productPrice}}</div>
+
+    <div style="color: blue; ">Tổng Tiền Mặt Hiện Có: {{(totalthu - totalchi) | productPrice}}</div>
+  </nb-card-header>
+
   <nb-card-body>
 
     <div style="display: flex;"><input type="date" style="margin-right: 5px;" [(ngModel)]="date1"
@@ -54,12 +63,12 @@
       </tbody>
     </table>
     <br />
-    <div *ngIf="totalthutheothang == 0 && totalchitheothang == 0" style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng:
+    <!-- <div *ngIf="totalthutheothang == 0 && totalchitheothang == 0" style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng:
       {{(totalthutheongay - totalchitheongay) | productPrice}}</div>
 
-    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng: {{(totalthutheothang - totalchitheothang) | productPrice}}</div>
+    <div *ngIf="totalthutheothang != 0 || totalchitheothang != 0"  style="color: #2e61fa;">Thống Kê Tiền Mặt Theo Ngày Tháng: {{(totalthutheothang - totalchitheothang) | productPrice}}</div> -->
   </nb-card-body>
-  <nb-card-footer>
+  <!-- <nb-card-footer>
     <div style="color: blue; ">Tổng Tiền Mặt Hiện Có: {{(totalthu - totalchi) | productPrice}}</div>
-  </nb-card-footer>
+  </nb-card-footer> -->
 </nb-card>

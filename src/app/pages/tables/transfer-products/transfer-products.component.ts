@@ -136,11 +136,12 @@ export class TransferProductsComponent implements OnInit {
             const from_position: PRODUCT_SOURCE = this.transferSource;
             const to_position: PRODUCT_SOURCE = this.transferDestination;
             const products = this.listProducts.map((product: Product) => {
+                console.log("this.listProducts",this.listProducts)
                 return {
                     id: product.id,
                     price: product.price,
                     estimated_price: product.estimated_price,
-                    quantity: notEmpty(product.transfer_quantity) ? product.transfer_quantity : 1,
+                    quantity: product.quantity,
                 };
             });
             let exchange_rate = this.rate_exchange;

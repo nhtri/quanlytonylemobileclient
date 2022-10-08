@@ -196,7 +196,7 @@
                             <p-dialog header="Gợi Ý Thông Tin Máy Thu Mua" [(visible)]="displaySuggestModalThongTinMayThuMua" [modal]="true"
                                 [style]="{width: '50vw', color:'blue'}" [baseZIndex]="15000" [draggable]="false" [resizable]="true">
                                 <p-table selectionMode="single"  (onRowUnselect)="onRowUnselect($event)" 
-                                dataKey="vin"  [value]="datathongtinthumuamaysuggests" (onRowSelect)="onRowSelect($event)" [(selection)]="datathongtinthumuamaysuggest">
+                                dataKey="vin"  [value]="datathongtinthumuamaysuggests" (onRowSelect)="onRowSelect($event,i)" [(selection)]="datathongtinthumuamaysuggest">
                                     <ng-template pTemplate="header">
                                         <tr>
                                             <th>JP Code</th>
@@ -244,8 +244,10 @@
                                 <div class="form-group">
                                     <label> Số imei </label><label style="color: #ec250d;"> *&nbsp;&nbsp;</label>
                                     <input class="form-control p-imei" autocomplete="off" placeholder="Số imei"
-                                        [(ngModel)]="product.imei" type="text" id="imei{{i}}" name="imei{{i}}"
-                                        required id="imei" #imei{{i}}="ngModel" (keyup.enter)="gotoNextImei($event, i+1)" />
+                                        [(ngModel)]="product.imei" type="text" required  id="imei{{i}}" name="imei{{i}}"
+                                 
+                                        #imei{{i}}="ngModel" (keyup.enter)="gotoNextImei($event, i+1)" />
+                                        <!-- id="imei"  -->
                                 </div>
                             </div>
                             <div class="col-kai-half-3 col-md-2 pr-md-1">

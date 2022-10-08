@@ -1,6 +1,6 @@
 import { User } from '../../model/user';
 
-export const QUAN_LY_TONY_SERVICE = 'https://quanlytonylemobile.herokuapp.com';
+export const QUAN_LY_TONY_SERVICE = 'http://103.15.51.135:3001';
 // export const QUAN_LY_TONY_SERVICE = 'http://localhost:3001';
 
 export const enum MONEY_SYMBOL {

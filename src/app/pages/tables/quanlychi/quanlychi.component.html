@@ -4,6 +4,16 @@
             Sách Quản Lý Chi</a>
 
     </nb-card-header>
+    <nb-card-header>
+        <div style="color:#2e61fa">* Tiền mặt: {{tienmat | productPrice}}</div>
+        <div style="color:#2e61fa">* Daibiki: {{daibiki | productPrice}}</div>
+        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan | productPrice}}</div>
+
+    </nb-card-header>
+    <nb-card-header>
+        <div style="color:blue; font-weight: 600;">Tổng chi: {{totalmoney | productPrice}}</div>
+
+    </nb-card-header>
 
     <nb-card-body>
 
@@ -77,12 +87,12 @@
         <br />
       
     </nb-card-body>
-    <nb-card-footer>
+    <!-- <nb-card-footer>
         <div style="color:#2e61fa">* Tiền mặt: {{tienmat | productPrice}}</div>
         <div style="color:#2e61fa">* Daibiki: {{daibiki | productPrice}}</div>
         <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan | productPrice}}</div>
     </nb-card-footer>
     <nb-card-footer>
         <div style="color:blue; font-weight: 600;">Tổng chi: {{totalmoney | productPrice}}</div>
-    </nb-card-footer>
+    </nb-card-footer> -->
 </nb-card>

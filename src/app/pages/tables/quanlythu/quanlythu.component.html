@@ -5,6 +5,15 @@
 
     </nb-card-header>
 
+    <nb-card-header>
+        <div style="color:#2e61fa">* Tiền mặt: {{tienmat| productPrice}}</div>
+        <div style="color:#2e61fa">* Daibiki: {{daibiki| productPrice}}</div>
+        <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan| productPrice}}</div>
+    </nb-card-header>
+    <nb-card-header>
+        <div style="color:blue; font-weight: 600;">Tổng thu: {{totalmoney| productPrice}}</div>
+    </nb-card-header>
+
     <nb-card-body>
         <div style="display: flex;">
             <input type="date" style="height: 28px; width: 150px; border-radius: 5px;" [(ngModel)]="date">
@@ -66,9 +75,13 @@
                     <td>{{sanpham.sotien | productPrice }}</td>
                     <td>{{sanpham.mucdich}}</td>
                     <!-- <td>{{sanpham.hinhthucthanhtoan}}</td> -->
+
                     <td *ngIf="sanpham.hinhthucthanhtoan == 'tienmat'">Tiền Mặt</td>
                     <td *ngIf="sanpham.hinhthucthanhtoan == 'daibiki'">Daibiki</td>
                     <td *ngIf="sanpham.hinhthucthanhtoan == 'chuyenkhoan'">Chuyển Khoản</td>
+                    <td *ngIf="sanpham.tienmat != 0">Tiền Mặt</td>
+                    <td *ngIf="sanpham.daikibi != 0">Daibiki</td>
+                    <td *ngIf="sanpham.chuyenkhoan != 0">Chuyển Khoản</td>
                     <td><i class="fa fa-edit" style="font-size:18px;color:darkblue; width: 30px;"
                             (click)="edit(sanpham.id,sanpham.ngaytao,sanpham.sotien,sanpham.mucdich,sanpham.hinhthucthanhtoan)"></i></td>
                     <td><i class="fa fa-trash" style="font-size:18px;color:tomato; width: 30px;"
@@ -83,12 +96,12 @@
 
     </nb-card-body>
 
-    <nb-card-footer>
+    <!-- <nb-card-footer>
         <div style="color:#2e61fa">* Tiền mặt: {{tienmat| productPrice}}</div>
         <div style="color:#2e61fa">* Daibiki: {{daibiki| productPrice}}</div>
         <div style="color:#2e61fa">* Chuyển khoản: {{chuyenkhoan| productPrice}}</div>
     </nb-card-footer>
     <nb-card-footer>
         <div style="color:blue; font-weight: 600;">Tổng thu: {{totalmoney| productPrice}}</div>
-    </nb-card-footer>
+    </nb-card-footer> -->
 </nb-card>

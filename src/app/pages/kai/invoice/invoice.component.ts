@@ -467,7 +467,8 @@ export class InvoiceComponent implements OnInit {
 
     cloneProduct(index) {
         // const { name, imei, status, color, quantity, price, product_group_id } = this.products[index];
-        const { name, imei, status, color, quantity, price, product_group_id } = Object.assign({}, this.products[index])
+        // const { name, imei, status, color, quantity, price, product_group_id } = Object.assign({}, this.products[index])
+        const { name, imei, status, color, quantity, price, product_group_id } = JSON.parse(JSON.stringify(this.products[index]));
         this.products.splice(index + 1, 0,
             {
                 name, imei, status, color, quantity, price,
@@ -638,11 +639,22 @@ export class InvoiceComponent implements OnInit {
             this.products[this.currentIndex].status = this.datathongtinthumuamaysuggests[0].trangthai
             this.products[this.currentIndex].color = this.datathongtinthumuamaysuggests[0].mau
             this.products[this.currentIndex].price = this.datathongtinthumuamaysuggests[0].gia
+
+
+            event.preventDefault();
+            const nextImeiElem = document.getElementById(`imei${i}`);
+            if (notEmpty(nextImeiElem)) {
+                nextImeiElem.focus();
+            } else {
+                return;
+            }
+    
         }
 
     }
 
-    onRowSelect(data) {
+    onRowSelect(data,i) {
+        this.currentIndex = i
         console.log(data)
         this.product_groups.forEach(element => {
             if (element.label == data.data.nhomsanpham) {
@@ -656,6 +668,13 @@ export class InvoiceComponent implements OnInit {
         this.products[this.currentIndex].color = data.data.mau
         this.products[this.currentIndex].price = data.data.gia
         this.displaySuggestModalThongTinMayThuMua = false
+        event.preventDefault();
+            const nextImeiElem = document.getElementById(`imei${i}`);
+            if (notEmpty(nextImeiElem)) {
+                nextImeiElem.focus();
+            } else {
+                return;
+            }
     }
 
     onRowUnselect() { }

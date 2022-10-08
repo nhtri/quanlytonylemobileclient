@@ -129,6 +129,7 @@ import { QuanlykhachhangnhatComponent } from './quanlykhachhangnhat/quanlykhachh
 import { DanhsachsanphamkhachhangdamuaComponent } from './danhsachsanphamkhachhangdamua/danhsachsanphamkhachhangdamua.component';
 import { EditbansanphamComponent } from './editbansanpham/editbansanpham.component';
 import { QuanlythongtinmaythumuaComponent } from './quanlythongtinmaythumua/quanlythongtinmaythumua.component';
+import { TableModule } from 'primeng/table';
 
 @NgModule({
     imports: [
@@ -144,6 +145,7 @@ import { QuanlythongtinmaythumuaComponent } from './quanlythongtinmaythumua/quan
         NgMultiSelectDropDownModule.forRoot(),
         MatSelectModule,
         SharedModule,
+        TableModule,
     ],
     declarations: [
         ...routedComponents,

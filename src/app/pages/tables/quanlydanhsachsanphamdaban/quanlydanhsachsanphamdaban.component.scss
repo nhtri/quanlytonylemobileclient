@@ -1,36 +1,76 @@
 
 
-.styled-table {
-    border-collapse: collapse;
-    margin: 25px 0;
-    font-size: 0.9em;
-    font-family: sans-serif;
-    min-width: 400px;
-    width: 100%;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-  }
-  .styled-table thead tr {
-    background-color: #809ffc;
-    color: #ffffff;
-    text-align: left;
-  }
-  .styled-table th,
-  .styled-table td {
-    padding: 12px 15px;
-  
-  }
-  .styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-  }
-  
-  .styled-table tbody tr:nth-of-type(even) {
-    background-color: #f3f3f3;
-  }
-  
-  .styled-table tbody tr:last-of-type {
-    border-bottom: 2px solid #809ffc;
-  }
-  .styled-table tbody tr.active-row {
-    font-weight: bold;
-    color: #809ffc;
+
+
+
+  // .kai-styled-table {
+  //   border-collapse: collapse;
+  //   margin: 25px 0;
+  //   font-size: 0.9em;
+  //   font-family: sans-serif;
+  //   min-width: 400px;
+  //   width: 100%;
+  //   box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+
+  //   .p-datatable-thead {
+  //     & > tr > th, td {
+  //       background-color: #809ffc;
+  //       color: #ffffff;
+  //       text-align: left;
+  //       padding: 12px 15px;
+  //     }
+
+  //     & > tr {
+  //       &.filter-header {
+  //         & > th, td {
+  //           background-color: #fff;
+  //         }
+  //       }
+  //     }
+  //   }
+
+  //   .p-datatable-tbody {
+  //     & > tr > td {
+  //       padding: 0.5rem 0.5rem;
+  //     }
+  //   }
+
+  //   thead tr {
+  //     background-color: #809ffc;
+  //     color: #ffffff;
+  //     text-align: left;
+  //   }
+
+  //   thead {
+  //     tr {
+  //       td {
+  //         background-color: #809ffc;
+  //       }
+  //     }
+  //   }
+
+  //   th, td {
+  //     padding: 12px 15px;
+  //   }
+
+  //   tbody tr {
+  //     border-bottom: 1px solid #dddddd;
+  //   }
+
+  //   tbody tr:nth-of-type(even) {
+  //     background-color: #f3f3f3;
+  //   }
+
+  //   tbody tr:last-of-type {
+  //     border-bottom: 2px solid #809ffc;
+  //   }
+
+  //   tbody tr.active-row {
+  //     font-weight: bold;
+  //     color: #809ffc;
+  //   }
+
+  // }
+  .outofstock{
+    font-weight: 400;
   }

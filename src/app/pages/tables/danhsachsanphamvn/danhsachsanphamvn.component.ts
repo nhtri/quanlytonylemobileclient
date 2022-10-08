@@ -241,22 +241,46 @@ export class DanhsachsanphamvnComponent implements OnInit {
   filterdanhsachsanpham() {
     this.data = this.datafilter
     if (this.tensp != "") {
+      this.tongsoluongsanpham=0
       this.data = this.data.filter(data => data.name.toLowerCase().includes(this.tensp.toLowerCase()))
+      this.data.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity);
+    });
     }
     if (this.nhomsp != "") {
+      this.tongsoluongsanpham=0
       this.data = this.data.filter(data => data.group_name.toLowerCase().includes(this.nhomsp.toLowerCase()))
+      this.data.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity);
+    });
     }
     if (this.imeisp != "") {
+      this.tongsoluongsanpham=0
       this.data = this.data.filter(data => data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
+      this.data.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity);
+    });
     }
     if (this.mausacsp != "") {
+      this.tongsoluongsanpham=0
       this.data = this.data.filter(data => data.color.toLowerCase().includes(this.mausacsp.toLowerCase()))
+      this.data.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity);
+    });
     }
     if (this.tinhtrangsp != "") {
+      this.tongsoluongsanpham=0
       this.data = this.data.filter(data => data.status.toUpperCase() === this.tinhtrangsp.toUpperCase())
+      this.data.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity);
+    });
     }
     if (this.tensp == "" && this.imeisp == "" && this.mausacsp == "" && this.tinhtrangsp == "" && this.nhomsp == "") {
+      this.tongsoluongsanpham=0
       this.data = this.datafilter
+      this.data.forEach(element => {
+        this.tongsoluongsanpham += parseInt(element.quantity);
+    });
     }
   }
 

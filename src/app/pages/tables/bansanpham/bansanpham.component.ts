@@ -6,6 +6,7 @@ import { notEmpty } from '../../../@core/utils/data.utils';
 import { KaiService } from '../../../services/kai.service';
 import { ExcelService } from '../../../services/excel.service';
 import { CurrencyMaskService } from '../../../@core/shared/directives/currency-mask/currency-mask.service';
+import { isNumeric } from 'rxjs/internal-compatibility';
 
 @Component({
     selector: 'ngx-bansanpham',
@@ -33,6 +34,7 @@ export class BansanphamComponent implements OnInit {
     chuyenkhoan = 0;
     tienconlai = 0;
     hoantattoggle = true;
+    luutamtoggle = true;
     danhsachkhachhang;
     thongtinkhachhang = 'khachle';
 
@@ -69,20 +71,26 @@ export class BansanphamComponent implements OnInit {
                 console.log('this.id', this.id);
                 console.log('this.position', this.position);
                 this.id.forEach(element => {
-                    this.service.getsanpham([element]).subscribe(value => {
-                        console.log('value', value);
-                        value.forEach(element => {
-                            if (element.position == this.position) {
-                                // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
-                                element['quantitytemp'] = element.quantity;
-                                element['quantity'] = 1;
-                                element['sotienban'] = element.estimated_price;
-                                this.datas.push(element);
-                                this.tienmat = element.estimated_price;
-                            }
+                    if(element != null && isNumeric(element)){
+                        this.service.getsanpham([element]).subscribe(value => {
+                            console.log('value', value);
+                            value.forEach(element => {
+                                if (element.position == this.position) {
+                                    // this.datas.push(element.map(data => ({ ...data, quantitytemp: data.quantity, quantity: 1 })))
+                                    element['quantitytemp'] = element.quantity;
+                                    element['quantity'] = 1;
+                                    element['sotienban'] = element.estimated_price;
+                                    this.datas.push(element);
+                                    this.tienmat = element.estimated_price;
+                                }
+                            });
+    
                         });
-
-                    });
+                    }
+                    else{
+                        alert("Tồn tại sản phẩm có lỗi thông tin")
+                    }
+                    
                 });
                 console.log('this.datas', this.datas);
                 if (this.position == 'WAREHOUSE') {
@@ -402,6 +410,7 @@ export class BansanphamComponent implements OnInit {
     }
 
     luutam() {
+        this.luutamtoggle = false;
         if (this.hinhthucthanhtoan == 'default' || this.hinhthucthanhtoan == '') {
             alert('Xin vui lòng chọn hình thức thanh toán !!!');
         } else {
@@ -489,6 +498,7 @@ export class BansanphamComponent implements OnInit {
             }
 
         }
+        this.luutamtoggle = true;
     }
 
     seleckhachhang(event) {

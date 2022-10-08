@@ -6,7 +6,8 @@ import * as XLSX from 'xlsx';
 @Component({
   selector: 'ngx-quanlydanhsachsanphamdaban',
   templateUrl: './quanlydanhsachsanphamdaban.component.html',
-  styleUrls: ['./quanlydanhsachsanphamdaban.component.scss']
+  styleUrls: ['./quanlydanhsachsanphamdaban.component.scss'],
+
 })
 export class QuanlydanhsachsanphamdabanComponent implements OnInit {
   fileName = 'DanhSachSanPham.xlsx';
@@ -41,94 +42,30 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
 
   datafilter = []
 
-  dataorigin =[]
-  role=''
+  dataorigin = []
+  role = ''
 
-  nhomsp=""
-  tensp=""
-  imeisp=""
+  nhomsp = ""
+  tensp = ""
+  imeisp = ""
   constructor(private service: NetworkserviceService, private router: Router) {
 
     this.service.getdanhsachsanphamdabanquanlymobile200().subscribe(value => {
-      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
-      // this.source.load(val);
-      // value.forEach(element => {
-      //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
-      //     element.madonhang = val[0].madonhang
-      //     this.data.push(element)
-      //     console.log('this.data', this.data)
+      this.data = value.filter(x => x.trangthaidonhang == 'trahet')
 
-      //     if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
-      //       this.datanhomsanpham.push({ "value": element.nhomsanpham, "title": element.nhomsanpham })
-      //       // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
-      //     }
-
-      //     if (element.tensanpham != '' && element.tensanpham != null && !this.datatensanpham.some(val => val.value == element.tensanpham)) {
-      //       this.datatensanpham.push({ "value": element.tensanpham, "title": element.tensanpham })
-      //       // this.datatensanpham = [...new Set(this.datatensanpham)];
-      //     }
-
-      //     if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
-      //       this.datadungluong.push({ "value": element.dungluong, "title": element.dungluong })
-      //       // this.datadungluong = [...new Set(this.datadungluong)];
-      //     }
-
-      //     if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
-      //       this.dataloaisanpham.push({ "value": element.loaisanpham, "title": element.loaisanpham })
-      //       // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
-      //     }
-
-      //     if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
-      //       this.dataphienban.push({ "value": element.phienban, "title": element.phienban })
-      //       // this.dataphienban = [...new Set(this.dataphienban)];
-      //     }
-      //   });
-      // });
       this.datafilter = this.data
       this.dataorigin = this.data
     });
 
 
     this.service.getdanhsachsanphamdabanquanlymobile().subscribe(value => {
-      this.data = value.filter(x=>x.trangthaidonhang=='trahet')
-      // this.source.load(val);
-      // value.forEach(element => {
-      //   this.service.getdanhsachdonhangquanlymobiletransaction([element.transactionkey]).subscribe(val => {
-      //     element.madonhang = val[0].madonhang
-      //     this.data.push(element)
-      //     console.log('this.data', this.data)
+      this.data = value.filter(x => x.trangthaidonhang == 'trahet')
 
-      //     if (element.nhomsanpham != '' && element.nhomsanpham != null && !this.datanhomsanpham.some(val => val.value == element.nhomsanpham)) {
-      //       this.datanhomsanpham.push({ "value": element.nhomsanpham, "title": element.nhomsanpham })
-      //       // this.datanhomsanpham = [...new Set(this.datanhomsanpham)];
-      //     }
-
-      //     if (element.tensanpham != '' && element.tensanpham != null && !this.datatensanpham.some(val => val.value == element.tensanpham)) {
-      //       this.datatensanpham.push({ "value": element.tensanpham, "title": element.tensanpham })
-      //       // this.datatensanpham = [...new Set(this.datatensanpham)];
-      //     }
-
-      //     if (element.dungluong != '' && element.dungluong != null && !this.datadungluong.some(val => val.value == element.dungluong)) {
-      //       this.datadungluong.push({ "value": element.dungluong, "title": element.dungluong })
-      //       // this.datadungluong = [...new Set(this.datadungluong)];
-      //     }
-
-      //     if (element.loaisanpham != '' && element.loaisanpham != null && !this.dataloaisanpham.some(val => val.value == element.loaisanpham)) {
-      //       this.dataloaisanpham.push({ "value": element.loaisanpham, "title": element.loaisanpham })
-      //       // this.dataloaisanpham = [...new Set(this.dataloaisanpham)];
-      //     }
-
-      //     if (element.phienban != '' && element.phienban != null && !this.dataphienban.some(val => val.value == element.phienban)) {
-      //       this.dataphienban.push({ "value": element.phienban, "title": element.phienban })
-      //       // this.dataphienban = [...new Set(this.dataphienban)];
-      //     }
-      //   });
-      // });
       this.datafilter = this.data
       this.dataorigin = this.data
     });
 
-    
+
 
   }
 
@@ -329,7 +266,7 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
       });
     }
     if (this.date2 != "") {
-       this.data = []
+      this.data = []
       console.log(this.date1, this.date2)
       var currentDate = new Date(this.date1);
       while (currentDate <= new Date(this.date2)) {
@@ -376,12 +313,12 @@ export class QuanlydanhsachsanphamdabanComponent implements OnInit {
       this.daterange.push(currentDate.getFullYear() + '-' + (currentDate.getMonth() + 1).toString().padStart(2, '0') + '-' + currentDate.getDate().toString().padStart(2, '0'));
       currentDate.setDate(currentDate.getDate() + 1)
     }
-console.log('datatemp',datatemp)
-console.log('daterange',this.daterange)
+    console.log('datatemp', datatemp)
+    console.log('daterange', this.daterange)
     datatemp.forEach(element1 => {
       this.daterange.forEach(element2 => {
-        console.log('element2',element2)
-        console.log('element1.ngayban',element1.ngayban)
+        console.log('element2', element2)
+        console.log('element1.ngayban', element1.ngayban)
         if (element2 == element1.ngayban) {
           this.data.push(element1)
         }
@@ -391,25 +328,25 @@ console.log('daterange',this.daterange)
     console.log(this.daterange)
   }
 
-  refresh(){
+  refresh() {
     window.location.reload()
   }
 
   filterdanhsachsanpham() {
-    console.log(this.tensp,this.imeisp)
+    console.log(this.tensp, this.imeisp)
     console.log(this.data)
-    console.log("this.datafilter",this.datafilter)
+    console.log("this.datafilter", this.datafilter)
     this.data = []
     // if (this.nhomsp != "") {
     //   this.data = this.datafilter.filter(data => data.group_name.includes(this.nhomsp))
     // }
     if (this.tensp != "") {
-      this.data = this.datafilter.filter(data =>data.tensanpham!=null&& data.tensanpham.toLowerCase().includes(this.tensp.toLowerCase()))
+      this.data = this.datafilter.filter(data => data.tensanpham != null && data.tensanpham.toLowerCase().includes(this.tensp.toLowerCase()))
     }
     if (this.imeisp != "") {
-      this.data = this.datafilter.filter(data =>data.imei!=null&& data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
+      this.data = this.datafilter.filter(data => data.imei != null && data.imei.toLowerCase().includes(this.imeisp.toLowerCase()))
     }
-    if(this.tensp==""&&this.imeisp==""){
+    if (this.tensp == "" && this.imeisp == "") {
       this.data = this.datafilter
     }
   }

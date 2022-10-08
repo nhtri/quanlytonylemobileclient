@@ -21,34 +21,71 @@ export class QuanlythuComponent implements OnInit {
   hinhthuc = "default"
   constructor(private service: NetworkserviceService) {
 
-    this.service.getquanlythu().subscribe(val => {
+    // this.service.getquanlythu().subscribe(val => {
+    //   console.log(val)
+    //   val.forEach(element => {
+    //     // this.totalmoney += parseInt(element.sotien)
+    //     if (element.mucdich.includes('dh')) {
+    //       this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
+    //         element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+    //         // this.data.push(element)
+    //         this.datatemp.push(element)
+    //         // let today = new Date();
+    //         // let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+    //         // this.date1 = date
+    //         // this.datatemp.forEach(element => {
+    //         //  console.log(element.ngaytao,this.date1)
+
+    //         // });
+    //       })
+    //     }
+    //     else {
+    //       let today = new Date();
+    //       let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+    //       this.date1 = date
+    //       // this.datatemp.forEach(element => {
+    //       //  console.log(element.ngaytao,this.date1)
+
+    //       // this.data.push(element)
+    //       this.datatemp.push(element)
+    //     }
+
+    //   });
+    //   console.log('this.datatemp', this.datatemp)
+
+    //   console.log(this.date1, 'this.data', this.datatemp)
+
+
+
+    // });
+
+    this.service.getquanlythudanhsachdonhang().subscribe(val => {
       console.log(val)
       val.forEach(element => {
-        // this.totalmoney += parseInt(element.sotien)
+        this.totalmoney += Number(element.sotien)
         if (element.mucdich.includes('dh')) {
-          this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
-            element.mucdich = 'Mã ĐH: ' + data[0].madonhang
-            // this.data.push(element)
-            this.datatemp.push(element)
-            // let today = new Date();
-            // let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
-            // this.date1 = date
-            // this.datatemp.forEach(element => {
-            //  console.log(element.ngaytao,this.date1)
-
-            // });
-          })
-        }
-        else {
-          let today = new Date();
-          let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
-          this.date1 = date
+          element.mucdich = 'Mã ĐH: ' + element.madonhang
+          //  this.data.push(element)
+          this.datatemp.push(element)
+          // let today = new Date();
+          // let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+          // this.date1 = date
           // this.datatemp.forEach(element => {
           //  console.log(element.ngaytao,this.date1)
 
+          // });
+
+        }
+        else {
+          // let today = new Date();
+          // let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+          // this.date1 = date
+          this.datatemp.forEach(element => {
+           console.log(element.ngaytao,this.date1)
+
           // this.data.push(element)
           this.datatemp.push(element)
-        }
+        })}
 
       });
       console.log('this.datatemp', this.datatemp)
@@ -59,56 +96,112 @@ export class QuanlythuComponent implements OnInit {
 
     });
 
-    this.service.getquanlythu().subscribe(val => {
+    this.service.getquanlythudanhsachdonhang().subscribe(val => {
+      console.log(val)
       let today = new Date();
       let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
       this.date1 = date
+      console.log('this.date1',this.date1)
       val.forEach(element => {
+        // this.totalmoney += parseInt(element.sotien)
         if (element.ngaytao == this.date1) {
           if (element.mucdich.includes('dh')) {
-            this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
-              element.mucdich = 'Mã ĐH: ' + data[0].madonhang
-              this.data.push(element)
+            element.mucdich = 'Mã ĐH: ' + element.madonhang
+             this.data.push(element)
+            this.datatemp.push(element)
+            // let today = new Date();
+            // let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+            // this.date1 = date
+            // this.datatemp.forEach(element => {
+            //  console.log(element.ngaytao,this.date1)
 
-            })
+            // });
+
           }
           else {
-
-
+            let today = new Date();
+            let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+            this.date1 = date
+            // this.datatemp.forEach(element => {
+            //  console.log(element.ngaytao,this.date1)
+    
             this.data.push(element)
-
+            this.datatemp.push(element)
           }
-          // element.forEach(element => {
-          //   this.totalmoney += parseInt(element.sotien)
-
-          //   if (element.hinhthucthanhtoan == 'tienmat') {
-          //     this.tienmat += parseInt(element.sotien)
-          //   }
-          //   if (element.hinhthucthanhtoan == 'daibiki') {
-          //     this.daibiki += parseInt(element.sotien)
-          //   }
-          //   if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-          //     this.chuyenkhoan += parseInt(element.sotien)
-          //   }
-          // });
-
           this.totalmoney += Number(element.sotien)
 
-          if (element.hinhthucthanhtoan == 'tienmat') {
+          if (element.hinhthucthanhtoan == 'tienmat' || element.tienmat !='0') {
             this.tienmat += Number(element.sotien)
           }
-          if (element.hinhthucthanhtoan == 'daibiki') {
+          if (element.hinhthucthanhtoan == 'daibiki' || element.daikibi !='0') {
             this.daibiki += Number(element.sotien)
           }
-          if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+          if (element.hinhthucthanhtoan == 'chuyenkhoan' || element.chuyenkhoan != '0') {
             this.chuyenkhoan += Number(element.sotien)
           }
+
+         
         }
-      });
+          
+        });
+      console.log('this.datatemp', this.datatemp)
+
+      console.log(this.date1, 'this.data', this.datatemp)
 
 
 
     });
+
+    // this.service.getquanlythu().subscribe(val => {
+    //   let today = new Date();
+    //   let date = today.getFullYear() + '-' + (today.getMonth() + 1).toString().padStart(2, '0') + '-' + today.getDate().toString().padStart(2, '0');
+    //   this.date1 = date
+    //   val.forEach(element => {
+    //     if (element.ngaytao == this.date1) {
+    //       if (element.mucdich.includes('dh')) {
+    //         this.service.getdanhsachdonhangquanlymobiletransaction([element.mucdich]).subscribe(data => {
+    //           element.mucdich = 'Mã ĐH: ' + data[0].madonhang
+    //           this.data.push(element)
+
+    //         })
+    //       }
+    //       else {
+
+
+    //         this.data.push(element)
+
+    //       }
+    //       // element.forEach(element => {
+    //       //   this.totalmoney += parseInt(element.sotien)
+
+    //       //   if (element.hinhthucthanhtoan == 'tienmat') {
+    //       //     this.tienmat += parseInt(element.sotien)
+    //       //   }
+    //       //   if (element.hinhthucthanhtoan == 'daibiki') {
+    //       //     this.daibiki += parseInt(element.sotien)
+    //       //   }
+    //       //   if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+    //       //     this.chuyenkhoan += parseInt(element.sotien)
+    //       //   }
+    //       // });
+
+    //       this.totalmoney += Number(element.sotien)
+
+    //       if (element.hinhthucthanhtoan == 'tienmat') {
+    //         this.tienmat += Number(element.sotien)
+    //       }
+    //       if (element.hinhthucthanhtoan == 'daibiki') {
+    //         this.daibiki += Number(element.sotien)
+    //       }
+    //       if (element.hinhthucthanhtoan == 'chuyenkhoan') {
+    //         this.chuyenkhoan += Number(element.sotien)
+    //       }
+    //     }
+    //   });
+
+
+
+    // });
   }
 
   fileName = "DanhSachThu"
@@ -223,6 +316,14 @@ export class QuanlythuComponent implements OnInit {
   }
 
   change1() {
+
+
+
+
+
+
+
+    
     this.tienmat = 0
     this.daibiki = 0
     this.chuyenkhoan = 0
@@ -259,14 +360,14 @@ export class QuanlythuComponent implements OnInit {
     }
 
     this.data.forEach(element => {
-      if (element.hinhthucthanhtoan == 'tienmat') {
-        this.tienmat += parseInt(element.sotien)
+      if (element.hinhthucthanhtoan == 'tienmat' || element.tienmat !='0') {
+        this.tienmat += Number(element.sotien)
       }
-      if (element.hinhthucthanhtoan == 'daibiki') {
-        this.daibiki += parseInt(element.sotien)
+      if (element.hinhthucthanhtoan == 'daibiki' || element.daikibi !='0') {
+        this.daibiki += Number(element.sotien)
       }
-      if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-        this.chuyenkhoan += parseInt(element.sotien)
+      if (element.hinhthucthanhtoan == 'chuyenkhoan' || element.chuyenkhoan != '0') {
+        this.chuyenkhoan += Number(element.sotien)
       }
     });
   }
@@ -295,14 +396,14 @@ export class QuanlythuComponent implements OnInit {
     console.log(this.daterange)
 
     this.data.forEach(element => {
-      if (element.hinhthucthanhtoan == 'tienmat') {
-        this.tienmat += parseInt(element.sotien)
+      if (element.hinhthucthanhtoan == 'tienmat' || element.tienmat !='0') {
+        this.tienmat += Number(element.sotien)
       }
-      if (element.hinhthucthanhtoan == 'daibiki') {
-        this.daibiki += parseInt(element.sotien)
+      if (element.hinhthucthanhtoan == 'daibiki' || element.daikibi !='0') {
+        this.daibiki += Number(element.sotien)
       }
-      if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-        this.chuyenkhoan += parseInt(element.sotien)
+      if (element.hinhthucthanhtoan == 'chuyenkhoan' || element.chuyenkhoan != '0') {
+        this.chuyenkhoan += Number(element.sotien)
       }
     });
   }
@@ -376,14 +477,14 @@ export class QuanlythuComponent implements OnInit {
       }
 
       this.data.forEach(element => {
-        if (element.hinhthucthanhtoan == 'tienmat') {
-          this.tienmat += parseInt(element.sotien)
+        if (element.hinhthucthanhtoan == 'tienmat' || element.tienmat !='0') {
+          this.tienmat += Number(element.sotien)
         }
-        if (element.hinhthucthanhtoan == 'daibiki') {
-          this.daibiki += parseInt(element.sotien)
+        if (element.hinhthucthanhtoan == 'daibiki' || element.daikibi !='0') {
+          this.daibiki += Number(element.sotien)
         }
-        if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-          this.chuyenkhoan += parseInt(element.sotien)
+        if (element.hinhthucthanhtoan == 'chuyenkhoan' || element.chuyenkhoan != '0') {
+          this.chuyenkhoan += Number(element.sotien)
         }
       });
 
@@ -444,14 +545,14 @@ export class QuanlythuComponent implements OnInit {
       console.log(this.daterange)
 
       this.data.forEach(element => {
-        if (element.hinhthucthanhtoan == 'tienmat') {
-          this.tienmat += parseInt(element.sotien)
+        if (element.hinhthucthanhtoan == 'tienmat' || element.tienmat !='0') {
+          this.tienmat += Number(element.sotien)
         }
-        if (element.hinhthucthanhtoan == 'daibiki') {
-          this.daibiki += parseInt(element.sotien)
+        if (element.hinhthucthanhtoan == 'daibiki' || element.daikibi !='0') {
+          this.daibiki += Number(element.sotien)
         }
-        if (element.hinhthucthanhtoan == 'chuyenkhoan') {
-          this.chuyenkhoan += parseInt(element.sotien)
+        if (element.hinhthucthanhtoan == 'chuyenkhoan' || element.chuyenkhoan != '0') {
+          this.chuyenkhoan += Number(element.sotien)
         }
       });
 
